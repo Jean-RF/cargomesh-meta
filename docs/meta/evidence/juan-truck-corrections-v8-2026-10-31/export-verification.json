@@ -1,0 +1,491 @@
+{
+  "models": 60,
+  "totalBytes": 319051024,
+  "maxBytes": 9761648,
+  "maxUniqueTriangles": 182475,
+  "maxInstantiatedTriangles": 190475,
+  "maxInstantiatedPrimitives": 42,
+  "maxImages": 15,
+  "modelsDetail": [
+    {
+      "id": "cm-courier-van",
+      "bytes": 4659804,
+      "uniqueTriangles": 96093,
+      "instantiatedTriangles": 100093,
+      "instantiatedPrimitives": 21,
+      "images": 13
+    },
+    {
+      "id": "cm-medical-van",
+      "bytes": 4626128,
+      "uniqueTriangles": 96303,
+      "instantiatedTriangles": 100303,
+      "instantiatedPrimitives": 21,
+      "images": 13
+    },
+    {
+      "id": "cm-fish-reefer",
+      "bytes": 4020056,
+      "uniqueTriangles": 121260,
+      "instantiatedTriangles": 125260,
+      "instantiatedPrimitives": 18,
+      "images": 8
+    },
+    {
+      "id": "cm-bakery-shutter",
+      "bytes": 4925064,
+      "uniqueTriangles": 134614,
+      "instantiatedTriangles": 138614,
+      "instantiatedPrimitives": 20,
+      "images": 12
+    },
+    {
+      "id": "cm-florist-glass",
+      "bytes": 4889816,
+      "uniqueTriangles": 103890,
+      "instantiatedTriangles": 107890,
+      "instantiatedPrimitives": 19,
+      "images": 8
+    },
+    {
+      "id": "cm-urban-curtain",
+      "bytes": 4511112,
+      "uniqueTriangles": 105030,
+      "instantiatedTriangles": 109030,
+      "instantiatedPrimitives": 19,
+      "images": 10
+    },
+    {
+      "id": "cm-orchard-dropside",
+      "bytes": 7019352,
+      "uniqueTriangles": 158920,
+      "instantiatedTriangles": 162920,
+      "instantiatedPrimitives": 19,
+      "images": 11
+    },
+    {
+      "id": "cm-beverage-rack",
+      "bytes": 6102180,
+      "uniqueTriangles": 174204,
+      "instantiatedTriangles": 178204,
+      "instantiatedPrimitives": 19,
+      "images": 8
+    },
+    {
+      "id": "cm-gas-cage",
+      "bytes": 3798260,
+      "uniqueTriangles": 106864,
+      "instantiatedTriangles": 110864,
+      "instantiatedPrimitives": 19,
+      "images": 11
+    },
+    {
+      "id": "cm-returnable-crates",
+      "bytes": 5413680,
+      "uniqueTriangles": 155754,
+      "instantiatedTriangles": 159754,
+      "instantiatedPrimitives": 19,
+      "images": 8
+    },
+    {
+      "id": "cm-glass-stand",
+      "bytes": 4491212,
+      "uniqueTriangles": 92215,
+      "instantiatedTriangles": 96215,
+      "instantiatedPrimitives": 21,
+      "images": 11
+    },
+    {
+      "id": "cm-plumber-overcab",
+      "bytes": 5055684,
+      "uniqueTriangles": 110261,
+      "instantiatedTriangles": 114261,
+      "instantiatedPrimitives": 20,
+      "images": 11
+    },
+    {
+      "id": "cm-cable-service",
+      "bytes": 3650716,
+      "uniqueTriangles": 100690,
+      "instantiatedTriangles": 104690,
+      "instantiatedPrimitives": 19,
+      "images": 11
+    },
+    {
+      "id": "cm-landscape-tipper",
+      "bytes": 4738400,
+      "uniqueTriangles": 99490,
+      "instantiatedTriangles": 103490,
+      "instantiatedPrimitives": 18,
+      "images": 8
+    },
+    {
+      "id": "cm-nursery-bed",
+      "bytes": 5426120,
+      "uniqueTriangles": 117655,
+      "instantiatedTriangles": 121655,
+      "instantiatedPrimitives": 19,
+      "images": 11
+    },
+    {
+      "id": "cm-furniture-luton",
+      "bytes": 4257188,
+      "uniqueTriangles": 96175,
+      "instantiatedTriangles": 100175,
+      "instantiatedPrimitives": 20,
+      "images": 9
+    },
+    {
+      "id": "cm-appliance-lift",
+      "bytes": 3140332,
+      "uniqueTriangles": 95288,
+      "instantiatedTriangles": 99288,
+      "instantiatedPrimitives": 19,
+      "images": 9
+    },
+    {
+      "id": "cm-mini-bowser",
+      "bytes": 3002776,
+      "uniqueTriangles": 91071,
+      "instantiatedTriangles": 95071,
+      "instantiatedPrimitives": 17,
+      "images": 8
+    },
+    {
+      "id": "cm-mobile-workshop",
+      "bytes": 4230040,
+      "uniqueTriangles": 89028,
+      "instantiatedTriangles": 93028,
+      "instantiatedPrimitives": 20,
+      "images": 10
+    },
+    {
+      "id": "cm-parcel-locker",
+      "bytes": 3852548,
+      "uniqueTriangles": 104140,
+      "instantiatedTriangles": 108140,
+      "instantiatedPrimitives": 22,
+      "images": 14
+    },
+    {
+      "id": "cm-regional-shutter",
+      "bytes": 4652496,
+      "uniqueTriangles": 123436,
+      "instantiatedTriangles": 131436,
+      "instantiatedPrimitives": 25,
+      "images": 14
+    },
+    {
+      "id": "cm-meat-rail",
+      "bytes": 4863488,
+      "uniqueTriangles": 99010,
+      "instantiatedTriangles": 115002,
+      "instantiatedPrimitives": 24,
+      "images": 8
+    },
+    {
+      "id": "cm-pallet-curtain",
+      "bytes": 6057060,
+      "uniqueTriangles": 123752,
+      "instantiatedTriangles": 139744,
+      "instantiatedPrimitives": 27,
+      "images": 13
+    },
+    {
+      "id": "cm-market-awning",
+      "bytes": 7097660,
+      "uniqueTriangles": 182475,
+      "instantiatedTriangles": 190475,
+      "instantiatedPrimitives": 23,
+      "images": 12
+    },
+    {
+      "id": "cm-tile-knuckle",
+      "bytes": 4893836,
+      "uniqueTriangles": 97244,
+      "instantiatedTriangles": 113244,
+      "instantiatedPrimitives": 27,
+      "images": 12
+    },
+    {
+      "id": "cm-brick-cage",
+      "bytes": 3873484,
+      "uniqueTriangles": 103080,
+      "instantiatedTriangles": 119080,
+      "instantiatedPrimitives": 26,
+      "images": 11
+    },
+    {
+      "id": "cm-rebar-stake",
+      "bytes": 3404580,
+      "uniqueTriangles": 90792,
+      "instantiatedTriangles": 98792,
+      "instantiatedPrimitives": 22,
+      "images": 11
+    },
+    {
+      "id": "cm-timber-sideboard",
+      "bytes": 4676612,
+      "uniqueTriangles": 91820,
+      "instantiatedTriangles": 107820,
+      "instantiatedPrimitives": 25,
+      "images": 11
+    },
+    {
+      "id": "cm-pipe-bolster",
+      "bytes": 5978280,
+      "uniqueTriangles": 135356,
+      "instantiatedTriangles": 151348,
+      "instantiatedPrimitives": 27,
+      "images": 12
+    },
+    {
+      "id": "cm-drum-rail",
+      "bytes": 3687988,
+      "uniqueTriangles": 103911,
+      "instantiatedTriangles": 111911,
+      "instantiatedPrimitives": 21,
+      "images": 11
+    },
+    {
+      "id": "cm-ibc-carrier",
+      "bytes": 3494000,
+      "uniqueTriangles": 91954,
+      "instantiatedTriangles": 107954,
+      "instantiatedPrimitives": 24,
+      "images": 11
+    },
+    {
+      "id": "cm-water-bowser",
+      "bytes": 4320860,
+      "uniqueTriangles": 93386,
+      "instantiatedTriangles": 109386,
+      "instantiatedPrimitives": 23,
+      "images": 8
+    },
+    {
+      "id": "cm-milk-elliptical",
+      "bytes": 6312124,
+      "uniqueTriangles": 91755,
+      "instantiatedTriangles": 99753,
+      "instantiatedPrimitives": 19,
+      "images": 8
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "bytes": 3463524,
+      "uniqueTriangles": 97698,
+      "instantiatedTriangles": 113698,
+      "instantiatedPrimitives": 24,
+      "images": 8
+    },
+    {
+      "id": "cm-sand-threeway",
+      "bytes": 5034184,
+      "uniqueTriangles": 98604,
+      "instantiatedTriangles": 114596,
+      "instantiatedPrimitives": 24,
+      "images": 8
+    },
+    {
+      "id": "cm-mini-mixer",
+      "bytes": 4455480,
+      "uniqueTriangles": 87679,
+      "instantiatedTriangles": 95675,
+      "instantiatedPrimitives": 20,
+      "images": 9
+    },
+    {
+      "id": "cm-skip-loader",
+      "bytes": 3208124,
+      "uniqueTriangles": 94134,
+      "instantiatedTriangles": 110134,
+      "instantiatedPrimitives": 25,
+      "images": 9
+    },
+    {
+      "id": "cm-rolloff",
+      "bytes": 3193748,
+      "uniqueTriangles": 97940,
+      "instantiatedTriangles": 113940,
+      "instantiatedPrimitives": 24,
+      "images": 9
+    },
+    {
+      "id": "cm-flat-recovery",
+      "bytes": 5051184,
+      "uniqueTriangles": 99578,
+      "instantiatedTriangles": 107578,
+      "instantiatedPrimitives": 23,
+      "images": 11
+    },
+    {
+      "id": "cm-power-service",
+      "bytes": 4551396,
+      "uniqueTriangles": 89706,
+      "instantiatedTriangles": 105698,
+      "instantiatedPrimitives": 26,
+      "images": 10
+    },
+    {
+      "id": "cm-aero-dryvan",
+      "bytes": 9761648,
+      "uniqueTriangles": 155963,
+      "instantiatedTriangles": 187955,
+      "instantiatedPrimitives": 37,
+      "images": 14
+    },
+    {
+      "id": "cm-pharma-multitemp",
+      "bytes": 9555640,
+      "uniqueTriangles": 152162,
+      "instantiatedTriangles": 184154,
+      "instantiatedPrimitives": 36,
+      "images": 13
+    },
+    {
+      "id": "cm-mega-curtain",
+      "bytes": 9178596,
+      "uniqueTriangles": 155005,
+      "instantiatedTriangles": 186997,
+      "instantiatedPrimitives": 36,
+      "images": 13
+    },
+    {
+      "id": "cm-coil-well",
+      "bytes": 5528312,
+      "uniqueTriangles": 114924,
+      "instantiatedTriangles": 154904,
+      "instantiatedPrimitives": 38,
+      "images": 12
+    },
+    {
+      "id": "cm-steel-extendable",
+      "bytes": 5206908,
+      "uniqueTriangles": 98044,
+      "instantiatedTriangles": 138024,
+      "instantiatedPrimitives": 39,
+      "images": 12
+    },
+    {
+      "id": "cm-forest-bolster",
+      "bytes": 5763956,
+      "uniqueTriangles": 118234,
+      "instantiatedTriangles": 158214,
+      "instantiatedPrimitives": 39,
+      "images": 12
+    },
+    {
+      "id": "cm-pipe-wedge",
+      "bytes": 7024272,
+      "uniqueTriangles": 103395,
+      "instantiatedTriangles": 135387,
+      "instantiatedPrimitives": 34,
+      "images": 11
+    },
+    {
+      "id": "cm-excavator-lowbed",
+      "bytes": 7741828,
+      "uniqueTriangles": 104636,
+      "instantiatedTriangles": 144626,
+      "instantiatedPrimitives": 41,
+      "images": 15
+    },
+    {
+      "id": "cm-tractor-stepdeck",
+      "bytes": 5836004,
+      "uniqueTriangles": 102642,
+      "instantiatedTriangles": 142622,
+      "instantiatedPrimitives": 40,
+      "images": 14
+    },
+    {
+      "id": "cm-transformer-modular",
+      "bytes": 6631900,
+      "uniqueTriangles": 99077,
+      "instantiatedTriangles": 147065,
+      "instantiatedPrimitives": 42,
+      "images": 10
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "bytes": 8768972,
+      "uniqueTriangles": 141739,
+      "instantiatedTriangles": 181729,
+      "instantiatedPrimitives": 40,
+      "images": 12
+    },
+    {
+      "id": "cm-iso-container",
+      "bytes": 6414012,
+      "uniqueTriangles": 92465,
+      "instantiatedTriangles": 124457,
+      "instantiatedPrimitives": 32,
+      "images": 8
+    },
+    {
+      "id": "cm-swap-body",
+      "bytes": 5187860,
+      "uniqueTriangles": 110320,
+      "instantiatedTriangles": 142304,
+      "instantiatedPrimitives": 33,
+      "images": 9
+    },
+    {
+      "id": "cm-fuel-multicell",
+      "bytes": 6537476,
+      "uniqueTriangles": 98550,
+      "instantiatedTriangles": 138540,
+      "instantiatedPrimitives": 35,
+      "images": 8
+    },
+    {
+      "id": "cm-food-stainless",
+      "bytes": 6486932,
+      "uniqueTriangles": 97265,
+      "instantiatedTriangles": 129257,
+      "instantiatedPrimitives": 31,
+      "images": 8
+    },
+    {
+      "id": "cm-cement-silo",
+      "bytes": 4758112,
+      "uniqueTriangles": 97396,
+      "instantiatedTriangles": 129380,
+      "instantiatedPrimitives": 31,
+      "images": 8
+    },
+    {
+      "id": "cm-grain-hopper",
+      "bytes": 5145428,
+      "uniqueTriangles": 102008,
+      "instantiatedTriangles": 141988,
+      "instantiatedPrimitives": 36,
+      "images": 8
+    },
+    {
+      "id": "cm-walking-floor",
+      "bytes": 7395356,
+      "uniqueTriangles": 124465,
+      "instantiatedTriangles": 156457,
+      "instantiatedPrimitives": 32,
+      "images": 8
+    },
+    {
+      "id": "cm-panel-a-frame",
+      "bytes": 5278280,
+      "uniqueTriangles": 101164,
+      "instantiatedTriangles": 141144,
+      "instantiatedPrimitives": 38,
+      "images": 11
+    },
+    {
+      "id": "cm-boat-cradle",
+      "bytes": 6768956,
+      "uniqueTriangles": 92878,
+      "instantiatedTriangles": 124870,
+      "instantiatedPrimitives": 35,
+      "images": 12
+    }
+  ]
+}

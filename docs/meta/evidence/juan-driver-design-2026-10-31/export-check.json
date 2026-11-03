@@ -1,0 +1,18 @@
+[
+  {
+    "id": "cm-medical-van",
+    "bytes": 7702604,
+    "sha256": "5a5c6d8623d02d597bb7f61345a60c10abfaa0ed8414978c709e1fe3b9c1613b",
+    "imageCount": 14,
+    "triangles": 102762,
+    "meshes": 19
+  },
+  {
+    "id": "cm-auto-doubledeck",
+    "bytes": 10631228,
+    "sha256": "01a69f25f5829118a2403390bac6592c8eeda491f2b16eeebda2527c49af6a21",
+    "imageCount": 12,
+    "triangles": 149996,
+    "meshes": 20
+  }
+]

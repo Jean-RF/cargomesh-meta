@@ -1,0 +1,106 @@
+Already up to date
+Done in 547ms using pnpm v11.19.0
+$ next build
+   ▲ Next.js 15.5.24
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 68s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/23) ...
+   Generating static pages (5/23) 
+   Generating static pages (11/23) 
+   Generating static pages (17/23) 
+ ✓ Generating static pages (23/23)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                                           Size  First Load JS
+┌ ƒ /                                                                              1.62 kB         118 kB
+├ ƒ /_not-found                                                                      997 B         106 kB
+├ ƒ /.well-known/oauth-authorization-server                                          240 B         105 kB
+├ ƒ /.well-known/oauth-protected-resource                                            240 B         105 kB
+├ ƒ /api/auth/demo-session                                                           240 B         105 kB
+├ ƒ /api/auth/login                                                                  240 B         105 kB
+├ ƒ /api/auth/logout                                                                 240 B         105 kB
+├ ƒ /api/auth/workspace-session                                                      240 B         105 kB
+├ ƒ /api/demo/v2/[[...route]]                                                        240 B         105 kB
+├ ƒ /api/local/client-session                                                        240 B         105 kB
+├ ƒ /api/local/hac52/client-session                                                  240 B         105 kB
+├ ƒ /api/local/login-defaults                                                        240 B         105 kB
+├ ƒ /api/local/road-preview                                                          240 B         105 kB
+├ ƒ /api/local/route-lab                                                             240 B         105 kB
+├ ƒ /api/local/truck-3d                                                              240 B         105 kB
+├ ƒ /api/v2/[[...route]]                                                             240 B         105 kB
+├ ƒ /api/v2/carriers/[carrierId]/offer-preparations                                  240 B         105 kB
+├ ƒ /api/v2/client-context                                                           240 B         105 kB
+├ ƒ /api/v2/client-context/confirm                                                   240 B         105 kB
+├ ƒ /api/v2/conversation/interpret                                                   240 B         105 kB
+├ ƒ /api/v2/conversation/preview                                                     240 B         105 kB
+├ ƒ /api/v2/conversation/voice/session                                               240 B         105 kB
+├ ƒ /api/v2/declaration-media/[action]                                               240 B         105 kB
+├ ƒ /api/v2/meta/loading-sessions/[sessionId]/passports/[passportId]/explanations    240 B         105 kB
+├ ƒ /bookings                                                                      2.88 kB         118 kB
+├ ƒ /carrier-control-tower                                                           240 B         105 kB
+├ ƒ /carrier-portal                                                                  240 B         105 kB
+├ ƒ /carrier-route-lab                                                               240 B         105 kB
+├ ƒ /carriers/[[...section]]                                                         240 B         105 kB
+├ ƒ /clients                                                                       3.05 kB         122 kB
+├ ƒ /clients/bookings                                                              5.62 kB         121 kB
+├ ƒ /clients/facilities                                                            5.51 kB         194 kB
+├ ƒ /clients/freight-request/new                                                      3 kB         336 kB
+├ ƒ /clients/help                                                                  5.08 kB         113 kB
+├ ƒ /clients/history                                                               4.75 kB         141 kB
+├ ƒ /clients/organization                                                          3.24 kB         198 kB
+├ ƒ /clients/requests                                                              3.65 kB         140 kB
+├ ƒ /clients/requests/[id]                                                         2.19 kB         260 kB
+├ ƒ /clients/support                                                               4.29 kB         109 kB
+├ ƒ /clients/tracking                                                              4.36 kB         145 kB
+├ ƒ /clients/tracking/[id]                                                         5.46 kB         153 kB
+├ ƒ /dashboard                                                                       211 B         119 kB
+├ ƒ /demo/shipper                                                                    240 B         105 kB
+├ ƒ /demo/shipper/bookings                                                          2.6 kB         111 kB
+├ ƒ /demo/shipper/dashboard                                                          211 B         119 kB
+├ ƒ /demo/shipper/facilities                                                       7.17 kB         139 kB
+├ ƒ /demo/shipper/freight-request/new                                                220 B         333 kB
+├ ƒ /demo/shipper/help                                                             1.46 kB         109 kB
+├ ƒ /demo/shipper/history                                                           5.3 kB         135 kB
+├ ƒ /demo/shipper/organization                                                       197 B         195 kB
+├ ƒ /demo/shipper/requests                                                         5.29 kB         135 kB
+├ ƒ /demo/shipper/requests/[id]                                                    4.27 kB         248 kB
+├ ƒ /demo/shipper/support                                                            468 B         105 kB
+├ ƒ /demo/shipper/tracking                                                         6.15 kB         140 kB
+├ ƒ /demo/shipper/tracking/[id]                                                     3.4 kB         144 kB
+├ ƒ /depot-preview                                                                   158 B         272 kB
+├ ƒ /enter                                                                           240 B         105 kB
+├ ƒ /facilities                                                                    1.24 kB         180 kB
+├ ƒ /freight-request/new                                                             220 B         333 kB
+├ ƒ /hac15-preview                                                                 5.36 kB         116 kB
+├ ƒ /hac37-preview                                                                   684 B         288 kB
+├ ƒ /help                                                                          1.46 kB         109 kB
+├ ƒ /history                                                                        2.1 kB         139 kB
+├ ƒ /login                                                                         3.34 kB         172 kB
+├ ƒ /mcp                                                                             240 B         105 kB
+├ ƒ /oauth/token                                                                     240 B         105 kB
+├ ƒ /organization                                                                    197 B         195 kB
+├ ƒ /requests                                                                        834 B         138 kB
+├ ƒ /requests/[id]                                                                   658 B         258 kB
+├ ƒ /support                                                                         471 B         105 kB
+├ ƒ /tetris                                                                          54 kB         194 kB
+├ ƒ /tetris/demo                                                                   1.33 kB         130 kB
+├ ƒ /tracking                                                                       1.5 kB         142 kB
+├ ƒ /tracking-preview                                                              17.4 kB         162 kB
+├ ƒ /tracking/[id]                                                                 2.65 kB         150 kB
+├ ƒ /truck-lab                                                                     6.74 kB         123 kB
+├ ƒ /truck-lab/reference                                                            179 kB         391 kB
+├ ƒ /v2-workspace                                                                    256 B         670 kB
+└ ƒ /vehicle-designs                                                                 158 B         272 kB
++ First Load JS shared by all                                                       105 kB
+  ├ chunks/325fc64d-5448585b030f107c.js                                            54.2 kB
+  ├ chunks/9877-48a3aaa15463bdeb.js                                                46.8 kB
+  └ other shared chunks (total)                                                    3.53 kB
+
+
+ƒ  (Dynamic)  server-rendered on demand
+

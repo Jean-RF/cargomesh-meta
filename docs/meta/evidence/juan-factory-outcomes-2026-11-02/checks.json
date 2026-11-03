@@ -1,0 +1,100 @@
+{
+  "errors": [],
+  "vehicles": [
+    {
+      "id": "cm-medical-van",
+      "method": "rear",
+      "flow": null,
+      "complete": true,
+      "incomplete": true,
+      "loaded": 7,
+      "loadedKg": 238,
+      "pendingKg": 34,
+      "departure": -6,
+      "actualPlayback": true,
+      "pause": true,
+      "rewind": true,
+      "reset": true,
+      "barcode": true
+    },
+    {
+      "id": "cm-coil-well",
+      "method": "crane",
+      "flow": null,
+      "complete": true,
+      "incomplete": true,
+      "loaded": 2,
+      "loadedKg": 13500,
+      "pendingKg": 6750,
+      "departure": -10.439187200000001,
+      "actualPlayback": true,
+      "pause": true,
+      "rewind": true,
+      "reset": true,
+      "barcode": true
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "method": "ramp",
+      "flow": null,
+      "complete": true,
+      "incomplete": true,
+      "loaded": 3,
+      "loadedKg": 4380,
+      "pendingKg": 1460,
+      "departure": -10.56727776,
+      "actualPlayback": true,
+      "pause": true,
+      "rewind": true,
+      "reset": true,
+      "barcode": true
+    },
+    {
+      "id": "cm-mini-bowser",
+      "method": "fill",
+      "flow": "liquid",
+      "complete": true,
+      "incomplete": true,
+      "loaded": 0,
+      "loadedKg": 825,
+      "pendingKg": 275,
+      "departure": -6,
+      "actualPlayback": true,
+      "pause": true,
+      "rewind": true,
+      "reset": true,
+      "barcode": true
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "method": "fill",
+      "flow": "bulk",
+      "complete": true,
+      "incomplete": true,
+      "loaded": 0,
+      "loadedKg": 4387.5,
+      "pendingKg": 1462.5,
+      "departure": -6,
+      "actualPlayback": true,
+      "pause": true,
+      "rewind": true,
+      "reset": true,
+      "barcode": true
+    }
+  ],
+  "mobile": {
+    "reducedSteps": true,
+    "departureStep": true,
+    "pending": 7,
+    "resetPaused": true,
+    "keyboardScenario": true,
+    "metrics": {
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 844,
+      "scrollHeight": 844,
+      "player": 341,
+      "playerScroll": 341
+    }
+  }
+}

@@ -1,0 +1,25 @@
+Already up to date
+Done in 1.1s using pnpm v11.19.0
+$ node --conditions=react-server --import tsx --test src/features/auth/password-login.test.ts src/features/auth/route-access-policy.test.ts src/server/auth/session-origin.test.ts src/server/auth/logout.test.ts src/server/auth/local-carrier-preview.test.ts
+✔ returns success after Supabase creates an authenticated session (1.9333ms)
+✔ returns a safe authentication error for invalid credentials (0.4592ms)
+✔ keeps unexpected authentication failures recoverable (0.2997ms)
+✔ keeps a non-credential HTTP 400 error recoverable (0.2485ms)
+✔ redirects an anonymous visitor away from an operational route (2.2633ms)
+✔ redirects a non-active member away from an operational route (0.3239ms)
+✔ allows only a resolved active member to render an operational route (0.4956ms)
+✔ redirects an active member away from login and leaves denied visitors on login (0.4268ms)
+✔ carrier frontend preview requires explicit opt-in on development localhost3000 (2.1386ms)
+✔ Client and Carrier sign out before returning to the public home page (234.7439ms)
+✔ failed or cross-origin sign out cannot claim success or redirect (24.2375ms)
+✔ local and hosted preview exits clear their grant and return home; entry still opens Client (44.6925ms)
+✔ cookie session mutations accept same origin and Next loopback normalization (34.7588ms)
+✔ cookie session mutations reject missing/external origins and mismatched authorities (2.6642ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2271.9072

@@ -1,0 +1,36 @@
+{
+  "classification": "SYNTHETIC_CONTRACT_FIXTURES_NOT_MODEL_OUTPUT",
+  "transcription": {
+    "input": { "schemaVersion": "1.0", "evidenceId": "ab090000-0000-4000-8000-000000000001", "inputRevision": 3, "language": "es" },
+    "output": { "schemaVersion": "1.0", "evidenceId": "ab090000-0000-4000-8000-000000000001", "inputRevision": 3, "status": "TRANSCRIBED", "text": "Son doce pallets de piezas de maquinaria.", "audioDurationMs": 2400, "requiresHumanConfirmation": true },
+    "empty": { "schemaVersion": "1.0", "evidenceId": "ab090000-0000-4000-8000-000000000001", "inputRevision": 3, "status": "EMPTY", "text": "", "audioDurationMs": 2400, "requiresHumanConfirmation": true },
+    "rejected": { "schemaVersion": "1.0", "evidenceId": "ab090000-0000-4000-8000-000000000002", "inputRevision": 2, "status": "TRANSCRIBED", "text": "Son diez pallets.", "audioDurationMs": 2400, "requiresHumanConfirmation": true }
+  },
+  "explanation": {
+    "input": {
+      "schemaVersion": "1.0", "reconciliationId": "ab030000-0000-4000-8000-000000000001", "reconciliationVersion": 2,
+      "sessionId": "ab030000-0000-4000-8000-000000000002", "manifestRevision": 3, "observationRevision": 1,
+      "comparisonStatus": "DIFFERENCE_PROPOSED", "sessionClosed": true, "evidenceSufficient": true,
+      "expectedQuantity": 12, "expectedUnit": "PALLET", "observedQuantity": 11, "observedUnit": "PALLET", "differenceQuantity": 1,
+      "events": [{ "eventId": "ab030000-0000-4000-8000-000000000003", "evidenceId": "ab030000-0000-4000-8000-000000000004", "timecodeMs": 8100 }]
+    },
+    "output": {
+      "schemaVersion": "1.0", "reconciliationId": "ab030000-0000-4000-8000-000000000001", "reconciliationVersion": 2,
+      "comparisonStatus": "DIFFERENCE_PROPOSED", "summary": "El comparador registra una diferencia de un pallet que requiere revisión.",
+      "reasons": ["La sesión está cerrada."], "limitations": ["No determina la causa ni acredita una pérdida física."], "suggestedActions": ["REVIEW_EVIDENCE"],
+      "evidenceRefs": [{ "eventId": "ab030000-0000-4000-8000-000000000003", "evidenceId": "ab030000-0000-4000-8000-000000000004", "timecodeMs": 8100 }],
+      "requiresHumanReview": true
+    },
+    "incomplete": {
+      "schemaVersion": "1.0", "reconciliationId": "ab030000-0000-4000-8000-000000000001", "reconciliationVersion": 2,
+      "sessionId": "ab030000-0000-4000-8000-000000000002", "manifestRevision": 3, "observationRevision": null,
+      "comparisonStatus": "NOT_READY", "sessionClosed": false, "evidenceSufficient": false,
+      "expectedQuantity": 12, "expectedUnit": "PALLET", "observedQuantity": null, "observedUnit": null, "differenceQuantity": null, "events": []
+    },
+    "rejected": {
+      "schemaVersion": "1.0", "reconciliationId": "ab030000-0000-4000-8000-000000000001", "reconciliationVersion": 1,
+      "comparisonStatus": "DIFFERENCE_PROPOSED", "summary": "Referencia no válida.", "reasons": [], "limitations": [], "suggestedActions": ["REVIEW_EVIDENCE"],
+      "evidenceRefs": [{ "eventId": "ab030000-0000-4000-8000-000000000099", "evidenceId": "ab030000-0000-4000-8000-000000000004", "timecodeMs": 8100 }], "requiresHumanReview": true
+    }
+  }
+}

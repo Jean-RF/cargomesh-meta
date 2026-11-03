@@ -1,0 +1,16 @@
+✔ document routes reject cookie CSRF, missing versions and malformed body before persistence (86.4537ms)
+✔ native document boundary rejects an invalid bearer before service access (2.9303ms)
+✔ each document request authenticates once, including root and nested paths (5.5289ms)
+✔ actual file inspection rejects empty, oversized, spoofed, encrypted, scripted and invalid PDF content (33.5281ms)
+✔ bounded structural image validation accepts actual PNG/JPEG and rejects incomplete or excessive images (18.7292ms)
+✔ packing list scope and issue/expiry are explicit, never inferred from a file (9.3077ms)
+✔ upload retry keeps revision, object path and finalization key without creating duplicate document intents (3.8131ms)
+✔ invalid upload never reserves metadata and unsigned download cannot bypass the repository (1.4221ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2311.6672

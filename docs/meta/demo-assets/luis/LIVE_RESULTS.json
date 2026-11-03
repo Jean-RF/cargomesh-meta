@@ -1,0 +1,313 @@
+{
+  "check": "meta-media",
+  "evaluatedAt": "2026-10-30T22:00:51.088Z",
+  "syntheticInputs": true,
+  "actualMetaInference": true,
+  "realAudioOrShipment": false,
+  "results": [
+    {
+      "case": "foreground-cargo-es",
+      "status": "PASS",
+      "material": "AI_GENERATED_SYNTHETIC_IMAGE",
+      "asset": "cargo-scene.png",
+      "sha256": "dc9f285578cbff964bc2a6a56fa53e11933ba459d2a7884bcabeb73880f95f56",
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "d63b6c35-5b30-451d-a56d-79c3aba20a9b",
+        "latencyMs": 5627,
+        "attempts": 1,
+        "inputTokens": 3992,
+        "outputTokens": 814,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "proposal": {
+        "schemaVersion": "1.0",
+        "inputRevision": 2,
+        "status": "PROPOSED",
+        "refusalReason": null,
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "cajas cerradas visibles en el suelo",
+            "provenance": {
+              "source": "photo",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "VISIBLE",
+              "quote": null
+            }
+          },
+          {
+            "field": "unitType",
+            "value": "BOX",
+            "provenance": {
+              "source": "photo",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "VISIBLE",
+              "quote": null
+            }
+          },
+          {
+            "field": "unitQuantity",
+            "value": 4,
+            "provenance": {
+              "source": "photo",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "VISIBLE",
+              "quote": null
+            }
+          }
+        ],
+        "missingFields": [
+          "unitWeightKg",
+          "unitLengthCm",
+          "unitWidthCm",
+          "unitHeightCm",
+          "handlingRequirements"
+        ],
+        "warnings": [
+          "VISIBLE_COUNT_ONLY",
+          "NO_SCALE",
+          "INCOMPLETE_DECLARATION"
+        ],
+        "requiresHumanConfirmation": true
+      },
+      "commercialWrites": 0
+    },
+    {
+      "case": "printed-label-es",
+      "status": "PASS",
+      "material": "AI_GENERATED_SYNTHETIC_IMAGE",
+      "asset": "shipping-label.png",
+      "sha256": "54b7a42e31740da0d651fafcec47eea0dafb7c2e3aab426fed4f9bc0a0a157c0",
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "8689f6af-56b5-4237-a412-08ab348ed958",
+        "latencyMs": 7529,
+        "attempts": 1,
+        "inputTokens": 3972,
+        "outputTokens": 1471,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "proposal": {
+        "schemaVersion": "1.0",
+        "inputRevision": 2,
+        "status": "PROPOSED",
+        "refusalReason": null,
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "REPUESTOS",
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "CONTENIDO: REPUESTOS"
+            }
+          },
+          {
+            "field": "unitType",
+            "value": "BOX",
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "BULTOS: 4 CAJAS"
+            }
+          },
+          {
+            "field": "unitQuantity",
+            "value": 4,
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "BULTOS: 4 CAJAS"
+            }
+          },
+          {
+            "field": "unitWeightKg",
+            "value": 8,
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "PESO POR CAJA: 8 kg"
+            }
+          },
+          {
+            "field": "unitLengthCm",
+            "value": 40,
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "MEDIDAS POR CAJA: 40 x 30 x 20 cm"
+            }
+          },
+          {
+            "field": "unitWidthCm",
+            "value": 30,
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "MEDIDAS POR CAJA: 40 x 30 x 20 cm"
+            }
+          },
+          {
+            "field": "unitHeightCm",
+            "value": 20,
+            "provenance": {
+              "source": "label",
+              "evidenceId": "11111111-1111-4111-8111-111111111111",
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "MEDIDAS POR CAJA: 40 x 30 x 20 cm"
+            }
+          }
+        ],
+        "missingFields": [
+          "handlingRequirements"
+        ],
+        "warnings": [
+          "UNVERIFIED_LABEL",
+          "INCOMPLETE_DECLARATION"
+        ],
+        "requiresHumanConfirmation": true
+      },
+      "commercialWrites": 0
+    },
+    {
+      "case": "damaged-label-es",
+      "status": "PASS",
+      "material": "AI_GENERATED_SYNTHETIC_IMAGE",
+      "asset": "damaged-label.png",
+      "sha256": "32cef107fa852dbad1c11a16c28faded16378b7f4f8d276f9aa869a62b6e8bf7",
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "89b64764-486b-419c-8169-8675cbe65da7",
+        "latencyMs": 5102,
+        "attempts": 1,
+        "inputTokens": 3972,
+        "outputTokens": 692,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "proposal": {
+        "schemaVersion": "1.0",
+        "inputRevision": 2,
+        "status": "PROPOSED",
+        "refusalReason": null,
+        "fields": [],
+        "missingFields": [
+          "cargoDescription",
+          "unitType",
+          "unitQuantity",
+          "unitWeightKg",
+          "unitLengthCm",
+          "unitWidthCm",
+          "unitHeightCm",
+          "handlingRequirements"
+        ],
+        "warnings": [
+          "INCOMPLETE_DECLARATION"
+        ],
+        "requiresHumanConfirmation": true
+      },
+      "commercialWrites": 0
+    },
+    {
+      "case": "newer-correction-es",
+      "status": "PASS",
+      "material": "SYNTHETIC_TRANSCRIPT_NO_ASR",
+      "asset": null,
+      "sha256": null,
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "28080bd3-0f39-4d50-80db-ccfe2cc8632b",
+        "latencyMs": 5859,
+        "attempts": 1,
+        "inputTokens": 2022,
+        "outputTokens": 991,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "proposal": {
+        "schemaVersion": "1.0",
+        "inputRevision": 2,
+        "status": "PROPOSED",
+        "refusalReason": null,
+        "fields": [
+          {
+            "field": "unitQuantity",
+            "value": 3,
+            "provenance": {
+              "source": "text",
+              "evidenceId": null,
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "son 3 cajas, no cuatro."
+            }
+          },
+          {
+            "field": "unitType",
+            "value": "BOX",
+            "provenance": {
+              "source": "text",
+              "evidenceId": null,
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "son 3 cajas"
+            }
+          },
+          {
+            "field": "unitWeightKg",
+            "value": 8,
+            "provenance": {
+              "source": "text",
+              "evidenceId": null,
+              "inputRevision": 2,
+              "basis": "EXPLICIT",
+              "quote": "Cada caja pesa 8 kg."
+            }
+          }
+        ],
+        "missingFields": [
+          "cargoDescription",
+          "unitLengthCm",
+          "unitWidthCm",
+          "unitHeightCm",
+          "handlingRequirements"
+        ],
+        "warnings": [
+          "INCOMPLETE_DECLARATION"
+        ],
+        "requiresHumanConfirmation": true
+      },
+      "commercialWrites": 0
+    }
+  ]
+}

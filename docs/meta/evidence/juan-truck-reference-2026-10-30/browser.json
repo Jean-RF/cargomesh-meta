@@ -1,0 +1,41 @@
+{
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "views": [
+    {
+      "width": 1600,
+      "view": "iso"
+    },
+    {
+      "width": 1600,
+      "view": "side"
+    },
+    {
+      "width": 1600,
+      "view": "front"
+    },
+    {
+      "width": 1600,
+      "view": "cab"
+    },
+    {
+      "width": 390,
+      "view": "iso"
+    },
+    {
+      "width": 390,
+      "view": "side"
+    },
+    {
+      "width": 390,
+      "view": "front"
+    },
+    {
+      "width": 390,
+      "view": "cab"
+    }
+  ],
+  "negativeCase": true,
+  "downloadSha256": "07af1d9ea4ffb08efe8b599c595200ce22f55d61e9f07d76d7024adfef545cf7"
+}

@@ -1,0 +1,205 @@
+{
+  "ranAt": "2026-11-02T04:16:25.478Z",
+  "scope": "Supabase local del perfil V2 (127.0.0.1:58321) y rutas Hono en proceso; sin Modal, SAM ni base alojada",
+  "segmenter": "FIXTURE del clip SYNTHETIC_RENDER sintetico_todas (6 cruces); no es inferencia real",
+  "checks": [
+    "Auth local -> solicitud -> manifiesto CR-01 confirmado -> sesiones DEMO y VERIFICATION de Juan",
+    "Clip privado registrado (replay con la misma clave), verificado READY; lectura anónima rechazada",
+    "Job -> worker Python -> callback firmado -> SUCCEEDED -> observación de Juan (neto 6, sintético, sin inferencia real) y video anotado privado",
+    "Caso obligatorio: Juan falló una vez, el worker reenvió tras el 503, una sola observación y un solo análisis",
+    "Reenvíos agotados: entrega PENDING durable y recuperada por HTTP; sin nuevo despacho",
+    "Organización B no lee, lista ni adjunta; VERIFICATION rechaza un render sintético",
+    "Prueba obligatoria: el intento 1 tardío subió a su propia ruta y su callback fue STALE_ATTEMPT; el video y la observación del intento 2 se conservan"
+  ],
+  "requestId": "823166c3-5289-4921-b5f3-9a453ffd9a43",
+  "manifestId": "d1dbcc60-57b8-400e-b02c-03a931c52445",
+  "manifestRevision": 1,
+  "demoSessionId": "d5a1c3ed-c850-46bb-a2d9-d62f0069f8aa",
+  "verificationSessionId": "720f7649-3c21-4515-bdcc-5b5d01e44097",
+  "groupId": "b1dfe264-a297-4158-b88e-6b16c25d94b3",
+  "clipId": "82b9c4a3-a2be-4196-9346-7075c256a305",
+  "clipSha256": "42d144061c0b33ad86d1562850efed3a105dcc22b261078e825aad04d971b9f4",
+  "clipBytes": 75774,
+  "clipContainer": "MP4",
+  "anonymousReadStatus": 400,
+  "job1": {
+    "jobId": "00053881-febb-4d5e-879b-157550fc6c15",
+    "receipt": {
+      "job_id": "00053881-febb-4d5e-879b-157550fc6c15",
+      "attempt": 1,
+      "status": "SUCCEEDED",
+      "error": null,
+      "net": 6,
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "overlay_uploaded": true,
+      "overlay_sha256": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b",
+      "reused": false,
+      "delivery": {
+        "delivered": true,
+        "tries": 1,
+        "http_status": 200,
+        "problem": null
+      }
+    },
+    "delivery": {
+      "status": "DELIVERED",
+      "tries": 1,
+      "error": null,
+      "observationId": "130572a3-d0a6-4c35-84a2-eac66b876993",
+      "deliveredAt": "2026-11-02T04:16:01.702418+00:00"
+    },
+    "observationId": "130572a3-d0a6-4c35-84a2-eac66b876993",
+    "overlayBytes": 83032
+  },
+  "job2": {
+    "jobId": "3a7d2402-aae2-45ec-b3a2-5cc422916455",
+    "receipt": {
+      "job_id": "3a7d2402-aae2-45ec-b3a2-5cc422916455",
+      "attempt": 1,
+      "status": "SUCCEEDED",
+      "error": null,
+      "net": 6,
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "overlay_uploaded": true,
+      "overlay_sha256": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b",
+      "reused": false,
+      "delivery": {
+        "delivered": true,
+        "tries": 2,
+        "http_status": 202,
+        "problem": null
+      }
+    },
+    "delivery": {
+      "status": "DELIVERED",
+      "tries": 2,
+      "error": null,
+      "observationId": "927cae7d-d50d-4b2f-9df7-724e90786839",
+      "deliveredAt": "2026-11-02T04:16:06.613578+00:00"
+    },
+    "observationId": "927cae7d-d50d-4b2f-9df7-724e90786839",
+    "workerDispatches": 1
+  },
+  "job3": {
+    "jobId": "9207cc80-8baa-460d-aecb-d1d996412908",
+    "receipt": {
+      "job_id": "9207cc80-8baa-460d-aecb-d1d996412908",
+      "attempt": 1,
+      "status": "SUCCEEDED",
+      "error": null,
+      "net": 6,
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "overlay_uploaded": true,
+      "overlay_sha256": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b",
+      "reused": false,
+      "delivery": {
+        "delivered": false,
+        "tries": 3,
+        "http_status": 503,
+        "problem": "UNREACHABLE"
+      }
+    },
+    "pendingTries": 3,
+    "recoveredDelivery": {
+      "status": "DELIVERED",
+      "tries": 4,
+      "error": null,
+      "observationId": "02ca5d3e-b9c6-449c-b032-948d491f256e",
+      "deliveredAt": "2026-11-02T04:16:19.625436+00:00"
+    },
+    "workerDispatches": 1
+  },
+  "outsider": {
+    "readJob": 404,
+    "clipMedia": 404,
+    "listJobs": 0,
+    "registerClip": 404
+  },
+  "verificationSyntheticClip": {
+    "status": 422,
+    "code": "REAL_EVIDENCE_REQUIRED"
+  },
+  "lateAttempt": {
+    "jobId": "9db0390b-8461-4473-863c-bb0dd3a220d8",
+    "attempt1Receipt": {
+      "job_id": "9db0390b-8461-4473-863c-bb0dd3a220d8",
+      "attempt": 1,
+      "status": "SUCCEEDED",
+      "error": null,
+      "net": 6,
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "overlay_uploaded": true,
+      "overlay_sha256": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b",
+      "reused": false,
+      "delivery": {
+        "delivered": true,
+        "tries": 1,
+        "http_status": 202,
+        "problem": null
+      }
+    },
+    "attempt2Receipt": {
+      "job_id": "9db0390b-8461-4473-863c-bb0dd3a220d8",
+      "attempt": 2,
+      "status": "SUCCEEDED",
+      "error": null,
+      "net": 6,
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "overlay_uploaded": true,
+      "overlay_sha256": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b",
+      "reused": false,
+      "delivery": {
+        "delivered": true,
+        "tries": 1,
+        "http_status": 200,
+        "problem": null
+      }
+    },
+    "overlayStatus": "VERIFIED",
+    "observationId": "91a5f897-dd98-4334-82cf-fe4b564f0a8a",
+    "repeatedUpload": {
+      "httpStatus": 400,
+      "statusCode": "409",
+      "error": "Duplicate"
+    },
+    "playbackSha256": {
+      "before": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b",
+      "after": "52e576009388e97261c65943f4075d6a6332068e3242c5e91b99e8d4dd7f9d9b"
+    }
+  },
+  "sessionObservations": [
+    {
+      "id": "130572a3-d0a6-4c35-84a2-eac66b876993",
+      "jobId": "00053881-febb-4d5e-879b-157550fc6c15",
+      "net": 6,
+      "source": "SYNTHETIC_RENDER",
+      "realInference": false
+    },
+    {
+      "id": "927cae7d-d50d-4b2f-9df7-724e90786839",
+      "jobId": "3a7d2402-aae2-45ec-b3a2-5cc422916455",
+      "net": 6,
+      "source": "SYNTHETIC_RENDER",
+      "realInference": false
+    },
+    {
+      "id": "02ca5d3e-b9c6-449c-b032-948d491f256e",
+      "jobId": "9207cc80-8baa-460d-aecb-d1d996412908",
+      "net": 6,
+      "source": "SYNTHETIC_RENDER",
+      "realInference": false
+    },
+    {
+      "id": "91a5f897-dd98-4334-82cf-fe4b564f0a8a",
+      "jobId": "9db0390b-8461-4473-863c-bb0dd3a220d8",
+      "net": 6,
+      "source": "SYNTHETIC_RENDER",
+      "realInference": false
+    }
+  ]
+}

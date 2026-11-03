@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-01",
+  "branch": "codex/meta-juan",
+  "head": "3810a589f75e4d4b9c7b7a7f2797cecffc791209",
+  "scope": "factory-loading",
+  "tests": {
+    "factory": {
+      "pass": 7,
+      "fail": 0
+    },
+    "logistics": {
+      "pass": 201,
+      "fail": 0,
+      "scope": "final F1/F2 state; includes seven factory tests",
+      "durationMs": 254797.5034
+    },
+    "carrierOperations": {
+      "pass": 54,
+      "fail": 0
+    }
+  },
+  "build": "passed with types/lint after F1/F2; before mechanical token alias; dev compile and22identical computed colors after alias",
+  "typecheck": "passed",
+  "architecture": {
+    "modules": 846,
+    "clientEntries": 246
+  },
+  "browser": {
+    "pageErrors": 0,
+    "mobile": "390x844",
+    "cases": 8,
+    "reducedMotion": true,
+    "desktop": "1440x1050"
+  },
+  "rasterProvenance": {
+    "missing": 0,
+    "rasters": 35
+  },
+  "review": "ship limited to F1/F2 resolved",
+  "committed": false,
+  "pushed": false,
+  "pullRequestChanged": false
+}

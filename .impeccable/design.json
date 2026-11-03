@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-30T06:39:51.200748+00:00",
+  "title": "Design System: CargoMesh V2 light product workspace",
+  "extensions": {
+    "colorMeta": {
+      "cm-color-primary": {
+        "role": "primary",
+        "displayName": "CargoMesh teal"
+      },
+      "cm-color-canvas": {
+        "role": "neutral",
+        "displayName": "Workspace canvas"
+      },
+      "cm-color-surface": {
+        "role": "neutral",
+        "displayName": "Record surface"
+      },
+      "cm-color-ink": {
+        "role": "neutral",
+        "displayName": "Operational ink"
+      }
+    },
+    "typographyMeta": {
+      "page-title": {
+        "displayName": "Page title",
+        "purpose": "Existing shared responsive title token; Tetris has a local title override."
+      },
+      "operation-body": {
+        "displayName": "Operation body",
+        "purpose": "Existing operation prose and controls."
+      },
+      "compact-metric": {
+        "displayName": "Compact metric",
+        "purpose": "Read-only quantities in CarrierKpis compact variant."
+      }
+    },
+    "shadows": [
+      {
+        "name": "cm-shadow-card",
+        "value": "0 2px 6px rgb(22 51 73 / 3%)",
+        "purpose": "Existing global card token; not applied to Tetris comparison or Passport."
+      },
+      {
+        "name": "cm-shadow-panel",
+        "value": "0 1.4rem 4rem rgb(16 45 67 / 16%)",
+        "purpose": "Existing global panel token; not applied to Tetris comparison or Passport."
+      }
+    ],
+    "motion": [
+      {
+        "name": "cm-motion-fast",
+        "value": "120ms",
+        "purpose": "Existing global product token."
+      },
+      {
+        "name": "cm-motion-interaction",
+        "value": "160ms",
+        "purpose": "Existing global product token."
+      },
+      {
+        "name": "cm-motion-content",
+        "value": "200ms",
+        "purpose": "Existing global product token."
+      },
+      {
+        "name": "cm-motion-panel",
+        "value": "240ms",
+        "purpose": "Existing global product token."
+      },
+      {
+        "name": "cm-motion-ease",
+        "value": "cubic-bezier(.2, .8, .2, 1)",
+        "purpose": "Existing global product easing."
+      },
+      {
+        "name": "tetris-button-background",
+        "value": "background-color .15s ease",
+        "purpose": "Observed local button transition, removed under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tetris-detail-narrow",
+        "value": "1150px"
+      },
+      {
+        "name": "tetris-stack",
+        "value": "800px"
+      },
+      {
+        "name": "tetris-header-compact",
+        "value": "480px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Operation secondary button",
+      "kind": "button",
+      "description": "Existing local operation action; no framework runtime.",
+      "html": "<button class=\"ds-operation-secondary\">Recargar</button>",
+      "css": ".ds-operation-secondary{min-height:44px;border:1px solid var(--cm-color-line, #dce5e8);border-radius:6px;background:var(--cm-color-surface, #fff);color:var(--cm-color-ink, #163349);padding:9px 13px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:13px;cursor:pointer;font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);transition:background-color .15s ease;}.ds-operation-secondary:hover{background:var(--cm-color-selected, #e6f3f3)}.ds-operation-secondary:focus-visible{outline:3px solid var(--cm-color-primary, #00747c);outline-offset:3px}.ds-operation-secondary:disabled{cursor:not-allowed;opacity:.55}@media(prefers-reduced-motion:reduce){.ds-operation-secondary{transition:none}}"
+    },
+    {
+      "name": "Operation primary button",
+      "kind": "button",
+      "description": "Existing local primary action; its hover is recorded here as a local variation, not a global color token.",
+      "html": "<button class=\"ds-operation-primary\">Guardar cobertura revisada</button>",
+      "css": ".ds-operation-primary{min-height:44px;border:1px solid var(--cm-color-line, #dce5e8);border-radius:6px;background:var(--cm-color-surface, #fff);color:var(--cm-color-ink, #163349);padding:9px 13px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:13px;cursor:pointer;font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);transition:background-color .15s ease;background:var(--cm-color-primary, #00747c);color:#fff;border-color:transparent}.ds-operation-primary:hover{background:#194e5b}.ds-operation-primary:focus-visible{outline:3px solid var(--cm-color-primary, #00747c);outline-offset:3px}.ds-operation-primary:disabled{cursor:not-allowed;opacity:.55}@media(prefers-reduced-motion:reduce){.ds-operation-primary{transition:none}}"
+    },
+    {
+      "name": "Operation select",
+      "kind": "input",
+      "description": "Visible associated label and native select, as used for explicit units.",
+      "html": "<label class=\"ds-operation-label\" for=\"ds-unit\">Unidad de lectura<select class=\"ds-operation-select\" id=\"ds-unit\"><option>Pallets</option><option>Cajas</option></select></label>",
+      "css": ".ds-operation-label{display:flex;flex-direction:column;gap:7px;font-weight:550;font-size:12px;color:var(--cm-color-ink, #163349);font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);}.ds-operation-select{font:inherit;font-weight:400;font-size:13px;min-height:44px;width:100%;padding:9px 12px;border:1px solid var(--cm-color-line, #dce5e8);border-radius:6px;background:var(--cm-color-surface, #fff);color:var(--cm-color-ink, #163349);cursor:pointer}.ds-operation-select:focus-visible{outline:3px solid var(--cm-color-primary, #00747c);outline-offset:3px}"
+    },
+    {
+      "name": "Tetris navigation",
+      "kind": "nav",
+      "description": "Existing current-destination treatment and truck link.",
+      "html": "<nav class=\"ds-tetris-nav\" aria-label=\"Área de trabajo\"><span aria-current=\"page\">Tetris</span><a href=\"/truck-lab\">Camiones 3D</a></nav>",
+      "css": ".ds-tetris-nav{display:flex;align-items:stretch;gap:30px;height:74px;font-size:13px;background:var(--cm-color-surface, #fff);font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);}.ds-tetris-nav a,.ds-tetris-nav span{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--cm-color-muted, #536b78)}.ds-tetris-nav span{color:var(--cm-color-primary, #00747c);border-bottom:2px solid currentColor;font-weight:650}.ds-tetris-nav a:focus-visible{outline:3px solid var(--cm-color-primary, #00747c);outline-offset:3px}@media(max-width:800px){.ds-tetris-nav{height:68px;gap:20px}}@media(max-width:480px){.ds-tetris-nav{font-size:12px;gap:16px}}"
+    },
+    {
+      "name": "Comparison status",
+      "kind": "chip",
+      "description": "Text-bearing review proposal, using the existing local warning colors.",
+      "html": "<span class=\"ds-comparison-status\">Revisar diferencia</span>",
+      "css": ".ds-comparison-status{font-size:10px;display:inline-flex;padding:5px 7px;border-radius:4px;background:#fff0d7;color:#79500e;white-space:nowrap;font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);}@media(max-width:800px){.ds-comparison-status{font-size:12px}}"
+    },
+    {
+      "name": "Passport container",
+      "kind": "card",
+      "description": "Existing saved-document surface, with literal local geometry.",
+      "html": "<article class=\"ds-passport\"><h3>Passport · versión 6</h3><p>Vigente al consultar</p><dl><div><dt>Fuente</dt><dd>Manifiesto r1 · demostración</dd></div></dl></article>",
+      "css": ".ds-passport{margin-top:26px;background:var(--cm-color-surface, #fff);color:var(--cm-color-ink, #163349);border:1px solid var(--cm-color-line, #dce5e8);border-radius:10px;padding:24px;font-size:13px;line-height:1.6;font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);}.ds-passport h3{font-size:16px;margin:0}.ds-passport p{max-width:75ch;color:var(--cm-color-muted, #536b78)}.ds-passport dl{display:flex;flex-wrap:wrap;gap:25px;margin:20px 0 26px}.ds-passport dt{font-size:12px;color:var(--cm-color-muted, #536b78)}.ds-passport dd{margin:5px 0 0;font-size:12px;overflow-wrap:anywhere}@media(max-width:800px){.ds-passport{padding:18px}.ds-passport dl{flex-direction:column;gap:16px}}"
+    },
+    {
+      "name": "Compact metric",
+      "kind": "custom",
+      "refersTo": "compact-metric",
+      "description": "Read-only CarrierKpis compact variant; sample label and unknown value are present in the implementation.",
+      "html": "<dl class=\"ds-compact-metric\"><dt>Planificado</dt><dd><span class=\"ds-compact-value\" aria-label=\"Pendiente de datos\">—</span><span class=\"ds-compact-unit\">cajas</span><span class=\"ds-compact-description\">Sin plan disponible</span></dd></dl>",
+      "css": ".ds-compact-metric{margin:0;background:var(--cm-color-surface, #fff);border-block:1px solid var(--cm-color-line, #dce5e8);color:var(--cm-color-ink, #163349);padding:22px 24px;min-height:146px;font-family:var(--cm-font-sans, Inter, ui-sans-serif, system-ui, sans-serif);}.ds-compact-metric dt{font-size:13px;color:var(--cm-color-muted, #536b78);line-height:1.4;font-weight:500}.ds-compact-metric dd{margin:12px 0 0}.ds-compact-value{font-size:32px;letter-spacing:-.025em;line-height:1.15;font-weight:650;font-variant-numeric:tabular-nums}.ds-compact-unit{font-size:12px;margin-left:8px;color:var(--cm-color-muted, #536b78)}.ds-compact-description{display:block;font-size:11px;color:var(--cm-color-muted, #536b78);line-height:1.5;margin-top:9px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "CargoMesh V2 product workspace",
+    "overview": "This is a descriptive name for the incumbent implementation, not a new visual direction or a claim of prior approval. The light CargoMesh product workspace uses restrained teal actions, dark blue text, white operational surfaces and explicit data provenance. It presents quantities, scope, uncertainty and source versions as readable product information.\n\nThis scan records the shared CargoMesh V2 tokens and the reused components visible in Tetris. It is not a redesign of the landing shell, carrier portal, or truck laboratory. The operations extension remains governed by [its direction contract](docs/meta/design-tetris-operation.md); historical [product context](docs/PRODUCT.md) does not reassign team ownership.",
+    "keyCharacteristics": [
+      "Shared light product tokens and the declared Inter sans stack.",
+      "Bordered tables and forms with tabular quantities and visible source information.",
+      "Compact metrics, explicit pending states and responsive internal table scrolling."
+    ],
+    "rules": [
+      {
+        "name": "The Shared Palette Rule",
+        "body": "New light product surfaces inherit the CargoMesh V2 tokens. Do not derive a new global palette from one local status or hover override.",
+        "section": "colors"
+      },
+      {
+        "name": "The Internal Scroll Rule",
+        "body": "Keep wide comparison data in its own scroll region so the document remains within the viewport.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "Do reuse the shared light CargoMesh palette and declared interface family.",
+      "Do retain visible labels, focus treatment and 44px operation controls.",
+      "Do keep source versions, units, uncertainty, synthetic origin and human review requirements visible where the operation exposes them.",
+      "Do preserve internal table scrolling and the compact metric variant in Tetris."
+    ],
+    "donts": [
+      "Don't promote a local status color, hover override or legacy shell palette into a replacement global system.",
+      "Don't represent an unavailable quantity as zero, count progress as physical occupancy, or the Passport as delivery confirmation.",
+      "Don't treat this scan as authority for a broad redesign or for changing unrelated carrier/truck surfaces."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "derivation": "JPEG maps resized to 512px with source provenance embedded; HDRI1k unchanged",
+  "files": [
+    {
+      "file": "brown_leather-color.jpg",
+      "bytes": 86959,
+      "sha256": "81342fbb808c8463bb0c435f4665c2b57933ff8fe49b39cb890ac6703937a2e3"
+    },
+    {
+      "file": "brown_leather-normal.jpg",
+      "bytes": 157944,
+      "sha256": "60e5b942174ba6fbda6313454c2269a311390646fd87bb410360fa0e72ad6183"
+    },
+    {
+      "file": "brown_leather-rough.jpg",
+      "bytes": 161857,
+      "sha256": "616d7392aa35e803c309b7badd5b61aee46ca14fc4953962484c7b3e3637ed40"
+    },
+    {
+      "file": "metal_plate-color.jpg",
+      "bytes": 100394,
+      "sha256": "7f36dd9786c32c4266ff09c345cabd529cea38c5de63ceb16605c829e76fffd2"
+    },
+    {
+      "file": "metal_plate-normal.jpg",
+      "bytes": 115059,
+      "sha256": "a3a8f041bae65c4ffb19133a895bda0624a351f54381d83bc0e06eec34325fee"
+    },
+    {
+      "file": "metal_plate-rough.jpg",
+      "bytes": 115160,
+      "sha256": "7ddec7c070691dbc6fe718b6f2cd8d25083c42489a1194f51f58834329d564ed"
+    },
+    {
+      "file": "studio-small-09.hdr",
+      "bytes": 1615248,
+      "sha256": "e7cfda5f4e98e623db12b8bfd0184e048488e4855d9c83e2751fb44a32e80c45"
+    },
+    {
+      "file": "wood_planks-color.jpg",
+      "bytes": 76078,
+      "sha256": "5772f310701418fd517c606fb94a870046ad49d9aae524d7c6529d48783815cc"
+    },
+    {
+      "file": "wood_planks-normal.jpg",
+      "bytes": 69565,
+      "sha256": "ffb6f57ea06165a59c786e7224e2737ba2f549357da114011d5b71ecffcb9d93"
+    },
+    {
+      "file": "wood_planks-rough.jpg",
+      "bytes": 29901,
+      "sha256": "8c53a95556d5d7eefb915c435bee25bffd4661e6e70ad9bf00652d6ec7aba01c"
+    }
+  ],
+  "source": "https://polyhaven.com",
+  "license": "CC0-1.0"
+}

@@ -1,0 +1,35 @@
+{
+  "base": "40f8865397dddf0c7dd6b87598c74b7d87ee9dad",
+  "scope": "Production effect code under simulated hooks/GPU plus pure domain/router suites; no browser FPS claim",
+  "viewer": {
+    "tests": 4,
+    "baselineBuilds": 11,
+    "optimizedBuilds": 1,
+    "baselineDirectDraws": 11,
+    "optimizedDirectDraws": 0
+  },
+  "sessions": 48,
+  "tracking": 53,
+  "documents": 8,
+  "typecheckExit": 0,
+  "productionBuild": {
+    "exit": 0,
+    "isolated": true,
+    "privateEnvCopied": false,
+    "cpuLimit": 2
+  },
+  "paidInference": false,
+  "remoteMigration": false,
+  "applicationTree": "a534de0a1a6082ded369cf50c140b5188722f2d7",
+  "candidateVerification": {
+    "viewer": 4,
+    "sessions": 48,
+    "tracking": 53,
+    "documents": 8,
+    "workspaceDemo": 46,
+    "total": 159,
+    "architectureModules": 898,
+    "clientEntries": 255,
+    "typecheckExit": 0
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cm-coil-well",
+    "bytes": 8227028,
+    "sha256": "d446ec5040fda79e0f0871e23de5e12d272a757bf624f90dbc7f577dcfc35995",
+    "triangles": 115280,
+    "meshes": 18
+  },
+  {
+    "id": "cm-auto-doubledeck",
+    "bytes": 10511724,
+    "sha256": "4a1bd085662826e6d270c50fc30f4c4dfb0b07a415836163bca872c73bd036d4",
+    "triangles": 146407,
+    "meshes": 20
+  },
+  {
+    "id": "cm-transformer-modular",
+    "bytes": 9367880,
+    "sha256": "1c1440f225f33af1082bb8f806a280c836fd9005b918957168d76cd00692850d",
+    "triangles": 102485,
+    "meshes": 18
+  }
+]

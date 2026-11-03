@@ -1,0 +1,30 @@
+[
+  {
+    "script": "check:architecture",
+    "exitCode": 0
+  },
+  {
+    "script": "test:meta-loading",
+    "exitCode": 0
+  },
+  {
+    "script": "test:carrier-operations",
+    "exitCode": 0
+  },
+  {
+    "script": "test:auth",
+    "exitCode": 0
+  },
+  {
+    "script": "test:carrier-navigation",
+    "exitCode": 0
+  },
+  {
+    "script": "test:carrier-closeout",
+    "exitCode": 0
+  },
+  {
+    "script": "test:meta-explanation",
+    "exitCode": 0
+  }
+]

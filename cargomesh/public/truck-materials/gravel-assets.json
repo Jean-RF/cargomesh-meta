@@ -1,0 +1,27 @@
+{
+  "asset": "gravel_floor",
+  "source": "https://polyhaven.com/a/gravel_floor",
+  "license": "CC0-1.0",
+  "authors": [
+    "Matterfield (photography)",
+    "Jenelle van Heerden (processing)"
+  ],
+  "widthMetres": 2.3,
+  "derivation": "Resize 1k maps to 512px; diffuse JPEG92, OpenGL normal PNG; no generated replacement",
+  "files": [
+    {
+      "file": "gravel-color.jpg",
+      "bytes": 155557,
+      "sha256": "96b449b5249fc5fbbaa62fb1762d24c280de5e84dd1ea93637a643d090466b84",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_floor/gravel_floor_diff_1k.jpg",
+      "sourceMd5": "4f055e1545dcf41f347600fbb01d9ac2"
+    },
+    {
+      "file": "gravel-normal.png",
+      "bytes": 772800,
+      "sha256": "561202c9156badfcf8839443c3f6eee3345b68f6d8989a4394a5d4d3ad42f3b4",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/gravel_floor/gravel_floor_nor_gl_1k.png",
+      "sourceMd5": "72915db5e8f062f6c30b5f328257c6b3"
+    }
+  ]
+}

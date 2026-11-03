@@ -1,0 +1,136 @@
+{
+  "errors": [],
+  "models": [
+    {
+      "id": "cm-aero-dryvan",
+      "ready": true,
+      "triangles": 372904
+    },
+    {
+      "id": "cm-pharma-multitemp",
+      "ready": true,
+      "triangles": 370374
+    },
+    {
+      "id": "cm-mega-curtain",
+      "ready": true,
+      "triangles": 370676
+    },
+    {
+      "id": "cm-coil-well",
+      "ready": true,
+      "triangles": 310522
+    },
+    {
+      "id": "cm-steel-extendable",
+      "ready": true,
+      "triangles": 276474
+    },
+    {
+      "id": "cm-forest-bolster",
+      "ready": true,
+      "triangles": 316854
+    },
+    {
+      "id": "cm-pipe-wedge",
+      "ready": true,
+      "triangles": 269352
+    },
+    {
+      "id": "cm-excavator-lowbed",
+      "ready": true,
+      "triangles": 296036
+    },
+    {
+      "id": "cm-tractor-stepdeck",
+      "ready": true,
+      "triangles": 292006
+    },
+    {
+      "id": "cm-transformer-modular",
+      "ready": true,
+      "triangles": 300948
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "ready": true,
+      "triangles": 369708
+    },
+    {
+      "id": "cm-iso-container",
+      "ready": true,
+      "triangles": 249340
+    },
+    {
+      "id": "cm-swap-body",
+      "ready": true,
+      "triangles": 285058
+    },
+    {
+      "id": "cm-fuel-multicell",
+      "ready": true,
+      "triangles": 277506
+    },
+    {
+      "id": "cm-food-stainless",
+      "ready": true,
+      "triangles": 258940
+    },
+    {
+      "id": "cm-cement-silo",
+      "ready": true,
+      "triangles": 259210
+    },
+    {
+      "id": "cm-grain-hopper",
+      "ready": true,
+      "triangles": 284402
+    },
+    {
+      "id": "cm-walking-floor",
+      "ready": true,
+      "triangles": 313340
+    },
+    {
+      "id": "cm-panel-a-frame",
+      "ready": true,
+      "triangles": 282738
+    },
+    {
+      "id": "cm-boat-cradle",
+      "ready": true,
+      "triangles": 256426
+    }
+  ],
+  "views": [
+    {
+      "id": "cm-aero-dryvan",
+      "view": "Lateral"
+    },
+    {
+      "id": "cm-coil-well",
+      "view": "Superior"
+    },
+    {
+      "id": "cm-excavator-lowbed",
+      "view": "Perspectiva"
+    },
+    {
+      "id": "cm-tractor-stepdeck",
+      "view": "Lateral"
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "view": "Perspectiva"
+    },
+    {
+      "id": "cm-transformer-modular",
+      "view": "Perspectiva"
+    },
+    {
+      "id": "cm-transformer-modular",
+      "view": "390px"
+    }
+  ],
+  "downloads": []
+}

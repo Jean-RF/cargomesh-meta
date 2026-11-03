@@ -1,0 +1,29 @@
+# Luis AX-09. Template only: never put real credentials in this tracked file.
+# Copy the needed entries into cargomesh/.env.local (ignored), or the separately
+# authorized Meta project's private settings. No script provisions that project.
+# Text, photo/label interpretation and grounded explanations share this Meta key/model.
+# Names match the shared client integrated from Meta main; META_API_KEY and
+# META_API_BASE_URL are not read by that implementation.
+CARGOMESH_AI_PROVIDER=META
+META_MODEL_BASE_URL=https://api.meta.ai/v1
+META_MODEL_API_KEY=
+META_MUSE_MODEL=muse-spark-1.3
+META_TRANSCRIBE_MODEL=muse-voice-transcribe-1.0
+# Shared total provider deadline; also used by the ASR adapter.
+META_PROPOSAL_TIMEOUT_MS=45000
+META_PROPOSAL_MAX_OUTPUT_TOKENS=2048
+
+# Explicitly approved META target; a matching URL is a guard, not proof of RLS,
+# account ownership or successful deployment. Never copy the Amazon credentials.
+META_APPROVED_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+
+# The old Nova gateway is separate, not a silent fallback for Meta.
+NEXT_PUBLIC_CARGOMESH_NOVA_VOICE_PREVIEW=false
+CARGOMESH_NOVA_DEMO_VOICE=false
+
+# Worker/Baseten credentials remain outside AX-09's text/voice transport checks.
+# Use the worker owner's accepted contract once integrated; do not invent another
+# callback credential, forward media silently or add unused provider secrets.

@@ -1,0 +1,25 @@
+{
+  "blender": "5.2.3 LTS",
+  "models": [
+    {
+      "id": "cm-auto-doubledeck",
+      "meshCount": 40,
+      "driverParts": [
+        "skin",
+        "uniform",
+        "hair"
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-medical-van",
+      "meshCount": 21,
+      "driverParts": [
+        "skin",
+        "uniform",
+        "hair"
+      ],
+      "externalImages": 0
+    }
+  ]
+}

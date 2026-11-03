@@ -1,0 +1,67 @@
+{
+  "errors": [],
+  "checks": [
+    {
+      "viewport": 1106,
+      "controls": true,
+      "cameraKeepsTime": true,
+      "pause": true,
+      "speed2": true,
+      "completion": true,
+      "replay": true,
+      "reset": true,
+      "keyboardImmediate": true,
+      "markers": 8
+    },
+    {
+      "liquid": true,
+      "continuousFill": 47.5,
+      "noDiscreteMarkers": true
+    },
+    {
+      "viewport": 390,
+      "reducedMotion": true,
+      "step": true,
+      "complete": true,
+      "reducedRestart": true,
+      "noAutoplayOnRestart": true,
+      "reset": true,
+      "sliderKeepsCamera": true,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 844,
+        "scrollHeight": 844,
+        "playerWidth": 341,
+        "playerScrollWidth": 341,
+        "stageHeight": 280
+      }
+    }
+  ],
+  "contrast": [
+    {
+      "label": "primary",
+      "color": "rgb(22, 51, 73)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 13.093468856544447
+    },
+    {
+      "label": "secondary",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgb(22, 51, 73)",
+      "ratio": 13.093468856544447
+    },
+    {
+      "label": "timeline hint",
+      "color": "rgb(77, 101, 123)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 6.064035604773315
+    },
+    {
+      "label": "completion",
+      "color": "rgb(33, 102, 80)",
+      "background": "rgb(233, 245, 239)",
+      "ratio": 6.0927523256344
+    }
+  ]
+}

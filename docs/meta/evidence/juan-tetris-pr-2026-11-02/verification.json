@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-02",
+  "timezone": "America/Lima",
+  "testedCodeCommit": "b67671599b4019fbbede65cf74dc8dba861008e5",
+  "integratedMain": "1f07e8a54b9f0e2170d8017827d629b1a8c59f69",
+  "node": "24.20.0",
+  "pnpm": "11.19.0",
+  "installFrozenLockfile": true,
+  "buildExitCode": 0,
+  "lintAndTypes": true,
+  "architecture": {
+    "modules": 897,
+    "clientEntries": 255
+  },
+  "suites": [
+    {
+      "file": "build.log",
+      "tests": null,
+      "pass": null,
+      "fail": null
+    },
+    {
+      "file": "check-architecture.log",
+      "tests": null,
+      "pass": null,
+      "fail": null
+    },
+    {
+      "file": "logistics.log",
+      "tests": 212,
+      "pass": 212,
+      "fail": 0
+    },
+    {
+      "file": "test-auth.log",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0
+    },
+    {
+      "file": "test-carrier-closeout.log",
+      "tests": 56,
+      "pass": 56,
+      "fail": 0
+    },
+    {
+      "file": "test-carrier-navigation.log",
+      "tests": 7,
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "file": "test-carrier-operations.log",
+      "tests": 54,
+      "pass": 54,
+      "fail": 0
+    },
+    {
+      "file": "test-meta-explanation.log",
+      "tests": 48,
+      "pass": 48,
+      "fail": 0
+    },
+    {
+      "file": "test-meta-loading.log",
+      "tests": 45,
+      "pass": 45,
+      "fail": 0
+    }
+  ],
+  "totalPassingTests": 436,
+  "browser": "browser.json",
+  "secretReview": {
+    "scope": "new publication files and linked logs",
+    "highConfidencePatternFindings": 0
+  },
+  "notChecked": [
+    "physical mobile and FPS",
+    "live paid inference",
+    "hosted operational flow and migrations",
+    "remote CI result before opening PR"
+  ]
+}

@@ -1,0 +1,58 @@
+(node:4148) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ cars: detailed visible parts remain inside the declared cargo envelope (100.3485ms)
+✔ excavator: detailed visible parts remain inside the declared cargo envelope (75.6331ms)
+✔ tractor: detailed visible parts remain inside the declared cargo envelope (52.2285ms)
+✔ flowers: detailed visible parts remain inside the declared cargo envelope (70.3976ms)
+✔ plants: detailed visible parts remain inside the declared cargo envelope (10.9736ms)
+✔ bottles: detailed visible parts remain inside the declared cargo envelope (5.3382ms)
+✔ glass: detailed visible parts remain inside the declared cargo envelope (4.8646ms)
+✔ panels: detailed visible parts remain inside the declared cargo envelope (24.1318ms)
+✔ cable: detailed visible parts remain inside the declared cargo envelope (13.4778ms)
+✔ drums: detailed visible parts remain inside the declared cargo envelope (2.0153ms)
+✔ ibc: detailed visible parts remain inside the declared cargo envelope (34.2908ms)
+✔ lumber: detailed visible parts remain inside the declared cargo envelope (12.6755ms)
+✔ pipes: detailed visible parts remain inside the declared cargo envelope (5.0075ms)
+✔ tools: detailed visible parts remain inside the declared cargo envelope (5.2493ms)
+✔ meat: detailed visible parts remain inside the declared cargo envelope (3.1769ms)
+(node:6540) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ driver eyes remain visible in front of the skin sockets (12393.8293ms)
+✔ drivers have a shoulder belt crossing the front of the torso (160.265ms)
+✔ hair and folded clothing retain valid surface normals (394.9723ms)
+✔ long trailers keep a compact clearance behind their licensed cab (1.0597ms)
+✔ the coil carrier has a continuous floor between its cradles and side walkways (5928.1114ms)
+✔ 60 new display designs have a 20/20/20 split and distinct types, names, colors and drivers (1.2641ms)
+✔ every counted load fits its bed in metres without overlap or hidden scaling (8.6295ms)
+✔ all sixty assemblies have distinct finite geometry, a visible driver and bounded draw calls (89583.6254ms)
+✔ anatomical hands reach both sides of the steering wheel in three cab families (3995.2815ms)
+✔ driver seats have an interior floor below the pedals in three cab families (3333.9638ms)
+✔ posing never stretches skin triangles from the hands toward the legs (1153.3816ms)
+✔ outer toes follow the seated legs even when the head is low in a short cab (130.4577ms)
+✔ each declared parcel renders one labelled package instead of eight nested boxes (981.6581ms)
+✔ inspection opens enclosed walls and preserves the declared load and driver (8706.3372ms)
+✔ liquid cross-section solves volume fraction rather than using a decorative fill level (0.4495ms)
+✔ all sixty faces remain visible through side glazing with seats and sleepers behind them (74185.541ms)
+✔ legacy cab geometry stays distinct and the collection selects multiple licensed bases per size (32198.7853ms)
+✔ neutral comparison removes merchandise while retaining body, cab and the assigned person (5566.0388ms)
+✔ loose loads follow the curved or tapered body instead of intersecting its lower sidewalls (6697.6715ms)
+✔ closed rear portals block the door seam and the shoulder below the crowned roof (6422.3552ms)
+✔ every sheet package has a padded bearing surface on the unloaded carrier (2521.2889ms)
+✔ the folded crane and its hook stay outside all five ceramic pallet volumes (1039.1741ms)
+✔ low beds reserve their axle bridge and their neck, without consuming the counted load (0.3898ms)
+✔ low-bed floors remain closed with chassis members below the usable surface (9130.6162ms)
+✔ the crowned bonnet nose is closed above the grille in the rejected front sightlines (4290.6369ms)
+(node:41904) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ licensed cab assets remain attributed, embedded and proportional across all five bases (38989.6337ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 41
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 269885.2205

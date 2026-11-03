@@ -1,0 +1,108 @@
+{
+  "schema": "dockmind.result.v2",
+  "job_id": "00000000-0000-4000-8000-00000000d001",
+  "attempt": 1,
+  "organization_id": "00000000-0000-4000-8000-00000000a001",
+  "session_id": "00000000-0000-4000-8000-00000000b001",
+  "evidence_id": "00000000-0000-4000-8000-00000000c001",
+  "group_id": "00000000-0000-4000-8000-00000000e001",
+  "manifest_revision": 1,
+  "status": "SUCCEEDED",
+  "error": null,
+  "observation": {
+    "analysis_version": "dockmind-0.1.0",
+    "created_at": "2026-11-02T00:10:07+00:00",
+    "clip": {
+      "file": "00000000-0000-4000-8000-00000000c001.mp4",
+      "sha256": "b1abdb675c09a8aa8bc0853cc4596151da252e96fb86e736a00ff4cf544af51f",
+      "source": "SYNTHETIC_RENDER",
+      "original": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30.0,
+        "frames": 330,
+        "duration": 11.0,
+        "codec": "h264"
+      },
+      "normalized": {
+        "width": 1280,
+        "height": 720,
+        "fps": 10.0,
+        "frames": 110,
+        "duration": 11.0,
+        "codec": "h264"
+      },
+      "roi": null,
+      "time_mapping": "segundo = cuadro / 10"
+    },
+    "segmentation": {
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "model": "FIXTURE",
+      "concept": "cardboard box",
+      "seconds": 0.0,
+      "request_id": null,
+      "boxes": 172,
+      "estimated_cost_usd": 0.0
+    },
+    "config": {
+      "line": {
+        "x1": 0.5,
+        "y1": 0.0,
+        "x2": 0.5,
+        "y2": 1.0,
+        "inside_x": 0.8,
+        "inside_y": 0.5
+      },
+      "unit": "BOX",
+      "concept": "cardboard box",
+      "margin": 0.01,
+      "near_zone": 0.09,
+      "min_track_frames": 3,
+      "confirm_frames": 2,
+      "switch_window_frames": 5,
+      "object_limit": 16
+    },
+    "result": {
+      "status": "REQUIRES_REVIEW",
+      "entries": 3,
+      "exits": 0,
+      "net": 3,
+      "events": [
+        {
+          "object_id": 1,
+          "frame": 32,
+          "seconds": 3.2,
+          "direction": "IN"
+        },
+        {
+          "object_id": 2,
+          "frame": 48,
+          "seconds": 4.8,
+          "direction": "IN"
+        },
+        {
+          "object_id": 4,
+          "frame": 80,
+          "seconds": 8.0,
+          "direction": "IN"
+        }
+      ],
+      "flags": [
+        {
+          "kind": "ID_SWITCH_SUSPECTED",
+          "frame": 58,
+          "seconds": 5.8,
+          "detail": "El ID 3 desaparece junto a la línea y aparece el ID 100"
+        }
+      ],
+      "tracks_seen": 5,
+      "tracks_counted": 5,
+      "max_objects_in_frame": 3
+    },
+    "evidence": {
+      "overlay_uploaded": true,
+      "overlay_sha256": "7a15bcf88c868b1b8d06607ed7932a7f8dfc788241a83fc5c0abfe6bfedd1eca"
+    }
+  }
+}

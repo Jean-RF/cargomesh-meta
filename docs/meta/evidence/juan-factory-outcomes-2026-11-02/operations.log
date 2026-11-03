@@ -1,0 +1,75 @@
+Already up to date
+Done in 808ms using pnpm v11.19.0
+$ node --conditions=react-server --import tsx --test src/server/modules/fleet/application/availability-service.test.ts src/server/modules/depot-operations/application/depot-service.test.ts src/server/modules/fleet/domain/assignment-policy.test.ts src/shared/schemas/v2/crew.test.ts src/server/modules/fleet/application/operational-assessment-service.test.ts
+▶ Depot contract and application boundary
+  ✔ allows unknown limits explicitly and rejects duplicate resources/foreign blocked references (5.3628ms)
+  ✔ represents full days and split overnight openings without a midnight gap (85.1943ms)
+  ✔ validates before persistence, including revision and idempotency key (1.7379ms)
+  ✔ preserves policy version, command actor and replay receipt (0.8917ms)
+  ✔ does not accept another carrier response (4.9758ms)
+  ✔ keeps missing policy and bounded appointment reads explicit (63.2369ms)
+  ✔ availability issues a read-only decision without an idempotency command (1.1518ms)
+✔ Depot contract and application boundary (164.3564ms)
+▶ Carrier resource-window availability
+  ✔ returns a correlated simulated decision without confirming a booking (4.9566ms)
+  ✔ absence and ambiguous calendars remain unknown (0.9247ms)
+  ✔ known maintenance blocks even with no calendar (0.4247ms)
+  ✔ holds and repositioning still block when the matching calendar horizon is incomplete (0.6218ms)
+  ✔ expired holds and released assignments do not block (0.5965ms)
+  ✔ confirmed assignments and resource state override incomplete reads (0.809ms)
+  ✔ stale evidence, partial reads and outside published slots cannot become available (1.4573ms)
+  ✔ driver checks license local date and duty budget (76.278ms)
+  ✔ counts other assignments in the same duty window and keeps unknown duty explicit (1.3011ms)
+  ✔ resolves license date at jurisdiction midnight across DST and date line (2.0574ms)
+  ✔ rejects a resource from another service (1.0358ms)
+  ✔ bounds pagination and marks potentially missing conflicts as unknown (3.1762ms)
+✔ Carrier resource-window availability (108.9733ms)
+▶ Carrier explicit operational requirements
+  ✔ combines native checks with separate dock/travel windows, versions and simulation provenance (8.22ms)
+  ✔ does not infer a booking, complete plan, coverage, cargo fit or an atomic read (2.1208ms)
+  ✔ rejects empty, excessive and injected requirements before any lookup (1.6947ms)
+  ✔ rejects duplicate physical resources and shared docks instead of double counting independent checks (0.9065ms)
+  ✔ known conflicts dominate unknown depot data (0.7819ms)
+  ✔ missing depot migration remains an explicit unknown, not success or a fabricated policy (0.631ms)
+  ✔ preserves authorization failures and infrastructure errors (1.2944ms)
+  ✔ rejects mismatched resources, service, windows and missing results (2.3913ms)
+  ✔ does not upgrade estimated evidence or absent policy versions into eligibility (0.727ms)
+  ✔ resource evidence that is stale or estimated remains unknown even if an upstream result claims eligible (1.2067ms)
+  ✔ a depot-only assessment never creates a fictional vehicle or driver (0.3485ms)
+  ✔ batch reads the Carrier catalogs once for several assets and still checks service membership (9.2893ms)
+✔ Carrier explicit operational requirements (32.1259ms)
+▶ HAC-40 shared fleet assignment policy
+  ✔ uses half-open windows and rejects invalid periods (32.5858ms)
+  ✔ covers a continuous period with adjacent slots but rejects gaps (1.2704ms)
+  ✔ does not infer unavailability from stale or incomplete agendas (0.2313ms)
+  ✔ blocks overlapping active commitments independently of missing evidence (0.198ms)
+  ✔ accepts a qualified driver with sourced duty limits and license date interpretation (1.849ms)
+  ✔ blocks foreign carrier, wrong license, missing qualification and excessive duty (0.3955ms)
+  ✔ keeps missing jurisdiction/duty policy unknown and rejects invalid license dates (0.4455ms)
+  ✔ checks license expiration against the entire assignment (0.2329ms)
+  ✔ calculates combination capacity from the strictest applicable limit without summing members (0.6119ms)
+  ✔ requires every member in the same operating window (0.5312ms)
+  ✔ does not confirm compatibility or capacity with missing evidence (0.4462ms)
+  ✔ rejects duplicate/foreign/nonROAD members and unavailable assets (0.3641ms)
+  ✔ discounts same-trip LTL allocations and checks weight and volume independently (0.7384ms)
+  ✔ does not consolidate across different executions or exclusive FTL trips (0.2304ms)
+  ✔ uses peak simultaneous LTL capacity rather than summing sequential allocations (0.3627ms)
+  ✔ does not subtract assignments outside the operating period and preserves unknown limits (0.224ms)
+  ✔ blocks auxiliary capacity and unbound confirmed assignments (0.1831ms)
+  ✔ requires a sourced confirmed reservation matching scope, trip, asset, capacity and window (0.3941ms)
+  ✔ keeps consolidation unknown when its policy has no current evidence (0.172ms)
+✔ HAC-40 shared fleet assignment policy (45.3844ms)
+▶ HAC-40 persisted crew contracts
+  ✔ accepts complete DTOs and rejects forged identity and duplicate members (69.5296ms)
+  ✔ rejects invalid driver dates/timezones and incomplete duty limits (2.0154ms)
+  ✔ does not accept confirmed vehicles without a reservation or combinations without a coupling period (0.5113ms)
+  ✔ passes actor, scope and optimistic version through the shared service for every resource (20.3009ms)
+✔ HAC-40 persisted crew contracts (95.682ms)
+ℹ tests 54
+ℹ suites 5
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1188.6297

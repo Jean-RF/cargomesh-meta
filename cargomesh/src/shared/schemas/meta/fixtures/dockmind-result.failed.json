@@ -1,0 +1,16 @@
+{
+  "schema": "dockmind.result.v2",
+  "job_id": "00000000-0000-4000-8000-00000000d001",
+  "attempt": 1,
+  "organization_id": "00000000-0000-4000-8000-00000000a001",
+  "session_id": "00000000-0000-4000-8000-00000000b001",
+  "evidence_id": "00000000-0000-4000-8000-00000000c001",
+  "group_id": "00000000-0000-4000-8000-00000000e001",
+  "manifest_revision": 1,
+  "status": "FAILED",
+  "error": {
+    "code": "PROVIDER_UNAVAILABLE",
+    "message": "SAM no respondió: timeout (fixture)"
+  },
+  "observation": null
+}

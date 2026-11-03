@@ -1,0 +1,26 @@
+{
+  "schema": "dockmind.job.v2",
+  "job_id": "00000000-0000-4000-8000-00000000d001",
+  "attempt": 1,
+  "organization_id": "00000000-0000-4000-8000-00000000a001",
+  "session_id": "00000000-0000-4000-8000-00000000b001",
+  "evidence_id": "00000000-0000-4000-8000-00000000c001",
+  "group_id": "00000000-0000-4000-8000-00000000e001",
+  "manifest_revision": 1,
+  "clip_url": "https://storage.example.test/clip?token=synthetic",
+  "overlay_upload_url": "https://storage.example.test/upload?token=synthetic",
+  "callback_url": "https://app.example.test/api/v2/meta/dockmind/callback",
+  "source": "SYNTHETIC_RENDER",
+  "config": {
+    "line": {
+      "x1": 0.5,
+      "y1": 0.0,
+      "x2": 0.5,
+      "y2": 1.0,
+      "inside_x": 0.8,
+      "inside_y": 0.5
+    },
+    "unit": "BOX",
+    "concept": "cardboard box"
+  }
+}

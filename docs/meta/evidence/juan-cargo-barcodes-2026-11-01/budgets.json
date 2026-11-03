@@ -1,0 +1,242 @@
+[
+  {
+    "id": "cm-courier-van",
+    "triangles": 98772
+  },
+  {
+    "id": "cm-medical-van",
+    "triangles": 103524
+  },
+  {
+    "id": "cm-fish-reefer",
+    "triangles": 125330
+  },
+  {
+    "id": "cm-bakery-shutter",
+    "triangles": 138032
+  },
+  {
+    "id": "cm-florist-glass",
+    "triangles": 107024
+  },
+  {
+    "id": "cm-urban-curtain",
+    "triangles": 110450
+  },
+  {
+    "id": "cm-orchard-dropside",
+    "triangles": 165648
+  },
+  {
+    "id": "cm-beverage-rack",
+    "triangles": 178098
+  },
+  {
+    "id": "cm-gas-cage",
+    "triangles": 107280
+  },
+  {
+    "id": "cm-returnable-crates",
+    "triangles": 156432
+  },
+  {
+    "id": "cm-glass-stand",
+    "triangles": 96680
+  },
+  {
+    "id": "cm-plumber-overcab",
+    "triangles": 99124
+  },
+  {
+    "id": "cm-cable-service",
+    "triangles": 100132
+  },
+  {
+    "id": "cm-landscape-tipper",
+    "triangles": 99662
+  },
+  {
+    "id": "cm-nursery-bed",
+    "triangles": 128410
+  },
+  {
+    "id": "cm-furniture-luton",
+    "triangles": 101680
+  },
+  {
+    "id": "cm-appliance-lift",
+    "triangles": 96458
+  },
+  {
+    "id": "cm-mini-bowser",
+    "triangles": 91598
+  },
+  {
+    "id": "cm-mobile-workshop",
+    "triangles": 107700
+  },
+  {
+    "id": "cm-parcel-locker",
+    "triangles": 104220
+  },
+  {
+    "id": "cm-regional-shutter",
+    "triangles": 124354
+  },
+  {
+    "id": "cm-meat-rail",
+    "triangles": 121972
+  },
+  {
+    "id": "cm-pallet-curtain",
+    "triangles": 135670
+  },
+  {
+    "id": "cm-market-awning",
+    "triangles": 170518
+  },
+  {
+    "id": "cm-tile-knuckle",
+    "triangles": 120116
+  },
+  {
+    "id": "cm-brick-cage",
+    "triangles": 130772
+  },
+  {
+    "id": "cm-rebar-stake",
+    "triangles": 92348
+  },
+  {
+    "id": "cm-timber-sideboard",
+    "triangles": 122602
+  },
+  {
+    "id": "cm-pipe-bolster",
+    "triangles": 116408
+  },
+  {
+    "id": "cm-drum-rail",
+    "triangles": 123906
+  },
+  {
+    "id": "cm-ibc-carrier",
+    "triangles": 122032
+  },
+  {
+    "id": "cm-water-bowser",
+    "triangles": 106098
+  },
+  {
+    "id": "cm-milk-elliptical",
+    "triangles": 93754
+  },
+  {
+    "id": "cm-gravel-halfpipe",
+    "triangles": 109618
+  },
+  {
+    "id": "cm-sand-threeway",
+    "triangles": 109258
+  },
+  {
+    "id": "cm-mini-mixer",
+    "triangles": 89750
+  },
+  {
+    "id": "cm-skip-loader",
+    "triangles": 106842
+  },
+  {
+    "id": "cm-rolloff",
+    "triangles": 113564
+  },
+  {
+    "id": "cm-flat-recovery",
+    "triangles": 104682
+  },
+  {
+    "id": "cm-power-service",
+    "triangles": 101242
+  },
+  {
+    "id": "cm-aero-dryvan",
+    "triangles": 187012
+  },
+  {
+    "id": "cm-pharma-multitemp",
+    "triangles": 194468
+  },
+  {
+    "id": "cm-mega-curtain",
+    "triangles": 181096
+  },
+  {
+    "id": "cm-coil-well",
+    "triangles": 169976
+  },
+  {
+    "id": "cm-steel-extendable",
+    "triangles": 149816
+  },
+  {
+    "id": "cm-forest-bolster",
+    "triangles": 172674
+  },
+  {
+    "id": "cm-pipe-wedge",
+    "triangles": 138134
+  },
+  {
+    "id": "cm-excavator-lowbed",
+    "triangles": 154110
+  },
+  {
+    "id": "cm-tractor-stepdeck",
+    "triangles": 158762
+  },
+  {
+    "id": "cm-transformer-modular",
+    "triangles": 157302
+  },
+  {
+    "id": "cm-auto-doubledeck",
+    "triangles": 193550
+  },
+  {
+    "id": "cm-iso-container",
+    "triangles": 136570
+  },
+  {
+    "id": "cm-swap-body",
+    "triangles": 155368
+  },
+  {
+    "id": "cm-fuel-multicell",
+    "triangles": 153572
+  },
+  {
+    "id": "cm-food-stainless",
+    "triangles": 134278
+  },
+  {
+    "id": "cm-cement-silo",
+    "triangles": 132192
+  },
+  {
+    "id": "cm-grain-hopper",
+    "triangles": 155946
+  },
+  {
+    "id": "cm-walking-floor",
+    "triangles": 169474
+  },
+  {
+    "id": "cm-panel-a-frame",
+    "triangles": 145788
+  },
+  {
+    "id": "cm-boat-cradle",
+    "triangles": 133464
+  }
+]

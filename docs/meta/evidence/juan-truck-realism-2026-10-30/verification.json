@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "7882e53298dd33dd29b43ace4e95bb5649627e4a",
+  "tests": {"passed": 21, "failed": 0, "command": "node --conditions=react-server --import tsx --test src/features/truck-collection/catalog.test.ts src/features/truck-collection/cargo-models.test.ts src/features/logistics-3d/truck-glb.test.ts"},
+  "productionBuild": "passed (includes type validation)",
+  "architecture": {"status": "passed", "modules": 830, "clientEntries": 241},
+  "browser": {"models": 60, "cabCargoSamples": 9, "pageErrors": 0, "httpFailures": 0, "desktopViewportWidth": 1600, "mobileViewportWidth": 390, "documentOverflow": false},
+  "blender": {"version": "5.2.3 LTS", "modelsImported": 60, "externalImages": 0},
+  "humanVisualApproval": "pending",
+  "notValidated": ["photorealism", "OEM CAD accuracy", "physical cargo stability", "performance on physical mobile hardware"]
+}

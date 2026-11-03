@@ -1,0 +1,9 @@
+{
+  "errors": [],
+  "checks": [
+    "60 model-specific local JPEGs200 and distinct hashes; list has60images and0WebGL canvases",
+    "390px thumbnail/card reflow and corresponding3Ddetail work"
+  ],
+  "assetCount": 60,
+  "bytes": 628473
+}

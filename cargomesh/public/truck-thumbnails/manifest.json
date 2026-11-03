@@ -1,0 +1,428 @@
+{
+  "source": "Local /truck-lab; ISO closed coachwork, realismVersion9 with trailer-fit and final driver-detail corrections2026-10-31",
+  "width": 361,
+  "height": 226,
+  "models": [
+    {
+      "id": "cm-courier-van",
+      "file": "cm-courier-van.jpg",
+      "bytes": 10977,
+      "sha256": "15d9cb56fc60017656255f1274f42eeca12ab23f717e91493f64427044fb2c2b",
+      "pixelSha256": "5778024a79506ca0de83bccade1a0c669560102e6e32a3435708ec7dc7b6bb00"
+    },
+    {
+      "id": "cm-medical-van",
+      "file": "cm-medical-van.jpg",
+      "bytes": 10348,
+      "sha256": "45a21fd7733180f3f9a9d9e3bb1eebccae479c19fc2b561fea544a3fcbbc5c41",
+      "pixelSha256": "1e133f3c98b4cdb6c886f841e613e494e3d8b12ec6bb44dc7ca05ce3c6050632"
+    },
+    {
+      "id": "cm-fish-reefer",
+      "file": "cm-fish-reefer.jpg",
+      "bytes": 11176,
+      "sha256": "7a62abd339e69ce0f81549ef0c379cf92abfcd7cf639d7d5d6d45b2e3e2ec9c7",
+      "pixelSha256": "8e622a4fce7ecd937e9cd5b4523642ad3f1905f1c4a537e620fc0db370ccdb57"
+    },
+    {
+      "id": "cm-bakery-shutter",
+      "file": "cm-bakery-shutter.jpg",
+      "bytes": 13426,
+      "sha256": "047919d228ddc145b406435da69bbc968abfc77afd71a5f247fcd3da97edc7fc",
+      "pixelSha256": "f836312845e756fa9de919eb98bdbf823790384f2f4cc91899e06d0f02523c9e"
+    },
+    {
+      "id": "cm-florist-glass",
+      "file": "cm-florist-glass.jpg",
+      "bytes": 11450,
+      "sha256": "4fac73550559f746d9bf3c1c813e53b20c3a510ff9b4bec569b9ae412a338f7e",
+      "pixelSha256": "5585bf5b93f9f0f4e839bbd3e06edb866efe4e221470274cef920f501c504e59"
+    },
+    {
+      "id": "cm-urban-curtain",
+      "file": "cm-urban-curtain.jpg",
+      "bytes": 11445,
+      "sha256": "7d743b7191315e18933ed5fda5acdefcc5c218007ead46fbf27283fb5b3604fe",
+      "pixelSha256": "502d9bde1e122c2b4355c3846149221fee408813aae5244ea55228fd985338ef"
+    },
+    {
+      "id": "cm-orchard-dropside",
+      "file": "cm-orchard-dropside.jpg",
+      "bytes": 11398,
+      "sha256": "bed7176f0fd8a62860c798575afd0c82a0a18ce5c0d58c20d0246c97a198cf09",
+      "pixelSha256": "69aa90d598d945a684a7517c5dff75faabadef33eddaff4f6f48877428b93399"
+    },
+    {
+      "id": "cm-beverage-rack",
+      "file": "cm-beverage-rack.jpg",
+      "bytes": 14551,
+      "sha256": "cd6a81675491bc40be8d1af95c666bbdea31d32fdd072fecd35b7706c6507362",
+      "pixelSha256": "446e65eb777c8eef1a9855683b025c5437dc63d6e61249e76fcd08943fa64b50"
+    },
+    {
+      "id": "cm-gas-cage",
+      "file": "cm-gas-cage.jpg",
+      "bytes": 14175,
+      "sha256": "c925ce706ff03654ed1c836587bdbccd184df3e2103af11c74173761ea48f46c",
+      "pixelSha256": "7791516d784e239e35dc7988f87f099e9e2f31a533abab1b49197bd65ecc5fa8"
+    },
+    {
+      "id": "cm-returnable-crates",
+      "file": "cm-returnable-crates.jpg",
+      "bytes": 13948,
+      "sha256": "1d491200a9175ba839d3c88b416a5ab06b5e884b39e6d0602561b182dfdac665",
+      "pixelSha256": "0d7d1204746dc8b5e26f9168ec81ffe74101255c9f35871cd7d8dc5598616af3"
+    },
+    {
+      "id": "cm-glass-stand",
+      "file": "cm-glass-stand.jpg",
+      "bytes": 11881,
+      "sha256": "68cf8c069bf8d957b79b60ffbb318bc7163446dc79cd4b95abfdfacff9f35d9b",
+      "pixelSha256": "05089c16d3fa08afb0ee7be63cfbfa306d6e3d99d3e31dcc10386920702b0954"
+    },
+    {
+      "id": "cm-plumber-overcab",
+      "file": "cm-plumber-overcab.jpg",
+      "bytes": 12388,
+      "sha256": "898954f47a9a4799cdfdfe81160957eae5be687065d7cc94c12eb6135c88073f",
+      "pixelSha256": "47acf7b0ad19505dbe219a30cd3743fdf97e94ad46b96a244417fe3e9b78fe53"
+    },
+    {
+      "id": "cm-cable-service",
+      "file": "cm-cable-service.jpg",
+      "bytes": 12397,
+      "sha256": "e2f920a9fb48115e8b63f7e1ca1b1e413b01b65cc0464d205f7f930d25b15882",
+      "pixelSha256": "7c0158e13977bbd5d726aea47d985da411cc7182d2c0a264d666156bb55548a4"
+    },
+    {
+      "id": "cm-landscape-tipper",
+      "file": "cm-landscape-tipper.jpg",
+      "bytes": 11102,
+      "sha256": "bbfbc81d5e9c277f23e972a738799e5030028b6024cec2e27333ca4e0a851a1b",
+      "pixelSha256": "03b13bc48dc7701e16fd09ac1354536ddb043827fd13360178d2e1793812261b"
+    },
+    {
+      "id": "cm-nursery-bed",
+      "file": "cm-nursery-bed.jpg",
+      "bytes": 12282,
+      "sha256": "8923bfbff3a620a9233d363a6a7f5322e651e300066cc4fb37cfd7ed0177ae1c",
+      "pixelSha256": "9a11f71a9de8608a0710438de29a0ef6e6500edd13e258d7ada1dfd90ea11e4b"
+    },
+    {
+      "id": "cm-furniture-luton",
+      "file": "cm-furniture-luton.jpg",
+      "bytes": 11126,
+      "sha256": "3e7f773efe021b22b5765073364a90eb9a23cf851ce0be77e438f3ea5a0c6df6",
+      "pixelSha256": "963666db6b096e7a98a91fab6df8efdfe185dea23524567106698edc197c443b"
+    },
+    {
+      "id": "cm-appliance-lift",
+      "file": "cm-appliance-lift.jpg",
+      "bytes": 10795,
+      "sha256": "3c47e55c8dc30fecc4e17e6840957a8c8e3a95269bcb850ee6f441684d453385",
+      "pixelSha256": "c62dd149c0335ba5f6f09c13fabde5a0fa5fb9a46d5751d2b248a79d765a8a7c"
+    },
+    {
+      "id": "cm-mini-bowser",
+      "file": "cm-mini-bowser.jpg",
+      "bytes": 11959,
+      "sha256": "acb1b333f379b4b0e06478be3125627ee040097726a51c790c19a8db833d32b3",
+      "pixelSha256": "f6e37065acc0fd34252cdb3c6e0cdf9bf427131ab13a9c7412a8f2094b8aa8e9"
+    },
+    {
+      "id": "cm-mobile-workshop",
+      "file": "cm-mobile-workshop.jpg",
+      "bytes": 12267,
+      "sha256": "21c7dd981af3d701b1ff274fe7af261797ac41bad729fd97a1a1102c8b322c65",
+      "pixelSha256": "f11f700d1b7420d852c8cefc8e17ca4131f2d94db51b9a9d4881c87e2f997301"
+    },
+    {
+      "id": "cm-parcel-locker",
+      "file": "cm-parcel-locker.jpg",
+      "bytes": 11222,
+      "sha256": "db241a9550d43e57f4dbc22f71c1ed7db30826b7b262769943a46e90f48b966e",
+      "pixelSha256": "effa1faf0f39d4ff47119735247c62eb65343d7c6ee43e8b35dc03497cdc3d0f"
+    },
+    {
+      "id": "cm-regional-shutter",
+      "file": "cm-regional-shutter.jpg",
+      "bytes": 14842,
+      "sha256": "93743433c7ce2d068fb6adb75bf7cd1f63442fd96ce34a864ab05eb1fb1e7646",
+      "pixelSha256": "db0e419d6e2796ef5cd89289e343fb10a8b5d9175361d37337e73fc42af22899"
+    },
+    {
+      "id": "cm-meat-rail",
+      "file": "cm-meat-rail.jpg",
+      "bytes": 11050,
+      "sha256": "f69309ba0d57ed40cd8e9287cdda4b3cbdb2203f536f9c92bfbef53eb9a56adf",
+      "pixelSha256": "bfee62a3a40098c9f4daadb8b37e61debf10fa2b2c1f2f7f88a67947a6c12c96"
+    },
+    {
+      "id": "cm-pallet-curtain",
+      "file": "cm-pallet-curtain.jpg",
+      "bytes": 12290,
+      "sha256": "8764ec9fe3d944ee9cd9ee8090af625575a27706fb85f48dc1d87d3a4d7e08c6",
+      "pixelSha256": "158b93410b2919db1327f530ee53cc8188a9c2605b3087277b0c7e44ca2ba752"
+    },
+    {
+      "id": "cm-market-awning",
+      "file": "cm-market-awning.jpg",
+      "bytes": 13068,
+      "sha256": "5499716e5fe4751f94699b7858a742fef3a6d9356e67f938394592b92674f348",
+      "pixelSha256": "37c5baa24fa4b72bb6a97a787218469d944326d0773dbc7e5e2aae5a3d6f1622"
+    },
+    {
+      "id": "cm-tile-knuckle",
+      "file": "cm-tile-knuckle.jpg",
+      "bytes": 10890,
+      "sha256": "62ffe369c4e2d25a71e4e1598a66848296f847b56e9384bd9761a0d950699900",
+      "pixelSha256": "64baf9566d531eb514c6ab2d65f116067f9a406a95c2888c8fe8ea7d4d185eb3"
+    },
+    {
+      "id": "cm-brick-cage",
+      "file": "cm-brick-cage.jpg",
+      "bytes": 12831,
+      "sha256": "65ddaec32d1c84d471c7fe7658ca1a139369a37ba2b9568890ea4f29a75aa66d",
+      "pixelSha256": "b0abaf30929d5e6f65dd89e38cfc1bc8f92aeeceeb0b72fda7eec0746a316827"
+    },
+    {
+      "id": "cm-rebar-stake",
+      "file": "cm-rebar-stake.jpg",
+      "bytes": 12509,
+      "sha256": "0766f4405d81ebaab5a9539950daa2a324bf61153a1f1defcae1402ec20683b5",
+      "pixelSha256": "e1fc5224c4a901b570495695b5a80090ef4ceef3c8813a27fe4a972ad11a252e"
+    },
+    {
+      "id": "cm-timber-sideboard",
+      "file": "cm-timber-sideboard.jpg",
+      "bytes": 9940,
+      "sha256": "2e2d3f115cca9a7aa850e90864b34f01cb26ea867a9d7e4c323ba8cc20906555",
+      "pixelSha256": "dd1e94d6648c2d36355c4d8090914c7220151b37d5dbc23000b71ede7a7ab6ce"
+    },
+    {
+      "id": "cm-pipe-bolster",
+      "file": "cm-pipe-bolster.jpg",
+      "bytes": 13873,
+      "sha256": "1391ff3c7543bbfd673eb31fc7ba23f74b4c4c8376ca94e0c2166979456d2216",
+      "pixelSha256": "41947327d439bdb45318089e87baa7234916f072c19128c2c14fd76a1e6e1d19"
+    },
+    {
+      "id": "cm-drum-rail",
+      "file": "cm-drum-rail.jpg",
+      "bytes": 11898,
+      "sha256": "a1f8c38d105d7dbae53fa5ef5fc6452e3a87ddf0b06280fd91aa2fefca6057db",
+      "pixelSha256": "0ba3c980f8a0f6ab483d247cd7f27adfff5b630c9ffea0e00861be23081169fa"
+    },
+    {
+      "id": "cm-ibc-carrier",
+      "file": "cm-ibc-carrier.jpg",
+      "bytes": 11415,
+      "sha256": "1b1a3ab0c159948a1e8178073d7b230e4e5fbd89390967d83774d35aa0c5b163",
+      "pixelSha256": "5017b238e135e6de3983aaa11edd930ab694e015e2ea4f5bec7666f8b93dc8c7"
+    },
+    {
+      "id": "cm-water-bowser",
+      "file": "cm-water-bowser.jpg",
+      "bytes": 11125,
+      "sha256": "ddf0666c9cd272c6fa70547e0b45be9ad6140089dedb1a83fd5a202691665a7a",
+      "pixelSha256": "16d3ed38b23a961eb635fc4d96aadedee4ae7dab9da5f935267ef44ed66a247e"
+    },
+    {
+      "id": "cm-milk-elliptical",
+      "file": "cm-milk-elliptical.jpg",
+      "bytes": 12499,
+      "sha256": "adea64f619972cb32b020b0c6396d77662424115c609204391ea4750d5cecf00",
+      "pixelSha256": "3539fe68f4d65071b8810d1a486fe72c894bbd5e1ff5be95aa7d07d4abf16da9"
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "file": "cm-gravel-halfpipe.jpg",
+      "bytes": 11589,
+      "sha256": "920922a8e2e37a274cf1172f2637bf9d7942c424dbf5c9752a482c553907662d",
+      "pixelSha256": "daa5d20962ffa5941df67b33e16de6b1c2421ea2cb96625365dbefc007305927"
+    },
+    {
+      "id": "cm-sand-threeway",
+      "file": "cm-sand-threeway.jpg",
+      "bytes": 11991,
+      "sha256": "489c03e9811624a23b521d2206ae40016bc8c76c810d29826eb661ee745c44ce",
+      "pixelSha256": "ef1b6fb52852aae044e74f0395945b9c205cc42916a4a46eedae15661d8c1861"
+    },
+    {
+      "id": "cm-mini-mixer",
+      "file": "cm-mini-mixer.jpg",
+      "bytes": 11545,
+      "sha256": "c8b06e34ebb6e48ea4d10494e7f090428df612768a9400311bfcef565da4219d",
+      "pixelSha256": "160f162062605e9e25cf3d2bfa3c66b7574e7e0415d94a082984f698725712b3"
+    },
+    {
+      "id": "cm-skip-loader",
+      "file": "cm-skip-loader.jpg",
+      "bytes": 13476,
+      "sha256": "1ed93b0d1095eebe7362eaafd6f4518259d83572aac42e8649c7efe64cf0cac3",
+      "pixelSha256": "98257b8b0175587b855eb5d5f7240be9bb0cce17587abb2bcb4723858dfc4d0b"
+    },
+    {
+      "id": "cm-rolloff",
+      "file": "cm-rolloff.jpg",
+      "bytes": 11852,
+      "sha256": "de1e0c53ee01409dff7104f6a6c54f7add608090905a9f260e3df217a214246b",
+      "pixelSha256": "52fd08d8cc18a2f54875dac94bef764b17b7132574d555413f0410294f501b2d"
+    },
+    {
+      "id": "cm-flat-recovery",
+      "file": "cm-flat-recovery.jpg",
+      "bytes": 9743,
+      "sha256": "ac93cd219f9d0721e838893d5e48f9bf29499f54aa2f74812721e811b9e0ab57",
+      "pixelSha256": "705450a39628a09dc7d04595c96cb7d961d17132fa14860365a400d0cb69b878"
+    },
+    {
+      "id": "cm-power-service",
+      "file": "cm-power-service.jpg",
+      "bytes": 11963,
+      "sha256": "e85abafa7f60f672741413296d748e737d4b94a13e0a4d051deb5e20243930be",
+      "pixelSha256": "3d2e6c6faef9e40b15c0aaba85f3c93106a7229523b319c38a89be740f438c51"
+    },
+    {
+      "id": "cm-aero-dryvan",
+      "file": "cm-aero-dryvan.jpg",
+      "bytes": 9497,
+      "sha256": "d77bf0219e385c13103cda9d8b45167e3ca1cddf76f2dd7154738ce672cf5d1e",
+      "pixelSha256": "832886adfb760d54e43c9fafb4691ee1c4787b84ff021bbea44f7a6c8a9c8d2f"
+    },
+    {
+      "id": "cm-pharma-multitemp",
+      "file": "cm-pharma-multitemp.jpg",
+      "bytes": 8954,
+      "sha256": "b5aff2926a07e398da366012c3b1d656d1e9af4a8ff2dd904afc0c33594039e1",
+      "pixelSha256": "48b68a4e06b16e6516fb3aa0736d3b9a4b5a3030cd6bfd2ae1ff75d1cd75540e"
+    },
+    {
+      "id": "cm-mega-curtain",
+      "file": "cm-mega-curtain.jpg",
+      "bytes": 9633,
+      "sha256": "7ab63ab3560259ef7cba3894dce1925b72ca556b50282a3645dfcbc94f9b663a",
+      "pixelSha256": "7bb27bec9a36c28e63e7ce8179fc3f4a980593ef7e7948915d8f6177526c682c"
+    },
+    {
+      "id": "cm-coil-well",
+      "file": "cm-coil-well.jpg",
+      "bytes": 9923,
+      "sha256": "394666db3b05a7e4bc6db87aa4621cdf5da59b1d4c3ce81a26c25be8dc5d1de3",
+      "pixelSha256": "cbb089916525ec519a358373e1c74d71822cf95c3bc3b2f485a3e5cb8f8869e7"
+    },
+    {
+      "id": "cm-steel-extendable",
+      "file": "cm-steel-extendable.jpg",
+      "bytes": 8782,
+      "sha256": "f45eabeda5cca12a13730f7e4e1dab3697be0c2b10b9284becbe5448fb91603f",
+      "pixelSha256": "78106d1fcfdd610dd6939419bc3266f25cacd264bc4bac72fad282e0001b29a3"
+    },
+    {
+      "id": "cm-forest-bolster",
+      "file": "cm-forest-bolster.jpg",
+      "bytes": 10143,
+      "sha256": "91c3c92c9ba2353b1ef100265d0ffa53ac95cf9dfbe03dfac64bde54cea89a73",
+      "pixelSha256": "c5bec6fcf2b304a8b5836bf5a727d50af29a1446342934ca0a07513991a3cca1"
+    },
+    {
+      "id": "cm-pipe-wedge",
+      "file": "cm-pipe-wedge.jpg",
+      "bytes": 10277,
+      "sha256": "aacf74d66e3acc3b5789c9ecac420951248decb682714d78e8350b0d92db09ba",
+      "pixelSha256": "0aa31e4b2249843272ce11a5a2baf415b5b046ae1f472c9dbd38d4d574870d89"
+    },
+    {
+      "id": "cm-excavator-lowbed",
+      "file": "cm-excavator-lowbed.jpg",
+      "bytes": 9025,
+      "sha256": "b3739f217289ea0b27e78e67f700bd1262c87f2510bdc7091a435b9bcb3f268e",
+      "pixelSha256": "f03e8d92cdc3a8c8d14ffbdb1ea0dc83d3a0b67ce0433759bfe09885c833667c"
+    },
+    {
+      "id": "cm-tractor-stepdeck",
+      "file": "cm-tractor-stepdeck.jpg",
+      "bytes": 8729,
+      "sha256": "4b10131aad06175bf46cf6bd70071a9c13235c564db742739837869db790bbfe",
+      "pixelSha256": "adee8e06aa9427adc575268f334f9043e5903cb5e217fc927144fc0f04e9ec26"
+    },
+    {
+      "id": "cm-transformer-modular",
+      "file": "cm-transformer-modular.jpg",
+      "bytes": 8465,
+      "sha256": "f61986a06f427ab4d1b27811b7e77cde4f3686db520ab373c63e625007fb5f66",
+      "pixelSha256": "9857614be698ac29147500a6d9f546a22133542d7fa65e3059771d35da1faab4"
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "file": "cm-auto-doubledeck.jpg",
+      "bytes": 12036,
+      "sha256": "d9cd838852fdfe92f7877f67bfa440452e6197b7748cbe8fdc37eecd9212a433",
+      "pixelSha256": "bb82d21902cfb0819842174fb7adfc212dcf377e533c21f47219e6f7c17e5b4c"
+    },
+    {
+      "id": "cm-iso-container",
+      "file": "cm-iso-container.jpg",
+      "bytes": 10293,
+      "sha256": "02413c8f1ffd7966e8275da0d59893be5ebc82c15638de896e63c33b6254a89f",
+      "pixelSha256": "4c3312da069728a867d8cc4db83736f9b48da89810f4ab96b0c574ad14fc7d46"
+    },
+    {
+      "id": "cm-swap-body",
+      "file": "cm-swap-body.jpg",
+      "bytes": 8798,
+      "sha256": "51299523f6d240e1bb45c22d35c4cf420df41452ee2cba7a1df80e67c9d11f67",
+      "pixelSha256": "ad7924ea9ab313b9b491f48b116cd3a7af4b449f1951395ac3e18d2a396a92d8"
+    },
+    {
+      "id": "cm-fuel-multicell",
+      "file": "cm-fuel-multicell.jpg",
+      "bytes": 10126,
+      "sha256": "e1d6e51b3c6c18bbd363b7d201fe93b703432aeec4e5d6472975cc9db98a5ab5",
+      "pixelSha256": "d294a389e9b6d6cd29399d23b42a6906f8930196131ce9e47061714b2f29b4b6"
+    },
+    {
+      "id": "cm-food-stainless",
+      "file": "cm-food-stainless.jpg",
+      "bytes": 9826,
+      "sha256": "2741fe9e6bc4c71188f58b44305e650363d14fa1f592293fbf2f14f63de4de5b",
+      "pixelSha256": "78f2e43939cfb7bfb32cf1cccdd2713a30f7407095d7d196c4ea148f1c3ea7f3"
+    },
+    {
+      "id": "cm-cement-silo",
+      "file": "cm-cement-silo.jpg",
+      "bytes": 10805,
+      "sha256": "eafc4359265ae8024c0ce4011b0419cfa19aa1afd9f1eb3bc367f2428eba4c0d",
+      "pixelSha256": "550bcac381ed7155836373fad3320d40b684f14d0740e725c9e0afccfd7529bc"
+    },
+    {
+      "id": "cm-grain-hopper",
+      "file": "cm-grain-hopper.jpg",
+      "bytes": 9373,
+      "sha256": "189084fad1d0f624d56ad4242a15b7a06b3a4941a7998dda82d7d0907f20c43f",
+      "pixelSha256": "a6227309909bfcdf1dc9e454b92d560c3f9afdbd55b3ec808e092549bfa4e42f"
+    },
+    {
+      "id": "cm-walking-floor",
+      "file": "cm-walking-floor.jpg",
+      "bytes": 10378,
+      "sha256": "daf9ae0984ba2f15bd2e5554ba462498222475db8ce9053c0db19e113bf75780",
+      "pixelSha256": "2005cde709b970777130719faf3afc9843c43c6fd23101bc03515290dd55a1c2"
+    },
+    {
+      "id": "cm-panel-a-frame",
+      "file": "cm-panel-a-frame.jpg",
+      "bytes": 8523,
+      "sha256": "940bc36cf11b2d7982ad6bf77c132ab959f3586d7d1016678fb288a3f4074db7",
+      "pixelSha256": "cc74d5f0eefbc552f85522b0401aa105ba07a716ffbf69812942aa9135974110"
+    },
+    {
+      "id": "cm-boat-cradle",
+      "file": "cm-boat-cradle.jpg",
+      "bytes": 8243,
+      "sha256": "9635a8cb73c5f3bb781034084bc8fb8d62f038d1a4d19f498581f8bea6d9ddfa",
+      "pixelSha256": "638c4c9b9952e9fb825d1d30cf0b04f3d1db4678af7d0499bc161ef2fe3f04a3"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,75 @@
+Already up to date
+Done in 716ms using pnpm v11.19.0
+$ node --conditions=react-server --import tsx --test src/server/conversation/carrier-briefing.test.ts src/server/conversation/carrier-voice-scope.test.ts src/features/carrier-juan/dashboard-model.test.ts src/features/carrier-juan/commercial-navigation-model.test.ts src/features/carrier-juan/orders-model.test.ts src/features/carrier-juan/offers-model.test.ts src/features/carrier-juan/fleet-entry.test.ts && node scripts/control-tower-map-lifecycle.test.cjs
+✔ legacy deep links select Commercial views; Orders stays independent (1.2295ms)
+✔ view destinations retain independent selections without contaminating another view (1.2273ms)
+✔ offer destinations distinguish preparation, history and issued versions; malformed IDs are rejected (2.3494ms)
+✔ Request history includes exact Carrier, organization, request, opportunity and plan relations only, newest version first (6.0048ms)
+✔ automation has its own route without being parsed as an offer (0.2326ms)
+✔ dashboard does not treat quotes, pending authorizations or cancelled bookings as contracted money (17.8452ms)
+✔ daily graph and period comparison use persisted confirmation instants and Peru day boundaries (2.3282ms)
+✔ duplicate offer references do not double financial amounts; missing relationships remain incomplete (2.9861ms)
+✔ missing cost snapshots are unknown margin, never invented profit (3.1939ms)
+✔ scenario starts with the first authorized Carrier and scoped service (1.9863ms)
+✔ direct entry uses only authorized identities and loaded service IDs (0.2208ms)
+✔ ordinary profiles keep manual selection and empty reads stay empty (0.2311ms)
+✔ USD arithmetic uses cents; included and uncertain costs never inflate the quoted total (22.021ms)
+✔ empty preparations remain incomplete and issuance validates evidence and explicit offsets (4.8015ms)
+✔ partial leg mapping, manual provenance and exact opportunity correlation are enforced (5.1735ms)
+✔ roles, deadlines, partial reads and existing commitments restrict actions (1.6714ms)
+✔ preparation memory keys are isolated by operator, Carrier, opportunity and replaced offer (0.2133ms)
+✔ workspace reads only native Carrier endpoints; empty, partial and denied reads never use examples (40.0679ms)
+✔ late aborted read is discarded even when transport ignores cancellation (0.9628ms)
+✔ stable issuance key permits identical retry; changed commercial input receives a new key (5.3973ms)
+✔ wrong scope and adapter impersonation are rejected before issuance (4.1017ms)
+✔ withdrawal sends the exact version and handles stale conflicts without emitting or replacing (1.7749ms)
+✔ replacement is one issue call and preserves the chain, never withdrawal then creation (1.6639ms)
+✔ preparation is saved through a separate API with expected version; missing persistence is explicit (1.4772ms)
+✔ Orders retains public and legacy aliases while accepting only real detail identities (3.0907ms)
+✔ booking correlation includes Carrier, organization, request, offer and service; missing links remain explicit (5.8432ms)
+✔ multiple operations and reservations remain attached without guessing a single truck or completion (2.4116ms)
+✔ active execution with revoked authorization stays in review (1.5884ms)
+✔ recorded resources require execution, service, reservation and combination references (2.9955ms)
+✔ capacity is unverified without every resource binding, fresh verified evidence and complete reads (3.0276ms)
+✔ booking confirmation requires capacity, while rejection remains a separate audited decision (2.1091ms)
+✔ reservation expiry, grouped children, committed assignments and roles block invalid commands (11.1579ms)
+✔ start requires a confirmed booking, recorded crew, matching reservations and the real window (1.9874ms)
+✔ bounded collection reads never call Client endpoints and allow empty catalogs (78.0843ms)
+✔ partial resource reads preserve bookings, while denial and late cancellation invalidate the read (9.8146ms)
+✔ history reads use only the opened execution endpoint and validate scope and partial pages (2.4247ms)
+✔ one audited transition uses expected version and stable receipt; stale conflict is not success (3.1876ms)
+✔ operation cancellation sends no automatic booking or hold release; refresh derives actual recorded changes (1.2215ms)
+✔ stale targets and incompatible command responses never become successful transitions (1.883ms)
+✔ a confirmed command changes the derived board only after a new persisted-record read (4.6728ms)
+✔ unknown organization or request references cannot prove an order relationship (0.8369ms)
+✔ privacy-safe native multi-truck projection requires a distinct confirmed reservation per binding (3.2819ms)
+✔ Carrier briefing preserves total and per-unit cargo, both trucks, native offer and explicit capacity limits (9.7912ms)
+✔ Carrier context rejects cross-carrier, cross-organization and cross-request data (6.8634ms)
+✔ stale projection and expired or unrelated offers do not become a recommended price (4.9686ms)
+✔ partial reads remain unknown and non-admin sessions never consume private policy inputs (1.0086ms)
+✔ native cost snapshot is restricted to the current exact offer, its price and the ADMIN role (6.2611ms)
+✔ privacy-safe allocation summary identifies each carrying binding without raw resource snapshots (1.4419ms)
+✔ carrier voice scope accepts only the exact persisted opportunity (12.8094ms)
+✔ voice facts are bounded and cannot carry prompt delimiters (0.9742ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1614.9567
+✔ map labels resolve the real demo presentation dependency (251.5265ms)
+✔ auth rejection while marker library loads cannot create a stale map (146.1405ms)
+✔ leaving the screen during loading never mounts a late map (110.8213ms)
+✔ markers wait for loaded tiles; an authorized map still renders its recorded sites (92.3247ms)
+✔ getRootNode SDK exception degrades only the map, keeping the operation list available (90.2866ms)
+✔ timeout and failing provider cleanup cannot crash the workspace (134.4376ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 848.8563

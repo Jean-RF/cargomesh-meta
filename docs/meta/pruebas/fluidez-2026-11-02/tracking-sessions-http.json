@@ -1,0 +1,48 @@
+{
+  "at": "2026-11-02T23:06:04.013Z",
+  "scope": "Local HTTP only; session auto-login, read-only GETs and rejected commands. No browser, live inference, writes or production latency claim.",
+  "records": [
+    {
+      "method": "GET",
+      "path": "/api/v2/meta/loading-sessions?limit=20&offset=0",
+      "status": 200,
+      "totalMs": 1329
+    },
+    {
+      "method": "GET",
+      "path": "/api/v2/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043",
+      "status": 200,
+      "totalMs": 263
+    },
+    {
+      "method": "GET",
+      "path": "/api/v2/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043/passports/331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+      "status": 200,
+      "totalMs": 238
+    },
+    {
+      "method": "GET",
+      "path": "/clients/tracking",
+      "status": 200,
+      "totalMs": 1899
+    },
+    {
+      "name": "anonymous collection",
+      "method": "GET",
+      "path": "/api/v2/meta/loading-sessions",
+      "status": 401
+    },
+    {
+      "name": "foreign-origin root command",
+      "method": "POST",
+      "path": "/api/v2/meta/loading-sessions",
+      "status": 403
+    },
+    {
+      "name": "oversized root command",
+      "method": "POST",
+      "path": "/api/v2/meta/loading-sessions",
+      "status": 413
+    }
+  ]
+}

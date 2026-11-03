@@ -1,0 +1,8 @@
+{
+  "errors": [],
+  "checks": [
+    "All4cards outside canvas; click selects table row; connector depth plane behind model",
+    "Orbit/side/top,390px all4cards, no overlap and table-to-model selection",
+    "Closed body hides connector and exposes a recovery hint"
+  ]
+}

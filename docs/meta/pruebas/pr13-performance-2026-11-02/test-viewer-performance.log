@@ -1,0 +1,16 @@
+(node:4152) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ camera angles and resize reuse one assembly, loader and ready exporter (478.1749ms)
+ℹ {"scenario":"initial mount, seven angle changes, three resizes","counts":{"build":1,"dispose":0,"cab":1,"textures":1,"hdr":1,"controls":1,"factory":0,"factoryDispose":0,"directDraw":0}}
+✔ real geometry changes rebuild once and a late cab cannot overwrite the selected truck (138.5076ms)
+✔ factory resize and camera views preserve elapsed time, scene and lighting; scenario still rebuilds (113.2688ms)
+✔ compositor records the scene pass without another scene render or confusing output triangles (23.6529ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3810.7834

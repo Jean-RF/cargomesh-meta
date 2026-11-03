@@ -1,0 +1,238 @@
+{
+  "errors": [],
+  "models": [
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "modelId": "cm-nursery-bed",
+      "loadCount": "12",
+      "driverId": "DEMO-DR-015",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "sprinter",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "243312",
+      "drawCalls": "40"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "4",
+      "driverId": "DEMO-DR-005",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "215530",
+      "drawCalls": "39",
+      "modelId": "cm-florist-glass"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "32",
+      "driverId": "DEMO-DR-008",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "310330",
+      "drawCalls": "39",
+      "modelId": "cm-beverage-rack"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "2",
+      "driverId": "DEMO-DR-011",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "sprinter",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "191568",
+      "drawCalls": "43",
+      "modelId": "cm-glass-stand"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "28",
+      "driverId": "DEMO-DR-007",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "250578",
+      "drawCalls": "40",
+      "modelId": "cm-orchard-dropside"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "2",
+      "driverId": "DEMO-DR-013",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "201190",
+      "drawCalls": "40",
+      "modelId": "cm-cable-service"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "1",
+      "driverId": "DEMO-DR-014",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "206982",
+      "drawCalls": "38",
+      "modelId": "cm-landscape-tipper"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "9",
+      "driverId": "DEMO-DR-006",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "sprinter",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "218062",
+      "drawCalls": "40",
+      "modelId": "cm-urban-curtain"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "6",
+      "driverId": "DEMO-DR-059",
+      "units": "metres",
+      "realismVersion": "8",
+      "cabBase": "euro-day",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "282290",
+      "drawCalls": "78",
+      "modelId": "cm-panel-a-frame"
+    }
+  ],
+  "details": [
+    {
+      "id": "cm-nursery-bed",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-florist-glass",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-beverage-rack",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-glass-stand",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-orchard-dropside",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-cable-service",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-landscape-tipper",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-urban-curtain",
+      "view": "rear"
+    },
+    {
+      "id": "cm-panel-a-frame",
+      "view": "cargo"
+    }
+  ],
+  "downloads": [
+    {
+      "id": "cm-nursery-bed",
+      "triangles": 117655,
+      "meshes": 17,
+      "bytes": 8098252
+    },
+    {
+      "id": "cm-florist-glass",
+      "triangles": 103890,
+      "meshes": 17,
+      "bytes": 6827820
+    },
+    {
+      "id": "cm-beverage-rack",
+      "triangles": 174204,
+      "meshes": 17,
+      "bytes": 7489356
+    },
+    {
+      "id": "cm-glass-stand",
+      "triangles": 92215,
+      "meshes": 19,
+      "bytes": 7163340
+    },
+    {
+      "id": "cm-cable-service",
+      "triangles": 96594,
+      "meshes": 17,
+      "bytes": 5702648
+    }
+  ],
+  "rendered": 60
+}

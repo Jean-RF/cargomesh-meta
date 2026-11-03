@@ -1,0 +1,16 @@
+[
+  {
+    "file": "cm-aero-dryvan.glb",
+    "bytes": 10205344,
+    "labels": 216,
+    "standard": "CODE128",
+    "embedded": true
+  },
+  {
+    "file": "cm-medical-van.glb",
+    "bytes": 4824976,
+    "labels": 8,
+    "standard": "CODE128",
+    "embedded": true
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "image": "cm-aero-dryvan-symbol.png",
+    "value": "0041001000",
+    "format": "Code128"
+  },
+  {
+    "image": "cm-bakery-shutter-symbol.png",
+    "value": "0004001000",
+    "format": "Code128"
+  },
+  {
+    "image": "cm-drum-rail-symbol.png",
+    "value": "0030001000",
+    "format": "Code128"
+  },
+  {
+    "image": "cm-medical-van-symbol.png",
+    "value": "0002001000",
+    "format": "Code128"
+  },
+  {
+    "image": "cm-mini-bowser-symbol.png",
+    "value": "0018001000",
+    "format": "Code128"
+  }
+]

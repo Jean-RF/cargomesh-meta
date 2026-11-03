@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-01",
+  "branch": "codex/meta-luis",
+  "implementationCommit": "a3571a008606aa1de87721cfff4f1dbacfeb5ba4",
+  "mainSyncMerge": "44916fb",
+  "pullRequest": "https://github.com/Chujutak2024/meta-hackathon/pull/10",
+  "checks": [
+    {
+      "command": "pnpm --dir cargomesh test:meta-draft-media",
+      "status": "PASS",
+      "tests": 27,
+      "ports": "React/HTTP/Storage/REST/microphone doubles; no database"
+    },
+    {
+      "command": "python scripts/test_meta_media_idempotency.py --container supabase_db_meta-luis-media-local",
+      "status": "PASS",
+      "cases": 19,
+      "ports": "real PostgreSQL; independent concurrent transactions; READY state prepared directly in SQL"
+    },
+    {
+      "command": "pnpm --dir cargomesh smoke:meta-draft-media",
+      "status": "PASS",
+      "cases": 22,
+      "ports": "real local Next/Auth/PostgREST/Storage; synthetic PNG/WAV; no --live"
+    },
+    {
+      "command": "psql local 52_meta_media_idempotency.test.sql",
+      "status": "PASS",
+      "tests": 12
+    },
+    {
+      "command": "pnpm --dir cargomesh typecheck",
+      "status": "PASS"
+    },
+    {
+      "command": "pnpm --dir cargomesh test:v2-conversation",
+      "status": "PASS"
+    },
+    {
+      "command": "pnpm --dir cargomesh check:architecture",
+      "status": "PASS",
+      "modules": 841,
+      "clientEntries": 244
+    },
+    {
+      "command": "python supabase-v2/gate.py manifest",
+      "status": "PASS"
+    }
+  ],
+  "paidInferenceCalls": 0,
+  "remoteMigrations": false,
+  "deployment": false,
+  "prMerged": false,
+  "limitations": [
+    "No new human recording or visual acceptance claimed.",
+    "Local SQL tests do not replace CI on the pushed SHA.",
+    "Legacy reservations have no invented retroactive idempotency key."
+  ]
+}

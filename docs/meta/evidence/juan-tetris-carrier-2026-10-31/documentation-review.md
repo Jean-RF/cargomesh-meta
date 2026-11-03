@@ -1,0 +1,28 @@
+# Revisión documental: Tetris en el carrier
+
+31 de octubre de 2026. Resultado: **la extensión conserva el sistema existente**. No requiere cambiar `DESIGN.md`, `.impeccable/design.json` ni los tokens globales. Se aplica el cierre de una extensión local establecido en `impeccable/reference/new-work.md`, sección 7, y el criterio del documenter: registrar lo construido, sin convertir variantes locales en reglas globales.
+
+La petición añade Tetris a la barra lateral del carrier. El [contrato de esta extensión](../../design-tetris-carrier.md) gobierna la integración; [DESIGN.md](../../../../DESIGN.md) describe el sistema CargoMesh V2 vigente. No existe `PRODUCT.md` en la raíz. El documento histórico `docs/PRODUCT.md` no reasigna propiedad ni convierte esta revisión en una redefinición del producto.
+
+## Sistema comprobado
+
+| Aspecto | Comparación con la implementación y evidencia |
+| --- | --- |
+| Paleta y superficies | `globals.css` mantiene los colores registrados en el frontmatter de `DESIGN.md`. Navegación y catálogo usan las variables CargoMesh de tinta, texto secundario, superficie, líneas, teal y selección. El fondo lateral y el lienzo carrier son los del shell existente; el workspace embebido es transparente. Las capturas de escritorio y menú móvil conservan el fondo lateral claro y la fila activa blanca de la referencia. |
+| Tipografía y jerarquía | Se conserva la familia declarada `cm-font-sans`, encabezados oscuros, texto de apoyo y cantidades tabulares. El catálogo tiene su jerarquía local de título y controles; no introduce una voz tipográfica nueva. Se contrastaron catálogo, detalle y métricas en escritorio y móvil. No se certifica qué archivo de fuente eligió el navegador. |
+| Componentes | Se reutilizan `CarrierNavigation`, sus enlaces, iconos lineales, estado `aria-current` y cajón móvil. Tetris incorpora `Blocks` al registro existente. El catálogo conserva campos nativos, controles de al menos 44 px, foco visible y contenedores blancos con borde. `CarrierKpis` usa su variante `compact`, con cuatro métricas planas y distribución dos por dos en móvil. |
+| Composición y adaptación | `/carriers/tetris` monta `TetrisVehicleWorkspace` con `embedded`. Se omite la cabecera de marca independiente y el componente usa `section` dentro del `main` carrier. Las consultas de contenedor a 1150, 850 y 480 px responden al ancho disponible junto a la barra lateral; catálogo, filtros y detalle se reorganizan en las capturas de 1440, 1024 y 390 px. |
+| Reglas existentes | Se respeta la paleta compartida y la regla de desplazamiento interno. La tabla de grupos mantiene región etiquetada, foco de teclado, ancho legible e instrucción visible de desplazamiento en móvil. Los estados incluyen texto, unidades y referencia al plan; el peso asignado no se presenta como conteo observado ni ocupación volumétrica. |
+| Alcance y datos | Tetris aparece bajo Operaciones de transporte con destinos carrier, sin copiar las secciones de cliente de la referencia. `Demostración`, identificadores `DEMO` y `Plan de carga` siguen visibles. Sesiones y Passport conservan enlaces a su superficie existente. El registro de rutas y la traducción de enlaces reconocen `tetris`; esta revisión no certifica contratos, permisos ni aprovisionamiento reales. |
+
+## Evidencia examinada
+
+Se abrieron la referencia de barra lateral aportada por el usuario y las ocho capturas finales: [desktop.png](desktop.png), [tablet.png](tablet.png), [mobile.png](mobile.png), [mobile-menu.png](mobile-menu.png), [detail-desktop.png](detail-desktop.png), [detail-table.png](detail-table.png), [detail-mobile.png](detail-mobile.png) y [detail-mobile-table.png](detail-mobile-table.png). Todas muestran contenido renderizado coherente con su nombre. Las dos capturas de tabla documentan el desplazamiento interno del contenido, como explica el [README de evidencia](README.md); no se interpretan como capturas desde el inicio de la página.
+
+Se leyeron `DESIGN.md`, `.impeccable/design.json`, `globals.css`, los modelos y componentes de navegación carrier, el coordinador, el registro de rutas, `vehicle-workspace.tsx`, sus estilos, `dashboard.module.css` y la variante compacta de `CarrierKpis`. La comparación de fuente confirma el uso del sistema y la eliminación del shell duplicado. Se consultaron el [recorrido registrado](browser-check.json) y la revisión de acabado `.impeccable/review/tetris-carrier/finish-review.md`, con disposición `ship` y sin correcciones materiales. Los resultados de interacción, pruebas, build, arquitectura y procedencia incrustada pertenecen a esa evidencia suministrada; no se ejecutaron de nuevo en este pase documental.
+
+## Desfase previo y límites
+
+La documentación global y su sidecar conservan ejemplos de la navegación horizontal independiente y del flujo de comparación/Passport, incluido su breakpoint de 800 px. No son un catálogo exhaustivo de todos los shells: la navegación carrier ya usa su fila blanca, su foco local y un cajón a 767 px; el catálogo de vehículos tiene su propio umbral de 850 px. Es una diferencia de cobertura y variantes existentes, no una sustitución de la paleta ni una obligación de uniformar componentes. No se canonizan esos valores locales como nuevos tokens y no se repara ese desfase como efecto lateral.
+
+Esta revisión solo crea este informe. Se preservan `DESIGN.md`, `.impeccable/design.json`, `globals.css` y las fuentes. No se vuelve a ejecutar el detector, el navegador ni las pruebas. El acceso se comprobó previamente con una identidad QA sintética y sin cambios de membresías; el alta y aprovisionamiento de un carrier real, móvil físico y una tarifa contractual real permanecen sin certificar.

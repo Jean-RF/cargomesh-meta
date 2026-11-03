@@ -1,0 +1,47 @@
+{
+  "errors": [],
+  "checks": [
+    {
+      "button": "adelante",
+      "distance": 1.0000000000000007,
+      "height": 11.230174563850925
+    },
+    {
+      "button": "atrás",
+      "distance": 1.0000000000000007,
+      "height": 11.230174563850925
+    },
+    {
+      "button": "izquierda",
+      "distance": 1.0000000000000007,
+      "height": 11.230174563850925
+    },
+    {
+      "button": "derecha",
+      "distance": 1.0000000000000007,
+      "height": 11.230174563850925
+    },
+    {
+      "primaryHover": {
+        "background": "rgb(0, 95, 103)",
+        "color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "keyboard": true,
+      "keyup": true,
+      "opposingKeys": true,
+      "blur": true,
+      "slider": true,
+      "rotate": true,
+      "zoom": true,
+      "rightDrag": true,
+      "duringPlayback": true
+    },
+    {
+      "mobileButtons": true,
+      "twoFingerPan": true,
+      "reducedMotion": true
+    }
+  ]
+}

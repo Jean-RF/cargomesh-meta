@@ -1,0 +1,13 @@
+{
+  "triangles": 189987,
+  "meshes": 10,
+  "images": 14,
+  "externalImages": 0,
+  "sizeMetresBlenderXYZ": [
+    8.003585815429688,
+    3.3807679414749146,
+    4.0551629066467285
+  ],
+  "groundZ": 0.00977945327758789,
+  "validMeshes": true
+}

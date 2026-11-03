@@ -1,0 +1,51 @@
+(node:4896) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+âœ– camera angles and resize reuse one assembly, loader and ready exporter (431.7866ms)
+â„¹ {"scenario":"initial mount, seven angle changes, three resizes","counts":{"build":11,"dispose":10,"cab":11,"textures":11,"hdr":1,"controls":1,"factory":0,"factoryDispose":0,"directDraw":11}}
+âœ” real geometry changes rebuild once and a late cab cannot overwrite the selected truck (110.7888ms)
+âœ– factory resize and camera views preserve elapsed time, scene and lighting; scenario still rebuilds (100.5301ms)
+â„¹ tests 3
+â„¹ suites 0
+â„¹ pass 1
+â„¹ fail 2
+â„¹ cancelled 0
+â„¹ skipped 0
+â„¹ todo 0
+â„¹ duration_ms 3471.6768
+
+âœ– failing tests:
+
+test at src\features\truck-collection\viewer-lifecycle.test.ts:2:7687
+âœ– camera angles and resize reuse one assembly, loader and ready exporter (431.7866ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  11 !== 1
+
+      at TestContext.<anonymous> (C:\Users\HP\Documents\cargomesh\salida\meta-hackathon-integration\tmp\review-juan-pr13-dbcd5f9\cargomesh\src\features\truck-collection\viewer-lifecycle.test.ts:75:41)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 11,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at src\features\truck-collection\viewer-lifecycle.test.ts:2:10036
+âœ– factory resize and camera views preserve elapsed time, scene and lighting; scenario still rebuilds (100.5301ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (C:\Users\HP\Documents\cargomesh\salida\meta-hackathon-integration\tmp\review-juan-pr13-dbcd5f9\cargomesh\src\features\truck-collection\viewer-lifecycle.test.ts:94:82)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

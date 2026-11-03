@@ -1,0 +1,50 @@
+{
+  "errors": [],
+  "checks": [
+    {
+      "truck": "cm-bakery-shutter",
+      "printed": 24,
+      "codes": 24,
+      "initial": "0004001000",
+      "last": "0004020000",
+      "reset": true,
+      "rootContained": true
+    },
+    {
+      "truck": "cm-aero-dryvan",
+      "printed": 216,
+      "codes": 216,
+      "initial": "0041001000",
+      "last": "0041024000",
+      "reset": true,
+      "rootContained": true
+    },
+    {
+      "truck": "cm-medical-van",
+      "printed": 8,
+      "codes": 8,
+      "initial": "0002001000",
+      "last": "0002008000",
+      "reset": true,
+      "rootContained": true
+    },
+    {
+      "truck": "cm-drum-rail",
+      "printed": 18,
+      "codes": 18,
+      "initial": "0030001000",
+      "last": "0030018000",
+      "reset": true,
+      "rootContained": true
+    },
+    {
+      "truck": "cm-mini-bowser",
+      "printed": 1,
+      "codes": 1,
+      "initial": "0018001000",
+      "last": "0018001000",
+      "reset": true,
+      "rootContained": true
+    }
+  ]
+}

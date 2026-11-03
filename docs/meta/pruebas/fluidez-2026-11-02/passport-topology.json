@@ -1,0 +1,36 @@
+{
+  "at": "2026-11-02T22:46:28.028Z",
+  "scope": "Equivalent HTTP read topology, not browser hydration or UI acceptance; 3 alternating samples each",
+  "rows": [
+    {
+      "iteration": 0,
+      "topology": "previous-waterfall",
+      "totalMs": 565
+    },
+    {
+      "iteration": 0,
+      "topology": "parallel-independent",
+      "totalMs": 295
+    },
+    {
+      "iteration": 1,
+      "topology": "parallel-independent",
+      "totalMs": 332
+    },
+    {
+      "iteration": 1,
+      "topology": "previous-waterfall",
+      "totalMs": 445
+    },
+    {
+      "iteration": 2,
+      "topology": "previous-waterfall",
+      "totalMs": 474
+    },
+    {
+      "iteration": 2,
+      "topology": "parallel-independent",
+      "totalMs": 287
+    }
+  ]
+}

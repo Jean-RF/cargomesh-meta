@@ -1,0 +1,51 @@
+{
+  "typecheck": "passed",
+  "buildFinal": "passed with lint/types",
+  "metaLoading": {
+    "passed": 43,
+    "failed": 0
+  },
+  "architecture": {
+    "modules": 852,
+    "clientEntries": 247
+  },
+  "scope": "FactoryPlayer TSX/CSS only; geometry/domain suites not repeated.",
+  "rasters": [
+    {
+      "file": "before.png",
+      "sha256": "bacb05d987bb4db3c53375fd22cc696ae68be87a94b757181e95d21d2bb83f5e"
+    },
+    {
+      "file": "desktop.png",
+      "sha256": "15a8f22296071cca1b320125137de734bc8ee0dbffeda80d26d33894688557d5"
+    },
+    {
+      "file": "flow.png",
+      "sha256": "e1bbec0d5270c0155fd07c03544cb1eb9a98592a149d2038e7f077370c52b100"
+    },
+    {
+      "file": "keyboard-focus.png",
+      "sha256": "1302b9efaff53f5925d788c53cf7755f14b3be45ac2b8d14b2a2fad2ac6aefe0"
+    },
+    {
+      "file": "mobile-complete.png",
+      "sha256": "f05b1ec1b521f2e16608a9f417ddbbcc7469a994b805baa65c5e381f8fbd438f"
+    },
+    {
+      "file": "mobile.png",
+      "sha256": "c1727f853036d4efe948e31eb4d7af47530c025d95b04d77092c6d103e0821aa"
+    },
+    {
+      "file": "overview.png",
+      "sha256": "40587f9745fbae6f52494b11f7f20125762c5ed479dd8d122e96cb5c3c0c73ba"
+    },
+    {
+      "file": "user-1106.png",
+      "sha256": "c9505cf10159b24f02ff939d32e472285dd0b0a6e89c8c7d7e48a3ccfbd6ae55"
+    },
+    {
+      "file": "user-reference.png",
+      "sha256": "0b2c8b5ef97a99756f915387c4fa3889040b8b3f64acfdedb26f23a57d7cd5ad"
+    }
+  ]
+}

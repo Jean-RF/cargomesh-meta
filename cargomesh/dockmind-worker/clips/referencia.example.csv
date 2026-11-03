@@ -1,0 +1,5 @@
+clip,sha256,grupo,cobertura,segundo,direccion,total_esperado
+grupo_a.mp4,<sha256 del archivo grupo_a.mp4>,879dc96b-3c00-43e1-b772-619996b2b713,COMPLETE,3.2,IN,8
+grupo_a.mp4,<sha256 del archivo grupo_a.mp4>,879dc96b-3c00-43e1-b772-619996b2b713,COMPLETE,6.8,IN,8
+grupo_b.mp4,<sha256 del archivo grupo_b.mp4>,d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c,COMPLETE,4.0,IN,4
+todas.mp4,,,,3.2,IN,4

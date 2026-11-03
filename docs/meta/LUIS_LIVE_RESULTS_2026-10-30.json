@@ -1,0 +1,220 @@
+{
+  "check": "luis-live-acceptance",
+  "evaluatedAt": "2026-10-30T22:05:00Z",
+  "repository": "Chujutak2024/meta-hackathon",
+  "branch": "codex/meta-luis",
+  "synchronizedLuisHead": "95046f5",
+  "axelHead": "f3125cb",
+  "mergeCommit": "15d39c8",
+  "codeUnderTest": "Merge commit plus local ASR session identifier fix and explanation smoke",
+  "syntheticInputs": true,
+  "physicalShipmentVerified": false,
+  "tenantIntegrationVerified": false,
+  "estimatedCostUsd": null,
+  "text": {
+    "check": "meta-text",
+    "status": "PASS_TEXT_ONLY",
+    "liveRequestMade": true,
+    "sourceCommand": "pnpm smoke:meta --live-text",
+    "metadata": {
+      "provider": "META",
+      "transport": "META_MODEL_API",
+      "model": "muse-spark-1.3",
+      "requestId": "e68619fb-229c-4c3b-93e3-0b4a505c2207",
+      "latencyMs": 6743,
+      "attempts": 1,
+      "inputTokens": 2297,
+      "outputTokens": 924,
+      "estimatedCostUsd": null,
+      "outcome": "PROPOSED"
+    },
+    "commercialWrites": 0
+  },
+  "images": {
+    "source": "demo-assets/luis/LIVE_RESULTS.json",
+    "cases": 4,
+    "status": "PASS",
+    "actualMetaInference": true
+  },
+  "voice": {
+    "check": "meta-environment",
+    "readiness": {
+      "schemaVersion": "1.0",
+      "status": "NOT_CONFIGURED",
+      "providerReady": true,
+      "voiceReady": true,
+      "applicationReady": false,
+      "checks": [
+        {
+          "name": "repository",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "source-branch",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "root-directory",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "provider-selection",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_MODEL_API_KEY",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_MODEL_BASE_URL",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_MUSE_MODEL",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_PROPOSAL_TIMEOUT_MS",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_PROPOSAL_MAX_OUTPUT_TOKENS",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_TRANSCRIBE_MODEL",
+          "scope": "application",
+          "status": "PASS"
+        },
+        {
+          "name": "no-public-secrets",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy-voice-disabled",
+          "scope": "provider",
+          "status": "PASS"
+        },
+        {
+          "name": "META_APPROVED_SUPABASE_URL",
+          "scope": "application",
+          "status": "MISSING"
+        },
+        {
+          "name": "NEXT_PUBLIC_SUPABASE_URL",
+          "scope": "application",
+          "status": "MISSING"
+        },
+        {
+          "name": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+          "scope": "application",
+          "status": "MISSING"
+        },
+        {
+          "name": "SUPABASE_SERVICE_ROLE_KEY",
+          "scope": "application",
+          "status": "MISSING"
+        }
+      ],
+      "providerVerified": false,
+      "deploymentVerified": false,
+      "liveRequestMade": false
+    },
+    "missingDependencies": [],
+    "missingVoiceDependencies": [],
+    "missingImageDependencies": [],
+    "voiceCheck": "PASS_VOICE_TRANSPORT",
+    "imageCheck": "NOT_RUN",
+    "status": "PASS_VOICE_TRANSPORT",
+    "liveRequestMade": true,
+    "metadata": {
+      "provider": "META",
+      "transport": "META_MODEL_API",
+      "model": "muse-voice-transcribe-1.0",
+      "attempts": 1,
+      "latencyMs": 2326,
+      "processingMayHaveOccurred": true,
+      "requestId": null,
+      "providerSessionId": "voyager/transcribe/8EFB6A19D1E74C01A248BE2A16838771",
+      "audioProcessedMs": 6000,
+      "estimatedCostUsd": null
+    },
+    "transcription": {
+      "evidenceId": "0b257233-ab53-4a0f-a715-bfdcceb38aef",
+      "inputRevision": 0,
+      "status": "TRANSCRIBED",
+      "transcriptCharacters": 27,
+      "audioDurationMs": 5930,
+      "requiresHumanConfirmation": true
+    },
+    "scope": "OPERATOR_LOCAL_FILE_NOT_TENANT_INTEGRATION",
+    "accuracyVerified": false
+  },
+  "voiceFixture": {
+    "path": "demo-assets/luis/synthetic-note.wav",
+    "synthetic": true,
+    "method": "Local Windows System.Speech",
+    "voice": "Microsoft Zira Desktop",
+    "voiceCulture": "en-US",
+    "scriptLanguage": "es",
+    "script": "Son cuatro cajas de repuestos. Cada caja pesa ocho kilos.",
+    "sampleRate": 16000,
+    "bitsPerSample": 16,
+    "channels": 1,
+    "durationMs": 5930,
+    "sha256": "62c1a5d5029e38e4b1650ebdc50ec96d8b8587d3a9f19e62b316bc9150ef3008",
+    "accuracyVerified": false,
+    "limitations": "Spanish text synthesized with an English voice. Not a native Spanish speaker or human recording."
+  },
+  "explanation": {
+    "check": "meta-explanation",
+    "scope": "SYNTHETIC_COMPARISON_NOT_PASSPORT_INTEGRATION",
+    "syntheticInput": true,
+    "status": "PASS_EXPLANATION_TRANSPORT",
+    "liveRequestMade": true,
+    "metadata": {
+      "provider": "META",
+      "transport": "META_MODEL_API",
+      "model": "muse-spark-1.3",
+      "reasoningEffort": "medium",
+      "attempts": 1,
+      "latencyMs": 5425,
+      "processingMayHaveOccurred": true,
+      "requestId": "4156523e-3b24-4c7c-b796-b2f703aa38fd",
+      "inputTokens": 642,
+      "outputTokens": 1243,
+      "estimatedCostUsd": null
+    },
+    "error": null,
+    "summary": "Comparador: esperado 12 PALLET; observado 11 PALLET; diferencia registrada 1 PALLET. Diferencia pendiente de revisión.",
+    "requiresHumanReview": true,
+    "persistedWrites": 0,
+    "commercialWrites": 0
+  },
+  "diagnostic": {
+    "initialVoiceCheck": "FAILED_LIVE_CHECK",
+    "httpDiagnostic": {
+      "realNetworkCall": true,
+      "instrumentedFetch": true,
+      "transportLabel": "INJECTED",
+      "httpStatus": 200,
+      "responseSchemaValidExceptSessionIdentifier": true,
+      "providerSessionIdRejectedByOldRegex": true
+    },
+    "fix": "Bounded printable opaque session ID, not a UUID/alphanumeric-only ID. No access decision uses this value.",
+    "additionalProcessingMayHaveOccurred": true
+  },
+  "persistedWrites": 0,
+  "commercialWrites": 0,
+  "hostedResourcesModified": false
+}

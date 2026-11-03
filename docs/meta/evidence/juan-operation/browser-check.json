@@ -1,0 +1,32 @@
+{
+  "desktop": {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "brand": "CargoMesh",
+    "links": [
+      {
+        "text": "CargoMesh",
+        "aria": null
+      },
+      {
+        "text": "Camiones 3D ",
+        "aria": null
+      }
+    ]
+  },
+  "mobile": {
+    "width": 390,
+    "scrollWidth": 390
+  },
+  "errors": [],
+  "uiCreatedSession": "40426086-be1e-4a11-aca0-3130454ddb12",
+  "checks": [
+    "Native cookie login",
+    "Passport/explanation reload",
+    "Responsive without document overflow",
+    "UI open with explicit unit",
+    "Reload persists",
+    "UI close",
+    "UI Passport with missing evidence stays pending"
+  ]
+}

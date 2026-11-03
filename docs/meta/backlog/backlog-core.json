@@ -1,0 +1,840 @@
+[
+  {
+    "id": "CR-00",
+    "iteration": "P0",
+    "owner": "Cristhian",
+    "title": "Mapear el borrador y el manifiesto",
+    "priority": "MUST",
+    "hours": 0.5,
+    "confidence": "media",
+    "goal": "Identificar qué puede precargarse y qué necesita confirmación antes de guardar el request.",
+    "logic": "Conservar unidades logísticas, revisión del borrador y distinción entre dato observado y confirmado.",
+    "backend": "Mapear campos actuales al nuevo manifiesto sin duplicar la solicitud; acordar con Juan el contrato del adjunto.",
+    "frontend": "Marcar dónde entrarán foto/audio y cómo se revisarán propuestas sin abrir otro formulario paralelo.",
+    "unitTests": [
+      "Pallet con doce cajas -> una unidad PALLET, no doce pallets.",
+      "Medida vacía -> pendiente, nunca cero.",
+      "Revisión de solicitud -> referencia estable."
+    ],
+    "acceptance": [
+      "Mapa de campos y caso de prueba manual disponible.",
+      "IDs reales y referencias de pantalla separados."
+    ],
+    "dependsOn": [],
+    "sourceFiles": [
+      "cargomesh/src/features/v2-intake/cargo-groups.ts",
+      "cargomesh/src/shared/schemas/v2/freight-request.ts"
+    ],
+    "evidence": "Ficha de campos: origen, unidad, validación, confirmación y destino.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "priority": "MUST",
+    "confidence": "media",
+    "frontend": "No aplica.",
+    "sourceFiles": [
+      "AGENTS.md",
+      ".github/workflows/v2-qa-gate.yml"
+    ],
+    "status": "Propuesto; no iniciado",
+    "id": "CR-09",
+    "iteration": "P0",
+    "owner": "Cristhian",
+    "hours": 0.5,
+    "title": "Verificar origen, estructura y política de PRs del repositorio Meta",
+    "goal": "Separar con evidencia lo construido en el hackathon y proteger la versión de Amazon.",
+    "logic": "Snapshot de CargoMesh 4482d3a importado por PR #1; ramas codex/meta-* desde origin/main y PR al main de meta-hackathon. No cambiar el repositorio Amazon.",
+    "backend": "AGENTS y CI coherentes con este repositorio Meta; referencias de origen y separación del incremento en BUILT_DURING_HACKATHON.md. Tags nuevos solo tras revisión específica.",
+    "unitTests": [
+      "La referencia del snapshot importado identifica 4482d3a sin atribuirle funcionalidad Meta nueva.",
+      "El PR de la rama Meta tiene como base main de Chujutak2024/meta-hackathon.",
+      "El workflow existente contempla PRs a main de este repositorio."
+    ],
+    "acceptance": [
+      "Origen, estructura, responsables y política de PR documentados sin cambiar Amazon.",
+      "BUILT_DURING_HACKATHON.md separa la base existente del incremento Meta."
+    ],
+    "dependsOn": [],
+    "evidence": "Enlaces al PR de importación y al PR de estructura; diff revisable de instrucciones y carpetas."
+  },
+  {
+    "id": "AX-00",
+    "iteration": "P0",
+    "owner": "Axel",
+    "title": "Cerrar contrato del proveedor y límites",
+    "priority": "MUST",
+    "hours": 0.5,
+    "confidence": "media",
+    "goal": "Acordar una interfaz de IA consumible por los otros módulos y una prueba de acceso sin filtrar secretos.",
+    "logic": "Separar entrada validada, llamada de proveedor y propuesta. La salida no ejecuta comandos de negocio; las variantes de modelo se configuran explícitamente.",
+    "backend": "Definir DTO de interpretación, error estable y metadatos de proveedor; decidir timeout y máximos iniciales como parámetros, no cifras comerciales.",
+    "frontend": "Entregar al equipo ejemplos de éxito, dato faltante, rechazo y proveedor caído; Cristhian puede usarlos como fixtures rotulados.",
+    "unitTests": [
+      "Campo fuera del esquema -> rechazo.",
+      "Configuración sin clave -> NOT_CONFIGURED sin invocar.",
+      "Texto/modelo en logs -> sin claves, audio ni datos privados."
+    ],
+    "acceptance": [
+      "Contrato y ejemplos revisados por Cristhian y Juan.",
+      "Modelos configurados por variable: muse-spark-1.3, muse-voice-transcribe-1.0 y sam-3.1; Baseten queda solo como respaldo."
+    ],
+    "dependsOn": [],
+    "sourceFiles": [
+      "cargomesh/src/server/conversation/interpret.ts",
+      "cargomesh/src/features/v2-conversation-prep/interpretation.ts"
+    ],
+    "evidence": "Contrato versionado y captura de configuración redactada; no se requiere exponer una clave.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "priority": "MUST",
+    "confidence": "media",
+    "frontend": "Acceso de demo para jueces en el dominio Meta autorizado; cargomesh-meta.vercel.app es el nombre propuesto.",
+    "sourceFiles": [
+      "cargomesh/.env.example",
+      "cargomesh/next.config.ts"
+    ],
+    "status": "Propuesto; no iniciado",
+    "id": "AX-09",
+    "iteration": "P0",
+    "owner": "Luis",
+    "hours": 1,
+    "title": "Proyecto Vercel cargomesh-meta y claves de proveedores",
+    "goal": "Tener el entorno web de Meta desplegado sin tocar el proyecto de Amazon.",
+    "logic": "Configurar un proyecto Vercel Meta solo con autorización, Root Directory cargomesh y rama main de este repositorio; conservar la configuración Amazon.",
+    "backend": "Variables del Supabase nuevo, Meta API, Modal y demo; ninguna secreta con NEXT_PUBLIC_; maxDuration 60 en las rutas de Muse; cuenta de Meta con alerta de gasto.",
+    "unitTests": [
+      "La configuración del proyecto Amazon permanece intacta; el proyecto Meta apunta al repositorio Meta.",
+      "Bundle del navegador sin claves secretas.",
+      "Variable faltante -> NOT_CONFIGURED visible."
+    ],
+    "acceptance": [
+      "El proyecto Amazon conserva su configuración y su despliegue previo.",
+      "El dominio Meta autorizado sirve un SHA identificable de main de meta-hackathon."
+    ],
+    "dependsOn": [
+      "CR-09"
+    ],
+    "evidence": "Capturas de configuración sin valores secretos y URL del deploy."
+  },
+  {
+    "id": "JU-00",
+    "iteration": "P0",
+    "owner": "Juan",
+    "title": "Definir snapshot del dashboard y vínculos de sesión",
+    "priority": "MUST",
+    "hours": 0.5,
+    "confidence": "media",
+    "goal": "Fijar qué decisiones permitirá el dashboard y qué hechos se pueden calcular con datos existentes.",
+    "logic": "Cada KPI declara universo, unidad y procedencia. Sede, capacidad registrada, reserva y carga observada siguen siendo hechos separados.",
+    "backend": "Definir sesión/manifiesto/observación/revisión; una dependencia no concede permisos a otro tenant.",
+    "frontend": "Esbozar cabecera de sesión, KPIs, comparación y panel de evidencia; evitar un segundo dashboard general.",
+    "unitTests": [
+      "Capacidad desconocida -> porcentaje nulo.",
+      "Cero observaciones -> no equivale a carga cero confirmada.",
+      "Sede sin operación -> sesión de demo rotulada."
+    ],
+    "acceptance": [
+      "Snapshot acordado con Cristhian y Ramón.",
+      "Propiedad de tablas/módulos anotada."
+    ],
+    "dependsOn": [],
+    "sourceFiles": [
+      "cargomesh/src/features/carrier-juan/dashboard-model.ts",
+      "cargomesh/src/features/logistics-3d/depot-arrival.tsx"
+    ],
+    "evidence": "Mapa de entidades y boceto anotado, sin afirmar revisión visual del producto.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "priority": "MUST",
+    "confidence": "media",
+    "frontend": "No aplica.",
+    "sourceFiles": [
+      "supabase-v2/supabase/config.toml",
+      "docs/DATA.md"
+    ],
+    "status": "Propuesto; no iniciado",
+    "id": "JU-12",
+    "iteration": "P0",
+    "owner": "Juan",
+    "hours": 1.5,
+    "title": "Proyecto Supabase de Meta, migraciones y bucket privado",
+    "goal": "Base de datos y archivos aislados de Amazon para la versión Meta.",
+    "logic": "Proyecto nuevo; migraciones de supabase-v2 aplicadas con dry-run previo; escenario sintético de demo; claves publicable y secreta nuevas.",
+    "backend": "Migración aditiva con las tablas nuevas y RLS, bucket privado meta-evidence (imagen, WAV, MP4/MOV, 50 MB) y políticas en storage.objects por carpeta de organización.",
+    "unitTests": [
+      "Usuario de otra organización -> no lee ni sube en la carpeta ajena.",
+      "MIME no permitido -> rechazado por el bucket.",
+      "Migraciones nuevas -> pgTAP de RLS en verde."
+    ],
+    "acceptance": [
+      "Migraciones existentes y nuevas aplicadas en el proyecto Meta.",
+      "La base de Amazon no recibe ningún cambio."
+    ],
+    "dependsOn": [
+      "CR-09"
+    ],
+    "evidence": "Salida de db push --dry-run y lista de migraciones aplicadas, sin claves."
+  },
+  {
+    "id": "RA-00",
+    "iteration": "P0",
+    "owner": "Ramón/Jean",
+    "title": "Preparar clip propio y referencia manual",
+    "priority": "MUST",
+    "hours": 0.5,
+    "confidence": "media",
+    "goal": "Disponer de un vídeo corto con unidad logística y conteo de referencia claros.",
+    "logic": "El vídeo puede ser captura propia o render propio; su fuente se conserva. La referencia manual evalúa el modelo y no se envía como respuesta esperada.",
+    "backend": "Definir metadatos de clip, duración, tasa de frames, timecodes y versión; conservar original por hash.",
+    "frontend": "Elegir encuadre fijo con zona de entrada visible y un caso sencillo; preparar otro caso con oclusión.",
+    "unitTests": [
+      "Clip sin frames -> rechazo.",
+      "Referencia manual separada del input del modelo.",
+      "Fuente de render -> etiqueta SIMULATED conservada."
+    ],
+    "acceptance": [
+      "Derechos y unidad logística anotados.",
+      "Archivo reproducible y conteo manual disponibles."
+    ],
+    "dependsOn": [],
+    "sourceFiles": [
+      "cargomesh/src/features/logistics-3d/depot-cycle.ts",
+      "cargomesh/src/features/logistics-3d/depot-coordinator.ts"
+    ],
+    "evidence": "Clip, manifiesto de referencia y registro de procedencia; rostros/documentos personales fuera del dataset.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "CR-01",
+    "iteration": "I1",
+    "owner": "Cristhian",
+    "title": "Confirmar una declaración mínima en el mismo request",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Completar el camino manual verificable que luego recibirá las propuestas visuales.",
+    "logic": "El cliente revisa cantidad, unidad, contenido, ruta y medidas requeridas. Una revisión modifica el mismo borrador y exige consentimiento para persistir.",
+    "backend": "Reutilizar servicio de draft y validadores actuales; crear snapshot de manifiesto confirmado y su revisión con tenant derivado del actor.",
+    "frontend": "Agregar sección Declarado por ti y lista de campos pendientes dentro del intake actual; reutilizar controles y resumen.",
+    "unitTests": [
+      "Cantidad fraccionaria de pallets -> inválida.",
+      "Total no coincide con suma -> rechazado.",
+      "Guardar dos veces con misma clave/payload -> mismo resultado.",
+      "Otro tenant -> acceso denegado."
+    ],
+    "acceptance": [
+      "Manifiesto guardado y reabierto en el mismo ID.",
+      "Datos faltantes explicados sin invención."
+    ],
+    "dependsOn": [
+      "CR-00"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/v2-intake/intake-controller.ts",
+      "cargomesh/src/server/modules/freight-requests/application/draft-service.ts"
+    ],
+    "evidence": "Captura/pasos del mismo identificador antes y después, más casos negativos del servicio.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "AX-01",
+    "iteration": "I1",
+    "owner": "Axel",
+    "title": "Obtener interpretación real con la Meta Model API",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Probar que la cuenta llama a muse-spark-1.3 y devuelve una propuesta estructurada válida.",
+    "logic": "El texto produce hechos propuestos y faltantes. Una instrucción del usuario no puede cambiar reglas de autorización ni completar un booking.",
+    "backend": "Adaptador servidor con el SDK openai apuntando a https://api.meta.ai/v1; modelo por variable (META_MUSE_MODEL); response_format json_schema; razonamiento low; timeout y errores tipados; registrar request ID y uso cuando el proveedor lo entregue. Agregar META al enum mode y a CARGOMESH_AI_PROVIDER sin romper BEDROCK ni DETERMINISTIC.",
+    "frontend": "Exponer a Cristhian estado de análisis, indisponibilidad y mensaje útil. No añadir un panel de credenciales a la interfaz.",
+    "unitTests": [
+      "JSON inválido -> MODEL_OUTPUT_INVALID y sin escritura.",
+      "Campo no soportado -> rechazado.",
+      "Timeout -> estado recuperable.",
+      "Petición de booking dentro del texto -> sin ejecución comercial."
+    ],
+    "acceptance": [
+      "Llamada real con caso propio, modelo/respuesta identificados y secretos ocultos.",
+      "Formulario manual sigue disponible si falla IA."
+    ],
+    "dependsOn": [
+      "AX-00"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/server/conversation/interpret.ts",
+      "cargomesh/src/app/api/v2/conversation/interpret/route.ts",
+      "cargomesh/src/features/v2-intake/conversation-chat.tsx"
+    ],
+    "evidence": "Resultado de una llamada autorizada, modelo devuelto, duración y límites; no basta un HTTP 200 sin esquema válido.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "AX-10",
+    "iteration": "I1",
+    "owner": "Luis",
+    "priority": "MUST",
+    "hours": 1,
+    "confidence": "baja hasta spike",
+    "title": "Transcribir notas de voz con Voice Transcribe",
+    "goal": "Convertir la nota de voz del embarcador en texto en español para la interpretación.",
+    "logic": "El audio llega como WAV mono de 16 kHz desde el navegador; la transcripción es una entrada más que la persona revisa y nunca se guarda como dato confirmado.",
+    "backend": "Función transcribe() con POST /v1/asr/transcribe (multipart: request JSON y audio WAV), modelo muse-voice-transcribe-1.0 por variable y sesgo de idioma español; límites de 32 MB y 10 minutos; errores MEDIA_INVALID, NOT_CONFIGURED y PROVIDER_UNAVAILABLE del módulo de Axel.",
+    "frontend": "Devolver a Cristhian el texto transcrito con su evidenceId para mostrarlo junto a la propuesta.",
+    "unitTests": [
+      "WAV estéreo o de 44,1 kHz -> MEDIA_INVALID antes de llamar.",
+      "Audio de más de 10 minutos -> rechazado.",
+      "Respuesta sin texto -> transcripción vacía marcada, sin inventar.",
+      "Clave ausente -> NOT_CONFIGURED sin invocar."
+    ],
+    "acceptance": [
+      "Una nota de voz propia en español se transcribe con el modelo real.",
+      "La transcripción queda ligada a su evidencia y no se guarda como dato confirmado."
+    ],
+    "dependsOn": [
+      "AX-00"
+    ],
+    "sourceFiles": [],
+    "evidence": "Transcripción de un audio propio con modelo, duración y costo; sin datos personales.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "JU-01",
+    "iteration": "I1",
+    "owner": "Juan",
+    "title": "Mostrar dashboard operativo de carga con snapshot real",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Dar al operador un resumen útil del envío sin depender del motor 3D ni de la inferencia.",
+    "logic": "Mostrar cantidad declarada, planificada y observada con unidades. Capacidad de peso/volumen solo cuando fuente y asignación sean completas.",
+    "backend": "Construir read model acotado a la sesión/operación; no leer toda la flota por cada refresco. Conservar campos desconocidos como null.",
+    "frontend": "Crear dashboard: cabecera de sesión, 4 KPIs, filas por vehículo/grupo y panel de comparación. Los fixtures de desarrollo se rotulan.",
+    "unitTests": [
+      "Denominador nulo o cero -> sin porcentaje.",
+      "Paginación parcial -> no presentar total global.",
+      "Diferencia de monedas -> no sumar importes.",
+      "Actualización sin datos nuevos -> conservar snapshot anterior."
+    ],
+    "acceptance": [
+      "El operador identifica qué está declarado y qué falta observar.",
+      "No se presenta el reparto existente como acomodo 3D probado."
+    ],
+    "dependsOn": [
+      "JU-00",
+      "CR-01"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/carrier-juan/carrier-kpis.tsx",
+      "cargomesh/src/features/carrier-juan/dashboard-model.ts"
+    ],
+    "evidence": "Snapshot de lectura con origen de cada KPI y demostración con un input incompleto.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "RA-01",
+    "iteration": "I1",
+    "owner": "Ramón/Jean",
+    "title": "Validar SAM 3.1 de la Meta API sobre un clip propio",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Resolver temprano la viabilidad de detectar y seguir la unidad del caso de demo.",
+    "logic": "Registrar tracks y timecodes de objetos visibles. No contar todos los frames como objetos nuevos ni tratar un track como identidad física certificada.",
+    "backend": "Normalizar con ffmpeg (MP4 H.264, 720p, 10 fps), subir a la Files API de Meta con vencimiento y llamar a sam-3.1 por Responses API en streaming con un concepto; parsear con meta-sam-parser. Anotar costo y tiempo. Si falla, probar pesos abiertos de SAM 3.1 en GPU.",
+    "frontend": "Producir reproducción mínima con overlays sobre el clip para revisar errores; no requiere integrarse aún al dashboard.",
+    "unitTests": [
+      "Respuesta vacía -> observación insuficiente.",
+      "Mismo track en diez frames -> una trayectoria.",
+      "Frame fuera de duración -> rechazado.",
+      "Contrato de proveedor cambiado -> error explícito."
+    ],
+    "acceptance": [
+      "Clip procesado realmente y trayectorias inspeccionables.",
+      "Decisión go/no-go de vía SAM al cierre; limitaciones anotadas."
+    ],
+    "dependsOn": [
+      "RA-00"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/logistics-3d/depot-cycle.ts"
+    ],
+    "evidence": "Vídeo/frames con resultado real, comparación manual y tiempos de proceso; mantener separado el conteo de referencia.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "priority": "MUST",
+    "confidence": "media",
+    "frontend": "No aplica.",
+    "sourceFiles": [],
+    "status": "Propuesto; no iniciado",
+    "id": "RA-10",
+    "iteration": "I1",
+    "owner": "Ramón/Jean",
+    "hours": 1,
+    "title": "Proyecto Modal y endpoint protegido del worker",
+    "goal": "Poder lanzar el análisis de clips desde la app sin bloquear Vercel.",
+    "logic": "POST /jobs con requires_proxy_auth lanza spawn y responde de inmediato; el estado vive en analysis_job.",
+    "backend": "Secret con claves de Meta y Supabase; función solo CPU con timeout de 15 minutos; código en cargomesh/dockmind-worker/.",
+    "unitTests": [
+      "Llamada sin token -> 401.",
+      "Mismo job dos veces -> un solo spawn.",
+      "Clip inexistente -> FAILED con error estable."
+    ],
+    "acceptance": [
+      "Un job de prueba pasa de QUEUED a SUCCEEDED en el entorno Meta.",
+      "Ninguna clave en el repo."
+    ],
+    "dependsOn": [
+      "JU-12"
+    ],
+    "evidence": "ID del deploy de Modal y log de un job de prueba."
+  },
+  {
+    "id": "CR-02",
+    "iteration": "I2",
+    "owner": "Cristhian",
+    "title": "Añadir adjuntos y aplicar propuestas revisadas al formulario",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Completar foto/audio/etiqueta -> propuesta -> confirmación -> borrador.",
+    "logic": "Cada propuesta conserva su evidencia y revisión de entrada. El usuario puede aceptar un campo o corregirlo; un análisis tardío no pisa la edición.",
+    "backend": "Implementar el ciclo privado de subida y asociación de evidencia de declaración, con autorización y límites. Validar que evidenceId pertenezca al actor/request. Subida directa del navegador a Supabase Storage con URL firmada (createSignedUploadUrl); el audio se convierte a WAV de 16 kHz y las fotos HEIC se reenvían como JPEG antes de subir.",
+    "frontend": "Previsualización, progreso, revisión por campo, estados de error/reintento y eliminación de adjunto antes de confirmación; usar componentes compartidos.",
+    "unitTests": [
+      "MIME no permitido -> rechazo antes de inferencia.",
+      "Adjunto ajeno -> 403/404 estable.",
+      "Rechazar sugerencia -> mantener campo manual.",
+      "Cancelar/reintentar -> sin duplicar asociación."
+    ],
+    "acceptance": [
+      "Caso visual llega al mismo borrador; el usuario sabe qué confirmó.",
+      "Sin permisos de micrófono sigue disponible texto/foto."
+    ],
+    "dependsOn": [
+      "CR-01",
+      "AX-02",
+      "AX-10"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/v2-intake/v2-intake-prototype.tsx",
+      "cargomesh/src/features/v2-intake/client-assistant.tsx"
+    ],
+    "evidence": "Recorrido de aceptación y log de asociaciones por ID sin publicar URLs privadas.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "AX-02",
+    "iteration": "I2",
+    "owner": "Axel",
+    "title": "Interpretar foto, etiqueta y transcripción sin sobrescribir hechos",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Proponer campos de carga a partir de medios revisables y conservar cambios recientes del usuario.",
+    "logic": "Extraer texto legible/embalaje/cantidad visible; diferenciar contenido de pallet y contenedor. La corrección explícita tiene prioridad y los medios no dictan autorizaciones.",
+    "backend": "Ampliar adaptador multimodal con entradas acotadas y validación; devolver evidenceId, inputRevision y campos propuestos. Alinear error de audio incompatible con Cristhian. El texto que transcribe AX-10 entra como fuente audio, junto con la imagen.",
+    "frontend": "Entregar estados por medio y respuestas cortas en el idioma del usuario. Una salida larga de razonamiento no se expone como prueba del hecho.",
+    "unitTests": [
+      "Foto sin escala -> peso/dimensiones no verificados.",
+      "Audio cambia doce por diez -> propuesta de corrección.",
+      "Respuesta de revisión antigua -> identificable y descartable.",
+      "Etiqueta ilegible -> campo pendiente."
+    ],
+    "acceptance": [
+      "Foto/audio propio genera propuesta revisable; ningún campo se guarda automáticamente.",
+      "El modelo real y sus modalidades quedan registrados."
+    ],
+    "dependsOn": [
+      "AX-01",
+      "CR-00",
+      "AX-10"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/server/conversation/interpret.ts",
+      "cargomesh/src/features/v2-conversation-prep/interpretation.ts"
+    ],
+    "evidence": "Inputs permitidos y salidas redactadas del mismo caso; errores separados por modalidad.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "JU-02",
+    "iteration": "I2",
+    "owner": "Juan",
+    "title": "Abrir sesión de carga desde sede y operación autorizadas",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Conectar el dashboard con un contexto operativo persistido.",
+    "logic": "Una sesión referencia sede, manifiesto y revisión; booking/ejecución son opcionales solo para un escenario rotulado, nunca se inventan. Abrir sesión no inicia una ejecución comercial.",
+    "backend": "Crear servicio/repositorio de sesión con RLS, validación de relaciones y versión. Acordar estados y comandos open/close con Ramón; migraciones aditivas en entorno Meta autorizado.",
+    "frontend": "Entrada desde sede o detalle de orden; mostrar manifiesto congelado, fase y botón de cerrar alcance. Si no hay operación mostrar condición de escenario.",
+    "unitTests": [
+      "Sede/operación de tenants distintos -> rechazo.",
+      "Manifiesto sin confirmar -> no abrir sesión evaluable.",
+      "Doble apertura idempotente -> una sesión.",
+      "Cerrar con versión obsoleta -> conflicto."
+    ],
+    "acceptance": [
+      "Request, sede y sesión conservan vínculos correctos al reabrir.",
+      "Juan entrega contrato estable que usa el worker."
+    ],
+    "dependsOn": [
+      "JU-01",
+      "CR-01"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/server/modules/depot-operations/application/depot-service.ts",
+      "cargomesh/src/features/logistics-3d/depot-arrival.tsx"
+    ],
+    "evidence": "Secuencia de apertura/reapertura/cierre y caso de asociación prohibida con IDs redactados.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "RA-02",
+    "iteration": "I2",
+    "owner": "Ramón/Jean",
+    "title": "Contar cruces con dirección y manejo de incertidumbre",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Transformar trayectorias en observaciones de carga útiles para comparar.",
+    "logic": "Configurar región/línea y dirección. Agregar eventos de entrada/salida sin repetir frames; si se pierde identidad o hay oclusión irresoluble marcar incertidumbre.",
+    "backend": "Crear función pura de conteo sobre tracks normalizados, eventos y calidad; limitar alcance al clip. No afirmar cantidad dentro del camión por una máscara aislada.",
+    "frontend": "Overlay con línea y trayectoria; contador por unidad; permitir revisar timecodes. No ajustar manualmente el resultado ocultando la corrección.",
+    "unitTests": [
+      "Track estable cruza una vez -> una entrada.",
+      "Objeto se queda cerca de línea -> no sumar repetidamente.",
+      "Salida/reingreso -> eventos diferenciados y saldo explicado.",
+      "Pérdida de identidad -> REQUIRES_REVIEW, no éxito silencioso."
+    ],
+    "acceptance": [
+      "Conteo coincide con referencia del clip simple y explica el clip difícil.",
+      "Se conserva unidad PALLET/BOX según el dataset."
+    ],
+    "dependsOn": [
+      "RA-01",
+      "JU-02"
+    ],
+    "sourceFiles": [],
+    "evidence": "Fixtures de trayectorias y resultados del vídeo con línea/timecodes; la precisión aún no se generaliza.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "CR-03",
+    "iteration": "I3",
+    "owner": "Cristhian",
+    "title": "Conservar revisión del manifiesto y corregir sin duplicados",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Evitar que una corrección posterior cambie silenciosamente la base observada.",
+    "logic": "Una nueva revisión del request genera un nuevo manifiesto; una sesión existente conserva la anterior. La actualización requiere revisión explícita y respeta versiones.",
+    "backend": "Reutilizar idempotencia y expectedVersion; exponer vínculo de manifiesto vigente y anterior cuando exista sesión. No migrar cantidades por defecto.",
+    "frontend": "Cliente ve última revisión y advertencia sobre sesiones basadas en una anterior; historial acotado y acceso al mismo envío.",
+    "unitTests": [
+      "Guardar/reabrir -> mismo request ID.",
+      "Repetición con payload distinto/misma clave -> conflicto.",
+      "Sesión con rev1 y draft rev2 -> no sobrescribir rev1.",
+      "Datos de otra organización -> nunca precargar."
+    ],
+    "acceptance": [
+      "Corrección visible sin perder trazabilidad de lo evaluado.",
+      "El caso del demo conserva la misma cadena de IDs."
+    ],
+    "dependsOn": [
+      "CR-02",
+      "JU-02"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/v2-intake/draft-review.ts",
+      "cargomesh/src/server/modules/freight-requests/application/draft-service.ts"
+    ],
+    "evidence": "Cadena request/revisión/manifiesto/sesión y casos de concurrencia reproducibles.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "AX-03",
+    "iteration": "I3",
+    "owner": "Luis",
+    "title": "Explicar diferencias a partir de hechos calculados",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Generar una explicación operativa y acciones propuestas respaldadas por evidencia.",
+    "logic": "El input ya trae esperado, observado, unidad, calidad y cierre. Muse explica; no recalcula ni cambia el conteo, la reserva o el manifiesto.",
+    "backend": "Función de explicación con schema de referencias y acciones permitidas; no ejecutar herramientas comerciales. Bloquear afirmaciones de faltante si el comparador reporta incertidumbre.",
+    "frontend": "Texto breve: hallazgo, límite y siguiente acción sugerida; mostrar enlace al timecode/evidencia que la aplicación valide.",
+    "unitTests": [
+      "Esperado 12/observado 11 cerrado -> explicación basada en diferencia de uno.",
+      "Sesión abierta -> progreso sin declarar faltante.",
+      "Unidad incompatible -> pedir revisión.",
+      "Referencia inexistente -> rechazar explicación o omitirla con aviso."
+    ],
+    "acceptance": [
+      "Toda afirmación visible se relaciona con input verificable.",
+      "La acción sigue siendo una propuesta del operador."
+    ],
+    "dependsOn": [
+      "AX-01",
+      "JU-03",
+      "RA-02"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/server/conversation/carrier-briefing.ts"
+    ],
+    "evidence": "Casos de explicación y rechazo; si IA cae, se mantiene la comparación numérica.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "JU-03",
+    "iteration": "I3",
+    "owner": "Juan",
+    "title": "Conciliar y mostrar Reality Passport dentro del dashboard",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Convertir declaración y observación en una revisión humana trazable.",
+    "logic": "Comparar solo unidades/alcances compatibles. Evaluar faltante al cierre; un clip incompleto produce revisión. Evidencias y decisiones conservan autor y tiempo.",
+    "backend": "Comparador puro y servicios de conciliación/revisión; guardar evidencia y observaciones por referencia sin duplicar archivos. Usar comandos de incidencia existentes solo tras confirmación autorizada.",
+    "frontend": "Panel declarado/planificado/observado; timeline con timecodes, visor y confirmar/descartar con motivo. Estados vacíos no se pintan como cumplimiento.",
+    "unitTests": [
+      "12 vs 11 con alcance completo -> diferencia 1.",
+      "12 vs 11 en sesión abierta -> progreso.",
+      "Sin observación -> desconocido.",
+      "Confirmación repetida -> una revisión; doble incidencia evitada."
+    ],
+    "acceptance": [
+      "El operador puede inspeccionar evidencia y confirmar/descartar.",
+      "Passport persiste y respeta tenant."
+    ],
+    "dependsOn": [
+      "JU-02",
+      "RA-02",
+      "CR-03"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/shipper-portal/tracking-data.ts",
+      "cargomesh/src/shared/schemas/v2/workflow.ts"
+    ],
+    "evidence": "Ensayo de caso completo/discrepancia/insuficiente y registros con referencias, sin datos personales.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "RA-03",
+    "iteration": "I3",
+    "owner": "Ramón/Jean",
+    "title": "Integrar el worker de Modal y el trabajo asíncrono",
+    "priority": "MUST",
+    "hours": 3,
+    "confidence": "baja hasta spike",
+    "goal": "Entregar resultados al dashboard sin bloquear la carga de página.",
+    "logic": "Un trabajo procesa una evidencia/revisión/configuración concreta; repetir polling no crea otra inferencia. Original, frames y resultado conservan relaciones.",
+    "backend": "POST /jobs del worker (proxy auth) lanza el análisis con spawn; el worker actualiza analysis_job con la clave secreta; la app consulta el estado cada 3 s; deduplicación por clave; reintento manual si el job sigue en QUEUED después de 2 minutos.",
+    "frontend": "Estado queued/running/review/failed, progreso solo cuando exista, reintento explícito y enlace a timecode. No usar una barra ficticia de precisión.",
+    "unitTests": [
+      "Polling repetido -> un job.",
+      "Resultado de manifiesto antiguo -> no aplicarlo a la revisión nueva.",
+      "Callback sin autorización -> rechazo.",
+      "Timeout -> trabajo fallido o pendiente conocido, sin éxito inventado."
+    ],
+    "acceptance": [
+      "Clip real integrado en sesión y reabierto con evidencia.",
+      "Una pérdida de red no duplica facturación por reenvío automático."
+    ],
+    "dependsOn": [
+      "RA-02",
+      "JU-02"
+    ],
+    "sourceFiles": [],
+    "evidence": "Job ID, clave de deduplicación, fuente/versión y vínculo a frames; sin tokens ni enlaces permanentes privados.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "CR-04",
+    "iteration": "I4",
+    "owner": "Cristhian",
+    "title": "Cerrar aceptación de Cliente y regresión del request",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Validar que los adjuntos nuevos no rompan el recorrido actual de solicitud.",
+    "logic": "Texto/foto/audio son entradas al mismo borrador; el usuario revisa antes de guardar y puede continuar manualmente.",
+    "backend": "Completar pruebas del servicio, validadores y permisos; ejecutar suite pertinente descubierta del repo. No usar conteos heredados como gate.",
+    "frontend": "Teclado, foco, móvil, errores por campo y revisión de cantidades. Solicitar la revisión visual humana del usuario.",
+    "unitTests": [
+      "Edición durante análisis -> gana edición vigente.",
+      "Micrófono denegado -> resto usable.",
+      "Volver y reabrir -> datos conservados.",
+      "Envió fallido -> no anunciar creación."
+    ],
+    "acceptance": [
+      "Ficha humana del camino principal y un negativo.",
+      "Defectos corregidos por Cristhian y resultados reales adjuntos."
+    ],
+    "dependsOn": [
+      "CR-03"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/v2-intake/intake-controller.test.ts",
+      "cargomesh/src/features/v2-intake/conversation-fields.test.ts"
+    ],
+    "evidence": "Comandos/resultados reales y observación humana separada de tests automatizados.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "AX-04",
+    "iteration": "I4",
+    "owner": "Axel",
+    "title": "Cerrar fallbacks, límites y trazabilidad del proveedor",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Conservar un producto utilizable cuando falle el proveedor y dejar evidencia honesta de la integración.",
+    "logic": "Errores de configuración, cuota, timeout y salida inválida se distinguen. No caer a otro proveedor sin informar/corroborar permiso y modelo.",
+    "backend": "Auditoría mínima de modelo/latencia/consumo conocido; redacción de logs; cancelación y límites de coste por trabajo cuando el proveedor lo permita.",
+    "frontend": "Mensajes recuperables y modo manual. La explicación puede omitirse manteniendo datos determinísticos.",
+    "unitTests": [
+      "429 -> reintento acotado/aviso.",
+      "Cancelación -> sin actualizaciones tardías.",
+      "Consumo ausente -> desconocido, no cero.",
+      "Error con secretos -> salida/log redactados."
+    ],
+    "acceptance": [
+      "La demo funciona con el proveedor disponible y explica claramente el fallo.",
+      "Acceso/versión/costo conocido registrados sin afirmar benchmark."
+    ],
+    "dependsOn": [
+      "AX-02",
+      "AX-03"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/server/conversation/interpret.test.ts"
+    ],
+    "evidence": "Ficha de integración y test de fallos con dobles; una inferencia real de aceptación separada.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "JU-04",
+    "iteration": "I4",
+    "owner": "Juan",
+    "title": "Cerrar permisos, estados y respuesta percibida del dashboard",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Conseguir una lectura clara y estable al actualizar o revisar evidencias.",
+    "logic": "Conservar el último snapshot durante refresh, invalidar acciones obsoletas y no cargar vídeo/3D hasta necesitarlo.",
+    "backend": "Acotar queries a sesión y lecturas autorizadas; revalidar versión antes de confirmar. Índices/RLS con pruebas proporcionales si hay migraciones.",
+    "frontend": "Loading inicial, vacío, actualizado/en curso, parcial y error; controles coherentes y accesibles; panel de evidencia cargado bajo demanda.",
+    "unitTests": [
+      "Refresh fallido -> conserva snapshot con aviso.",
+      "Actor ajeno -> sin datos.",
+      "Snapshot obsoleto -> acción bloqueada/conflicto.",
+      "Clip inexistente -> estado honesto sin pantalla rota."
+    ],
+    "acceptance": [
+      "Dashboard muestra qué se sabe y qué está pendiente.",
+      "Ensayo del caso final sin mutaciones inesperadas."
+    ],
+    "dependsOn": [
+      "JU-03"
+    ],
+    "sourceFiles": [
+      "cargomesh/src/features/carrier-navigation/background-refresh.tsx",
+      "cargomesh/src/features/carrier-juan/carrier-kpis.tsx"
+    ],
+    "evidence": "Revisión de lectura, permisos y ruta de entrada/salida con estado conservado.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "id": "RA-04",
+    "iteration": "I4",
+    "owner": "Ramón/Jean",
+    "title": "Evaluar clips y cerrar límites del conteo",
+    "priority": "MUST",
+    "hours": 2,
+    "confidence": "baja hasta spike",
+    "goal": "Demostrar el desempeño del caso acotado y sus condiciones de fallo.",
+    "logic": "Comparar predicción y referencia manual sobre clips reservados; registrar error de conteo, duplicaciones, pérdidas de tracks y abstenciones.",
+    "backend": "Conjunto reproducible de entradas/resultados con versión/configuración; medir duración total y fallos reales sin generalizar exactitud.",
+    "frontend": "Preparar grabación de overlays/timecodes y mensaje claro para el caso ambiguo; aportar material propio al vídeo.",
+    "unitTests": [
+      "Cruce único -> esperado manual.",
+      "Oclusión -> resultado/revisión según política.",
+      "Objeto no cruza -> no sumar.",
+      "Procesar clip cerrado dos veces -> misma asociación, no duplicado."
+    ],
+    "acceptance": [
+      "Al menos caso correcto, discrepancia y observación insuficiente registrados.",
+      "No se presenta una animación como cámara real ni un único clip como precisión universal."
+    ],
+    "dependsOn": [
+      "RA-03"
+    ],
+    "sourceFiles": [],
+    "evidence": "Dataset con referencia separada, informe pass/fail/bloqueado/no ejecutado y vídeo del resultado.",
+    "status": "Propuesto; no iniciado"
+  },
+  {
+    "priority": "MUST",
+    "confidence": "media",
+    "frontend": "No aplica.",
+    "sourceFiles": [],
+    "status": "Propuesto; no iniciado",
+    "id": "CR-10",
+    "iteration": "ENTREGA",
+    "owner": "Cristhian",
+    "hours": 1,
+    "title": "BUILT_DURING_HACKATHON.md y formulario de entrega",
+    "goal": "Que los jueces identifiquen sin dudas qué se construyó durante el hackathon.",
+    "logic": "Separar la base existente (hasta 4482d3a) de lo nuevo, con commits, autores, funcionalidades y límites; el texto describe solo lo que funciona.",
+    "backend": "No aplica.",
+    "unitTests": [
+      "Cada funcionalidad nueva enlaza a sus commits.",
+      "Ninguna funcionalidad previa aparece como nueva.",
+      "Los enlaces de demo y video abren en una ventana de incógnito."
+    ],
+    "acceptance": [
+      "Formulario enviado el 3 de noviembre.",
+      "Track Indie y tema Build for Your World."
+    ],
+    "dependsOn": [
+      "CR-04",
+      "AX-04",
+      "JU-04",
+      "RA-04"
+    ],
+    "evidence": "Captura del envío y enlace al archivo en el repo."
+  },
+  {
+    "priority": "MUST",
+    "confidence": "media",
+    "frontend": "No aplica.",
+    "sourceFiles": [],
+    "status": "Propuesto; no iniciado",
+    "id": "RA-11",
+    "iteration": "ENTREGA",
+    "owner": "Ramón/Jean",
+    "hours": 1.5,
+    "title": "Video del demo",
+    "goal": "Video de unos 170 s que muestre solo lo nuevo, siguiendo el guion del plan.",
+    "logic": "Cada dueño graba su tramo; lo existente se rotula; nada de música con derechos de terceros.",
+    "backend": "No aplica.",
+    "unitTests": [
+      "Duración dentro del límite del formulario.",
+      "Cada afirmación del video tiene una pantalla real que la respalda.",
+      "Se reproduce sin iniciar sesión en YouTube."
+    ],
+    "acceptance": [
+      "Video público y enlazado en la entrega."
+    ],
+    "dependsOn": [
+      "RA-04",
+      "JU-04"
+    ],
+    "evidence": "Enlace público al video."
+  }
+]

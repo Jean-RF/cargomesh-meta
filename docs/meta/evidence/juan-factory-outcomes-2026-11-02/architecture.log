@@ -1,0 +1,4 @@
+Already up to date
+Done in 715ms using pnpm v11.19.0
+$ node scripts/check-architecture.mjs
+Architecture OK: 852 modules; 247 client entry points checked.

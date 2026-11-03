@@ -1,0 +1,68 @@
+{
+  "errors": [],
+  "cases": [
+    {
+      "label": "bakery factory initial",
+      "viewport": 778,
+      "document": 778,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 778,
+      "contentTop": 0
+    },
+    {
+      "label": "factory controls reached and advanced",
+      "viewport": 778,
+      "document": 778,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 778,
+      "contentTop": 726
+    },
+    {
+      "label": "table bottom",
+      "viewport": 778,
+      "document": 778,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 778,
+      "contentTop": 1893
+    },
+    {
+      "label": "mobile controls",
+      "viewport": 844,
+      "document": 844,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 844,
+      "contentTop": 690
+    },
+    {
+      "label": "mobile menu",
+      "viewport": 844,
+      "document": 844,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 844,
+      "contentTop": 0
+    },
+    {
+      "label": "mobile menu closed",
+      "viewport": 844,
+      "document": 844,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 844,
+      "contentTop": 0
+    },
+    {
+      "label": "fleet list",
+      "viewport": 778,
+      "document": 778,
+      "windowY": 0,
+      "frameTop": 0,
+      "frameBottom": 778,
+      "contentTop": 17097
+    }
+  ]
+}

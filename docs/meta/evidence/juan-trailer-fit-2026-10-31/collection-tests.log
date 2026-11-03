@@ -1,0 +1,55 @@
+(node:32992) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ cars: detailed visible parts remain inside the declared cargo envelope (42.0716ms)
+✔ excavator: detailed visible parts remain inside the declared cargo envelope (27.0339ms)
+✔ tractor: detailed visible parts remain inside the declared cargo envelope (13.3534ms)
+✔ flowers: detailed visible parts remain inside the declared cargo envelope (13.3155ms)
+✔ plants: detailed visible parts remain inside the declared cargo envelope (2.6337ms)
+✔ bottles: detailed visible parts remain inside the declared cargo envelope (3.2899ms)
+✔ glass: detailed visible parts remain inside the declared cargo envelope (2.1427ms)
+✔ panels: detailed visible parts remain inside the declared cargo envelope (1.209ms)
+✔ cable: detailed visible parts remain inside the declared cargo envelope (3.0403ms)
+✔ drums: detailed visible parts remain inside the declared cargo envelope (1.3551ms)
+✔ ibc: detailed visible parts remain inside the declared cargo envelope (8.9664ms)
+✔ lumber: detailed visible parts remain inside the declared cargo envelope (4.5545ms)
+✔ pipes: detailed visible parts remain inside the declared cargo envelope (4.1178ms)
+✔ tools: detailed visible parts remain inside the declared cargo envelope (1.937ms)
+✔ meat: detailed visible parts remain inside the declared cargo envelope (1.872ms)
+(node:45460) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ long trailers keep a compact clearance behind their licensed cab (1.3049ms)
+✔ the coil carrier has a continuous floor between its cradles and side walkways (2353.5428ms)
+✔ 60 new display designs have a 20/20/20 split and distinct types, names, colors and drivers (0.4514ms)
+✔ every counted load fits its bed in metres without overlap or hidden scaling (3.4112ms)
+✔ all sixty assemblies have distinct finite geometry, a visible driver and bounded draw calls (52983.9015ms)
+✔ anatomical hands reach both sides of the steering wheel in three cab families (2430.2576ms)
+✔ driver seats have an interior floor below the pedals in three cab families (2389.1435ms)
+✔ posing never stretches skin triangles from the hands toward the legs (884.0981ms)
+✔ outer toes follow the seated legs even when the head is low in a short cab (15.1953ms)
+✔ each declared parcel renders one labelled package instead of eight nested boxes (676.925ms)
+✔ inspection opens enclosed walls and preserves the declared load and driver (5827.3612ms)
+✔ liquid cross-section solves volume fraction rather than using a decorative fill level (0.2877ms)
+✔ all sixty faces remain visible through side glazing with seats and sleepers behind them (55427.1602ms)
+✔ legacy cab geometry stays distinct and the collection selects multiple licensed bases per size (17913.9499ms)
+✔ neutral comparison removes merchandise while retaining body, cab and the assigned person (3069.7056ms)
+✔ loose loads follow the curved or tapered body instead of intersecting its lower sidewalls (3859.3162ms)
+✔ closed rear portals block the door seam and the shoulder below the crowned roof (3603.6269ms)
+✔ every sheet package has a padded bearing surface on the unloaded carrier (1505.6399ms)
+✔ the folded crane and its hook stay outside all five ceramic pallet volumes (689.6444ms)
+✔ low beds reserve their axle bridge and their neck, without consuming the counted load (0.2261ms)
+✔ low-bed floors remain closed with chassis members below the usable surface (3903.9538ms)
+✔ the crowned bonnet nose is closed above the grille in the rejected front sightlines (2349.2019ms)
+(node:744) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ licensed cab assets remain attributed, embedded and proportional across all five bases (14286.7758ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 160415.0545

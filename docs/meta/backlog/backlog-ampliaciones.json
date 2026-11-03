@@ -1,0 +1,565 @@
+[
+  {
+    "id": "JU-05",
+    "iteration": "I2",
+    "owner": "Juan",
+    "title": "Desglosar capacidad por vehículo y grupo",
+    "priority": "SHOULD",
+    "hours": 3,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Permitir entender la distribución declarada en una tabla y barras por vehículo.",
+    "logic": "Usar asignaciones conocidas y capacidades registradas; un ratio no prueba acomodo físico ni disponibilidad.",
+    "backend": "Read model por recurso, masa/volumen conocidos y completitud; reutilizar el reparto de bultos si el contrato y los datos lo permiten.",
+    "frontend": "Filas expandibles por vehículo/grupo, filtros y barras con unidad/fuente.",
+    "unitTests": [
+      "Asignación parcial -> marcar subtotal.",
+      "Capacidad ausente -> sin ratio.",
+      "Mismo bulto en dos recursos -> error de asignación."
+    ],
+    "acceptance": [
+      "El operador reconoce recurso, cantidad y dato faltante sin inferir un layout geométrico.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-01",
+      "CR-01"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "JU-06",
+    "iteration": "POST",
+    "owner": "Juan",
+    "title": "Editar acomodo 2D con validación",
+    "priority": "SHOULD",
+    "hours": 4,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Explorar un plano simple del piso para unidades con medidas confirmadas.",
+    "logic": "Rectángulos con orientación permitida; validar contorno y colisiones, sin certificar estabilidad o reparto por ejes.",
+    "backend": "Algoritmo/validador puro, inputs versionados y resultados que no cambian reservas.",
+    "frontend": "Plano 2D accesible y tabla equivalente; editar solo una propuesta hasta aprobación.",
+    "unitTests": [
+      "Dos rectángulos solapados -> inválido.",
+      "Giro prohibido -> rechazo.",
+      "Fuera del contorno -> inválido."
+    ],
+    "acceptance": [
+      "Solo entra con tiempo adicional y datos medidos; no bloquea la demo de conciliación.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-05"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "CR-05",
+    "iteration": "I3",
+    "owner": "Cristhian",
+    "title": "Revisar lectura de etiquetas y unidades por paquete",
+    "priority": "SHOULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Extraer identificadores o cantidades visibles sin confundir contenido y embalaje.",
+    "logic": "Etiqueta es evidencia revisable, no peso/dimensión verificados. Conservar texto detectado y campo interpretado.",
+    "backend": "Normalizar propuesta del adaptador y enlazar imagen original con revisión humana.",
+    "frontend": "Mostrar recorte/texto y confirmación por campo, con corrección manual.",
+    "unitTests": [
+      "12 boxes/pallet -> no 12 pallets.",
+      "Dos etiquetas contradictorias -> revisión.",
+      "OCR ilegible -> desconocido."
+    ],
+    "acceptance": [
+      "La etiqueta y la interpretación se pueden comparar visualmente.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "CR-02",
+      "AX-02"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "AX-05",
+    "iteration": "I3",
+    "owner": "Luis",
+    "title": "Ofrecer respuesta hablada opcional",
+    "priority": "SHOULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Leer una respuesta revisable sin convertir el proyecto en una migración de voz completa.",
+    "logic": "Síntesis y transcripción son capacidades distintas. Cancelar audio al cambiar de contexto y respetar permiso explícito.",
+    "backend": "Entregar texto seguro para síntesis y contrato de cancelación; no anunciar proveedor TTS inexistente.",
+    "frontend": "Control reproducir/silenciar con estado y transcripción accesible.",
+    "unitTests": [
+      "Cancelar -> termina reproducción.",
+      "TTS no disponible -> texto visible.",
+      "Respuesta antigua -> no interrumpe revisión actual."
+    ],
+    "acceptance": [
+      "La interfaz funciona sin audio y no atribuye al modelo capacidades no demostradas.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "AX-03"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "RA-05",
+    "iteration": "I2",
+    "owner": "Ramón/Jean",
+    "title": "Respaldo: SAM 3.1 con pesos abiertos en GPU",
+    "priority": "SHOULD",
+    "hours": 4,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Tener una vía de seguimiento si la API de SAM falla.",
+    "logic": "Misma interfaz de trayectorias que la vía por API; pesos facebook/sam3.1 (acceso aprobado en Hugging Face) y repo facebookresearch/sam3; revisar la SAM License antes de usarlo.",
+    "backend": "Función GPU en Modal (L40S o A100) o ejecución local, con los pesos en un Volume. Solo se despliega si el gate de I1 lo pide.",
+    "frontend": "Estado de procesamiento y error que diferencia espera en cola de procesamiento real.",
+    "unitTests": [
+      "Invocación sin auth -> rechazo.",
+      "Cold start -> estado pendiente.",
+      "Resultado duplicado -> deduplicado."
+    ],
+    "acceptance": [
+      "La cuenta, GPU, costes y acceso están confirmados; no se presupone crédito gratuito.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "RA-01"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "RA-06",
+    "iteration": "POST",
+    "owner": "Ramón/Jean",
+    "title": "Vincular unidades físicas mediante etiqueta visible",
+    "priority": "SHOULD",
+    "hours": 3,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Comparar identidad además de cantidad cuando exista una etiqueta/QR legible.",
+    "logic": "Track visual y unidad del manifiesto son identificadores diferentes; asociación revisada y sin duplicados.",
+    "backend": "Tabla de asociaciones con evidencia, confianza disponible y revisión; nunca por proximidad únicamente.",
+    "frontend": "Panel de unidad declarada y frame que la identifica.",
+    "unitTests": [
+      "Etiqueta repetida -> discrepancia.",
+      "Etiqueta no legible -> cantidad sin identidad.",
+      "Asociación ajena -> prohibida."
+    ],
+    "acceptance": [
+      "Se distingue conteo de identificación física; un fallo de OCR no inventa el vínculo.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "RA-03",
+      "CR-05"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "JU-07",
+    "iteration": "I4",
+    "owner": "Juan",
+    "title": "Filtrar y navegar sesiones del dashboard",
+    "priority": "SHOULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Localizar sesiones por sede, estado y fecha sin perder selección.",
+    "logic": "Filtros aplicados al universo explícito; paginación/completitud visibles.",
+    "backend": "Consulta indexada autorizada y orden estable; no traer vídeos por cada fila.",
+    "frontend": "Filtros compartidos, búsqueda con label, fila navegable, URL/restauración de selección.",
+    "unitTests": [
+      "Limpiar -> universo inicial.",
+      "Filtro sin resultados -> vacío útil.",
+      "Página parcial -> conteo visible acotado."
+    ],
+    "acceptance": [
+      "Los filtros y totales describen el mismo conjunto.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-03"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "CR-06",
+    "iteration": "I4",
+    "owner": "Cristhian",
+    "title": "Optimizar captura móvil de medios",
+    "priority": "SHOULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Facilitar grabar/capturar sin bloquear el formulario móvil.",
+    "logic": "Consentimiento de cámara/micrófono explícito; tamaño/formato comprobado antes de analizar.",
+    "backend": "Validación de formato y carga reintentable sin alterar política de privacidad.",
+    "frontend": "Selector de cámara/archivo, compresión controlada si no destruye etiquetas y fallback de selección.",
+    "unitTests": [
+      "Permiso denegado -> elegir archivo.",
+      "Rotación EXIF -> orientación correcta.",
+      "Cancelación -> vuelve al borrador."
+    ],
+    "acceptance": [
+      "Una captura de móvil se revisa y conserva sin perder el resto del request.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "CR-02"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "JU-08",
+    "iteration": "POST",
+    "owner": "Juan",
+    "title": "Visualizar acomodo físico en 3D",
+    "priority": "COULD",
+    "hours": 6,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Inspeccionar distribución geométrica a partir de un plan 2D/3D validado.",
+    "logic": "Separar la escena visual del algoritmo que devuelve posiciones; no usar render como verificador.",
+    "backend": "Resultado geométrico versionado y validadores de contorno/colisión/soporte modelado.",
+    "frontend": "Interior R3F bajo demanda, selección por unidad y tabla accesible.",
+    "unitTests": [
+      "Cambiar medida -> invalidar layout.",
+      "Fallo WebGL -> tabla disponible.",
+      "Salir de vista -> pausa."
+    ],
+    "acceptance": [
+      "Solo después de aceptar la ampliación; se muestran restricciones no validadas.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-06"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "JU-09",
+    "iteration": "POST",
+    "owner": "Juan",
+    "title": "Mover unidades con drag and drop",
+    "priority": "COULD",
+    "hours": 3,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Permitir proponer redistribuciones sin modificar hechos confirmados.",
+    "logic": "Cada cambio produce una propuesta revisable y recalcula validación; no altera el manifiesto.",
+    "backend": "Comando de propuesta con versión y restricciones, sin efecto comercial automático.",
+    "frontend": "Arrastre con alternativa por teclado y deshacer local.",
+    "unitTests": [
+      "Arrastrar a recurso incompatible -> inválido.",
+      "Deshacer -> estado anterior.",
+      "Versión antigua -> conflicto."
+    ],
+    "acceptance": [
+      "El operador entiende que edita un plan, no la carga observada.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-06"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "JU-10",
+    "iteration": "POST",
+    "owner": "Juan",
+    "title": "Optimizar reparto entre varios equipos",
+    "priority": "COULD",
+    "hours": 6,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Comparar alternativas factibles con objetivos explícitos.",
+    "logic": "Filtros duros antes del ranking, recursos en la misma ventana y sin capacidad auxiliar falsa.",
+    "backend": "Extender/reutilizar búsqueda acotada y objetivo versionado; reportar límite de búsqueda como revisión.",
+    "frontend": "Comparación de alternativas y razones, sin precio inventado.",
+    "unitTests": [
+      "No divisible -> un recurso.",
+      "Escolta -> capacidad cero.",
+      "Límite de búsqueda -> no óptimo afirmado."
+    ],
+    "acceptance": [
+      "Se distingue propuesta factible de óptimo global y de oferta comercial.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-05"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "RA-07",
+    "iteration": "POST",
+    "owner": "Ramón/Jean",
+    "title": "Procesar cámara en vivo",
+    "priority": "COULD",
+    "hours": 5,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Evaluar observación continua después de estabilizar clips.",
+    "logic": "Gestionar ventana temporal, reconexión y continuidad de identidad; no reutilizar directamente reglas de un clip cerrado.",
+    "backend": "Streaming/jobs por segmento, presión de cola y límites de retención.",
+    "frontend": "Estado de conexión y latencia, pausar/finalizar y permisos visibles.",
+    "unitTests": [
+      "Corte de red -> no duplicar segmento.",
+      "Frames perdidos -> aviso.",
+      "Cerrar sesión -> finalización única."
+    ],
+    "acceptance": [
+      "Requiere alcance y presupuesto nuevos; no es dependencia del envío.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "RA-04"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "RA-08",
+    "iteration": "POST",
+    "owner": "Ramón/Jean",
+    "title": "Correlacionar varias cámaras",
+    "priority": "COULD",
+    "hours": 8,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Investigar identidad y conteo entre vistas distintas.",
+    "logic": "Sincronización y reidentificación son un problema nuevo; no sumar conteos de cámaras.",
+    "backend": "Modelo de cámaras/tiempos/calibración y asociación revisable.",
+    "frontend": "Vistas sincronizadas con origen claro de cada observación.",
+    "unitTests": [
+      "Dos cámaras ven el mismo pallet -> no suma automática.",
+      "Relojes desfasados -> revisión.",
+      "Cámara no autorizada -> sin acceso."
+    ],
+    "acceptance": [
+      "Spike independiente posterior, sin promesa de resolución en la hackathon.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "RA-07"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "RA-09",
+    "iteration": "POST",
+    "owner": "Ramón/Jean",
+    "title": "Ampliar evaluación a escenarios diversos",
+    "priority": "COULD",
+    "hours": 3,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Medir límites en iluminación, objetos y oclusiones diferentes.",
+    "logic": "Separar desarrollo y evaluación; reportar error y abstención por condición.",
+    "backend": "Pipeline reproducible de métricas, versiones y datasets.",
+    "frontend": "Informe por condición en lugar de un porcentaje agregado engañoso.",
+    "unitTests": [
+      "Dataset repetido -> identificado.",
+      "Sin ground truth -> no precisión.",
+      "Caso fallido -> permanece visible."
+    ],
+    "acceptance": [
+      "Resultados con tamaño de muestra y límites explícitos.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "RA-04"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "AX-06",
+    "iteration": "POST",
+    "owner": "Axel",
+    "title": "Respaldo explícito con Baseten (Muse Spark Open)",
+    "priority": "COULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Reducir dependencia de una cuenta sin cambiar modelos de forma silenciosa.",
+    "logic": "Política de selección por disponibilidad y permiso de datos. Baseten no garantiza el JSON Schema de este modelo: validar con Zod y reintentar.",
+    "backend": "Segundo adaptador con mismas validaciones y metadatos de coste/proveedor.",
+    "frontend": "Mostrar cambio de proveedor y mantener fuente del análisis previo.",
+    "unitTests": [
+      "Proveedor alternativo sin visión -> no enviar imagen.",
+      "Failover -> origen actualizado.",
+      "Sin consentimiento -> no reenviar medios."
+    ],
+    "acceptance": [
+      "No se añaden tres servicios obligatorios al demo.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "AX-04"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "AX-07",
+    "iteration": "POST",
+    "owner": "Luis",
+    "title": "Mantener conversación de voz bidireccional",
+    "priority": "COULD",
+    "hours": 4,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Explorar una experiencia continua de audio después del flujo por grabación.",
+    "logic": "Separar STT, razonamiento y TTS; manejar interrupción, contexto y revisión sin mutación automática.",
+    "backend": "Transporte autenticado y renovación de sesiones con límites y origen exacto.",
+    "frontend": "Micrófono, transcript, interrupción y salida de audio accesibles.",
+    "unitTests": [
+      "Interrupción -> respuesta detenida.",
+      "Renovación -> conserva contexto permitido.",
+      "Silencio -> no crea comandos."
+    ],
+    "acceptance": [
+      "Gateway Amazon permanece independiente; la nueva voz tiene evidencia propia.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "AX-05"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "CR-07",
+    "iteration": "POST",
+    "owner": "Cristhian",
+    "title": "Añadir ayuda contextual de primera visita",
+    "priority": "COULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Explicar el flujo a usuarios nuevos sin redundar en cada pantalla.",
+    "logic": "Ayuda contextual se basa en el paso/campos faltantes, no reemplaza validación.",
+    "backend": "Sin mutación de dominio; preferencia de ayuda con alcance claro.",
+    "frontend": "Mensaje corto, cerrar/volver a mostrar, teclado y movimiento reducido.",
+    "unitTests": [
+      "Cerrar -> no reaparece inmediatamente.",
+      "Cambiar paso -> ayuda pertinente.",
+      "Sin IA -> ayuda estática disponible."
+    ],
+    "acceptance": [
+      "No se usa como sustituto de etiquetas y errores claros.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "CR-04"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "JU-11",
+    "iteration": "POST",
+    "owner": "Juan",
+    "title": "Exportar un Passport revisado",
+    "priority": "COULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Compartir un resumen autorizado de evidencias y decisiones.",
+    "logic": "Snapshot de la revisión; no incrustar URLs privadas permanentes ni sugerir certificación legal.",
+    "backend": "Exportación con tenant, versión, fecha y referencias de evidencia autorizadas.",
+    "frontend": "Acción de descargar con alcance y advertencias de datos pendientes.",
+    "unitTests": [
+      "Actor ajeno -> rechazo.",
+      "Nueva revisión -> exportación nueva.",
+      "URL vencida -> sin enlace roto presentado como evidencia final."
+    ],
+    "acceptance": [
+      "Artefacto rotulado como registro de la aplicación, no prueba certificada.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "JU-04"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "CR-08",
+    "iteration": "POST",
+    "owner": "Cristhian",
+    "title": "Importar manifiesto por archivo CSV",
+    "priority": "COULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Reutilizar declaraciones estructuradas de un operador.",
+    "logic": "Mapeo y validación previos; ninguna importación salta revisión/confirmación.",
+    "backend": "Parser acotado, errores por fila y deduplicación de importación.",
+    "frontend": "Previsualización, correspondencia de columnas y revisión de unidades.",
+    "unitTests": [
+      "Decimal/unidad ambiguos -> pedir corrección.",
+      "Fila inválida -> no ocultarla.",
+      "Importación repetida -> no duplica request."
+    ],
+    "acceptance": [
+      "El mismo contrato de manifiesto sirve a manual, IA e importación.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "CR-03"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  },
+  {
+    "id": "AX-08",
+    "iteration": "POST",
+    "owner": "Axel",
+    "title": "Comparar latencia y coste con benchmark reproducible",
+    "priority": "COULD",
+    "hours": 2,
+    "confidence": "baja; requiere reestimación",
+    "goal": "Respaldar afirmaciones de rendimiento con datos.",
+    "logic": "Baseline y variante sobre el mismo conjunto y versión de esquema; calidad equivalente.",
+    "backend": "Registrar input/output tokens, errores y tiempos sin datos privados; reportar p50/p95 solo con muestra descrita.",
+    "frontend": "Resumen técnico para documentación, fuera del flujo del operador.",
+    "unitTests": [
+      "Fallo -> incluido en tasa.",
+      "Consumo faltante -> desconocido.",
+      "Datasets distintos -> comparación no válida."
+    ],
+    "acceptance": [
+      "No se anuncian porcentajes de mejora desde una sola llamada.",
+      "No consume el margen de defectos ni retrasa un MUST. Si no se acepta capacidad adicional, permanece fuera del compromiso."
+    ],
+    "dependsOn": [
+      "AX-04"
+    ],
+    "sourceFiles": [],
+    "evidence": "Diff, pruebas pertinentes y evidencia de la funcionalidad; no se cuenta como entregada por aparecer en este backlog.",
+    "status": "Propuesto; fuera del compromiso"
+  }
+]

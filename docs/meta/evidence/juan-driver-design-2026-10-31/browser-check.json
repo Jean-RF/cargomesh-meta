@@ -1,0 +1,25 @@
+{
+  "errors": [],
+  "cases": [
+    {
+      "id": "cm-medical-van",
+      "base": "sprinter"
+    },
+    {
+      "id": "cm-florist-glass",
+      "base": "bonnet"
+    },
+    {
+      "id": "cm-fish-reefer",
+      "base": "isuzu"
+    },
+    {
+      "id": "cm-meat-rail",
+      "base": "euro-day"
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "base": "euro-high"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "date": "2026-11-01",
+  "branch": "codex/meta-luis",
+  "baseCommit": "97cd3fc3e7479afd2ec3da6247f997d0f2bb7384",
+  "publication": {
+    "implementationCommit": "bb36cb2d2318f6b0e5c17f38d36dd2adbd1c4dda",
+    "pr": 10,
+    "authorized": true,
+    "remoteGate": "consult-current-PR-head",
+    "merged": false
+  },
+  "source": "SYNTHETIC_RENDER",
+  "physicalCargoVerified": false,
+  "remoteMigrations": false,
+  "paidInferenceForIdempotency": false,
+  "database": {
+    "project": "meta-luis-media-local",
+    "apiPort": 65321,
+    "migration": "20261101120000",
+    "ledger": "applied-local"
+  },
+  "checks": {
+    "metaExplanation": {
+      "passed": 48,
+      "transport": "INJECTED"
+    },
+    "metaLoading": {
+      "passed": 40
+    },
+    "conversation": {
+      "passed": 138
+    },
+    "draftMedia": {
+      "passed": 27
+    },
+    "pgTapLoadingSessions": {
+      "passed": 36
+    },
+    "pgTapExplanation": {
+      "passed": 13
+    },
+    "localPersistence": {
+      "passed": 13,
+      "cases": [
+        {
+          "name": "uncertain-coverage-domain-guidance-no-inference",
+          "status": "PASS"
+        },
+        {
+          "name": "six-real-concurrent-claims-one-attempt",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical-payload-conflict-no-second-claim",
+          "status": "PASS"
+        },
+        {
+          "name": "different-keys-share-active-group-explicit-retry-only",
+          "status": "PASS"
+        },
+        {
+          "name": "real-database-grounded-injected-generation-and-atomic-save",
+          "status": "PASS"
+        },
+        {
+          "name": "lost-response-http-replay-recovers-exact-saved-explanation",
+          "status": "PASS"
+        },
+        {
+          "name": "reopen-preserves-explanation-and-recorded-origin",
+          "status": "PASS"
+        },
+        {
+          "name": "unauthenticated-and-other-organization-denied",
+          "status": "PASS"
+        },
+        {
+          "name": "browser-cannot-call-privileged-writer",
+          "status": "PASS"
+        },
+        {
+          "name": "historical-passport-still-readable-but-cannot-generate",
+          "status": "PASS"
+        },
+        {
+          "name": "material-change-between-generation-and-write-rejects-stale-result",
+          "status": "PASS"
+        },
+        {
+          "name": "expired-attempt-is-uncertain-and-never-automatically-reprocessed",
+          "status": "PASS"
+        },
+        {
+          "name": "explicit-new-attempt-fences-late-expired-result",
+          "status": "PASS"
+        }
+      ]
+    },
+    "typescript": "PASS",
+    "productionBuild": "PASS",
+    "architecture": {
+      "status": "PASS",
+      "modules": 847,
+      "clientEntries": 246
+    },
+    "migrationManifest": "PASS"
+  },
+  "liveAcceptance": {
+    "sessionId": "ab9051f1-77f7-4f12-b172-17b9b71d7cd9",
+    "passportId": "be84309a-15f0-43a5-9c54-4670b08f6d73",
+    "groupId": "fcac8908-38f8-421e-94f1-ecc5ce2ca3b4",
+    "sessionVersion": 7,
+    "uiGenerationCount": 1,
+    "state": "SAVED",
+    "metadata": {
+      "model": "muse-spark-1.3",
+      "attempts": 1,
+      "provider": "META",
+      "latencyMs": 6593,
+      "requestId": "a54e36dc-f546-4e7c-92de-12429daa87b6",
+      "transport": "META_MODEL_API",
+      "inputTokens": 1072,
+      "outputTokens": 1981,
+      "reasoningEffort": "medium",
+      "estimatedCostUsd": null,
+      "processingMayHaveOccurred": true
+    },
+    "attemptId": "a313f783-1674-458e-94b3-b10856de2808",
+    "createdAt": "2026-11-01T18:17:28.035662+00:00",
+    "completedAt": "2026-11-01T18:17:34.675148+00:00",
+    "reopenedSameExplanation": true,
+    "downloadContainsSameExplanation": true,
+    "eventReferencesNavigateToRecordedEvents": true,
+    "consoleErrorsAndWarnings": 0
+  },
+  "layout": {
+    "desktopCss": {
+      "width": 1365,
+      "height": 900,
+      "documentScrollWidth": 1355
+    },
+    "mobileCss": {
+      "width": 390,
+      "height": 844,
+      "documentScrollWidth": 379,
+      "explanationPanelWidth": 305.15
+    },
+    "viewportOverrideReset": true,
+    "screenshot": "saved-passport.jpg",
+    "note": "Raw browser capture at the final default viewport; earlier full-page captures omitted because the capture backend padded them with black pixels."
+  }
+}

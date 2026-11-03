@@ -1,0 +1,11 @@
+{
+  "errors": [],
+  "failedRequests": [],
+  "checks": [
+    "Carrier menu Tetris link, same-document route, active item, one main, 60 rows and deferred 3D",
+    "Tablet reflow, 3D selection/camera and direct detail reload",
+    "390px catalogue/detail, drawer open/Escape/navigation, Fleet return and browser back",
+    "Standalone Tetris remains available"
+  ],
+  "auth": "local synthetic QA identity; existing carrier memberships unchanged"
+}

@@ -1,0 +1,64 @@
+{
+  "verified": "2026-11-02",
+  "suites": {
+    "logistics": {
+      "passed": 208,
+      "failed": 0
+    },
+    "metaLoading": {
+      "passed": 43,
+      "failed": 0
+    },
+    "carrierOperations": {
+      "passed": 54,
+      "failed": 0
+    }
+  },
+  "typecheck": "passed",
+  "build": "passed (lint/types included)",
+  "architecture": {
+    "modules": 851,
+    "clientEntries": 247
+  },
+  "localhostStatus": 200,
+  "head": "3810a589f75e4d4b9c7b7a7f2797cecffc791209",
+  "publication": "none",
+  "rasters": [
+    {
+      "file": "cm-aero-dryvan-symbol.png",
+      "sha256": "863e05a4a60aabceb8a670a7e5d72c1df7a474afbdaa954f68c74d17707d707e"
+    },
+    {
+      "file": "cm-bakery-shutter-symbol.png",
+      "sha256": "e653e83da0ea46027b4d6195932d7798cf118c87569c047392ba8ae31e73ec95"
+    },
+    {
+      "file": "cm-drum-rail-symbol.png",
+      "sha256": "a953f466ec2e5c515ac34bb9905242f036b8711e60d72451d6eaba1174fac39d"
+    },
+    {
+      "file": "cm-medical-van-symbol.png",
+      "sha256": "883cadedf5b577bf696401e83b835e23d41e76f4e433a71befb2801a388f4ae0"
+    },
+    {
+      "file": "cm-mini-bowser-symbol.png",
+      "sha256": "cc6b0ff5942294e4935827f99c03f6ecec68af066ff6a8399b28c02af3a1c3b4"
+    },
+    {
+      "file": "desktop-codes.png",
+      "sha256": "42717a1d633338eb787549320bb68b4f3b97ec039e75c8f5c5d9a87b5ec73e4e"
+    },
+    {
+      "file": "desktop-factory.png",
+      "sha256": "2f4f833d3632a976ef152b310922f10e547e078b128bfa4a963add31ae135ff7"
+    },
+    {
+      "file": "mobile-factory.png",
+      "sha256": "ba74bcda8c23c831c7a03d8bc2d16e9bbd830b6190e05aff684e6db7cf3301f2"
+    },
+    {
+      "file": "model-detail.png",
+      "sha256": "03f7903dd9c7fcd60bcbeeddfd47e791d6f91dd09b7cfed5d15b659346c81895"
+    }
+  ]
+}

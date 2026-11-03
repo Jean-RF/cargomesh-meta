@@ -1,0 +1,47 @@
+(node:17260) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ all 60 trucks have a complete and incomplete result with truthful remaining quantities (31.8764ms)
+✖ incomplete native scenes leave the omitted product behind and move truck, fixtures and loaded products together (57791.0116ms)
+✔ articulated wrist keeps fixed links and the gripper on the exact cargo attachment while seeking (3314.4723ms)
+✔ mechanical details and factory fixtures have a bounded cost for all four loading methods (6749.7612ms)
+✔ all 60 vehicles use their own cargo, quantity, dimensions, weight and loading method (10.0593ms)
+✔ discrete cargo never intersects another unit along the metric path or crosses a closed body (1954.4376ms)
+✔ backward seek resets stock and counters, and midpoint interpolation is continuous (0.3748ms)
+✔ invalid dimensions, mass or quantities cannot start a loading sequence (1.6817ms)
+✔ factory reuses each native cargo mesh and never scales a rigid product (72687.0513ms)
+✔ rolling loads retain support through ramp/deck transitions without resizing (286.4856ms)
+✔ car carrier staging stays compact without scaling or overlapping parked vehicles (0.3332ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 10
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146331.5531
+
+✖ failing tests:
+
+test at src\features\truck-collection\factory-loading.test.ts:2:3936
+✖ incomplete native scenes leave the omitted product behind and move truck, fixtures and loaded products together (57791.0116ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + -0
+  - 0
+  
+      at TestContext.<anonymous> (D:\Documents\hackaton 2\meta-hackathon-juan-local\cargomesh\src\features\truck-collection\factory-loading.test.ts:50:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: -0,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

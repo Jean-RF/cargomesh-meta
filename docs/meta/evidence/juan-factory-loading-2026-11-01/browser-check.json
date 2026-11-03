@@ -1,0 +1,69 @@
+{
+  "errors": [],
+  "cases": [
+    {
+      "id": "cm-medical-van",
+      "method": "rear",
+      "product": "contenedores isotérmicos",
+      "loadedMid": 4,
+      "weightMid": 136,
+      "duration": 134.00628482777557
+    },
+    {
+      "id": "cm-regional-shutter",
+      "method": "rear",
+      "product": "pallets de cajas",
+      "loadedMid": 4,
+      "weightMid": 1440,
+      "duration": 219.7996982933005
+    },
+    {
+      "id": "cm-coil-well",
+      "method": "crane",
+      "product": "bobinas de acero",
+      "loadedMid": 1,
+      "weightMid": 6750,
+      "duration": 95.3517084410293
+    },
+    {
+      "id": "cm-tractor-stepdeck",
+      "method": "ramp",
+      "product": "tractor agrícola",
+      "loadedMid": 0,
+      "weightMid": 0,
+      "duration": 22.001804384636234
+    },
+    {
+      "id": "cm-water-bowser",
+      "method": "fill",
+      "product": "depósito de agua",
+      "loadedMid": 0,
+      "weightMid": 2510,
+      "duration": 70.75
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "method": "fill",
+      "product": "carga de grava",
+      "loadedMid": 0,
+      "weightMid": 2885,
+      "duration": 80.125
+    },
+    {
+      "id": "cm-florist-glass",
+      "method": "rear",
+      "product": "carros de flores",
+      "loadedMid": 2,
+      "weightMid": 130,
+      "duration": 83.05531327377311
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "method": "ramp",
+      "product": "automóviles de muestra",
+      "loadedMid": 2,
+      "weightMid": 2920,
+      "duration": 170.9064335586737
+    }
+  ]
+}

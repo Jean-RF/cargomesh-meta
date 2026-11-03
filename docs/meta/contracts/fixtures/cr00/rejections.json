@@ -1,0 +1,34 @@
+{
+  "exampleType": "SYNTHETIC_CONTRACT_EXAMPLE_NOT_EXECUTED",
+  "reference": "complete.json",
+  "cases": [
+    {
+      "change": "trustedContext.actorOrganizationId belongs to a different organization",
+      "expectedCode": "FORBIDDEN_TENANT"
+    },
+    {
+      "change": "trustedContext.expectedRequestDraftVersion differs from request.draftVersion",
+      "expectedCode": "STALE_DRAFT"
+    },
+    {
+      "change": "Two bindings reuse one groupId",
+      "expected": "Zod validation issue"
+    },
+    {
+      "change": "Two bindings point at sourceUnitIndex 0",
+      "expected": "Zod validation issue"
+    },
+    {
+      "change": "Index 1 is not bound, or index 2 replaces it",
+      "expected": "Zod validation issue"
+    },
+    {
+      "change": "A quantity, measure or total is not finite",
+      "expected": "Zod validation issue"
+    },
+    {
+      "change": "Claim confirmed=true or add a booking/price property to the candidate",
+      "expected": "Zod strict-schema validation issue"
+    }
+  ]
+}

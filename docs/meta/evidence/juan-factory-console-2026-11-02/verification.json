@@ -1,0 +1,57 @@
+{
+  "typecheck": "passed",
+  "buildFinal": "passed with lint/types after F1",
+  "metaLoading": {
+    "passed": 43,
+    "failed": 0
+  },
+  "architecture": {
+    "modules": 852,
+    "clientEntries": 247
+  },
+  "F1": "Reduced-motion final action returns to time/count zero, paused, without autoplay.",
+  "detector": "One execution before F1; not repeated.",
+  "scope": "FactoryPlayer TSX/CSS only; geometry/domain suites not repeated.",
+  "rasters": [
+    {
+      "file": "before.png",
+      "sha256": "813f14f953d98d9350a66940bc82299650cf252434156e8fe330e7ca284738e8"
+    },
+    {
+      "file": "desktop.png",
+      "sha256": "cbd5bee19593c74aac3c0431d92c62406e016db71e249fd6360f6b3109462b6d"
+    },
+    {
+      "file": "flow.png",
+      "sha256": "6ae484e996cae5d16605046c3745822135288da3f2880f67258f7810f1407cb6"
+    },
+    {
+      "file": "keyboard-focus.png",
+      "sha256": "63757c02c282b598120168437409e51eb800f64354fb894335e7774595cccb5e"
+    },
+    {
+      "file": "mobile-complete.png",
+      "sha256": "2d94c5506c6dddb09a4753ffc79ea1acda47b816cfa2f42321ac77e180744b5b"
+    },
+    {
+      "file": "mobile-reset.png",
+      "sha256": "7c45636d201aca4e1a6631340034fd6dda584321cad38a8fdebd01a6d6bc2acf"
+    },
+    {
+      "file": "mobile.png",
+      "sha256": "83ffec09e27ac00c831e68a7f2ed55f6ea42ad98fcb729ed6b69580f3fa3bbd1"
+    },
+    {
+      "file": "overview.png",
+      "sha256": "e2732a501a581347e61bcbebef58ae0c2aa8ab0149f849aeb40e40cf8811df54"
+    },
+    {
+      "file": "user-1106.png",
+      "sha256": "f2b18525cd0080f76c62dc26286c7c0f28ed94c1f8aa54e0325efcba8b0b5379"
+    },
+    {
+      "file": "user-reference.png",
+      "sha256": "0b2c8b5ef97a99756f915387c4fa3889040b8b3f64acfdedb26f23a57d7cd5ad"
+    }
+  ]
+}

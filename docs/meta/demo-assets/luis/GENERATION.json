@@ -1,0 +1,23 @@
+{
+  "method": "built-in image_gen",
+  "createdDate": "2026-10-30",
+  "synthetic": true,
+  "realShipmentEvidence": false,
+  "prompts": [
+    {
+      "id": "photo",
+      "file": "cargo-scene.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: synthetic logistics demo input for computer vision, landscape. Create a realistic documentary photograph of exactly FOUR separate closed plain brown cardboard shipping cartons standing individually on a clean warehouse floor in one foreground row, with generous visible gaps between all four cartons. All four entire cartons visible, no occlusion, no other boxes or pallets anywhere in frame. Neutral clean warehouse with blank racks in background. Natural overhead industrial light, realistic corrugated cardboard. Eye level slightly above boxes, diagonal view shows fronts and tops. No ruler, scale, dimensions, labels, numbers, brand, logos, people, overlaid titles, UI, watermark. This is deliberately synthetic test material: the photo can establish only visible packaging and foreground count, never real weight or dimensions."
+    },
+    {
+      "id": "label",
+      "file": "shipping-label.png",
+      "prompt": "Use case: product-mockup. Asset type: AI-generated synthetic shipping label photo used to test reading Spanish cargo information. Realistic close-up photo of a SINGLE plain cardboard carton side with a large white perfectly flat rectangular printed label, straight-on camera, no perspective distortion, all label edges visible, crisp black text in simple sans-serif font, high contrast and ample spacing. The label must contain exactly these six lines, clearly spelled and legible, no other text:\nDEMOSTRACION SINTETICA\nCONTENIDO: REPUESTOS\nBULTOS: 4 CAJAS\nPESO POR CAJA: 8 kg\nMEDIDAS POR CAJA: 40 x 30 x 20 cm\nNO ES EVIDENCIA REAL\nAll units refer to each box, printed facts only. Cardboard and realistic paper texture around label, neutral even soft light, no hands, personal data, logos, address, barcodes, warehouse background, ruler, extra boxes, UI, watermarks."
+    },
+    {
+      "id": "unreadable",
+      "file": "damaged-label.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: synthetic unreadable cargo label test. Realistic close-up photo of a SINGLE closed plain cardboard package with a severely water damaged abraded white shipping label. The label has washed-out ink, crumpled torn paper and smeared black marks; absolutely NO legible letters, words or numerals. No other label, no numbers, no dimensions, no readable text anywhere. Cropped background is neutral light gray. Soft light, clear focus on physical damage and cardboard textures, not an artificial blur filter. The label conveys no recoverable quantity, weight, dimensions or contents. No people, scale, logos, overlay text, UI, watermark."
+    }
+  ]
+}

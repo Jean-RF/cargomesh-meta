@@ -1,0 +1,20 @@
+{
+  "label": "AI_GENERATED_SYNTHETIC_DEMO",
+  "generator": "Built-in image_gen tool",
+  "createdDate": "2026-10-29",
+  "prompts": [
+    {
+      "key": "photo",
+      "prompt": "Use case: photorealistic-natural. Create a synthetic demo photograph for CargoMesh cargo-recognition tests. A warehouse floor with exactly three separate closed plain brown cardboard shipping boxes, each fully visible, side by side with clear space between them. No pallet, people, labels, printed measurements, numbers, logos, rulers or scale references. Natural warehouse lighting, realistic cardboard. Wide shot, all three boxes visible. Include small footer text \"SYNTHETIC DEMO — NOT A REAL SHIPMENT\". Do not state the count in the image."
+    },
+    {
+      "key": "label",
+      "prompt": "Use case: product-mockup. Synthetic logistics label test asset for CargoMesh. Close straight-on photograph of one large clean white shipping label on brown cardboard. Very legible black sans-serif text, exactly these lines: \"CARGOMESH DEMO\", \"UNIT TYPE: BOX\", \"QUANTITY: 2 BOXES\", \"WEIGHT PER BOX: 15 kg\", \"SIZE PER BOX: 50 x 40 x 30 cm\", \"CONTENTS: MACHINE PARTS\", \"SYNTHETIC — NOT A REAL SHIPMENT\". No other text, barcodes, company logos, addresses or personal information. High contrast, all label edges visible, no glare. This is a synthetic test label, not a real measurement."
+    },
+    {
+      "key": "unreadable",
+      "prompt": "Use case: photorealistic-natural. Synthetic CargoMesh negative test photograph. A single closed brown cardboard shipping box on warehouse floor with a white shipping label. The label is severely smeared, faded and torn, with no readable quantity, weight, dimensions or contents. No other objects, people, logos, numbers, rulers or scale references. The carton shape is clear; all label fields are unreadable. Add a small separate footer \"SYNTHETIC DEMO\". Realistic natural light."
+    }
+  ],
+  "notes": "Not real shipment evidence. Ground truth is human-reviewed from pixels and used by evaluator only, never supplied to Meta inference."
+}

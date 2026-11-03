@@ -1,0 +1,82 @@
+{
+  "sprinter": {
+    "file": "sprinter.glb",
+    "bodyWidth": 1.99,
+    "length": 2.759,
+    "radius": 0.3656,
+    "frontAxle": 1.0161,
+    "track": 0.8402,
+    "head": [
+      1.85,
+      1.8,
+      0.57
+    ],
+    "license": "CC-BY-4.0",
+    "bytes": 3740884,
+    "sha256": "d3f53c8233f33dcafd9740d55a6b92882de94ed420bdffdf4abb79198b42b403"
+  },
+  "bonnet": {
+    "file": "bonnet.glb",
+    "bodyWidth": 1.96,
+    "length": 2.068,
+    "radius": 0.3548,
+    "frontAxle": 0.7761,
+    "track": 0.7841,
+    "head": [
+      1.8,
+      1.77,
+      0.55
+    ],
+    "license": "CC-BY-4.0",
+    "bytes": 4027532,
+    "sha256": "0b8692b1f033fa27998927c32b9f4f675914bb81e51ca9fd3ef9812a521f05d6"
+  },
+  "isuzu": {
+    "file": "isuzu.glb",
+    "bodyWidth": 2.12,
+    "length": 1.799,
+    "radius": 0.3997,
+    "frontAxle": 1.1035,
+    "track": 0.9041,
+    "head": [
+      1.02,
+      2.08,
+      0.6
+    ],
+    "license": "CC-BY-4.0",
+    "bytes": 2051012,
+    "sha256": "97bcd8becb0b361d17a744c5b1b5e6c8f4f3fe1e4275262cc9be821a0f169f73"
+  },
+  "euro-high": {
+    "file": "euro-high.glb",
+    "bodyWidth": 2.5,
+    "length": 2.387,
+    "radius": 0.5734,
+    "frontAxle": 1.6569,
+    "track": 1.19,
+    "head": [
+      1.2,
+      2.8,
+      0.76
+    ],
+    "license": "CC-BY-4.0",
+    "bytes": 6794352,
+    "sha256": "5ae49ca380ac7765f2d0b1cab32775e829a8457c416fd1b5ac91e51a9abb042e"
+  },
+  "euro-day": {
+    "file": "euro-day.glb",
+    "bodyWidth": 2.5,
+    "length": 2.39,
+    "radius": 0.5734,
+    "frontAxle": 1.7754,
+    "track": 1.19,
+    "head": [
+      1.2,
+      2.8,
+      0.76
+    ],
+    "license": "CC-BY-4.0",
+    "bytes": 4436712,
+    "sha256": "2f446b50d23466b07f2eb2213b8cd6cd53763a5f782ed85e6ae3b29e0a3dabaf"
+  }
+}

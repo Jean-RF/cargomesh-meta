@@ -1,0 +1,62 @@
+✔ JU-00: unknown and zero denominators never produce a percentage (3.1785ms)
+✔ JU-00: no observation is unknown, never confirmed zero (11.7179ms)
+✔ JU-00: a session without an authorized operation is visibly a demo (5.6014ms)
+✔ JU-01: pallets and boxes stay in separate totals (4.0137ms)
+✔ JU-01: partial pages and unknown group counts never become global totals (1.4854ms)
+✔ JU-01: complete plan with no allocation means explicit zero, incomplete plan means pending (2.3793ms)
+✔ JU-01: stale or incompatible plans cannot supply planned quantities (2.3295ms)
+✔ JU-01: empty and older refreshes preserve the previous snapshot (2.1918ms)
+✔ an open session shows progress without declaring a shortage (1.4198ms)
+✔ closed sufficient evidence gives a proposed difference and a match deterministically (2.458ms)
+✔ incomplete coverage or uncertainty cannot prove a difference (2.2164ms)
+✔ a changed manifest revision makes the comparison outdated (1.1383ms)
+✔ units and sessions must match before comparing (1.4592ms)
+✔ an explicit complete count of zero remains a confirmed zero (1.1628ms)
+✔ duplicate observations, negative counts and foreign allocations fail contract validation (5.4096ms)
+✔ integer overflow in a total is unknown rather than a rounded count (1.4821ms)
+✔ keeps caller idempotency on transport retries and reads the authorized source only (93.3353ms)
+✔ checks explanation response scope and sends stable command keys with an abort signal (5.7993ms)
+✔ validates Passport source before deriving comparison and rejects forged evidence scope (24.2638ms)
+✔ starts session, history and exact selected Passport before any read resolves (16.3035ms)
+✔ does not read a Passport when none is selected and propagates authorization failures (3.1036ms)
+✔ the directory preserves all sixty truck/driver identities and isolates its illustrative tariffs (3.3355ms)
+✔ category, weight, accented names and sorting compose without mutating the fleet (18.3007ms)
+✔ 3D groups partition the actual placed units, retain weight and contain their geometry envelopes (15.3492ms)
+✔ selected leader uses reserved gutters and approaches the selected boundary from its chosen side (5.4074ms)
+✔ offscreen and invalid targets never get a misleading clamped leader (0.6411ms)
+▶ Loading HTTP routes
+  ✔ authenticates root GET/POST and nested reads once while retaining root guards (89.1999ms)
+  ✔ blocks cross-origin cookies, malformed JSON, oversized bodies and missing versions (13.7649ms)
+  ✔ uses the native authentication boundary when no injected test actor is supplied (2.8861ms)
+  ✔ protects explanation commands, forwards identity/scope/key and makes status a read-only call (5.5048ms)
+✔ Loading HTTP routes (114.5174ms)
+✔ reader passes trusted organization and session to the repository (13.8773ms)
+✔ other organizations, facilities and sessions cannot leak a snapshot (7.387ms)
+✔ no granted facility means no repository call (0.5371ms)
+✔ production reader rejects fixture data and malformed sources (3.7515ms)
+✔ missing session is not found (0.5958ms)
+▶ Loading operation trust boundary
+  ✔ requires identity, explicit unit mapping, versions and UUID idempotency before writes (5.0257ms)
+  ✔ does not return a foreign session or list and propagates a persistence failure (3.8682ms)
+  ✔ rejects an opening receipt that changes the operator chosen unit mapping (1.514ms)
+  ✔ keeps historical Passport readable but refuses explanation from a stale source (15.8677ms)
+  ✔ rechecks the bound actor and currency for producer read ports (16.4097ms)
+  ✔ uses scoped RPC args and exposes missing capability without a fallback (1.0138ms)
+  ✔ does not forward invalid worker counts to privileged persistence (1.2449ms)
+✔ Loading operation trust boundary (47.5214ms)
+▶ Operational loading facts
+  ✔ compares a closed evidenced group and preserves the immutable Passport source (34.5836ms)
+  ✔ does not conclude a difference from open, incomplete, uncertain, stale or negative-net evidence (13.7581ms)
+  ✔ keeps a workflow-only draft-version change current but rejects synthetic verification evidence (3.3504ms)
+  ✔ rejects forged quantities, foreign observations and changed identities at the boundary (5.6136ms)
+  ✔ projects exact event aliases for Luis, validates response scope and refuses lossy projections (10.34ms)
+  ✔ checks the worker supplied net and event counts instead of inventing conversions (2.2662ms)
+✔ Operational loading facts (73.102ms)
+ℹ tests 48
+ℹ suites 3
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2548.583

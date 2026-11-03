@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dockmind"
+version = "0.1.0"
+description = "DockMind: cuenta bultos que cruzan una línea en un clip de carga usando SAM 3.1."
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26",
+    "opencv-python-headless>=4.9",
+    "openai>=1.99",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+modal = ["modal>=1.6"]
+
+[project.scripts]
+dockmind = "dockmind.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

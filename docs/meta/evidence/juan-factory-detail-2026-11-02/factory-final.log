@@ -1,0 +1,20 @@
+(node:52880) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ articulated wrist keeps fixed links and the gripper on the exact cargo attachment while seeking (3304.3387ms)
+✔ mechanical details and factory fixtures have a bounded cost for all four loading methods (5683.3392ms)
+✔ all 60 vehicles use their own cargo, quantity, dimensions, weight and loading method (14.2382ms)
+✔ discrete cargo never intersects another unit along the metric path or crosses a closed body (1490.738ms)
+✔ backward seek resets stock and counters, and midpoint interpolation is continuous (0.3516ms)
+✔ invalid dimensions, mass or quantities cannot start a loading sequence (0.2678ms)
+✔ factory reuses each native cargo mesh and never scales a rigid product (74822.5892ms)
+✔ rolling loads retain support through ramp/deck transitions without resizing (216.8038ms)
+✔ car carrier staging stays compact without scaling or overlapping parked vehicles (0.4938ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86089.711

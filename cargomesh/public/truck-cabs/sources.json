@@ -1,0 +1,27 @@
+[
+  {
+    "name": "van",
+    "url": "https://huggingface.co/datasets/mehmetkeremturkcan/valdrada/resolve/v0.6.2/Content/models/fleet24/van.glb",
+    "sha256": "5dadb772e1807b38ab0bb1413cc0ce2a4e1eed6f10ddad9596d455127c1b0bea"
+  },
+  {
+    "name": "ambulance",
+    "url": "https://huggingface.co/datasets/mehmetkeremturkcan/valdrada/resolve/v0.6.2/Content/models/fleet24/ambulance.glb",
+    "sha256": "805b47bd7d06e30763065aba4275f5f39e3111b2e0f632c6fdd06a347a9b57fb"
+  },
+  {
+    "name": "firetruck",
+    "url": "https://huggingface.co/datasets/mehmetkeremturkcan/valdrada/resolve/v0.6.2/Content/models/fleet24/firetruck.glb",
+    "sha256": "223dc4d719c1c42b5cf10761fd40f0a9022601235efda09a5f820ff96400c67b"
+  },
+  {
+    "name": "isuzu",
+    "url": "https://huggingface.co/datasets/mehmetkeremturkcan/valdrada/resolve/v0.6.2/Content/models/fleet24/boxtruck26_vh36.glb",
+    "sha256": "2aea8d0e120276536bdfe70967011b079314ddf786c465bf0f63c70a21ffab02"
+  },
+  {
+    "name": "euro-high",
+    "url": "https://huggingface.co/datasets/mehmetkeremturkcan/valdrada/resolve/v0.6.2/Content/models/fleet24/boxtruck.glb",
+    "sha256": "bf2a6e9617b873635c2f9a9e8e084cfa73437af37b4965ed6cc7f4ae43714d79"
+  }
+]

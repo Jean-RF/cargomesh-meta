@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "liveInference": false,
+  "hostedChanges": false,
+  "app": "http://localhost:3000",
+  "sessionId": "1e938c6a-83d0-432a-975b-195749781baa",
+  "requestId": "88426d91-c617-4eca-9d93-7cdc34fbaeba",
+  "passportId": "99cb90d2-b76e-4143-bbcc-48902ac70d7d",
+  "checks": [
+    "Native Auth -> request -> CR-01 prepare/explicit confirm -> persistent session; opening replay",
+    "Actual Ramon service + HMAC callback; uncertain fixture retained; separate OK contract fixture; no inference/Modal call",
+    "Actual Luis access + grounded renderer + injected provider -> stored scoped explanation -> Passport reload",
+    "Unchanged material survives draft version; material revision invalidates live comparison, preserves historical Passport, blocks stale explanation"
+  ]
+}

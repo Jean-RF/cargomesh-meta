@@ -1,0 +1,46 @@
+{
+  "source": "Original project artwork, deterministic prepare-truck-materials.mjs",
+  "license": "MIT (repository license)",
+  "resolution": {
+    "microdetail": 256,
+    "grille": 512
+  },
+  "files": [
+    {
+      "file": "fabric-normal.png",
+      "bytes": 115690,
+      "sha256": "7958a2a217a5bc12f74e76631a54d402f01ebfbd01e58aac0599c612380cd12e"
+    },
+    {
+      "file": "cardboard-normal.png",
+      "bytes": 117635,
+      "sha256": "4189741f05a3b1d57756146fbfe351ed12e043b3b02cad8e2228fb856a232b9c"
+    },
+    {
+      "file": "skin-normal.png",
+      "bytes": 117599,
+      "sha256": "005699c6fe0b70bbfb4ed39297c9c4d8357c75c0fdd0d95d40937430c7bf46f8"
+    },
+    {
+      "file": "paint-normal.png",
+      "bytes": 99424,
+      "sha256": "0b8c9bc62c69d67edf6594a2b323441f5504110a22a050a3c24af75a62ae5350"
+    },
+    {
+      "file": "paint-rough.png",
+      "bytes": 45372,
+      "sha256": "5eb39d098a731b0fbbc8bce59f981fdec410069a326065f751038b82ba5fc0a8"
+    },
+    {
+      "file": "grille-color.png",
+      "bytes": 9830,
+      "sha256": "7c94287284f1453631fbdc7f35df4c3215eb7f85ff9873ba7e9987088b10b11b"
+    },
+    {
+      "file": "hair-normal.png",
+      "bytes": 3662,
+      "sha256": "ecc7580f97e0d103048043f985c50b0cada060697c5e0724a44f7c2460517ab3",
+      "source": "Original deterministic prepare-driver-hair.mjs, 256px tileable fibre normal map"
+    }
+  ]
+}

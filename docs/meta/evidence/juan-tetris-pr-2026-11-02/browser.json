@@ -1,0 +1,31 @@
+{
+  "errors": [],
+  "checks": [
+    {
+      "catalogue": 60,
+      "noEagerGlbs": true
+    },
+    {
+      "medical": true,
+      "complete": 8,
+      "incomplete": 7,
+      "departure": true
+    },
+    {
+      "mobileReduced": true,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "player": 341,
+        "scroll": 341
+      }
+    },
+    {
+      "anonymousApi": 401
+    },
+    {
+      "sessionsRoute": true,
+      "controlledUnauthorized": true
+    }
+  ]
+}

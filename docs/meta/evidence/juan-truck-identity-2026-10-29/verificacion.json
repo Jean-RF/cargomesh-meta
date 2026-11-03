@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-29",
+  "revision": 4,
+  "logisticsTests": 166,
+  "collectionTests": 14,
+  "carrierOperationsTests": 54,
+  "build": "passed",
+  "architecture": {
+    "modules": 799,
+    "clientEntries": 239
+  },
+  "browserModels": 60,
+  "browserErrors": 0,
+  "desktopOverflow": false,
+  "mobileOverflow": false,
+  "blenderImported": 60,
+  "blender": "5.2.3 LTS",
+  "maxTriangles": 166252,
+  "maxMeshes": 17,
+  "allImagesEmbedded": true,
+  "humanVisualAcceptance": "pending"
+}

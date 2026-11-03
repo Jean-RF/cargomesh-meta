@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-02",
+  "head": "3810a58",
+  "captures": [
+    {
+      "file": "before.png",
+      "sha256": "728fa85e1c3d20bd007035cd8570e6728d96ea7d819b8df246aab2e36521670a"
+    },
+    {
+      "file": "bulk-departure.png",
+      "sha256": "37ef1f7acb551861c7378e3237767945fbf877860a7aea204dfc9872a6a04413"
+    },
+    {
+      "file": "crane-departure.png",
+      "sha256": "a6c37539be8b2e88266a2fa1d4a83c69cf9f63091461413b9382eef4c6cf5a56"
+    },
+    {
+      "file": "desktop.png",
+      "sha256": "74b8fa7c6fd8dcb06891b842971af27c58b31efdfc8d09960d3366dccedb7a6d"
+    },
+    {
+      "file": "liquid-departure.png",
+      "sha256": "6a5f98be487198848d319ff3fa3bd69c6feeb41a61464d7c25b17a0fb253402d"
+    },
+    {
+      "file": "medical-departure.png",
+      "sha256": "0fb45d0f2f5cf6375f329d4d0d0315944d6c3b222b3ba27c7091b55cc68c0591"
+    },
+    {
+      "file": "medical-result.png",
+      "sha256": "f51770fb04b8bea71e8fa79d5a294128995b41f63a042cd1fa1d019e37e89bef"
+    },
+    {
+      "file": "medical-stop.png",
+      "sha256": "d779e5861c7c13d464c987ba373d982d9d17f757f7d8e0c99b7db00eae99c916"
+    },
+    {
+      "file": "mobile-result.png",
+      "sha256": "2480dcfc0765c7b55e2b8bcd7d4f5cb3c770153176c5f1f4cf0221f0a0d92762"
+    },
+    {
+      "file": "mobile.png",
+      "sha256": "a6134a213fffb0c2fe1b8a56c35aa09db3759414865e38e730787fd754f92ed1"
+    },
+    {
+      "file": "ramp-departure.png",
+      "sha256": "35516b82a0e770218a496123b9126cbee763c30ac84648aae752d4beb89d03e7"
+    },
+    {
+      "file": "user-1106.png",
+      "sha256": "35b9c2960777fea019ead673506dfbcdeba841e2f66254af88d5d12f7d99557c"
+    }
+  ],
+  "browser": "checks.json",
+  "detector": "detector.json",
+  "limits": [
+    "Synthetic demonstration, no operational mutations",
+    "No real device, physical route validation or scanner check",
+    "Missing-unit/partial-flow scenario; no breakage simulation"
+  ],
+  "checks": {
+    "httpStatus": 200,
+    "logistics": {
+      "passed": 212,
+      "failed": 0,
+      "scope": "core before final ramp layout correction"
+    },
+    "nearEndReducedStep": "edge-check.json",
+    "factoryFinal": {
+      "passed": 10,
+      "failed": 1,
+      "failure": "Strict zero versus negative zero angle assertion; no product defect"
+    },
+    "architecture": {
+      "modules": 852,
+      "clientEntries": 247
+    },
+    "factoryRecheck": {
+      "passed": 1,
+      "failed": 0,
+      "scope": "same native scene test, all60, tolerance-corrected assertion"
+    },
+    "buildFinal": {
+      "lintAndTypes": true,
+      "exitCode": 0
+    },
+    "operations": {
+      "passed": 54,
+      "failed": 0
+    }
+  }
+}

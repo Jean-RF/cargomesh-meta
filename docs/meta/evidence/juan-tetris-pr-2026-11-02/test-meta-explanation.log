@@ -1,0 +1,59 @@
+Already up to date
+Done in 842ms using pnpm v11.19.0
+$ node --conditions=react-server --import tsx --test src/server/ai/meta/explain-reconciliation.test.ts src/server/ai/meta/explanation-adapter.test.ts src/server/modules/loading-sessions/passport-explanation-service.test.ts src/server/modules/loading-sessions/passport-explanation-repository.test.ts src/features/meta-loading-dashboard/use-passport-explanations.test.ts
+✔ a lost generation response retries the same payload/key and then adopts the saved explanation (199.2839ms)
+✔ remount recovers the operation key from session storage (74.0433ms)
+✔ double clicks share one request and late results do not update an unmounted Passport (20.5322ms)
+✔ a failed/uncertain attempt requires explicit consent and a new key referring to the old attempt (104.5125ms)
+✔ read-only membership, historical Passport and unknown group cannot request generation (136.0274ms)
+✔ reading status never invokes generation and adopts a saved result only once (40.3454ms)
+✔ a failed Passport reread can be recovered by checking status without another provider request (28.2425ms)
+✔ closed 12/11 comparison renders supplied difference, reasons, validated events and human proposals (7.7254ms)
+✔ shared client port receives strict JSON Schema, medium reasoning and only authorized facts (2.4345ms)
+✔ match, BOX, unknown usage and English copy retain the supplied values (3.1902ms)
+✔ renderer copies the signed difference from Juan, without calculating or correcting it (2.6621ms)
+✔ open and uncertain sessions show domain guidance without calling or requiring Meta (2.3434ms)
+✔ closed insufficient evidence suggests more evidence rather than waiting for an already closed session (1.2783ms)
+✔ missing or invalid shared model configuration does not invoke Meta (2.3528ms)
+✔ browser facts, tenant, URLs, commands and bad revisions cannot authorize a read (3.3131ms)
+✔ inactive actor, absent/foreign/revoked snapshots and other identities are denied (3.9299ms)
+✔ stale or invalid authoritative comparisons never reach the provider (3.3683ms)
+✔ access/revision is rechecked before the request and after the response (7.5232ms)
+✔ currency fingerprint covers counts, quality, close, event references and all revisions (0.9413ms)
+✔ an updated manifest, observation or event invalidates the response even without a reconciliation version bump (3.09ms)
+✔ invented identities, event IDs, evidence and timecodes reject the whole explanation (4.8139ms)
+✔ prose with invented causes/counts and commands cannot pass the structured plan (8.0539ms)
+✔ no events means no reference reason or review-evidence suggestion (1.0291ms)
+✔ invalid JSON, truncated content, wrong model and malformed usage are rejected (38.8991ms)
+✔ provider failures (401/429/500) are sanitized, never retried and never change Juan facts (1.5787ms)
+✔ caller cancellation does no work and never leaks a private cancellation reason (0.6933ms)
+✔ a dependency rejecting in the same turn as cancellation does not leak an unhandled rejection (0.6591ms)
+✔ deadline also bounds an authorized lookup that ignores cancellation (28.8489ms)
+✔ provider ignoring cancellation cannot keep the request open or return a late explanation (31.4405ms)
+✔ invalid deadlines do no IO (0.7385ms)
+✔ configured timeout still applies while rechecking access after a fast provider response (2.7404ms)
+✔ explanation uses Axel SDK transport with strict schema, medium and no commercial tools (27.8485ms)
+✔ real client configuration gates absent key, alternate endpoints and contributor models without fetch (2.0734ms)
+✔ shared SDK never retries 401, 429 or 500 and does not expose provider errors (5.7527ms)
+✔ truncation, tool calls, refusals and a wrong model fail through the shared client guard (7.9509ms)
+✔ SDK success cannot bypass the grounded plan or an unknown event check (4.3275ms)
+✔ authenticated scope/key and privileged persistence use different ports (2.9584ms)
+✔ missing capability, scope conflicts and unreachable persistence are explicit safe errors (1.1511ms)
+✔ generation uses Juan's facts, saves once and reopens the exact explanation (38.4706ms)
+✔ simultaneous same-key or different-key calls for a group invoke the provider once (30.0398ms)
+✔ same key with different valid payload is a stable conflict, with no second inference (13.8326ms)
+✔ a lost stage response is recovered without another inference (10.766ms)
+✔ a lost final response replays the stored result, without another inference (11.3263ms)
+✔ unconfigured or invalid provider output preserves the numeric comparison and failed receipt (13.3225ms)
+✔ insufficient evidence produces domain guidance, with no claim or provider (2.3775ms)
+✔ historical scope, missing group, requester and foreign actor cannot generate (3.4339ms)
+✔ browser-supplied quantities or missing idempotency keys cannot reach the provider (1.0566ms)
+✔ revision changing during inference or after staging never saves the old explanation (21.1544ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 33982.5665

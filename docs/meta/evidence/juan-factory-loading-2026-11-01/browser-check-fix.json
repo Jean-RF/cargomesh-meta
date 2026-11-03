@@ -1,0 +1,37 @@
+{
+  "errors": [],
+  "cases": [
+    {
+      "id": "cm-tractor-stepdeck",
+      "method": "ramp",
+      "product": "tractor agrícola",
+      "loadedMid": 0,
+      "weightMid": 0,
+      "duration": 22.231876063460266
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "method": "ramp",
+      "product": "automóviles de muestra",
+      "loadedMid": 2,
+      "weightMid": 2920,
+      "duration": 152.71477345087806
+    },
+    {
+      "id": "cm-excavator-lowbed",
+      "method": "ramp",
+      "product": "excavadora de orugas",
+      "loadedMid": 0,
+      "weightMid": 0,
+      "duration": 24.100765943085648
+    },
+    {
+      "id": "cm-flat-recovery",
+      "method": "ramp",
+      "product": "automóvil de muestra",
+      "loadedMid": 0,
+      "weightMid": 0,
+      "duration": 17.437644796413068
+    }
+  ]
+}

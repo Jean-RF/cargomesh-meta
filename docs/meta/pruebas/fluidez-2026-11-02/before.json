@@ -1,0 +1,717 @@
+{
+  "at": "2026-11-02T22:39:06.010Z",
+  "scope": "Read-only loopback development HTTP, first-hit versus warm; no browser/production/paid AI measurement",
+  "records": [
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/freight/requests?limit=25&offset=0",
+      "first": {
+        "status": 200,
+        "headersMs": 1368.6,
+        "totalMs": 1371.9,
+        "bytes": 10696
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 468,
+          "totalMs": 468.9,
+          "bytes": 10696
+        },
+        {
+          "status": 200,
+          "headersMs": 519.7,
+          "totalMs": 520.4,
+          "bytes": 10696
+        },
+        {
+          "status": 200,
+          "headersMs": 263.1,
+          "totalMs": 263.8,
+          "bytes": 10696
+        },
+        {
+          "status": 200,
+          "headersMs": 184.4,
+          "totalMs": 185,
+          "bytes": 10696
+        },
+        {
+          "status": 200,
+          "headersMs": 243.3,
+          "totalMs": 244,
+          "bytes": 10696
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 263.8,
+      "warmMaxMs": 520.4
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/freight/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+      "first": {
+        "status": 200,
+        "headersMs": 231.9,
+        "totalMs": 232.8,
+        "bytes": 1840
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 202,
+          "totalMs": 202.4,
+          "bytes": 1840
+        },
+        {
+          "status": 200,
+          "headersMs": 202.6,
+          "totalMs": 203.5,
+          "bytes": 1840
+        },
+        {
+          "status": 200,
+          "headersMs": 211.4,
+          "totalMs": 212,
+          "bytes": 1840
+        },
+        {
+          "status": 200,
+          "headersMs": 217.8,
+          "totalMs": 218.3,
+          "bytes": 1840
+        },
+        {
+          "status": 200,
+          "headersMs": 239.9,
+          "totalMs": 240.4,
+          "bytes": 1840
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 212,
+      "warmMaxMs": 240.4
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/loading-sessions?limit=20&offset=0",
+      "first": {
+        "status": 200,
+        "headersMs": 326.9,
+        "totalMs": 328,
+        "bytes": 10394
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 338.4,
+          "totalMs": 338.9,
+          "bytes": 10394
+        },
+        {
+          "status": 200,
+          "headersMs": 311.7,
+          "totalMs": 312.6,
+          "bytes": 10394
+        },
+        {
+          "status": 200,
+          "headersMs": 276.8,
+          "totalMs": 277.3,
+          "bytes": 10394
+        },
+        {
+          "status": 200,
+          "headersMs": 249.2,
+          "totalMs": 249.5,
+          "bytes": 10394
+        },
+        {
+          "status": 200,
+          "headersMs": 235.4,
+          "totalMs": 235.7,
+          "bytes": 10394
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 277.3,
+      "warmMaxMs": 338.9
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043",
+      "first": {
+        "status": 200,
+        "headersMs": 209.9,
+        "totalMs": 210.3,
+        "bytes": 9230
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 197,
+          "totalMs": 197.3,
+          "bytes": 9230
+        },
+        {
+          "status": 200,
+          "headersMs": 162,
+          "totalMs": 162.3,
+          "bytes": 9230
+        },
+        {
+          "status": 200,
+          "headersMs": 158,
+          "totalMs": 158.3,
+          "bytes": 9230
+        },
+        {
+          "status": 200,
+          "headersMs": 160.9,
+          "totalMs": 161.3,
+          "bytes": 9230
+        },
+        {
+          "status": 200,
+          "headersMs": 186,
+          "totalMs": 186.4,
+          "bytes": 9230
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 162.3,
+      "warmMaxMs": 197.3
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043/passports/331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+      "first": {
+        "status": 200,
+        "headersMs": 164.3,
+        "totalMs": 164.7,
+        "bytes": 11017
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 215.8,
+          "totalMs": 216,
+          "bytes": 11017
+        },
+        {
+          "status": 200,
+          "headersMs": 165.8,
+          "totalMs": 166.1,
+          "bytes": 11017
+        },
+        {
+          "status": 200,
+          "headersMs": 191.6,
+          "totalMs": 191.9,
+          "bytes": 11017
+        },
+        {
+          "status": 200,
+          "headersMs": 151,
+          "totalMs": 151.3,
+          "bytes": 11017
+        },
+        {
+          "status": 200,
+          "headersMs": 133.6,
+          "totalMs": 134,
+          "bytes": 11017
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 166.1,
+      "warmMaxMs": 216
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/dockmind/jobs?sessionId=36dd509e-6612-4ce2-8663-46531abce043",
+      "first": {
+        "status": 200,
+        "headersMs": 166.5,
+        "totalMs": 166.9,
+        "bytes": 2189
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 175.7,
+          "totalMs": 175.9,
+          "bytes": 2189
+        },
+        {
+          "status": 200,
+          "headersMs": 189.2,
+          "totalMs": 189.5,
+          "bytes": 2189
+        },
+        {
+          "status": 200,
+          "headersMs": 165.6,
+          "totalMs": 166.1,
+          "bytes": 2189
+        },
+        {
+          "status": 200,
+          "headersMs": 197.7,
+          "totalMs": 198,
+          "bytes": 2189
+        },
+        {
+          "status": 200,
+          "headersMs": 175.3,
+          "totalMs": 175.5,
+          "bytes": 2189
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 175.9,
+      "warmMaxMs": 198
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/documents",
+      "first": {
+        "status": 200,
+        "headersMs": 254.3,
+        "totalMs": 254.6,
+        "bytes": 1597
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 244.6,
+          "totalMs": 245,
+          "bytes": 1597
+        },
+        {
+          "status": 200,
+          "headersMs": 245.2,
+          "totalMs": 245.5,
+          "bytes": 1597
+        },
+        {
+          "status": 200,
+          "headersMs": 264.6,
+          "totalMs": 264.8,
+          "bytes": 1597
+        },
+        {
+          "status": 200,
+          "headersMs": 210.5,
+          "totalMs": 210.9,
+          "bytes": 1597
+        },
+        {
+          "status": 200,
+          "headersMs": 226.4,
+          "totalMs": 226.6,
+          "bytes": 1597
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 245,
+      "warmMaxMs": 264.8
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients",
+      "first": {
+        "status": 200,
+        "headersMs": 25704.6,
+        "totalMs": 27153.4,
+        "bytes": 129211
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 620.7,
+          "totalMs": 701.3,
+          "bytes": 129159
+        },
+        {
+          "status": 200,
+          "headersMs": 496.6,
+          "totalMs": 548.3,
+          "bytes": 129160
+        },
+        {
+          "status": 200,
+          "headersMs": 526.7,
+          "totalMs": 588.8,
+          "bytes": 129159
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 588.8,
+      "warmMaxMs": 701.3
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/requests",
+      "first": {
+        "status": 200,
+        "headersMs": 4418.5,
+        "totalMs": 4437.8,
+        "bytes": 84981
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 468.3,
+          "totalMs": 490.5,
+          "bytes": 85233
+        },
+        {
+          "status": 200,
+          "headersMs": 429.3,
+          "totalMs": 446.8,
+          "bytes": 85240
+        },
+        {
+          "status": 200,
+          "headersMs": 343.8,
+          "totalMs": 419.6,
+          "bytes": 85793
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 446.8,
+      "warmMaxMs": 490.5
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+      "first": {
+        "status": 200,
+        "headersMs": 4822.6,
+        "totalMs": 5100.2,
+        "bytes": 118237
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 509.7,
+          "totalMs": 717,
+          "bytes": 118452
+        },
+        {
+          "status": 200,
+          "headersMs": 539.1,
+          "totalMs": 761.6,
+          "bytes": 118793
+        },
+        {
+          "status": 200,
+          "headersMs": 531.6,
+          "totalMs": 731.3,
+          "bytes": 118791
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 731.3,
+      "warmMaxMs": 761.6
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/freight-request/new",
+      "first": {
+        "status": 200,
+        "headersMs": 3075.2,
+        "totalMs": 3091.3,
+        "bytes": 59608
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 257.5,
+          "totalMs": 283.8,
+          "bytes": 59608
+        },
+        {
+          "status": 200,
+          "headersMs": 293.1,
+          "totalMs": 306.2,
+          "bytes": 59607
+        },
+        {
+          "status": 200,
+          "headersMs": 333.5,
+          "totalMs": 349,
+          "bytes": 59609
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 306.2,
+      "warmMaxMs": 349
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/organization",
+      "first": {
+        "status": 200,
+        "headersMs": 2041,
+        "totalMs": 2060.7,
+        "bytes": 62122
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 356.1,
+          "totalMs": 372.7,
+          "bytes": 62126
+        },
+        {
+          "status": 200,
+          "headersMs": 306.8,
+          "totalMs": 322,
+          "bytes": 62125
+        },
+        {
+          "status": 200,
+          "headersMs": 277.4,
+          "totalMs": 291.8,
+          "bytes": 62123
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 322,
+      "warmMaxMs": 372.7
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/tracking",
+      "first": {
+        "status": 200,
+        "headersMs": 2523.7,
+        "totalMs": 2537.3,
+        "bytes": 60733
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 368.3,
+          "totalMs": 385.8,
+          "bytes": 60737
+        },
+        {
+          "status": 200,
+          "headersMs": 346.7,
+          "totalMs": 361.2,
+          "bytes": 60735
+        },
+        {
+          "status": 200,
+          "headersMs": 343,
+          "totalMs": 358.7,
+          "bytes": 60742
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 361.2,
+      "warmMaxMs": 385.8
+    },
+    {
+      "workspace": "client-page",
+      "path": "/tetris?session=36dd509e-6612-4ce2-8663-46531abce043&passport=331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+      "first": {
+        "status": 200,
+        "headersMs": 179.9,
+        "totalMs": 189,
+        "bytes": 21491
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 101.8,
+          "totalMs": 111.2,
+          "bytes": 21492
+        },
+        {
+          "status": 200,
+          "headersMs": 125.6,
+          "totalMs": 133.4,
+          "bytes": 21492
+        },
+        {
+          "status": 200,
+          "headersMs": 94.4,
+          "totalMs": 102.1,
+          "bytes": 21492
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 111.2,
+      "warmMaxMs": 133.4
+    },
+    {
+      "workspace": "carrier",
+      "path": "/api/v2/carriers/c2340000-0000-4000-8000-000000000001/documents/bookings/654a02b7-c366-4298-8e1a-003481cbfb0a",
+      "first": {
+        "status": 200,
+        "headersMs": 544,
+        "totalMs": 544.2,
+        "bytes": 2225
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 145.8,
+          "totalMs": 146.1,
+          "bytes": 2225
+        },
+        {
+          "status": 200,
+          "headersMs": 158.5,
+          "totalMs": 158.7,
+          "bytes": 2225
+        },
+        {
+          "status": 200,
+          "headersMs": 158.9,
+          "totalMs": 159.2,
+          "bytes": 2225
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 158.7,
+      "warmMaxMs": 159.2
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers",
+      "first": {
+        "status": 200,
+        "headersMs": 13278.1,
+        "totalMs": 13317.3,
+        "bytes": 39549
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 311.6,
+          "totalMs": 328.1,
+          "bytes": 40433
+        },
+        {
+          "status": 200,
+          "headersMs": 314.2,
+          "totalMs": 329.2,
+          "bytes": 40433
+        },
+        {
+          "status": 200,
+          "headersMs": 307.9,
+          "totalMs": 324.4,
+          "bytes": 40436
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 328.1,
+      "warmMaxMs": 329.2
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers/orders",
+      "first": {
+        "status": 200,
+        "headersMs": 370.9,
+        "totalMs": 383,
+        "bytes": 43777
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 1609.1,
+          "totalMs": 1620.7,
+          "bytes": 43768
+        },
+        {
+          "status": 200,
+          "headersMs": 282.6,
+          "totalMs": 312,
+          "bytes": 43780
+        },
+        {
+          "status": 200,
+          "headersMs": 273.7,
+          "totalMs": 285.7,
+          "bytes": 43778
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 312,
+      "warmMaxMs": 1620.7
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers/orders/654a02b7-c366-4298-8e1a-003481cbfb0a",
+      "first": {
+        "status": 200,
+        "headersMs": 289.9,
+        "totalMs": 304.7,
+        "bytes": 44045
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 326,
+          "totalMs": 342.1,
+          "bytes": 44044
+        },
+        {
+          "status": 200,
+          "headersMs": 388.7,
+          "totalMs": 403.9,
+          "bytes": 44040
+        },
+        {
+          "status": 200,
+          "headersMs": 319.7,
+          "totalMs": 332.5,
+          "bytes": 44046
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 342.1,
+      "warmMaxMs": 403.9
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers/fleet",
+      "first": {
+        "status": 200,
+        "headersMs": 254.4,
+        "totalMs": 268,
+        "bytes": 42968
+      },
+      "warm": [
+        {
+          "status": 200,
+          "headersMs": 307.3,
+          "totalMs": 339.3,
+          "bytes": 42965
+        },
+        {
+          "status": 200,
+          "headersMs": 272.7,
+          "totalMs": 285.7,
+          "bytes": 42966
+        },
+        {
+          "status": 200,
+          "headersMs": 290,
+          "totalMs": 304,
+          "bytes": 42968
+        }
+      ],
+      "error": null,
+      "warmMedianMs": 304,
+      "warmMaxMs": 339.3
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "physicalMobile": "not tested",
+  "tests": {
+    "meta-loading": {
+      "passed": 41,
+      "failed": 0
+    },
+    "logistics": {
+      "passed": 188,
+      "failed": 0
+    },
+    "carrier-operations": {
+      "passed": 54,
+      "failed": 0
+    }
+  },
+  "productionBuild": "compiled, lint/types valid, 23 pages generated, traces complete",
+  "externalProducers": "not revalidated",
+  "architecture": {
+    "clientEntries": 245,
+    "modules": 840
+  },
+  "date": "2026-10-31",
+  "head": "3810a589f75e4d4b9c7b7a7f2797cecffc791209",
+  "publication": "local working tree only"
+}

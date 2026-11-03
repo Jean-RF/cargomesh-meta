@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "failedRequests": [],
+  "checks": [
+    "60 rows, no initial 3D, combined filters, empty/reset",
+    "truck query, group annotations, bidirectional selection",
+    "camera, body toggle, reload, browser back",
+    "mobile, invalid truck, operational auth path, previous comparison demo",
+    "shared viewer backwards compatibility"
+  ],
+  "screenshots": [
+    "desktop",
+    "detail-desktop",
+    "mobile",
+    "detail-mobile"
+  ]
+}

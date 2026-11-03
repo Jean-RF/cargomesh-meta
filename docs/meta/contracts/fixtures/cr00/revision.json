@@ -1,0 +1,284 @@
+{
+  "exampleType": "SYNTHETIC_CONTRACT_EXAMPLE_NOT_EXECUTED",
+  "previousCandidate": {
+    "schemaVersion": "0.1",
+    "kind": "DECLARATION_CANDIDATE",
+    "source": {
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "organizationId": "10000000-0000-4000-8000-000000000001",
+      "requestDraftVersion": 1
+    },
+    "route": {
+      "origin": {
+        "facilityId": "40000000-0000-4000-8000-000000000001",
+        "label": "Example pickup site",
+        "countryCode": "PE",
+        "region": null,
+        "city": "Lima",
+        "lat": null,
+        "lng": null
+      },
+      "destination": {
+        "facilityId": "40000000-0000-4000-8000-000000000002",
+        "label": "Example delivery site",
+        "countryCode": "PE",
+        "region": null,
+        "city": "Arequipa",
+        "lat": null,
+        "lng": null
+      },
+      "pickupWindow": {
+        "startsAt": "2026-11-02T13:00:00Z",
+        "endsAt": "2026-11-02T15:00:00Z"
+      },
+      "deliveryWindow": {
+        "startsAt": "2026-11-03T13:00:00Z",
+        "endsAt": "2026-11-03T17:00:00Z"
+      }
+    },
+    "cargoSpecification": {
+      "categoryCode": "GENERAL",
+      "description": "Example mixed cargo",
+      "packaging": "PALLET",
+      "totalWeightKg": 1210,
+      "totalVolumeM3": 12.25,
+      "divisible": false,
+      "requirements": [
+        "KEEP_DRY"
+      ],
+      "availableDocuments": [],
+      "units": [
+        {
+          "packageType": "PALLET",
+          "quantity": 12,
+          "weightPerUnitKg": 100,
+          "volumePerUnitM3": 1,
+          "dimensionsCm": {
+            "length": 100,
+            "width": 100,
+            "height": 100
+          },
+          "indivisible": true,
+          "stackable": false
+        },
+        {
+          "packageType": "BOX",
+          "quantity": 2,
+          "weightPerUnitKg": 5,
+          "volumePerUnitM3": 0.125,
+          "dimensionsCm": {
+            "length": 50,
+            "width": 50,
+            "height": 50
+          },
+          "indivisible": true,
+          "stackable": false
+        }
+      ]
+    },
+    "groupBindings": [
+      {
+        "groupId": "30000000-0000-4000-8000-000000000001",
+        "sourceUnitIndex": 0
+      },
+      {
+        "groupId": "30000000-0000-4000-8000-000000000002",
+        "sourceUnitIndex": 1
+      }
+    ]
+  },
+  "request": {
+    "id": "20000000-0000-4000-8000-000000000001",
+    "referenceCode": "PED-EXAMPLE",
+    "organizationId": "10000000-0000-4000-8000-000000000001",
+    "status": "DRAFT",
+    "draftVersion": 2,
+    "origin": {
+      "facilityId": "40000000-0000-4000-8000-000000000001",
+      "label": "Example pickup site",
+      "countryCode": "PE",
+      "region": null,
+      "city": "Lima",
+      "lat": null,
+      "lng": null
+    },
+    "destination": {
+      "facilityId": "40000000-0000-4000-8000-000000000002",
+      "label": "Example delivery site",
+      "countryCode": "PE",
+      "region": null,
+      "city": "Arequipa",
+      "lat": null,
+      "lng": null
+    },
+    "pickupWindow": {
+      "startsAt": "2026-11-02T13:00:00Z",
+      "endsAt": "2026-11-02T15:00:00Z"
+    },
+    "deliveryWindow": {
+      "startsAt": "2026-11-03T13:00:00Z",
+      "endsAt": "2026-11-03T17:00:00Z"
+    },
+    "acceptedModes": [
+      "ROAD"
+    ],
+    "requiredEquipment": null,
+    "cargoSpecification": {
+      "categoryCode": "GENERAL",
+      "description": "Example mixed cargo",
+      "packaging": "PALLET",
+      "totalWeightKg": 1010,
+      "totalVolumeM3": 10.25,
+      "divisible": false,
+      "requirements": [
+        "KEEP_DRY"
+      ],
+      "availableDocuments": [],
+      "units": [
+        {
+          "packageType": "BOX",
+          "quantity": 2,
+          "weightPerUnitKg": 5,
+          "volumePerUnitM3": 0.125,
+          "dimensionsCm": {
+            "length": 50,
+            "width": 50,
+            "height": 50
+          },
+          "indivisible": true,
+          "stackable": false
+        },
+        {
+          "packageType": "PALLET",
+          "quantity": 10,
+          "weightPerUnitKg": 100,
+          "volumePerUnitM3": 1,
+          "dimensionsCm": {
+            "length": 100,
+            "width": 100,
+            "height": 100
+          },
+          "indivisible": true,
+          "stackable": false
+        }
+      ]
+    },
+    "contacts": {
+      "pickup": {
+        "name": "Example Sender",
+        "phoneE164": "+12025550123",
+        "email": null
+      },
+      "recipient": {
+        "name": "Example Receiver",
+        "phoneE164": "+12025550124",
+        "email": null
+      }
+    },
+    "budget": null,
+    "createdAt": "2026-10-27T14:00:00Z",
+    "updatedAt": "2026-10-27T14:05:00Z"
+  },
+  "trustedContext": {
+    "actorOrganizationId": "10000000-0000-4000-8000-000000000001",
+    "expectedRequestDraftVersion": 2,
+    "groupBindings": [
+      {
+        "groupId": "30000000-0000-4000-8000-000000000002",
+        "sourceUnitIndex": 0
+      },
+      {
+        "groupId": "30000000-0000-4000-8000-000000000001",
+        "sourceUnitIndex": 1
+      }
+    ]
+  },
+  "expected": {
+    "schemaVersion": "0.1",
+    "kind": "DECLARATION_CANDIDATE",
+    "source": {
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "organizationId": "10000000-0000-4000-8000-000000000001",
+      "requestDraftVersion": 2
+    },
+    "route": {
+      "origin": {
+        "facilityId": "40000000-0000-4000-8000-000000000001",
+        "label": "Example pickup site",
+        "countryCode": "PE",
+        "region": null,
+        "city": "Lima",
+        "lat": null,
+        "lng": null
+      },
+      "destination": {
+        "facilityId": "40000000-0000-4000-8000-000000000002",
+        "label": "Example delivery site",
+        "countryCode": "PE",
+        "region": null,
+        "city": "Arequipa",
+        "lat": null,
+        "lng": null
+      },
+      "pickupWindow": {
+        "startsAt": "2026-11-02T13:00:00Z",
+        "endsAt": "2026-11-02T15:00:00Z"
+      },
+      "deliveryWindow": {
+        "startsAt": "2026-11-03T13:00:00Z",
+        "endsAt": "2026-11-03T17:00:00Z"
+      }
+    },
+    "cargoSpecification": {
+      "categoryCode": "GENERAL",
+      "description": "Example mixed cargo",
+      "packaging": "PALLET",
+      "totalWeightKg": 1010,
+      "totalVolumeM3": 10.25,
+      "divisible": false,
+      "requirements": [
+        "KEEP_DRY"
+      ],
+      "availableDocuments": [],
+      "units": [
+        {
+          "packageType": "BOX",
+          "quantity": 2,
+          "weightPerUnitKg": 5,
+          "volumePerUnitM3": 0.125,
+          "dimensionsCm": {
+            "length": 50,
+            "width": 50,
+            "height": 50
+          },
+          "indivisible": true,
+          "stackable": false
+        },
+        {
+          "packageType": "PALLET",
+          "quantity": 10,
+          "weightPerUnitKg": 100,
+          "volumePerUnitM3": 1,
+          "dimensionsCm": {
+            "length": 100,
+            "width": 100,
+            "height": 100
+          },
+          "indivisible": true,
+          "stackable": false
+        }
+      ]
+    },
+    "groupBindings": [
+      {
+        "groupId": "30000000-0000-4000-8000-000000000002",
+        "sourceUnitIndex": 0
+      },
+      {
+        "groupId": "30000000-0000-4000-8000-000000000001",
+        "sourceUnitIndex": 1
+      }
+    ]
+  },
+  "explanation": "Bindings supplied explicitly by a future service, not inferred by this mapper. A session based on the previous manifest must retain that revision."
+}

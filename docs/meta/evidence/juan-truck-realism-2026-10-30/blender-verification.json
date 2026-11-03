@@ -1,0 +1,607 @@
+{
+  "blender": "5.2.3 LTS",
+  "modelsImported": 60,
+  "units": "metres",
+  "models": [
+    {
+      "id": "cm-courier-van",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        6.377500057220459,
+        2.343770980834961,
+        2.7839999715797603
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-medical-van",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        6.358000040054321,
+        2.3356211185455322,
+        2.803999952506274
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-fish-reefer",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        5.976500034332275,
+        2.5072624683380127,
+        2.8447070638649166
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-bakery-shutter",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        6.446500062942505,
+        2.445734977722168,
+        3.2347071687690914
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-florist-glass",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        6.597499847412109,
+        2.315670967102051,
+        2.803999952506274
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-urban-curtain",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        6.017999887466431,
+        2.5277624130249023,
+        2.9747071783058345
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-orchard-dropside",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        7.45799994468689,
+        2.324370861053467,
+        2.5947070638649166
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-beverage-rack",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        6.587500095367432,
+        2.514312505722046,
+        2.9047070066444576
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-gas-cage",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        5.80649995803833,
+        2.486762523651123,
+        3.0847070734016597
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-returnable-crates",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        6.086499929428101,
+        2.3240623474121094,
+        2.804707102011889
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-glass-stand",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        6.96750020980835,
+        2.4752707481384277,
+        3.0447071115486324
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-plumber-overcab",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        7.887499809265137,
+        2.4676711559295654,
+        2.799000076483935
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-cable-service",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        5.917999982833862,
+        2.246462345123291,
+        2.634707025717944
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-landscape-tipper",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        6.566499948501587,
+        2.435371160507202,
+        2.4503772063180804
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-nursery-bed",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        6.867999792098999,
+        2.426671028137207,
+        2.9247072259895504
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-furniture-luton",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        6.777500152587891,
+        2.3822624683380127,
+        3.2140000383369625
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-appliance-lift",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        6.172139883041382,
+        2.3347623348236084,
+        2.803999952506274
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-mini-bowser",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        6.346499919891357,
+        2.548262357711792,
+        2.9647071878425777
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-mobile-workshop",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        7.186500072479248,
+        2.3049707412719727,
+        2.8347070734016597
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-parcel-locker",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        6.837500095367432,
+        2.456181526184082,
+        3.1647072355262935
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-regional-shutter",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        8.897499561309814,
+        2.9461615085601807,
+        3.3839998762123287
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-meat-rail",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        9.31749963760376,
+        2.9819905757904053,
+        3.6147070447914302
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-pallet-curtain",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        9.827499866485596,
+        2.8770763874053955,
+        3.754707149695605
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-market-awning",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        9.757500171661377,
+        3.8289313316345215,
+        3.264707140158862
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-tile-knuckle",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        10.286499977111816,
+        2.752561569213867,
+        3.244707159232348
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-brick-cage",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        9.267500400543213,
+        2.9835400581359863,
+        3.704707197379321
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-rebar-stake",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        9.327499866485596,
+        2.800961494445801,
+        3.3447070638649166
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-timber-sideboard",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        10.967999935150146,
+        2.931161403656006,
+        3.304707102011889
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-pipe-bolster",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        9.277499675750732,
+        2.897761583328247,
+        3.554707102011889
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-drum-rail",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        9.377500057220459,
+        2.881561517715454,
+        3.184707216452807
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-ibc-carrier",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        9.77750015258789,
+        2.8493614196777344,
+        3.444707206916064
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-water-bowser",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        10.452499866485596,
+        2.9827184677124023,
+        3.6547070066444576
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-milk-elliptical",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        9.6875,
+        2.951477289199829,
+        3.9047070066444576
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        9.517500400543213,
+        2.881561517715454,
+        3.4747071783058345
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-sand-threeway",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        10.397500038146973,
+        2.897761583328247,
+        3.4247072259895504
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-mini-mixer",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        9.80421495437622,
+        2.9575629234313965,
+        3.634707025717944
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-skip-loader",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        9.507500171661377,
+        2.9461615085601807,
+        3.384707025717944
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-rolloff",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        9.417500019073486,
+        2.934535264968872,
+        3.744707159232348
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-flat-recovery",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        11.516100883483887,
+        2.800961494445801,
+        3.3447070638649166
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-power-service",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        10.167500019073486,
+        3.0096113681793213,
+        3.7947071115486324
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-aero-dryvan",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        18.08150005340576,
+        3.079664468765259,
+        4.2847068826667964
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-pharma-multitemp",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        18.529500007629395,
+        3.0550146102905273,
+        4.384707264136523
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-mega-curtain",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        18.42549991607666,
+        2.9997189044952393,
+        4.0239999811165035
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-coil-well",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        20.296500205993652,
+        2.8925116062164307,
+        3.624707035254687
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-steel-extendable",
+      "meshes": 19,
+      "dimensionsBlenderXYZ": [
+        20.137500762939453,
+        3.00085186958313,
+        4.074707321356982
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-forest-bolster",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        19.99650001525879,
+        2.9690115451812744,
+        3.6447070161812007
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-pipe-wedge",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        17.91349983215332,
+        3.050408124923706,
+        3.9747071783058345
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-excavator-lowbed",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        19.317999839782715,
+        3.0727028846740723,
+        3.804707102011889
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-tractor-stepdeck",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        20.36750030517578,
+        2.943511486053467,
+        3.454707197379321
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-transformer-modular",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        18.065500259399414,
+        3.0779805183410645,
+        4.124707035254687
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-auto-doubledeck",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        19.757999420166016,
+        2.8925116062164307,
+        4.408666900824755
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-iso-container",
+      "meshes": 17,
+      "dimensionsBlenderXYZ": [
+        18.64150047302246,
+        3.028477668762207,
+        4.264706901740283
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-swap-body",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        17.91349983215332,
+        2.9754819869995117,
+        4.08470707340166
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-fuel-multicell",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        20.286499977111816,
+        3.022763729095459,
+        3.8547070543281734
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-food-stainless",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        18.7475004196167,
+        3.080965518951416,
+        4.444707206916064
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-cement-silo",
+      "meshes": 15,
+      "dimensionsBlenderXYZ": [
+        18.201499938964844,
+        2.921720027923584,
+        4.534000209998339
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-grain-hopper",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        20.707500457763672,
+        3.0012357234954834,
+        4.104707054328173
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-walking-floor",
+      "meshes": 16,
+      "dimensionsBlenderXYZ": [
+        18.7475004196167,
+        3.055943012237549,
+        4.514706901740283
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-panel-a-frame",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        19.386500358581543,
+        2.9732494354248047,
+        3.934707216452807
+      ],
+      "externalImages": 0
+    },
+    {
+      "id": "cm-boat-cradle",
+      "meshes": 18,
+      "dimensionsBlenderXYZ": [
+        20.457500457763672,
+        3.0793819427490234,
+        4.254707149695605
+      ],
+      "externalImages": 0
+    }
+  ]
+}

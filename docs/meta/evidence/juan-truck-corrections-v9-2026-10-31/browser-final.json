@@ -1,0 +1,313 @@
+{
+  "errors": [],
+  "models": [
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "modelId": "cm-mobile-workshop",
+      "loadCount": "4",
+      "driverId": "DEMO-DR-019",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "219906",
+      "drawCalls": "38"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "8",
+      "driverId": "DEMO-DR-022",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "euro-day",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "251086",
+      "drawCalls": "48",
+      "modelId": "cm-meat-rail"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "6",
+      "driverId": "DEMO-DR-024",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "348880",
+      "drawCalls": "46",
+      "modelId": "cm-market-awning"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "5",
+      "driverId": "DEMO-DR-025",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "246306",
+      "drawCalls": "58",
+      "modelId": "cm-tile-knuckle"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "6",
+      "driverId": "DEMO-DR-026",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "264946",
+      "drawCalls": "54",
+      "modelId": "cm-brick-cage"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "4",
+      "driverId": "DEMO-DR-028",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "245082",
+      "drawCalls": "52",
+      "modelId": "cm-timber-sideboard"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "6",
+      "driverId": "DEMO-DR-029",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "euro-day",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "242314",
+      "drawCalls": "56",
+      "modelId": "cm-pipe-bolster"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "18",
+      "driverId": "DEMO-DR-030",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "248976",
+      "drawCalls": "44",
+      "modelId": "cm-drum-rail"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "4",
+      "driverId": "DEMO-DR-031",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "250694",
+      "drawCalls": "50",
+      "modelId": "cm-ibc-carrier"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "1",
+      "driverId": "DEMO-DR-034",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "isuzu",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "225014",
+      "drawCalls": "50",
+      "modelId": "cm-gravel-halfpipe"
+    },
+    {
+      "engine": "three.js r186",
+      "graphics": "gtao-msaa",
+      "state": "ready",
+      "lighting": "hdr",
+      "loadCount": "1",
+      "driverId": "DEMO-DR-014",
+      "units": "metres",
+      "realismVersion": "9",
+      "cabBase": "bonnet",
+      "materials": "pbr-atlas",
+      "comparison": "false",
+      "view": "iso",
+      "reveal": "false",
+      "triangles": "206982",
+      "drawCalls": "38",
+      "modelId": "cm-landscape-tipper"
+    }
+  ],
+  "details": [
+    {
+      "id": "cm-mobile-workshop",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-meat-rail",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-market-awning",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-market-awning",
+      "view": "rear"
+    },
+    {
+      "id": "cm-tile-knuckle",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-brick-cage",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-timber-sideboard",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-pipe-bolster",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-pipe-bolster",
+      "view": "rear"
+    },
+    {
+      "id": "cm-drum-rail",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-ibc-carrier",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-ibc-carrier",
+      "view": "rear"
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "view": "cargo"
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "view": "top"
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "view": "rear"
+    },
+    {
+      "id": "cm-landscape-tipper",
+      "view": "cargo"
+    }
+  ],
+  "downloads": [
+    {
+      "id": "cm-meat-rail",
+      "triangles": 109550,
+      "meshes": 15,
+      "bytes": 6934608
+    },
+    {
+      "id": "cm-tile-knuckle",
+      "triangles": 107152,
+      "meshes": 20,
+      "bytes": 8138912
+    },
+    {
+      "id": "cm-pipe-bolster",
+      "triangles": 105164,
+      "meshes": 19,
+      "bytes": 8028104
+    },
+    {
+      "id": "cm-drum-rail",
+      "triangles": 116487,
+      "meshes": 17,
+      "bytes": 6249912
+    },
+    {
+      "id": "cm-ibc-carrier",
+      "triangles": 109346,
+      "meshes": 16,
+      "bytes": 6190968
+    },
+    {
+      "id": "cm-gravel-halfpipe",
+      "triangles": 96506,
+      "meshes": 16,
+      "bytes": 5443860
+    },
+    {
+      "id": "cm-landscape-tipper",
+      "triangles": 99490,
+      "meshes": 16,
+      "bytes": 8230068
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+begin;
+set local search_path=extensions,public;
+select plan(13);
+select has_table('private','meta_passport_explanation_attempts','durable generation receipts exist');
+select ok((select relrowsecurity from pg_class where oid='private.meta_passport_explanation_attempts'::regclass),'receipts retain RLS');
+select ok(not has_table_privilege('authenticated','private.meta_passport_explanation_attempts','SELECT,INSERT,UPDATE,DELETE'),'browser cannot inspect or forge generation receipts');
+select ok(not has_table_privilege('service_role','private.meta_passport_explanation_attempts','UPDATE'),'privileged service must use the checked commands');
+select has_index('private','meta_passport_explanation_attempts','meta_passport_one_active_explanation','one active generation per tenant/Passport/group');
+select ok(not has_function_privilege('anon','public.meta_claim_passport_explanation_v1(uuid,uuid,uuid,uuid,uuid,integer,text,uuid,uuid)','EXECUTE'),'anonymous cannot claim');
+select ok(has_function_privilege('authenticated','public.meta_claim_passport_explanation_v1(uuid,uuid,uuid,uuid,uuid,integer,text,uuid,uuid)','EXECUTE'),'authenticated checked claim available');
+select ok(not has_function_privilege('authenticated','public.meta_complete_passport_explanation_v1(uuid,text,jsonb,jsonb,text)','EXECUTE'),'browser cannot complete or forge a result');
+select ok(has_function_privilege('service_role','public.meta_complete_passport_explanation_v1(uuid,text,jsonb,jsonb,text)','EXECUTE'),'validated server result has a persistence port');
+select ok(not has_function_privilege('authenticated','private.meta_current_explanation_passport(uuid,uuid,uuid,integer)','EXECUTE'),'currency helper cannot bypass authorization');
+select ok(not has_function_privilege('service_role','private.meta_record_loading_explanation_v1(uuid,uuid,uuid,jsonb)','EXECUTE'),'original writer cannot bypass the new currency wrapper');
+select ok(has_function_privilege('service_role','public.meta_record_loading_explanation_v1(uuid,uuid,uuid,jsonb)','EXECUTE'),'Juan public writer contract preserved');
+select ok(exists(select 1 from pg_trigger where tgrelid='private.meta_loading_explanations'::regclass and tgname='meta_loading_explanation_immutable'),'saved explanations remain immutable');
+select * from finish();
+rollback;

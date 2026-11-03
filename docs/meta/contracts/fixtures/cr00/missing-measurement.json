@@ -1,0 +1,23 @@
+{
+  "exampleType": "SYNTHETIC_CONTRACT_EXAMPLE_NOT_EXECUTED",
+  "localCapture": {
+    "unitPackageType": "PALLET",
+    "unitQuantity": "12",
+    "unitWeightPerUnitKg": "100",
+    "unitVolumePerUnitM3": "",
+    "unitLengthCm": "",
+    "unitWidthCm": "",
+    "unitHeightCm": ""
+  },
+  "expected": {
+    "canPersistRequest": false,
+    "canPrepareManifestCandidate": false,
+    "missingFields": [
+      "unitVolumePerUnitM3",
+      "unitLengthCm",
+      "unitWidthCm",
+      "unitHeightCm"
+    ],
+    "explanation": "Keep capture pending; never replace unknown measurements with zero."
+  }
+}

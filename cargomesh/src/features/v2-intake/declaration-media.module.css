@@ -1,0 +1,253 @@
+.panel {
+  border: 1px solid #dfd9f3;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #fcfaff, #f5fbff);
+  margin: 12px 0;
+  min-width: 0;
+  color: var(--cm-color-ink, #163349);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.panel summary {
+  padding: 13px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 650;
+  list-style: none;
+}
+.panel summary > span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.panel summary small {
+  font-weight: 500;
+  color: #6856a3;
+}
+.body {
+  padding: 0 15px 16px;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.body p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.body small {
+  color: #657684;
+}
+.tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tools label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+.tools select {
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid #d5ddec;
+  border-radius: 8px;
+  background: white;
+}
+.file {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 11px;
+  border: 1px solid #d4daeb;
+  border-radius: 9px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.file:focus-within {
+  outline: 2px solid #5b58e8;
+  outline-offset: 2px;
+}
+.file:has(input:disabled) {
+  opacity: 0.5;
+  cursor: default;
+}
+.file input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  cursor: pointer;
+}
+.files {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.files li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e1e6ee;
+  border-radius: 10px;
+  min-width: 0;
+}
+.files li > span {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+}
+.files strong {
+  overflow-wrap: anywhere;
+}
+.audioPreview {
+  min-width: 0;
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+}
+.audioPreview audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 42px;
+}
+.files button {
+  border: 0;
+  background: transparent;
+  padding: 9px;
+  border-radius: 8px;
+  color: #6e5763;
+  cursor: pointer;
+}
+.context {
+  display: grid;
+  gap: 5px;
+  font-weight: 600;
+}
+.context textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 65px;
+  border: 1px solid #d5ddec;
+  background: #fff;
+  border-radius: 9px;
+  padding: 9px;
+  font: inherit;
+}
+.review {
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid #ddddeb;
+}
+.review h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.field,
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+.field {
+  background: white;
+  border: 1px solid #e1e6ee;
+  border-radius: 10px;
+  padding: 10px;
+}
+.field > span {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.field strong {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.field input,
+.consent input {
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  accent-color: #5d51d9;
+  margin-top: 3px;
+}
+.transcript {
+  padding: 10px;
+  background: #fff;
+  border-radius: 9px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.error {
+  color: #9b3325 !important;
+  background: #fff4f1;
+  padding: 10px;
+  border-radius: 9px;
+}
+.notice {
+  color: #315780 !important;
+  background: #edf4ff;
+  padding: 10px;
+  border-radius: 9px;
+}
+@media (max-width: 480px) {
+  .body {
+    padding: 0 11px 12px;
+  }
+  .panel summary {
+    padding: 12px;
+  }
+  .tools > button {
+    white-space: normal;
+  }
+  .file {
+    padding: 9px;
+    font-size: 13px;
+  }
+}
+
+.body {
+  max-height: clamp(
+    80px,
+    calc(var(--chat-visual-height, 100dvh) - 360px),
+    min(42dvh, 480px)
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.panel summary::-webkit-details-marker {
+  display: none;
+}
+.panel .tools button {
+  max-width: 100%;
+  height: auto;
+  min-height: 36px;
+  white-space: normal;
+}
+.panel {
+  flex: none;
+}
+.tools select {
+  min-width: 0;
+}
+@media (max-height: 600px) {
+  .body {
+    max-height: 32dvh;
+  }
+}

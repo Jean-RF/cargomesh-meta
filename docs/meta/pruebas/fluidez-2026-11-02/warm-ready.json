@@ -1,0 +1,272 @@
+{
+  "at": "2026-11-02T22:49:41.751Z",
+  "scope": "Read-only loopback development HTTP, first-hit versus warm; no browser/production/paid AI measurement",
+  "records": [
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/freight/requests?limit=25&offset=0",
+      "first": {
+        "status": 200,
+        "headersMs": 233.7,
+        "totalMs": 236.2,
+        "bytes": 10696
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/freight/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+      "first": {
+        "status": 200,
+        "headersMs": 229.5,
+        "totalMs": 230.1,
+        "bytes": 1840
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/loading-sessions?limit=20&offset=0",
+      "first": {
+        "status": 200,
+        "headersMs": 336.8,
+        "totalMs": 337.3,
+        "bytes": 10394
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043",
+      "first": {
+        "status": 200,
+        "headersMs": 193.1,
+        "totalMs": 194.1,
+        "bytes": 9230
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043/passports/331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+      "first": {
+        "status": 200,
+        "headersMs": 225.7,
+        "totalMs": 226.3,
+        "bytes": 11017
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/dockmind/jobs?sessionId=36dd509e-6612-4ce2-8663-46531abce043",
+      "first": {
+        "status": 200,
+        "headersMs": 187.1,
+        "totalMs": 187.7,
+        "bytes": 2189
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-api",
+      "path": "/api/v2/meta/documents",
+      "first": {
+        "status": 200,
+        "headersMs": 196.4,
+        "totalMs": 196.9,
+        "bytes": 1597
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients",
+      "first": {
+        "status": 200,
+        "headersMs": 6008.8,
+        "totalMs": 6072.2,
+        "bytes": 128926
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/requests",
+      "first": {
+        "status": 200,
+        "headersMs": 1914.7,
+        "totalMs": 1946.1,
+        "bytes": 84979
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+      "first": {
+        "status": 200,
+        "headersMs": 1634.1,
+        "totalMs": 1941.8,
+        "bytes": 117409
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/freight-request/new",
+      "first": {
+        "status": 200,
+        "headersMs": 1691.1,
+        "totalMs": 1708.1,
+        "bytes": 58517
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/organization",
+      "first": {
+        "status": 200,
+        "headersMs": 1258.7,
+        "totalMs": 1271.2,
+        "bytes": 61038
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/clients/tracking",
+      "first": {
+        "status": 200,
+        "headersMs": 1911.2,
+        "totalMs": 1926.1,
+        "bytes": 59355
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "client-page",
+      "path": "/tetris?session=36dd509e-6612-4ce2-8663-46531abce043&passport=331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+      "first": {
+        "status": 200,
+        "headersMs": 181.7,
+        "totalMs": 190.6,
+        "bytes": 21492
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "carrier",
+      "path": "/api/v2/carriers/c2340000-0000-4000-8000-000000000001/documents/bookings/654a02b7-c366-4298-8e1a-003481cbfb0a",
+      "first": {
+        "status": 200,
+        "headersMs": 344.7,
+        "totalMs": 345,
+        "bytes": 2225
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers",
+      "first": {
+        "status": 200,
+        "headersMs": 3057.7,
+        "totalMs": 3070,
+        "bytes": 39755
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers/orders",
+      "first": {
+        "status": 200,
+        "headersMs": 259.5,
+        "totalMs": 271.6,
+        "bytes": 43109
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers/orders/654a02b7-c366-4298-8e1a-003481cbfb0a",
+      "first": {
+        "status": 200,
+        "headersMs": 274.9,
+        "totalMs": 289.1,
+        "bytes": 43377
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    },
+    {
+      "workspace": "carrier",
+      "path": "/carriers/fleet",
+      "first": {
+        "status": 200,
+        "headersMs": 278.6,
+        "totalMs": 294.3,
+        "bytes": 42299
+      },
+      "warm": [],
+      "error": null,
+      "warmMedianMs": null,
+      "warmMaxMs": null
+    }
+  ]
+}

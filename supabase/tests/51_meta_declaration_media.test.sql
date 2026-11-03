@@ -1,0 +1,15 @@
+begin;
+set local search_path=extensions,public;
+select plan(10);
+select has_table('public','meta_declaration_media','declaration media table exists');
+select ok((select relrowsecurity from pg_class where oid='public.meta_declaration_media'::regclass),'media metadata enforces RLS');
+select ok(not has_table_privilege('anon','public.meta_declaration_media','SELECT'),'anonymous cannot read metadata');
+select ok(not has_table_privilege('authenticated','public.meta_declaration_media','SELECT'),'client cannot bypass server ownership checks');
+select ok(not has_table_privilege('authenticated','public.meta_declaration_media','INSERT'),'client cannot forge ownership');
+select ok(not has_table_privilege('authenticated','public.meta_declaration_media','UPDATE'),'client cannot reassign evidence');
+select ok(not has_table_privilege('authenticated','public.meta_declaration_media','DELETE'),'client cannot delete another evidence row');
+select ok(has_table_privilege('service_role','public.meta_declaration_media','SELECT,INSERT,UPDATE,DELETE'),'authenticated service has the required persistence port');
+select is((select public from storage.buckets where id='declaration-media'),false,'originals are in a private bucket');
+select is((select file_size_limit from storage.buckets where id='declaration-media'),30000000::bigint,'storage independently bounds uploads');
+select * from finish();
+rollback;

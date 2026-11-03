@@ -1,0 +1,62 @@
+{
+  "logistics": {
+    "pass": 210,
+    "fail": 0
+  },
+  "carrierOperations": {
+    "pass": 54,
+    "fail": 0
+  },
+  "finalFactory": {
+    "pass": 9,
+    "fail": 0
+  },
+  "buildFinal": "passed with lint/types",
+  "architecture": {
+    "modules": 852,
+    "clientEntries": 247
+  },
+  "scopeNote": "210 logistics after core implementation; 9 factory tests repeated after final fixture-layout correction.",
+  "rasters": [
+    {
+      "file": "before.png",
+      "sha256": "8ad2855445bf31f66d375261b3922b4104c1a9ecdfe9f33c9724af5e571c2413"
+    },
+    {
+      "file": "coil-overview.png",
+      "sha256": "de7eb72741673d6b16a2e0304148c8ada9dc3acd0e37a34c58e80665d8b3fe1b"
+    },
+    {
+      "file": "desktop.png",
+      "sha256": "86ab94cb25add07cb3aff30dddc8d530952b3445fcc096666cb1f9010a7a7531"
+    },
+    {
+      "file": "medical-overview.png",
+      "sha256": "fc7ef32f40270363fe985b5c00ce29641ebd949adad3676fe8cef996efc24121"
+    },
+    {
+      "file": "medical-pickup.png",
+      "sha256": "c18c8686f40ad630176ff07589118c7b4ea31a683ff3cc0114525f0742ce1303"
+    },
+    {
+      "file": "medical-place.png",
+      "sha256": "c71f0098203e64b60bebc2c94bae42147b5154e695e34aa7802809f6314fd60d"
+    },
+    {
+      "file": "mobile.png",
+      "sha256": "5592b9895ebd8c25268d1ab2fcbf2142f046bcf31f64c9bf6c262278839f2765"
+    },
+    {
+      "file": "ramp-overview.png",
+      "sha256": "90cfc786a60a1a413e6c992050b5d4bd56977b7902539d4ab467a15fda2ceb31"
+    },
+    {
+      "file": "robot-closeup.png",
+      "sha256": "e974a9b2df91ee940f5bf47f4d50c33dc18220c7b493057db0d5714eb9b984b3"
+    },
+    {
+      "file": "tank-overview.png",
+      "sha256": "6814ab13e0f8aa9cd0a2f8e7445603b10137876e073b4cf2234e2bcdae952c40"
+    }
+  ]
+}

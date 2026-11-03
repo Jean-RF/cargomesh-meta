@@ -1,0 +1,81 @@
+{
+  "at": "2026-11-02T22:44:38.893Z",
+  "scope": "Concurrent read-only local HTTP; no commercial writes or inference",
+  "concurrent": {
+    "elapsedMs": 548,
+    "reads": [
+      {
+        "path": "/freight/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+        "status": 200,
+        "ms": 407
+      },
+      {
+        "path": "/freight/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe/declared-manifests/current",
+        "status": 200,
+        "ms": 488
+      },
+      {
+        "path": "/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043",
+        "status": 200,
+        "ms": 491
+      },
+      {
+        "path": "/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043/passports/331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+        "status": 200,
+        "ms": 477
+      },
+      {
+        "path": "/meta/dockmind/jobs?sessionId=36dd509e-6612-4ce2-8663-46531abce043",
+        "status": 200,
+        "ms": 481
+      },
+      {
+        "path": "/meta/documents/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+        "status": 200,
+        "ms": 462
+      },
+      {
+        "path": "/carriers/c2340000-0000-4000-8000-000000000001/documents/bookings/654a02b7-c366-4298-8e1a-003481cbfb0a",
+        "status": 200,
+        "ms": 468
+      },
+      {
+        "path": "/bookings/654a02b7-c366-4298-8e1a-003481cbfb0a",
+        "status": 200,
+        "ms": 542
+      }
+    ],
+    "sameManifest": true,
+    "stableGroupIds": true,
+    "bookingStatus": "AUTHORIZED"
+  },
+  "denied": [
+    {
+      "path": "/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043",
+      "status": 404
+    },
+    {
+      "path": "/meta/loading-sessions/36dd509e-6612-4ce2-8663-46531abce043/passports/331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+      "status": 404
+    },
+    {
+      "path": "/meta/dockmind/jobs/64b8e40d-f339-4f2b-acfd-7a504efc7ff4",
+      "status": 404
+    },
+    {
+      "path": "/meta/documents/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+      "status": 404
+    },
+    {
+      "path": "/meta/documents",
+      "status": 401,
+      "anonymous": true
+    },
+    {
+      "path": "/meta/loading-sessions",
+      "status": 401,
+      "anonymous": true
+    }
+  ],
+  "visualAcceptance": false
+}

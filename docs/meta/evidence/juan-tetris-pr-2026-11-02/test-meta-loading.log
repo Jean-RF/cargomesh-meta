@@ -1,0 +1,62 @@
+Already up to date
+Done in 1.1s using pnpm v11.19.0
+$ node --conditions=react-server --import tsx --test src/features/meta-loading-dashboard/dashboard-model.test.ts src/features/meta-loading-dashboard/vehicle-dashboard-model.test.ts src/features/truck-collection/load-leader-route.test.ts src/server/modules/loading-sessions/dashboard-reader.test.ts src/shared/meta/loading-operation.test.ts src/server/modules/loading-sessions/operation-service.test.ts src/server/hono/routes/meta/loading-sessions.test.ts src/features/meta-loading-dashboard/operation-api.test.ts
+✔ JU-00: unknown and zero denominators never produce a percentage (1.4518ms)
+✔ JU-00: no observation is unknown, never confirmed zero (5.0016ms)
+✔ JU-00: a session without an authorized operation is visibly a demo (1.4173ms)
+✔ JU-01: pallets and boxes stay in separate totals (1.8995ms)
+✔ JU-01: partial pages and unknown group counts never become global totals (0.6744ms)
+✔ JU-01: complete plan with no allocation means explicit zero, incomplete plan means pending (1.2638ms)
+✔ JU-01: stale or incompatible plans cannot supply planned quantities (1.0428ms)
+✔ JU-01: empty and older refreshes preserve the previous snapshot (1.0697ms)
+✔ an open session shows progress without declaring a shortage (0.6744ms)
+✔ closed sufficient evidence gives a proposed difference and a match deterministically (44.5411ms)
+✔ incomplete coverage or uncertainty cannot prove a difference (2.5149ms)
+✔ a changed manifest revision makes the comparison outdated (2.1069ms)
+✔ units and sessions must match before comparing (0.6741ms)
+✔ an explicit complete count of zero remains a confirmed zero (0.5418ms)
+✔ duplicate observations, negative counts and foreign allocations fail contract validation (2.4595ms)
+✔ integer overflow in a total is unknown rather than a rounded count (0.7387ms)
+✔ keeps caller idempotency on transport retries and reads the authorized source only (96.219ms)
+✔ checks explanation response scope and sends stable command keys with an abort signal (4.4709ms)
+✔ validates Passport source before deriving comparison and rejects forged evidence scope (24.0858ms)
+✔ the directory preserves all sixty truck/driver identities and isolates its illustrative tariffs (1.4189ms)
+✔ category, weight, accented names and sorting compose without mutating the fleet (8.1467ms)
+✔ 3D groups partition the actual placed units, retain weight and contain their geometry envelopes (128.0176ms)
+✔ selected leader uses reserved gutters and approaches the selected boundary from its chosen side (2.719ms)
+✔ offscreen and invalid targets never get a misleading clamped leader (0.2705ms)
+▶ Loading HTTP routes
+  ✔ blocks cross-origin cookies, malformed JSON, oversized bodies and missing versions (125.5407ms)
+  ✔ uses the native authentication boundary when no injected test actor is supplied (4.795ms)
+  ✔ protects explanation commands, forwards identity/scope/key and makes status a read-only call (5.1115ms)
+✔ Loading HTTP routes (137.8931ms)
+✔ reader passes trusted organization and session to the repository (9.6835ms)
+✔ other organizations, facilities and sessions cannot leak a snapshot (3.9626ms)
+✔ no granted facility means no repository call (0.2736ms)
+✔ production reader rejects fixture data and malformed sources (3.2016ms)
+✔ missing session is not found (0.2765ms)
+▶ Loading operation trust boundary
+  ✔ requires identity, explicit unit mapping, versions and UUID idempotency before writes (3.1686ms)
+  ✔ does not return a foreign session or list and propagates a persistence failure (2.4395ms)
+  ✔ rejects an opening receipt that changes the operator chosen unit mapping (1.114ms)
+  ✔ keeps historical Passport readable but refuses explanation from a stale source (10.998ms)
+  ✔ rechecks the bound actor and currency for producer read ports (10.768ms)
+  ✔ uses scoped RPC args and exposes missing capability without a fallback (0.6167ms)
+  ✔ does not forward invalid worker counts to privileged persistence (0.7644ms)
+✔ Loading operation trust boundary (31.6768ms)
+▶ Operational loading facts
+  ✔ compares a closed evidenced group and preserves the immutable Passport source (13.5566ms)
+  ✔ does not conclude a difference from open, incomplete, uncertain, stale or negative-net evidence (34.5941ms)
+  ✔ keeps a workflow-only draft-version change current but rejects synthetic verification evidence (1.5894ms)
+  ✔ rejects forged quantities, foreign observations and changed identities at the boundary (3.6264ms)
+  ✔ projects exact event aliases for Luis, validates response scope and refuses lossy projections (5.6175ms)
+  ✔ checks the worker supplied net and event counts instead of inventing conversions (1.1169ms)
+✔ Operational loading facts (62.0508ms)
+ℹ tests 45
+ℹ suites 3
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7883.9754

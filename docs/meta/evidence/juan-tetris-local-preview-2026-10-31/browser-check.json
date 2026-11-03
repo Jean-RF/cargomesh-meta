@@ -1,0 +1,8 @@
+{
+  "errors": [],
+  "checks": [
+    "Anonymous carrier login URL redirects to Tetris, 60rows, no login/logout controls or auth cookies",
+    "Anonymous3Ddetail/reload work; operational session API still401",
+    "Carrier root opens Tetris and mobile menu still works"
+  ]
+}
