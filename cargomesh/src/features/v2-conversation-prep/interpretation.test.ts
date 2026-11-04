@@ -1,5 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+
+test('questions mentioning a pallet or quantities never become declarations or consent',()=>{
+  for(const text of ['¿Qué es un pallet?','¿Qué es un pallet','What is a pallet?',
+    'They are packed on pallets. Do you remember what I am shipping?',
+    '¿Puedes guardar 12 pallets?']){
+    const result=interpretDeterministically({schemaVersion:'2.0',text,currentField:'unitQuantity',language:'es'});
+    assert.equal(result.intent,'HELP');assert.deepEqual(result.fields,[]);
+  }
+});
 import { InterpretationRequestSchema, InterpretationResponseSchema, guardExplicitCorrection, interpretDeterministically } from "./interpretation";
 
 test('real speech quantities and explicit per-pallet weight survive while totals stay separate',()=>{
@@ -185,11 +194,10 @@ test("untrusted model output must use the versioned bounded response contract", 
   }).success, false);
 });
 
-test("mixed commercial question preserves explicit quantity and packaging", () => {
+test("mixed commercial questions stay read-only even when they mention cargo quantities", () => {
   const result=interpretDeterministically({schemaVersion:"2.0",text:"¿Cuánto cuesta enviar 10 pallets de 100 kg cada uno?",currentField:null,language:"es"});
-  assert.equal(result.intent,"PROVIDE");
-  assert.ok(result.fields.some(f=>f.field==="unitQuantity"&&f.value==="10"));
-  assert.ok(result.fields.some(f=>f.field==="unitWeightPerUnitKg"&&f.value==="100"));
+  assert.equal(result.intent,"HELP");
+  assert.deepEqual(result.fields,[]);
 });
 
 test("Spanish spoken numbers are captured without assigning a cargo category",()=>{

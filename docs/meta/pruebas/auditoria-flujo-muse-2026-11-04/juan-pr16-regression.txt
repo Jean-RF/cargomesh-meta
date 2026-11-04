@@ -1,0 +1,37 @@
+✖ src\features\truck-collection\catalog.test.ts (292470.6442ms)
+(node:35972) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ all 60 trucks have a complete and incomplete result with truthful remaining quantities (34.5489ms)
+✔ incomplete native scenes leave the omitted product behind and move truck, fixtures and loaded products together (103520.163ms)
+✔ articulated wrist keeps fixed links and the gripper on the exact cargo attachment while seeking (4164.3785ms)
+✔ mechanical details and factory fixtures have a bounded cost for all four loading methods (6730.5903ms)
+✔ all 60 vehicles use their own cargo, quantity, dimensions, weight and loading method (12.2786ms)
+✔ discrete cargo never intersects another unit along the metric path or crosses a closed body (2349.566ms)
+✔ backward seek resets stock and counters, and midpoint interpolation is continuous (0.5183ms)
+✔ invalid dimensions, mass or quantities cannot start a loading sequence (0.4736ms)
+✔ factory reuses each native cargo mesh and never scales a rigid product (97316.5827ms)
+✔ rolling loads retain support through ramp/deck transitions without resizing (348.7307ms)
+✔ car carrier staging stays compact without scaling or overlapping parked vehicles (0.5259ms)
+(node:19704) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ camera angles and resize reuse one assembly, loader and ready exporter (328.6458ms)
+ℹ {"scenario":"initial mount, eight angle changes, three resizes","counts":{"build":1,"dispose":0,"cab":1,"textures":1,"hdr":1,"controls":1,"factory":0,"factoryDispose":0,"directDraw":0}}
+✔ real geometry changes rebuild once and a late cab cannot overwrite the selected truck (96.5673ms)
+✔ factory resize and camera views preserve elapsed time, scene and lighting; scenario still rebuilds (69.8812ms)
+✔ compositor records the scene pass without another scene render or confusing output triangles (11.29ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 15
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292483.3389
+
+✖ failing tests:
+
+test at src\features\truck-collection\catalog.test.ts:1:1
+✖ src\features\truck-collection\catalog.test.ts (292470.6442ms)
+  'test failed'

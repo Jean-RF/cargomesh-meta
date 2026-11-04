@@ -145,14 +145,14 @@ async function invoke(config: Config, input: InterpretationRequest): Promise<Con
 
 export async function interpretConversationTurn(
   input: InterpretationRequest,
-  options: { config?: Config; invoke?: Invoke; now?: () => number; env?: MetaEnvironment; metaFetch?: MetaFetch } = {},
+  options: { config?: Config; invoke?: Invoke; now?: () => number; env?: MetaEnvironment; metaFetch?: MetaFetch; signal?: AbortSignal } = {},
 ): Promise<InterpretationResponse> {
   input = InterpretationRequestSchema.parse(input);
   const env = options.env ?? process.env;
   const config = options.config ?? conversationBedrockConfig(env);
   if (input.context?.screen === "TRANSPORT_SELECTION") {
     if (env.CARGOMESH_AI_PROVIDER === "META")
-      return interpretMetaConversationTurn(input, { env, fetch: options.metaFetch });
+      return interpretMetaConversationTurn(input, { env, fetch: options.metaFetch, signal: options.signal });
     return { schemaVersion: "2.0", mode: "DETERMINISTIC", telemetry: null,
       interpretation: { intent: "HELP", fields: [] } };
   }
@@ -165,7 +165,7 @@ export async function interpretConversationTurn(
   // Explicit business commands stay deterministic; the model only proposes ambiguous chat details.
   if (!["PROVIDE", "CORRECT", "HELP"].includes(fallback.interpretation.intent)) return fallback;
   if (env.CARGOMESH_AI_PROVIDER === "META")
-    return interpretMetaConversationTurn(input, { env, fetch: options.metaFetch });
+    return interpretMetaConversationTurn(input, { env, fetch: options.metaFetch, signal: options.signal });
   if (env.CARGOMESH_AI_PROVIDER && env.CARGOMESH_AI_PROVIDER !== "BEDROCK") return fallback;
   if (!config.enabled || !config.region || !config.modelId) return fallback;
   const started = (options.now ?? Date.now)();

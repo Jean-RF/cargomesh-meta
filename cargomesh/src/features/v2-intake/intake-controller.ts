@@ -10,6 +10,7 @@ import type { FreightRequestV2Data, IntakeOptionsData, RoadServiceabilityEvaluat
 import { auditIntakeOptions, EMPTY_INTAKE_OPTIONS } from "./intake-options";
 import { mapServiceabilityToMapViewProps } from "./mappers/road-map-props.mapper";
 import { EMPTY_PROTOTYPE_DRAFT, applyChatFieldsToDraft, buildPrototypeExample, findIntakeFacility, mapDraftToCreateFreightRequestV2Input, mapDraftToRevisionInput, requestToPrototypeDraft, updatePrototypeDraftField, validatePrototypeReview, validatePrototypeStep, type PrototypeStep, type PrototypeValidationIssue, type V2IntakePrototypeDraft } from "./prototype-model";
+import {needsExplicitCargoGroup} from './assistant-group-scope';
 import { V2IntakeApiError, assertFreightRequestRoundTrip, assertServiceabilityCorrelation, createFreightRequestV2, getFreightRequestV2, getRoadServiceabilityV2, loadIntakeOptions, reconcileCandidateSelection, reviseFreightRequestV2 } from "./v2-intake-client";
 
 const CHAT_REQUEST_SESSION_KEY = "cargomesh-v2-chat-request-id";
@@ -389,7 +390,7 @@ export function useIntakeController() {
   };
 
   const updateFromChat = (fields: ReadonlyArray<{ field: ConversationField; value: string }>) => {
-    if (!fields.length) return;
+    if (!fields.length || needsExplicitCargoGroup(draft, fields)) return;
     trackAssistantFields(fields);
     draftRevisionRef.current += 1;
     setDraft((current) => applyChatFieldsToDraft(current, fields));

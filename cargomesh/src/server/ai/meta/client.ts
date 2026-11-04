@@ -8,8 +8,10 @@ import { MetaSpeechSessionIdSchema } from '@/shared/schemas/meta/provider-identi
 import type { ResponseFormatJSONSchema } from "openai/resources/shared";
 
 export type MetaFetch = typeof globalThis.fetch;
+type MetaObservation = { requestId: string | null; usage: { inputTokens: number | null; outputTokens: number | null } | null };
 export class InvalidMetaOutput extends Error {
-  constructor(message = "Invalid structured response.", public readonly missingUsage = false) { super(message); }
+  constructor(message = "Invalid structured response.", public readonly missingUsage = false,
+    public readonly observation?: MetaObservation) { super(message); }
 }
 
 function metaClient(config: Pick<MetaProposalConfig, 'apiKey' | 'baseURL' | 'timeoutMs'>, fetch?: MetaFetch) {
@@ -32,7 +34,7 @@ export async function requestMetaJson(request: {
   instructions: string;
   payload: unknown;
   responseFormat: ResponseFormatJSONSchema;
-  reasoningEffort?: 'low' | 'medium';
+  reasoningEffort?: 'minimal' | 'low' | 'medium';
   signal: AbortSignal;
   fetch?: MetaFetch;
   images?: readonly { evidenceId: string; dataUrl: string }[];
@@ -56,10 +58,18 @@ export async function requestMetaJson(request: {
     ],
     store: false,
   }, { signal: request.signal });
+  const observedUsage = ReplySchema.shape.usage.safeParse(response.usage ? {
+    inputTokens: response.usage.prompt_tokens ?? null, outputTokens: response.usage.completion_tokens ?? null,
+  } : null);
+  const observation: MetaObservation = {
+    requestId: typeof response._request_id === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(response._request_id) ? response._request_id : null,
+    usage: observedUsage.success ? observedUsage.data : null,
+  };
+  const invalid = () => new InvalidMetaOutput('Invalid structured response.', observation.usage === null, observation);
   const choice = response.choices?.[0];
   if (!choice || choice.finish_reason !== "stop" || choice.message.tool_calls?.length ||
       choice.message.refusal || response.model !== config.model)
-    throw new InvalidMetaOutput("Invalid structured response.", true);
+    throw invalid();
   const parsed = ReplySchema.safeParse({
     content: choice.message.content,
     requestId: response._request_id ?? null,
@@ -69,7 +79,7 @@ export async function requestMetaJson(request: {
       outputTokens: response.usage.completion_tokens ?? null,
     } : null,
   });
-  if (!parsed.success) throw new InvalidMetaOutput("Invalid structured response.", true);
+  if (!parsed.success) throw invalid();
   return parsed.data;
 }
 

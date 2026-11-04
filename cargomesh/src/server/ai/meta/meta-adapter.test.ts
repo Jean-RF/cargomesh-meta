@@ -116,13 +116,71 @@ test("Meta chat maps AX-00 proposal to existing fields without executing or losi
 });
 
 test("Meta guidance answers in the requested language without changing a draft", async () => {
-  const mock = transport([{ intent: "HELP", fields: [], declaration: null,
-    acknowledgment: "Un pallet es una plataforma para agrupar carga. ¿Qué producto transportarás?" }]);
+  const mock = transport([{ acknowledgment: "Un pallet es una plataforma para agrupar carga. ¿Qué producto transportarás?" }]);
   const result = await interpretConversationTurn({ ...input, text: "¿Qué es un pallet?", language: "es" },
     { env, metaFetch: mock.fetch });
   assert.equal(result.mode, "META");
   assert.deepEqual(result.interpretation.fields, []);
   assert.match(result.interpretation.acknowledgment ?? "", /plataforma/);
+});
+
+test('mixed new fact and memory question uses compact read-only guidance in both languages',async()=>{
+  for(const [text,language,acknowledgment] of [
+    ['They are packed on pallets. Do you remember what I am shipping?','en','You said 1000 bottles of medicine from Lima to Arequipa. Please state the packaging separately to update the form.'],
+    ['Van en pallets. ¿Recuerdas qué estoy enviando?','es','Mencionaste 1000 frascos de medicina de Lima a Arequipa. Indica el embalaje por separado para actualizar el formulario.'],
+  ] as const){
+    const mock=transport([{acknowledgment}]);
+    const result=await interpretConversationTurn({...input,text,language,context:{screen:'ROAD_INTAKE',knownFields:[],lastAskedField:null,failedAttempts:0,
+      conversation:[{role:'user',text:'1000 bottles of medicine from Lima to Arequipa'}]}},{env,metaFetch:mock.fetch});
+    assert.equal(result.mode,'META');assert.equal(result.interpretation.intent,'HELP');
+    assert.deepEqual(result.interpretation.fields,[]);assert.equal(result.declarationProposal,null);
+    assert.equal(result.interpretation.acknowledgment,acknowledgment);assert.equal(mock.seen.length,1);
+    assert.equal(mock.seen[0].body.reasoning_effort,'minimal');
+    assert(JSON.stringify(mock.seen[0].body.response_format).length<1000,'a question must not carry the declaration schema');
+  }
+});
+
+test('compact help rejects hidden fields, empty output and claimed business actions',async()=>{
+  for(const answer of [{acknowledgment:'I saved your request.'},{acknowledgment:'He creado tu reserva.'},
+    {acknowledgment:'   '},{acknowledgment:'Hello',fields:[{field:'unitQuantity',value:'999'}]}]){
+    const mock=transport([answer]);
+    const result=await interpretConversationTurn({...input,text:'What am I shipping?'},{env,metaFetch:mock.fetch});
+    assert.equal(result.providerError?.code,'MODEL_OUTPUT_INVALID');assert.deepEqual(result.interpretation.fields,[]);
+  }
+});
+
+test('chat supports a low reasoning rollback but rejects unsupported reasoning before network',async()=>{
+  const mock=transport([turn()]);
+  const result=await interpretConversationTurn(input,{env:{...env,META_CONVERSATION_REASONING_EFFORT:'low'},metaFetch:mock.fetch});
+  assert.equal(result.mode,'META');assert.equal(mock.seen[0].body.reasoning_effort,'low');
+  const noCall=transport([turn()]);
+  const missing=await interpretConversationTurn(input,{env:{...env,META_CONVERSATION_REASONING_EFFORT:'none'},metaFetch:noCall.fetch});
+  assert.equal(missing.providerError?.code,'NOT_CONFIGURED');assert.equal(noCall.seen.length,0);
+});
+
+test('truncated responses retain observed usage and a bounded retry can recover',async()=>{
+  const mock=transport([turn()]);let calls=0;
+  const fetch:typeof globalThis.fetch=async(url,init)=>{
+    const response=await mock.fetch(url,init),json=await response.json();
+    if(++calls===1)json.choices[0].finish_reason='length';
+    return new Response(JSON.stringify(json),{status:200,headers:{'content-type':'application/json','x-request-id':'safe-observed-id'}});
+  };
+  const result=await interpretConversationTurn(input,{env,metaFetch:fetch});
+  assert.equal(result.mode,'META');assert.equal(result.providerMetadata?.attempts,2);
+  assert.equal(result.providerMetadata?.inputTokens,240);assert.equal(result.providerMetadata?.outputTokens,160);
+});
+
+test('caller cancellation aborts pending Meta and never starts a retry',async()=>{
+  const controller=new AbortController();let calls=0,aborted=false;
+  const fetch:typeof globalThis.fetch=async(_url,init)=>new Promise((_resolve,reject)=>{
+    calls++;init?.signal?.addEventListener('abort',()=>{aborted=true;reject(new Error('private cancelled detail'));},{once:true});
+    controller.abort();
+  });
+  const result=await interpretConversationTurn(input,{env,metaFetch:fetch,signal:controller.signal});
+  assert.equal(calls,1);assert(aborted);assert.equal(result.providerError?.code,'PROVIDER_UNAVAILABLE');
+  const cancelled=new AbortController();cancelled.abort();const mock=transport([turn()]);
+  const early=await interpretConversationTurn(input,{env,metaFetch:mock.fetch,signal:cancelled.signal});
+  assert.equal(mock.seen.length,0);assert.equal(early.providerMetadata?.attempts,0);
 });
 
 test("non-cargo facts require a quote from the latest turn, never old context", async () => {
@@ -267,7 +325,7 @@ test("Meta response contract requires honest provider metadata and revision", ()
 test("transport screen sends greetings and arithmetic to Meta with no form mutations", async () => {
   for (const [text, acknowledgment] of [["hola", "¡Hola! ¿Continuamos con transporte terrestre?"],
     ["cuanto es 1 +2", "Es 3. ¿Continuamos con transporte terrestre?"]]) {
-    const mock = transport([{intent:"HELP",fields:[],declaration:null,acknowledgment}]);
+    const mock = transport([{acknowledgment}]);
     const result = await interpretConversationTurn({...input,text,currentField:null,language:"es",
       context:{screen:"TRANSPORT_SELECTION",knownFields:[],lastAskedField:null,failedAttempts:0}},
       {env,metaFetch:mock.fetch});
@@ -301,7 +359,7 @@ test('follow-up memory reaches Meta as untrusted context and a remembered declar
     {role:'assistant' as const,text:'Would you like to continue with Road?'},
     {role:'user' as const,text:"yeah we're not"}];
   const acknowledgment='You mentioned 1,000 bottles of medicine. Did you mean Road, or do you still need Air?';
-  const mock=transport([{intent:'HELP',fields:[],declaration:null,acknowledgment}]);
+  const mock=transport([{acknowledgment}]);
   const result=await interpretConversationTurn({...input,text:'no I would like to go with hello shipment',
     currentField:null,context:{screen:'TRANSPORT_SELECTION',knownFields:[],lastAskedField:null,failedAttempts:0,conversation}},
     {env,metaFetch:mock.fetch});

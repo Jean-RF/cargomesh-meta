@@ -41,6 +41,8 @@ export function inspectMetaEnvironment(env: MetaEnvironment, target: MetaTarget)
   check('META_MODEL_API_KEY', 'provider', present(env.META_MODEL_API_KEY));
   check('META_MODEL_BASE_URL', 'provider', true, (env.META_MODEL_BASE_URL ?? META_API_ORIGIN).replace(/\/$/, '') === META_API_ORIGIN);
   check('META_MUSE_MODEL', 'provider', present(env.META_MUSE_MODEL), validModel(env.META_MUSE_MODEL, 'muse-spark-'));
+  check('META_CONVERSATION_REASONING_EFFORT', 'provider', true,
+    ['minimal', 'low'].includes(env.META_CONVERSATION_REASONING_EFFORT ?? 'minimal'));
   const timeout = Number(env.META_PROPOSAL_TIMEOUT_MS ?? 45_000), tokens = Number(env.META_PROPOSAL_MAX_OUTPUT_TOKENS ?? 2_048);
   check('META_PROPOSAL_TIMEOUT_MS', 'provider', true, Number.isInteger(timeout) && timeout >= 1_000 && timeout <= 45_000);
   check('META_PROPOSAL_MAX_OUTPUT_TOKENS', 'provider', true, Number.isInteger(tokens) && tokens >= 256 && tokens <= 4_096);
@@ -62,7 +64,7 @@ export function inspectMetaEnvironment(env: MetaEnvironment, target: MetaTarget)
   const providerReady = checks.filter(item => item.scope === 'provider').every(item => item.status === 'PASS');
   // Voice does not require a text model/token budget, but shares every transport/safety guard.
   const voiceReady = readMetaSpeechConfig(env) !== null && checks.filter(item => item.scope === 'provider' &&
-    !['META_MUSE_MODEL', 'META_PROPOSAL_MAX_OUTPUT_TOKENS'].includes(item.name)).every(item => item.status === 'PASS');
+    !['META_MUSE_MODEL', 'META_PROPOSAL_MAX_OUTPUT_TOKENS', 'META_CONVERSATION_REASONING_EFFORT'].includes(item.name)).every(item => item.status === 'PASS');
   const applicationReady = checks.every(item => item.status === 'PASS');
   return {
     schemaVersion: '1.0' as const,

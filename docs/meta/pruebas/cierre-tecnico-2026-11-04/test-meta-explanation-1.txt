@@ -1,0 +1,298 @@
+TAP version 13
+# Subtest: a lost generation response retries the same payload/key and then adopts the saved explanation
+ok 1 - a lost generation response retries the same payload/key and then adopts the saved explanation
+  ---
+  duration_ms: 116.0604
+  type: 'test'
+  ...
+# Subtest: remount recovers the operation key from session storage
+ok 2 - remount recovers the operation key from session storage
+  ---
+  duration_ms: 47.5341
+  type: 'test'
+  ...
+# Subtest: double clicks share one request and late results do not update an unmounted Passport
+ok 3 - double clicks share one request and late results do not update an unmounted Passport
+  ---
+  duration_ms: 17.4846
+  type: 'test'
+  ...
+# Subtest: a failed/uncertain attempt requires explicit consent and a new key referring to the old attempt
+ok 4 - a failed/uncertain attempt requires explicit consent and a new key referring to the old attempt
+  ---
+  duration_ms: 22.5616
+  type: 'test'
+  ...
+# Subtest: read-only membership, historical Passport and unknown group cannot request generation
+ok 5 - read-only membership, historical Passport and unknown group cannot request generation
+  ---
+  duration_ms: 48.3825
+  type: 'test'
+  ...
+# Subtest: reading status never invokes generation and adopts a saved result only once
+ok 6 - reading status never invokes generation and adopts a saved result only once
+  ---
+  duration_ms: 19.0818
+  type: 'test'
+  ...
+# Subtest: a failed Passport reread can be recovered by checking status without another provider request
+ok 7 - a failed Passport reread can be recovered by checking status without another provider request
+  ---
+  duration_ms: 15.8428
+  type: 'test'
+  ...
+# Subtest: closed 12/11 comparison renders supplied difference, reasons, validated events and human proposals
+ok 8 - closed 12/11 comparison renders supplied difference, reasons, validated events and human proposals
+  ---
+  duration_ms: 5.342
+  type: 'test'
+  ...
+# Subtest: shared client port receives strict JSON Schema, medium reasoning and only authorized facts
+ok 9 - shared client port receives strict JSON Schema, medium reasoning and only authorized facts
+  ---
+  duration_ms: 1.5041
+  type: 'test'
+  ...
+# Subtest: match, BOX, unknown usage and English copy retain the supplied values
+ok 10 - match, BOX, unknown usage and English copy retain the supplied values
+  ---
+  duration_ms: 1.4761
+  type: 'test'
+  ...
+# Subtest: renderer copies the signed difference from Juan, without calculating or correcting it
+ok 11 - renderer copies the signed difference from Juan, without calculating or correcting it
+  ---
+  duration_ms: 1.3127
+  type: 'test'
+  ...
+# Subtest: open and uncertain sessions show domain guidance without calling or requiring Meta
+ok 12 - open and uncertain sessions show domain guidance without calling or requiring Meta
+  ---
+  duration_ms: 2.1012
+  type: 'test'
+  ...
+# Subtest: closed insufficient evidence suggests more evidence rather than waiting for an already closed session
+ok 13 - closed insufficient evidence suggests more evidence rather than waiting for an already closed session
+  ---
+  duration_ms: 0.9083
+  type: 'test'
+  ...
+# Subtest: missing or invalid shared model configuration does not invoke Meta
+ok 14 - missing or invalid shared model configuration does not invoke Meta
+  ---
+  duration_ms: 3.1819
+  type: 'test'
+  ...
+# Subtest: browser facts, tenant, URLs, commands and bad revisions cannot authorize a read
+ok 15 - browser facts, tenant, URLs, commands and bad revisions cannot authorize a read
+  ---
+  duration_ms: 0.9043
+  type: 'test'
+  ...
+# Subtest: inactive actor, absent/foreign/revoked snapshots and other identities are denied
+ok 16 - inactive actor, absent/foreign/revoked snapshots and other identities are denied
+  ---
+  duration_ms: 1.0003
+  type: 'test'
+  ...
+# Subtest: stale or invalid authoritative comparisons never reach the provider
+ok 17 - stale or invalid authoritative comparisons never reach the provider
+  ---
+  duration_ms: 1.2338
+  type: 'test'
+  ...
+# Subtest: access/revision is rechecked before the request and after the response
+ok 18 - access/revision is rechecked before the request and after the response
+  ---
+  duration_ms: 1.6041
+  type: 'test'
+  ...
+# Subtest: currency fingerprint covers counts, quality, close, event references and all revisions
+ok 19 - currency fingerprint covers counts, quality, close, event references and all revisions
+  ---
+  duration_ms: 0.8071
+  type: 'test'
+  ...
+# Subtest: an updated manifest, observation or event invalidates the response even without a reconciliation version bump
+ok 20 - an updated manifest, observation or event invalidates the response even without a reconciliation version bump
+  ---
+  duration_ms: 2.5975
+  type: 'test'
+  ...
+# Subtest: invented identities, event IDs, evidence and timecodes reject the whole explanation
+ok 21 - invented identities, event IDs, evidence and timecodes reject the whole explanation
+  ---
+  duration_ms: 2.7983
+  type: 'test'
+  ...
+# Subtest: prose with invented causes/counts and commands cannot pass the structured plan
+ok 22 - prose with invented causes/counts and commands cannot pass the structured plan
+  ---
+  duration_ms: 5.0775
+  type: 'test'
+  ...
+# Subtest: no events means no reference reason or review-evidence suggestion
+ok 23 - no events means no reference reason or review-evidence suggestion
+  ---
+  duration_ms: 0.8172
+  type: 'test'
+  ...
+# Subtest: invalid JSON, truncated content, wrong model and malformed usage are rejected
+ok 24 - invalid JSON, truncated content, wrong model and malformed usage are rejected
+  ---
+  duration_ms: 2.1251
+  type: 'test'
+  ...
+# Subtest: provider failures (401/429/500) are sanitized, never retried and never change Juan facts
+ok 25 - provider failures (401/429/500) are sanitized, never retried and never change Juan facts
+  ---
+  duration_ms: 1.4756
+  type: 'test'
+  ...
+# Subtest: caller cancellation does no work and never leaks a private cancellation reason
+ok 26 - caller cancellation does no work and never leaks a private cancellation reason
+  ---
+  duration_ms: 0.6779
+  type: 'test'
+  ...
+# Subtest: a dependency rejecting in the same turn as cancellation does not leak an unhandled rejection
+ok 27 - a dependency rejecting in the same turn as cancellation does not leak an unhandled rejection
+  ---
+  duration_ms: 0.6405
+  type: 'test'
+  ...
+# Subtest: deadline also bounds an authorized lookup that ignores cancellation
+ok 28 - deadline also bounds an authorized lookup that ignores cancellation
+  ---
+  duration_ms: 20.7072
+  type: 'test'
+  ...
+# Subtest: provider ignoring cancellation cannot keep the request open or return a late explanation
+ok 29 - provider ignoring cancellation cannot keep the request open or return a late explanation
+  ---
+  duration_ms: 19.9162
+  type: 'test'
+  ...
+# Subtest: invalid deadlines do no IO
+ok 30 - invalid deadlines do no IO
+  ---
+  duration_ms: 0.4628
+  type: 'test'
+  ...
+# Subtest: configured timeout still applies while rechecking access after a fast provider response
+ok 31 - configured timeout still applies while rechecking access after a fast provider response
+  ---
+  duration_ms: 1.7401
+  type: 'test'
+  ...
+# Subtest: explanation uses Axel SDK transport with strict schema, medium and no commercial tools
+ok 32 - explanation uses Axel SDK transport with strict schema, medium and no commercial tools
+  ---
+  duration_ms: 16.3898
+  type: 'test'
+  ...
+# Subtest: real client configuration gates absent key, alternate endpoints and contributor models without fetch
+ok 33 - real client configuration gates absent key, alternate endpoints and contributor models without fetch
+  ---
+  duration_ms: 4.5813
+  type: 'test'
+  ...
+# Subtest: shared SDK never retries 401, 429 or 500 and does not expose provider errors
+ok 34 - shared SDK never retries 401, 429 or 500 and does not expose provider errors
+  ---
+  duration_ms: 6.8144
+  type: 'test'
+  ...
+# Subtest: truncation, tool calls, refusals and a wrong model fail through the shared client guard
+ok 35 - truncation, tool calls, refusals and a wrong model fail through the shared client guard
+  ---
+  duration_ms: 7.3085
+  type: 'test'
+  ...
+# Subtest: SDK success cannot bypass the grounded plan or an unknown event check
+ok 36 - SDK success cannot bypass the grounded plan or an unknown event check
+  ---
+  duration_ms: 4.6383
+  type: 'test'
+  ...
+# Subtest: authenticated scope/key and privileged persistence use different ports
+ok 37 - authenticated scope/key and privileged persistence use different ports
+  ---
+  duration_ms: 2.1165
+  type: 'test'
+  ...
+# Subtest: missing capability, scope conflicts and unreachable persistence are explicit safe errors
+ok 38 - missing capability, scope conflicts and unreachable persistence are explicit safe errors
+  ---
+  duration_ms: 0.9775
+  type: 'test'
+  ...
+# Subtest: generation uses Juan's facts, saves once and reopens the exact explanation
+ok 39 - generation uses Juan's facts, saves once and reopens the exact explanation
+  ---
+  duration_ms: 28.9624
+  type: 'test'
+  ...
+# Subtest: simultaneous same-key or different-key calls for a group invoke the provider once
+ok 40 - simultaneous same-key or different-key calls for a group invoke the provider once
+  ---
+  duration_ms: 21.4736
+  type: 'test'
+  ...
+# Subtest: same key with different valid payload is a stable conflict, with no second inference
+ok 41 - same key with different valid payload is a stable conflict, with no second inference
+  ---
+  duration_ms: 9.6466
+  type: 'test'
+  ...
+# Subtest: a lost stage response is recovered without another inference
+ok 42 - a lost stage response is recovered without another inference
+  ---
+  duration_ms: 7.0113
+  type: 'test'
+  ...
+# Subtest: a lost final response replays the stored result, without another inference
+ok 43 - a lost final response replays the stored result, without another inference
+  ---
+  duration_ms: 9.3354
+  type: 'test'
+  ...
+# Subtest: unconfigured or invalid provider output preserves the numeric comparison and failed receipt
+ok 44 - unconfigured or invalid provider output preserves the numeric comparison and failed receipt
+  ---
+  duration_ms: 8.8234
+  type: 'test'
+  ...
+# Subtest: insufficient evidence produces domain guidance, with no claim or provider
+ok 45 - insufficient evidence produces domain guidance, with no claim or provider
+  ---
+  duration_ms: 1.969
+  type: 'test'
+  ...
+# Subtest: historical scope, missing group, requester and foreign actor cannot generate
+ok 46 - historical scope, missing group, requester and foreign actor cannot generate
+  ---
+  duration_ms: 1.7954
+  type: 'test'
+  ...
+# Subtest: browser-supplied quantities or missing idempotency keys cannot reach the provider
+ok 47 - browser-supplied quantities or missing idempotency keys cannot reach the provider
+  ---
+  duration_ms: 0.7104
+  type: 'test'
+  ...
+# Subtest: revision changing during inference or after staging never saves the old explanation
+ok 48 - revision changing during inference or after staging never saves the old explanation
+  ---
+  duration_ms: 12.5992
+  type: 'test'
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4191.4003

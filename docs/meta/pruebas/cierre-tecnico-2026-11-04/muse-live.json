@@ -1,0 +1,145 @@
+{
+  "scope": "Shared production interpreter; synthetic text only; no DB/Next/browser, no commercial writes. Small diagnostic sample, not p50/p95 benchmark.",
+  "experimentalReasoningOverride": null,
+  "cases": [
+    {
+      "id": "greeting-transport",
+      "totalMs": 2756,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "7a714d26-f3aa-4d05-a477-10d53a987cdf",
+        "latencyMs": 2753,
+        "attempts": 1,
+        "inputTokens": 415,
+        "outputTokens": 156,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Hi! I can help with your shipment. Only Road transport is available right now — Air and Sea are unavailable. Shall I proceed with Road for your shipment?"
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 2736,
+          "bodyMs": 2740,
+          "bytes": 2144,
+          "instructionChars": 1396,
+          "schemaChars": 297,
+          "reasoning": "minimal",
+          "stream": false
+        }
+      ]
+    },
+    {
+      "id": "cargo-extraction",
+      "totalMs": 5079,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "f972a247-03d5-438f-98db-65a9ca6e95de",
+        "latencyMs": 5066,
+        "attempts": 1,
+        "inputTokens": 2617,
+        "outputTokens": 568,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "PROVIDE",
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "machine parts"
+          },
+          {
+            "field": "packaging",
+            "value": "PALLET"
+          },
+          {
+            "field": "unitQuantity",
+            "value": "12"
+          },
+          {
+            "field": "unitWeightPerUnitKg",
+            "value": "100"
+          }
+        ],
+        "acknowledgment": "Got it — 12 pallets of machine parts at 100 kg per pallet."
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 5061,
+          "bodyMs": 5063,
+          "bytes": 17242,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "minimal",
+          "stream": false
+        }
+      ]
+    },
+    {
+      "id": "memory-follow-up",
+      "totalMs": 5234,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "89d78d37-e917-48d9-abea-fa2991efd2d8",
+        "latencyMs": 5230,
+        "attempts": 1,
+        "inputTokens": 463,
+        "outputTokens": 524,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Yes - 1000 bottles of medicine from Lima to Arequipa, and you mentioned they are packed on pallets. I haven't saved that, let me know clearly if you want to update the form. What pickup date do you have in mind?"
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 5228,
+          "bodyMs": 5229,
+          "bytes": 2364,
+          "instructionChars": 1396,
+          "schemaChars": 297,
+          "reasoning": "minimal",
+          "stream": false
+        }
+      ]
+    },
+    {
+      "id": "explicit-correction",
+      "totalMs": 3,
+      "mode": "DETERMINISTIC",
+      "metadata": null,
+      "error": null,
+      "interpretation": {
+        "intent": "CORRECT",
+        "fields": [
+          {
+            "field": "unitQuantity",
+            "value": "10"
+          }
+        ]
+      },
+      "http": []
+    }
+  ]
+}

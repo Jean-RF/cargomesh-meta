@@ -1,0 +1,83 @@
+TAP version 13
+# Subtest: prepare → explicit confirmation → reopen retains request, revision, units and every group UUID
+ok 1 - prepare → explicit confirmation → reopen retains request, revision, units and every group UUID
+  ---
+  duration_ms: 41.806
+  type: 'test'
+  ...
+# Subtest: a failed network confirmation retries the same intent, never a new request or booking
+ok 2 - a failed network confirmation retries the same intent, never a new request or booking
+  ---
+  duration_ms: 1.6894
+  type: 'test'
+  ...
+# Subtest: client rejects another tenant, stale source versions and receipts for another preparation/hash
+ok 3 - client rejects another tenant, stale source versions and receipts for another preparation/hash
+  ---
+  duration_ms: 3.3148
+  type: 'test'
+  ...
+# Subtest: revisions require explicit complete unique group mappings; reordering retains the chosen UUIDs
+ok 4 - revisions require explicit complete unique group mappings; reordering retains the chosen UUIDs
+  ---
+  duration_ms: 1.4393
+  type: 'test'
+  ...
+# Subtest: manual changes, unsaved data, expiry or another request invalidate review consent
+ok 5 - manual changes, unsaved data, expiry or another request invalidate review consent
+  ---
+  duration_ms: 0.2985
+  type: 'test'
+  ...
+# Subtest: 403 and missing migration stay explicit errors and never become simulated success
+ok 6 - 403 and missing migration stay explicit errors and never become simulated success
+  ---
+  duration_ms: 1.1241
+  type: 'test'
+  ...
+# Subtest: Declared manifest command boundary
+    # Subtest: rejects forged scope, implicit approval, duplicate mappings and unbounded reads before persistence
+    ok 1 - rejects forged scope, implicit approval, duplicate mappings and unbounded reads before persistence
+      ---
+      duration_ms: 3.9646
+      type: 'test'
+      ...
+    # Subtest: preserves confirmation receipts without rechecking an elapsed local clock or newer request
+    ok 2 - preserves confirmation receipts without rechecking an elapsed local clock or newer request
+      ---
+      duration_ms: 3.0823
+      type: 'test'
+      ...
+    # Subtest: rejects cross-tenant/cross-request repository responses and mismatched review hashes
+    ok 3 - rejects cross-tenant/cross-request repository responses and mismatched review hashes
+      ---
+      duration_ms: 1.8918
+      type: 'test'
+      ...
+    # Subtest: reports the historical manifest when the request version has advanced
+    ok 4 - reports the historical manifest when the request version has advanced
+      ---
+      duration_ms: 0.7956
+      type: 'test'
+      ...
+    # Subtest: empty history has no fabricated manifest
+    ok 5 - empty history has no fabricated manifest
+      ---
+      duration_ms: 0.4656
+      type: 'test'
+      ...
+    1..5
+ok 7 - Declared manifest command boundary
+  ---
+  duration_ms: 11.7152
+  type: 'suite'
+  ...
+1..7
+# tests 11
+# suites 1
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 678.3739

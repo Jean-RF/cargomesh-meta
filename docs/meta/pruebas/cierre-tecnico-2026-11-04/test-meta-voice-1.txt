@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: shared SDK sends the documented ASR JSON field/audio file, authorization and Spanish/English bias
+ok 1 - shared SDK sends the documented ASR JSON field/audio file, authorization and Spanish/English bias
+  ---
+  duration_ms: 40.8404
+  type: 'test'
+  ...
+# Subtest: ASR configuration is independent of Muse text, fails closed and never sends unsupported WAVs
+ok 2 - ASR configuration is independent of Muse text, fails closed and never sends unsupported WAVs
+  ---
+  duration_ms: 23.4462
+  type: 'test'
+  ...
+# Subtest: documented opaque ASR session IDs allow punctuation but reject control or oversized diagnostics
+ok 3 - documented opaque ASR session IDs allow punctuation but reject control or oversized diagnostics
+  ---
+  duration_ms: 14.873
+  type: 'test'
+  ...
+# Subtest: ASR empty transcript is explicitly EMPTY; missing text, turns and malformed payloads are invalid
+ok 4 - ASR empty transcript is explicitly EMPTY; missing text, turns and malformed payloads are invalid
+  ---
+  duration_ms: 8.1695
+  type: 'test'
+  ...
+# Subtest: ASR non-JSON, oversized buffered or streamed JSON fails within bounded memory
+ok 5 - ASR non-JSON, oversized buffered or streamed JSON fails within bounded memory
+  ---
+  duration_ms: 6.6744
+  type: 'test'
+  ...
+# Subtest: ASR 401/413/429/500 have one SDK attempt, no fallback and sanitized errors
+ok 6 - ASR 401/413/429/500 have one SDK attempt, no fallback and sanitized errors
+  ---
+  duration_ms: 4.4192
+  type: 'test'
+  ...
+# Subtest: ASR SDK ignores debug environment and never logs audio, transcript, key or raw failures
+ok 7 - ASR SDK ignores debug environment and never logs audio, transcript, key or raw failures
+  ---
+  duration_ms: 2.0526
+  type: 'test'
+  ...
+# Subtest: a stalled ASR response body is cancelled by the service deadline without a late transcript
+ok 8 - a stalled ASR response body is cancelled by the service deadline without a late transcript
+  ---
+  duration_ms: 27.745
+  type: 'test'
+  ...
+# Subtest: authorized transcription is reviewable, scoped, has one attempt and unknown cost
+ok 9 - authorized transcription is reviewable, scoped, has one attempt and unknown cost
+  ---
+  duration_ms: 5.7676
+  type: 'test'
+  ...
+# Subtest: missing configuration does not read media or call a provider
+ok 10 - missing configuration does not read media or call a provider
+  ---
+  duration_ms: 0.6852
+  type: 'test'
+  ...
+# Subtest: injected browser tenant, URLs and malformed input never start a read
+ok 11 - injected browser tenant, URLs and malformed input never start a read
+  ---
+  duration_ms: 1.8054
+  type: 'test'
+  ...
+# Subtest: inactive member, foreign/revoked evidence or a stale revision cannot reach Meta
+ok 12 - inactive member, foreign/revoked evidence or a stale revision cannot reach Meta
+  ---
+  duration_ms: 2.3478
+  type: 'test'
+  ...
+# Subtest: bad WAV, metadata-only trust and changed bytes are rejected before invoking
+ok 13 - bad WAV, metadata-only trust and changed bytes are rejected before invoking
+  ---
+  duration_ms: 22.504
+  type: 'test'
+  ...
+# Subtest: access lost immediately before invoking prevents provider work
+ok 14 - access lost immediately before invoking prevents provider work
+  ---
+  duration_ms: 0.6849
+  type: 'test'
+  ...
+# Subtest: manual correction or revoked access during the provider response discards that response
+ok 15 - manual correction or revoked access during the provider response discards that response
+  ---
+  duration_ms: 0.9921
+  type: 'test'
+  ...
+# Subtest: silence is an EMPTY reviewable transcript, not zero cargo or guessed text
+ok 16 - silence is an EMPTY reviewable transcript, not zero cargo or guessed text
+  ---
+  duration_ms: 0.5498
+  type: 'test'
+  ...
+# Subtest: incomplete/oversized provider text, extra fields and false durations fail without truncating
+ok 17 - incomplete/oversized provider text, extra fields and false durations fail without truncating
+  ---
+  duration_ms: 1.43
+  type: 'test'
+  ...
+# Subtest: provider failures are sanitized and never automatically retried
+ok 18 - provider failures are sanitized and never automatically retried
+  ---
+  duration_ms: 0.7279
+  type: 'test'
+  ...
+# Subtest: cancel before starting performs no IO and does not echo an abort reason
+ok 19 - cancel before starting performs no IO and does not echo an abort reason
+  ---
+  duration_ms: 0.6419
+  type: 'test'
+  ...
+# Subtest: non-finite, fractional or out-of-range deadlines cannot silently become a provider budget
+ok 20 - non-finite, fractional or out-of-range deadlines cannot silently become a provider budget
+  ---
+  duration_ms: 0.7574
+  type: 'test'
+  ...
+# Subtest: a dependency rejecting in the same turn as cancellation does not leak an unhandled rejection
+ok 21 - a dependency rejecting in the same turn as cancellation does not leak an unhandled rejection
+  ---
+  duration_ms: 0.5777
+  type: 'test'
+  ...
+# Subtest: deadline also bounds a dependency that ignores the cancellation signal
+ok 22 - deadline also bounds a dependency that ignores the cancellation signal
+  ---
+  duration_ms: 11.2664
+  type: 'test'
+  ...
+# Subtest: a late response after cancellation never produces a successful transcription
+ok 23 - a late response after cancellation never produces a successful transcription
+  ---
+  duration_ms: 2.1573
+  type: 'test'
+  ...
+# Subtest: valid mono PCM WAV at both supported rates is inspected from bytes
+ok 24 - valid mono PCM WAV at both supported rates is inspected from bytes
+  ---
+  duration_ms: 1.7404
+  type: 'test'
+  ...
+# Subtest: stereo, unsupported rate, float and bit depth are rejected
+ok 25 - stereo, unsupported rate, float and bit depth are rejected
+  ---
+  duration_ms: 0.3244
+  type: 'test'
+  ...
+# Subtest: empty audio, truncated and mislabeled containers are rejected
+ok 26 - empty audio, truncated and mislabeled containers are rejected
+  ---
+  duration_ms: 0.2629
+  type: 'test'
+  ...
+# Subtest: ten minutes is a ceiling computed from sample bytes, not metadata
+ok 27 - ten minutes is a ceiling computed from sample bytes, not metadata
+  ---
+  duration_ms: 0.5445
+  type: 'test'
+  ...
+# Subtest: forged chunk lengths, rate/alignment and RIFF size cannot bypass validation
+ok 28 - forged chunk lengths, rate/alignment and RIFF size cannot bypass validation
+  ---
+  duration_ms: 0.773
+  type: 'test'
+  ...
+# Subtest: views with a nonzero byte offset are validated without reading unrelated bytes
+ok 29 - views with a nonzero byte offset are validated without reading unrelated bytes
+  ---
+  duration_ms: 0.2601
+  type: 'test'
+  ...
+# Subtest: padded metadata chunks are skipped correctly and duplicate format chunks are rejected
+ok 30 - padded metadata chunks are skipped correctly and duplicate format chunks are rejected
+  ---
+  duration_ms: 0.337
+  type: 'test'
+  ...
+# Subtest: large numbers of tiny chunks cannot create unbounded parsing work
+ok 31 - large numbers of tiny chunks cannot create unbounded parsing work
+  ---
+  duration_ms: 2.9173
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1540.4846

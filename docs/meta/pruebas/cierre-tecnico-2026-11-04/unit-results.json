@@ -1,0 +1,141 @@
+{
+  "scope": "LOCAL_AUTOMATED_TESTS_WITH_OVERLAPPING_COMMANDS",
+  "caseExecutions": 878,
+  "stages": 15,
+  "results": [
+    {
+      "suite": "test:v2-conversation",
+      "stage": 1,
+      "exit": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "ms": 6661
+    },
+    {
+      "suite": "test:v2-conversation",
+      "stage": 2,
+      "exit": 0,
+      "tests": 32,
+      "passed": 32,
+      "failed": 0,
+      "ms": 4056
+    },
+    {
+      "suite": "test:v2-chat-workflow",
+      "stage": 1,
+      "exit": 0,
+      "tests": 116,
+      "passed": 116,
+      "failed": 0,
+      "ms": 5881
+    },
+    {
+      "suite": "test:meta-ai",
+      "stage": 1,
+      "exit": 0,
+      "tests": 59,
+      "passed": 59,
+      "failed": 0,
+      "ms": 3489
+    },
+    {
+      "suite": "test:meta-base",
+      "stage": 1,
+      "exit": 0,
+      "tests": 44,
+      "passed": 44,
+      "failed": 0,
+      "ms": 15801
+    },
+    {
+      "suite": "test:meta-manifests",
+      "stage": 1,
+      "exit": 0,
+      "tests": 11,
+      "passed": 11,
+      "failed": 0,
+      "ms": 770
+    },
+    {
+      "suite": "test:meta-documents",
+      "stage": 1,
+      "exit": 0,
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "ms": 1494
+    },
+    {
+      "suite": "test:meta-draft-media",
+      "stage": 1,
+      "exit": 0,
+      "tests": 28,
+      "passed": 28,
+      "failed": 0,
+      "ms": 1739
+    },
+    {
+      "suite": "test:meta-loading",
+      "stage": 1,
+      "exit": 0,
+      "tests": 51,
+      "passed": 51,
+      "failed": 0,
+      "ms": 2490
+    },
+    {
+      "suite": "test:meta-dockmind",
+      "stage": 1,
+      "exit": 0,
+      "tests": 55,
+      "passed": 55,
+      "failed": 0,
+      "ms": 1870
+    },
+    {
+      "suite": "test:meta-voice",
+      "stage": 1,
+      "exit": 0,
+      "tests": 31,
+      "passed": 31,
+      "failed": 0,
+      "ms": 1610
+    },
+    {
+      "suite": "test:meta-explanation",
+      "stage": 1,
+      "exit": 0,
+      "tests": 48,
+      "passed": 48,
+      "failed": 0,
+      "ms": 4264
+    },
+    {
+      "suite": "test:client-operations",
+      "stage": 1,
+      "exit": 0,
+      "tests": 81,
+      "passed": 81,
+      "failed": 0,
+      "ms": 2720
+    },
+    {
+      "suite": "test:carrier-commercial",
+      "stage": 1,
+      "exit": 0,
+      "tests": 118,
+      "passed": 118,
+      "failed": 0,
+      "ms": 4119
+    },
+    {
+      "suite": "test:v2-intake",
+      "stage": 1,
+      "exit": 0,
+      "tests": 89,
+      "passed": 89,
+      "failed": 0
+    }
+  ]
+}

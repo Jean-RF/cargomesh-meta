@@ -1,0 +1,274 @@
+TAP version 13
+# Subtest: an absent key cannot trigger a live explanation
+ok 1 - an absent key cannot trigger a live explanation
+  ---
+  duration_ms: 5.5555
+  type: 'test'
+  ...
+# Subtest: injected explanation remains simulated and does not claim a live Passport integration
+ok 2 - injected explanation remains simulated and does not claim a live Passport integration
+  ---
+  duration_ms: 1.8749
+  type: 'test'
+  ...
+# Subtest: an unsupported reference cannot become a successful smoke result
+ok 3 - an unsupported reference cannot become a successful smoke result
+  ---
+  duration_ms: 1.0977
+  type: 'test'
+  ...
+# Subtest: both synthetic suites validate actual local files without credentials or recognition claims
+ok 4 - both synthetic suites validate actual local files without credentials or recognition claims
+  ---
+  duration_ms: 2952.094
+  type: 'test'
+  ...
+# Subtest: a configured key cannot turn a check or default invocation into live inference
+ok 5 - a configured key cannot turn a check or default invocation into live inference
+  ---
+  duration_ms: 3109.9661
+  type: 'test'
+  ...
+# Subtest: contradictory, repeated and unknown flags cannot invoke a provider
+ok 6 - contradictory, repeated and unknown flags cannot invoke a provider
+  ---
+  duration_ms: 6161.2441
+  type: 'test'
+  ...
+# Subtest: live mode with an empty private key fails before reading or sending media
+ok 7 - live mode with an empty private key fails before reading or sending media
+  ---
+  duration_ms: 1916.6874
+  type: 'test'
+  ...
+# Subtest: the local secrets file is ignored and never tracked
+ok 8 - the local secrets file is ignored and never tracked
+  ---
+  duration_ms: 279.1302
+  type: 'test'
+  ...
+# Subtest: readiness is configuration only, never evidence of a connection or deployment
+ok 9 - readiness is configuration only, never evidence of a connection or deployment
+  ---
+  duration_ms: 4.0751
+  type: 'test'
+  ...
+# Subtest: missing variables are bounded diagnostics without leaking secret values
+ok 10 - missing variables are bounded diagnostics without leaking secret values
+  ---
+  duration_ms: 0.9143
+  type: 'test'
+  ...
+# Subtest: Amazon checkout, wrong root and production from a feature branch fail closed
+ok 11 - Amazon checkout, wrong root and production from a feature branch fail closed
+  ---
+  duration_ms: 1.0692
+  type: 'test'
+  ...
+# Subtest: public secrets, arbitrary endpoints, contributor models and legacy voice are rejected
+ok 12 - public secrets, arbitrary endpoints, contributor models and legacy voice are rejected
+  ---
+  duration_ms: 1.3553
+  type: 'test'
+  ...
+# Subtest: Supabase origin must match the explicitly approved Meta target; remote loopback is invalid
+ok 13 - Supabase origin must match the explicitly approved Meta target; remote loopback is invalid
+  ---
+  duration_ms: 0.5452
+  type: 'test'
+  ...
+# Subtest: preflight respects the timeout/output bounds of the reviewed Axel client
+ok 14 - preflight respects the timeout/output bounds of the reviewed Axel client
+  ---
+  duration_ms: 0.6504
+  type: 'test'
+  ...
+# Subtest: default/preflight checks never invoke the child even with complete credentials
+ok 15 - default/preflight checks never invoke the child even with complete credentials
+  ---
+  duration_ms: 0.7436
+  type: 'test'
+  ...
+# Subtest: isolated AI requires only the Meta key, not Supabase, and never invokes a provider
+ok 16 - isolated AI requires only the Meta key, not Supabase, and never invokes a provider
+  ---
+  duration_ms: 1.0697
+  type: 'test'
+  ...
+# Subtest: isolated AI still rejects unsafe configuration, missing media dependencies and combined flags
+ok 17 - isolated AI still rejects unsafe configuration, missing media dependencies and combined flags
+  ---
+  duration_ms: 1.3906
+  type: 'test'
+  ...
+# Subtest: explicit opt-in still requires a safe configuration and Axel dependencies
+ok 18 - explicit opt-in still requires a safe configuration and Axel dependencies
+  ---
+  duration_ms: 1.2559
+  type: 'test'
+  ...
+# Subtest: a text acceptance remains TEXT_ONLY, with voice/image and deployment explicitly unverified
+ok 19 - a text acceptance remains TEXT_ONLY, with voice/image and deployment explicitly unverified
+  ---
+  duration_ms: 0.7899
+  type: 'test'
+  ...
+# Subtest: image adapter presence is distinct from image acceptance and does not block independent text
+ok 20 - image adapter presence is distinct from image acceptance and does not block independent text
+  ---
+  duration_ms: 0.5529
+  type: 'test'
+  ...
+# Subtest: simulated transport, wrong model and a failed acceptance cannot count as a real pass
+ok 21 - simulated transport, wrong model and a failed acceptance cannot count as a real pass
+  ---
+  duration_ms: 0.7957
+  type: 'test'
+  ...
+# Subtest: provider/child failures never disclose raw output or claim no request was made
+ok 22 - provider/child failures never disclose raw output or claim no request was made
+  ---
+  duration_ms: 0.7261
+  type: 'test'
+  ...
+# Subtest: unsupported or repeated flags cannot cause a provider request
+ok 23 - unsupported or repeated flags cannot cause a provider request
+  ---
+  duration_ms: 0.4499
+  type: 'test'
+  ...
+# Subtest: malformed or unsuccessful child output is bounded and never echoed
+ok 24 - malformed or unsuccessful child output is bounded and never echoed
+  ---
+  duration_ms: 0.6768
+  type: 'test'
+  ...
+# Subtest: public aliases cannot disguise a server credential or privileged Supabase key
+ok 25 - public aliases cannot disguise a server credential or privileged Supabase key
+  ---
+  duration_ms: 0.9586
+  type: 'test'
+  ...
+# Subtest: voice smoke is opt-in, independent of Muse text, and does not claim accuracy or tenant integration
+ok 26 - voice smoke is opt-in, independent of Muse text, and does not claim accuracy or tenant integration
+  ---
+  duration_ms: 1.0081
+  type: 'test'
+  ...
+# Subtest: parent voice acceptance preserves bounded opaque provider session IDs
+ok 27 - parent voice acceptance preserves bounded opaque provider session IDs
+  ---
+  duration_ms: 0.4201
+  type: 'test'
+  ...
+# Subtest: voice smoke rejects missing configuration/dependencies and ambiguous flags before any file/provider work
+ok 28 - voice smoke rejects missing configuration/dependencies and ambiguous flags before any file/provider work
+  ---
+  duration_ms: 0.673
+  type: 'test'
+  ...
+# Subtest: simulated/wrong-model voice, leaked transcript/secret or false confirmation cannot count as acceptance
+ok 29 - simulated/wrong-model voice, leaked transcript/secret or false confirmation cannot count as acceptance
+  ---
+  duration_ms: 1.9327
+  type: 'test'
+  ...
+# Subtest: voice smoke does not print audio/transcript, fake real inference, verification of accuracy or tenant integration
+ok 30 - voice smoke does not print audio/transcript, fake real inference, verification of accuracy or tenant integration
+  ---
+  duration_ms: 5.9871
+  type: 'test'
+  ...
+# Subtest: empty and invalid voice are never smoke success and invalid bytes never invoke
+ok 31 - empty and invalid voice are never smoke success and invalid bytes never invoke
+  ---
+  duration_ms: 1.4409
+  type: 'test'
+  ...
+# Subtest: own-file loader validates real bytes, rejects truncated/oversized files and never requires a database
+ok 32 - own-file loader validates real bytes, rejects truncated/oversized files and never requires a database
+  ---
+  duration_ms: 20.1139
+  type: 'test'
+  ...
+# Subtest: fixtures are explicitly synthetic, never recorded model acceptance
+ok 33 - fixtures are explicitly synthetic, never recorded model acceptance
+  ---
+  duration_ms: 1.3228
+  type: 'test'
+  ...
+# Subtest: transcription retains evidence/revision and maps to Axel DeclarationInput v1 evidence
+ok 34 - transcription retains evidence/revision and maps to Axel DeclarationInput v1 evidence
+  ---
+  duration_ms: 4.996
+  type: 'test'
+  ...
+# Subtest: empty transcription does not invent an interpretation input
+ok 35 - empty transcription does not invent an interpretation input
+  ---
+  duration_ms: 0.6361
+  type: 'test'
+  ...
+# Subtest: another evidence or stale revision cannot become the current transcription
+ok 36 - another evidence or stale revision cannot become the current transcription
+  ---
+  duration_ms: 0.4938
+  type: 'test'
+  ...
+# Subtest: transcription rejects confirmation, injected scope/URLs, extra commands and excessive data
+ok 37 - transcription rejects confirmation, injected scope/URLs, extra commands and excessive data
+  ---
+  duration_ms: 0.8525
+  type: 'test'
+  ...
+# Subtest: explanation consumes supplied comparison facts without mutating the input
+ok 38 - explanation consumes supplied comparison facts without mutating the input
+  ---
+  duration_ms: 0.674
+  type: 'test'
+  ...
+# Subtest: open, insufficient, missing and incompatible scopes cannot claim a comparable difference
+ok 39 - open, insufficient, missing and incompatible scopes cannot claim a comparable difference
+  ---
+  duration_ms: 0.6205
+  type: 'test'
+  ...
+# Subtest: not ready stays unknown, never confirmed zero or a final difference
+ok 40 - not ready stays unknown, never confirmed zero or a final difference
+  ---
+  duration_ms: 0.3633
+  type: 'test'
+  ...
+# Subtest: explanations reject stale identities and invented event IDs, evidence or timecodes
+ok 41 - explanations reject stale identities and invented event IDs, evidence or timecodes
+  ---
+  duration_ms: 0.9321
+  type: 'test'
+  ...
+# Subtest: actions remain proposals and models cannot introduce counts or commercial commands
+ok 42 - actions remain proposals and models cannot introduce counts or commercial commands
+  ---
+  duration_ms: 1.3233
+  type: 'test'
+  ...
+# Subtest: semantic guards reject blank explanation text and contradictory supplied match status
+ok 43 - semantic guards reject blank explanation text and contradictory supplied match status
+  ---
+  duration_ms: 0.6694
+  type: 'test'
+  ...
+# Subtest: structural contracts can supply strict provider JSON Schema without provider calls
+ok 44 - structural contracts can supply strict provider JSON Schema without provider calls
+  ---
+  duration_ms: 3.1347
+  type: 'test'
+  ...
+1..44
+# tests 44
+# suites 0
+# pass 44
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14840.9407

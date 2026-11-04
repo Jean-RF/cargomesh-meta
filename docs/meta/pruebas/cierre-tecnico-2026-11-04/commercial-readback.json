@@ -1,0 +1,22 @@
+{
+  "scope": "META_LOCAL_READ_ONLY",
+  "bookingId": "654a02b7-c366-4298-8e1a-003481cbfb0a",
+  "documents": [
+    {
+      "kind": "COMPANY_PROFILE",
+      "revisionId": "54928626-1882-481e-b93c-a11abe7898ea",
+      "review": "ACCEPTED",
+      "hashVerified": true,
+      "foreignDenied": true
+    },
+    {
+      "kind": "PACKING_LIST",
+      "revisionId": "ac08c938-6e48-4ffe-abb3-b0ccbc07f75c",
+      "review": "ACCEPTED",
+      "hashVerified": true,
+      "foreignDenied": true
+    }
+  ],
+  "writes": 0,
+  "inferenceCalls": 0
+}

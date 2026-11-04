@@ -1,0 +1,157 @@
+{
+  "scope": "Shared production interpreter; synthetic text only; no DB/Next/browser, no commercial writes. Small diagnostic sample, not p50/p95 benchmark.",
+  "cases": [
+    {
+      "id": "greeting-transport",
+      "totalMs": 4232,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "46771f9f-248d-4a83-a101-12f8ea2bb7c0",
+        "latencyMs": 4229,
+        "attempts": 1,
+        "inputTokens": 2613,
+        "outputTokens": 248,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Hi! I can help you prepare a shipment request. Only Road is available right now; Air and Sea are unavailable. Would you like to select Road to continue?"
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 4180,
+          "bodyMs": 4214,
+          "bytes": 17211,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "low",
+          "stream": false
+        }
+      ]
+    },
+    {
+      "id": "cargo-extraction",
+      "totalMs": 12306,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "f5b218b7-ce5c-45cc-9593-3ac01c75b3cd",
+        "latencyMs": 12291,
+        "attempts": 1,
+        "inputTokens": 2617,
+        "outputTokens": 1175,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "PROVIDE",
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "machine parts"
+          },
+          {
+            "field": "packaging",
+            "value": "PALLET"
+          },
+          {
+            "field": "unitQuantity",
+            "value": "12"
+          },
+          {
+            "field": "unitWeightPerUnitKg",
+            "value": "100"
+          }
+        ],
+        "acknowledgment": "Got it — 12 pallets of machine parts at 100 kg per pallet."
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 12284,
+          "bodyMs": 12286,
+          "bytes": 17238,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "low",
+          "stream": false
+        }
+      ]
+    },
+    {
+      "id": "memory-follow-up",
+      "totalMs": 39400,
+      "mode": "DETERMINISTIC",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "648d63d5-09c0-4146-bd03-5e9ec70c84f2",
+        "latencyMs": 39394,
+        "attempts": 2,
+        "inputTokens": null,
+        "outputTokens": null,
+        "estimatedCostUsd": null,
+        "outcome": "MODEL_OUTPUT_INVALID"
+      },
+      "error": {
+        "code": "MODEL_OUTPUT_INVALID",
+        "retryable": false
+      },
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "I can explain the steps and help you prepare the request. What would you like to know?"
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 22041,
+          "bodyMs": 22042,
+          "bytes": 17431,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "low",
+          "stream": false
+        },
+        {
+          "status": 200,
+          "headersMs": 17348,
+          "bodyMs": 17349,
+          "bytes": 17431,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "low",
+          "stream": false
+        }
+      ]
+    },
+    {
+      "id": "explicit-correction",
+      "totalMs": 2,
+      "mode": "DETERMINISTIC",
+      "metadata": null,
+      "error": null,
+      "interpretation": {
+        "intent": "CORRECT",
+        "fields": [
+          {
+            "field": "unitQuantity",
+            "value": "10"
+          }
+        ]
+      },
+      "http": []
+    }
+  ]
+}

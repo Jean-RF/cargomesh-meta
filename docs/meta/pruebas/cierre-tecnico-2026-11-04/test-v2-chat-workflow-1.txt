@@ -1,0 +1,706 @@
+TAP version 13
+# Subtest: language survives numeric turns and changes only on clear language evidence
+ok 1 - language survives numeric turns and changes only on clear language evidence
+  ---
+  duration_ms: 1.4917
+  type: 'test'
+  ...
+# Subtest: renewal context reflects latest draft without contact values or mutation authority
+ok 2 - renewal context reflects latest draft without contact values or mutation authority
+  ---
+  duration_ms: 28.9773
+  type: 'test'
+  ...
+# Subtest: renewal retains unresolved dimensions and cannot crash on an out-of-range proposal
+ok 3 - renewal retains unresolved dimensions and cannot crash on an out-of-range proposal
+  ---
+  duration_ms: 1.5528
+  type: 'test'
+  ...
+# Subtest: voice receives accepted availability without collapsing alternatives or granting execution authority
+ok 4 - voice receives accepted availability without collapsing alternatives or granting execution authority
+  ---
+  duration_ms: 5.6599
+  type: 'test'
+  ...
+# Subtest: renewal carries the product and pending delivery clock without leaking contact values
+ok 5 - renewal carries the product and pending delivery clock without leaking contact values
+  ---
+  duration_ms: 2.0987
+  type: 'test'
+  ...
+# Subtest: voice renewal follows validated form sections instead of optional-field order
+ok 6 - voice renewal follows validated form sections instead of optional-field order
+  ---
+  duration_ms: 0.8088
+  type: 'test'
+  ...
+# Subtest: Nova renewal keeps split as a pending question until it is explicitly answered
+ok 7 - Nova renewal keeps split as a pending question until it is explicitly answered
+  ---
+  duration_ms: 4.0505
+  type: 'test'
+  ...
+# Subtest: assistant scalar proposals cannot select or partly modify one of multiple groups
+ok 8 - assistant scalar proposals cannot select or partly modify one of multiple groups
+  ---
+  duration_ms: 1.5594
+  type: 'test'
+  ...
+# Subtest: a newly appended group has no guessed quantity
+ok 9 - a newly appended group has no guessed quantity
+  ---
+  duration_ms: 0.216
+  type: 'test'
+  ...
+# Subtest: relative dates use the session date, including UTC/local midnight and year boundary
+ok 10 - relative dates use the session date, including UTC/local midnight and year boundary
+  ---
+  duration_ms: 41.1696
+  type: 'test'
+  ...
+# Subtest: alternative dates remain proposals without inventing pickup/delivery roles or hours
+ok 11 - alternative dates remain proposals without inventing pickup/delivery roles or hours
+  ---
+  duration_ms: 3.2198
+  type: 'test'
+  ...
+# Subtest: windows require explicit ordered and real calendar instants
+ok 12 - windows require explicit ordered and real calendar instants
+  ---
+  duration_ms: 1.0909
+  type: 'test'
+  ...
+# Subtest: hazard uncertainty requires product classification; packaging is not cargo classification
+ok 13 - hazard uncertainty requires product classification; packaging is not cargo classification
+  ---
+  duration_ms: 1.3804
+  type: 'test'
+  ...
+# Subtest: long messages pass intact up to 6000; larger input is rejected without slicing
+ok 14 - long messages pass intact up to 6000; larger input is rejected without slicing
+  ---
+  duration_ms: 3.5194
+  type: 'test'
+  ...
+# Subtest: chat commands only propose; yes never selects or authorizes booking
+ok 15 - chat commands only propose; yes never selects or authorizes booking
+  ---
+  duration_ms: 8.5571
+  type: 'test'
+  ...
+# Subtest: consent is required before any network read and review expires
+ok 16 - consent is required before any network read and review expires
+  ---
+  duration_ms: 4.6252
+  type: 'test'
+  ...
+# Subtest: tenant, version, price and ranking changes invalidate a proposal before writes
+ok 17 - tenant, version, price and ranking changes invalidate a proposal before writes
+  ---
+  duration_ms: 5.6191
+  type: 'test'
+  ...
+# Subtest: selection is persisted then reread, and repeat confirmation reuses the existing receipt
+ok 18 - selection is persisted then reread, and repeat confirmation reuses the existing receipt
+  ---
+  duration_ms: 2.9524
+  type: 'test'
+  ...
+# Subtest: a response not present in the authoritative reread is not success
+ok 19 - a response not present in the authoritative reread is not success
+  ---
+  duration_ms: 1.3551
+  type: 'test'
+  ...
+# Subtest: network retries reuse selection idempotency key
+ok 20 - network retries reuse selection idempotency key
+  ---
+  duration_ms: 1.7666
+  type: 'test'
+  ...
+# Subtest: booking requires a current selected decision and is separate from carrier confirmation
+ok 21 - booking requires a current selected decision and is separate from carrier confirmation
+  ---
+  duration_ms: 1.7704
+  type: 'test'
+  ...
+# Subtest: unsubmitted drafts and invalid option indices are never selectable
+ok 22 - unsubmitted drafts and invalid option indices are never selectable
+  ---
+  duration_ms: 0.8533
+  type: 'test'
+  ...
+# Subtest: retrying authorization after delegated confirmation does not prepare capacity again
+ok 23 - retrying authorization after delegated confirmation does not prepare capacity again
+  ---
+  duration_ms: 1.7739
+  type: 'test'
+  ...
+# Subtest: quote action never submits a draft and requires explicit consent before any read
+ok 24 - quote action never submits a draft and requires explicit consent before any read
+  ---
+  duration_ms: 1.697
+  type: 'test'
+  ...
+# Subtest: deadline must be future and within the pickup window
+ok 25 - deadline must be future and within the pickup window
+  ---
+  duration_ms: 0.2179
+  type: 'test'
+  ...
+# Subtest: version or tenant change invalidates the reviewed quote action before mutation
+ok 26 - version or tenant change invalidates the reviewed quote action before mutation
+  ---
+  duration_ms: 2.2899
+  type: 'test'
+  ...
+# Subtest: network retry and repeated consent reuse the original idempotency key
+ok 27 - network retry and repeated consent reuse the original idempotency key
+  ---
+  duration_ms: 4.254
+  type: 'test'
+  ...
+# Subtest: a receipt for another request is never displayed as success
+ok 28 - a receipt for another request is never displayed as success
+  ---
+  duration_ms: 0.9233
+  type: 'test'
+  ...
+# Subtest: voice/text quote requests only prepare UI; selection or mixed cargo is not consent
+ok 29 - voice/text quote requests only prepare UI; selection or mixed cargo is not consent
+  ---
+  duration_ms: 11.4808
+  type: 'test'
+  ...
+# Subtest: C-02: a typed message during speech is rejected visibly and remains available to resend
+ok 30 - C-02: a typed message during speech is rejected visibly and remains available to resend
+  ---
+  duration_ms: 1.4429
+  type: 'test'
+  ...
+# Subtest: long draft reviews scroll inside the conversation without displacing the header and composer
+ok 31 - long draft reviews scroll inside the conversation without displacing the header and composer
+  ---
+  duration_ms: 4.5216
+  type: 'test'
+  ...
+# Subtest: the welcome rises in order: mascot, heading, then the first greeting
+ok 32 - the welcome rises in order: mascot, heading, then the first greeting
+  ---
+  duration_ms: 1.9196
+  type: 'test'
+  ...
+# Subtest: reduced motion shows every welcome block immediately without a hidden or displaced state
+ok 33 - reduced motion shows every welcome block immediately without a hidden or displaced state
+  ---
+  duration_ms: 0.2635
+  type: 'test'
+  ...
+# Subtest: the introduction leaves time for the one-shot hop and a still greeting, but has a finite deadline
+ok 34 - the introduction leaves time for the one-shot hop and a still greeting, but has a finite deadline
+  ---
+  duration_ms: 0.1738
+  type: 'test'
+  ...
+# Subtest: the assistant looks toward the pointer without letting its eyes escape the face
+ok 35 - the assistant looks toward the pointer without letting its eyes escape the face
+  ---
+  duration_ms: 0.3404
+  type: 'test'
+  ...
+# Subtest: dragging past any viewport edge keeps the assistant reachable
+ok 36 - dragging past any viewport edge keeps the assistant reachable
+  ---
+  duration_ms: 0.2728
+  type: 'test'
+  ...
+# Subtest: expanding or resizing to mobile clamps the moved composer into the new viewport
+ok 37 - expanding or resizing to mobile clamps the moved composer into the new viewport
+  ---
+  duration_ms: 0.1695
+  type: 'test'
+  ...
+# Subtest: keyboard dragging supports precise movement, larger steps and boundary recovery
+ok 38 - keyboard dragging supports precise movement, larger steps and boundary recovery
+  ---
+  duration_ms: 0.2808
+  type: 'test'
+  ...
+# Subtest: fallback help acknowledges only verified provisional details and asks the next step
+ok 39 - fallback help acknowledges only verified provisional details and asks the next step
+  ---
+  duration_ms: 5.3529
+  type: 'test'
+  ...
+# Subtest: how-to question gets a conversational explanation before a form prompt
+ok 40 - how-to question gets a conversational explanation before a form prompt
+  ---
+  duration_ms: 0.9666
+  type: 'test'
+  ...
+# Subtest: Spanish guidance keeps confirmed totals and asks what pallets contain
+ok 41 - Spanish guidance keeps confirmed totals and asks what pallets contain
+  ---
+  duration_ms: 1.8279
+  type: 'test'
+  ...
+# Subtest: context summarizes current non-contact draft values without exposing contact details
+ok 42 - context summarizes current non-contact draft values without exposing contact details
+  ---
+  duration_ms: 4.1021
+  type: 'test'
+  ...
+# Subtest: memory retains medicine declaration across follow-ups without converting bottles into cargo groups
+ok 43 - memory retains medicine declaration across follow-ups without converting bottles into cargo groups
+  ---
+  duration_ms: 0.7404
+  type: 'test'
+  ...
+# Subtest: bounded memory preserves older cargo and later corrections, excludes partial turns and masks contacts
+ok 44 - bounded memory preserves older cargo and later corrections, excludes partial turns and masks contacts
+  ---
+  duration_ms: 0.8928
+  type: 'test'
+  ...
+# Subtest: untrusted history cannot supply a system role or bypass message bounds
+ok 45 - untrusted history cannot supply a system role or bypass message bounds
+  ---
+  duration_ms: 0.4572
+  type: 'test'
+  ...
+# Subtest: review shows all cargo groups, alternatives and booleans without internal metadata or object coercions
+ok 46 - review shows all cargo groups, alternatives and booleans without internal metadata or object coercions
+  ---
+  duration_ms: 23.6695
+  type: 'test'
+  ...
+# Subtest: every correction invalidates an older confirmation, including additional groups and alternative dates
+ok 47 - every correction invalidates an older confirmation, including additional groups and alternative dates
+  ---
+  duration_ms: 0.5051
+  type: 'test'
+  ...
+# Subtest: approval applies only to the exact reviewed draft within five minutes
+ok 48 - approval applies only to the exact reviewed draft within five minutes
+  ---
+  duration_ms: 1.1316
+  type: 'test'
+  ...
+# Subtest: recovery merges a correction made during loading into the same saved draft
+ok 49 - recovery merges a correction made during loading into the same saved draft
+  ---
+  duration_ms: 94.077
+  type: 'test'
+  ...
+# Subtest: reset while recovery is in flight cannot resurrect the previous request
+ok 50 - reset while recovery is in flight cannot resurrect the previous request
+  ---
+  duration_ms: 17.3455
+  type: 'test'
+  ...
+# Subtest: an old evaluation cannot reappear after a correction during its read
+ok 51 - an old evaluation cannot reappear after a correction during its read
+  ---
+  duration_ms: 14.9973
+  type: 'test'
+  ...
+# Subtest: confirmed create, correction and revision keep one ID; reopening loads the revised values
+ok 52 - confirmed create, correction and revision keep one ID; reopening loads the revised values
+  ---
+  duration_ms: 34.0391
+  type: 'test'
+  ...
+# Subtest: corrections made during a save keep the saved ID but cannot revive its older ROAD result
+ok 53 - corrections made during a save keep the saved ID but cannot revive its older ROAD result
+  ---
+  duration_ms: 20.259
+  type: 'test'
+  ...
+# Subtest: catalog refresh during recovery restarts safely and ignores the old read
+ok 54 - catalog refresh during recovery restarts safely and ignores the old read
+  ---
+  duration_ms: 19.2917
+  type: 'test'
+  ...
+# Subtest: reload discards pre-existing edits but keeps corrections arriving after reload started
+ok 55 - reload discards pre-existing edits but keeps corrections arriving after reload started
+  ---
+  duration_ms: 23.5532
+  type: 'test'
+  ...
+# Subtest: unsupported recovered locations finish with an error, never an endless reading state
+ok 56 - unsupported recovered locations finish with an error, never an endless reading state
+  ---
+  duration_ms: 13.7108
+  type: 'test'
+  ...
+# Subtest: version conflict preserves corrections and retries the same revision intent, never creates a second request
+ok 57 - version conflict preserves corrections and retries the same revision intent, never creates a second request
+  ---
+  duration_ms: 13.7384
+  type: 'test'
+  ...
+# Subtest: assistant feedback marks only committed changes, including derived totals, without saving
+ok 58 - assistant feedback marks only committed changes, including derived totals, without saving
+  ---
+  duration_ms: 15.7802
+  type: 'test'
+  ...
+# Subtest: no-op turns and manual edits do not produce an assistant success cue
+ok 59 - no-op turns and manual edits do not produce an assistant success cue
+  ---
+  duration_ms: 10.6298
+  type: 'test'
+  ...
+# Subtest: new corrections restart feedback and an old timer cannot clear the latest change
+ok 60 - new corrections restart feedback and an old timer cannot clear the latest change
+  ---
+  duration_ms: 11.9766
+  type: 'test'
+  ...
+# Subtest: batched assistant facts retain each changed field and reset releases feedback
+ok 61 - batched assistant facts retain each changed field and reset releases feedback
+  ---
+  duration_ms: 16.0694
+  type: 'test'
+  ...
+# Subtest: assistant completes facilities then advances after showing feedback, never saves
+ok 62 - assistant completes facilities then advances after showing feedback, never saves
+  ---
+  duration_ms: 21.4943
+  type: 'test'
+  ...
+# Subtest: manual navigation and reset cancel scheduled assistant advancement
+ok 63 - manual navigation and reset cancel scheduled assistant advancement
+  ---
+  duration_ms: 11.8761
+  type: 'test'
+  ...
+# Subtest: manual edits and unsupported or same-facility routes cannot trigger advancement
+ok 64 - manual edits and unsupported or same-facility routes cannot trigger advancement
+  ---
+  duration_ms: 13.5977
+  type: 'test'
+  ...
+# Subtest: complete cargo and contacts advance to review only after form validation
+ok 65 - complete cargo and contacts advance to review only after form validation
+  ---
+  duration_ms: 13.2766
+  type: 'test'
+  ...
+# Subtest: receipts show authorized route values and form guidance identifies actual missing data
+ok 66 - receipts show authorized route values and form guidance identifies actual missing data
+  ---
+  duration_ms: 2.2694
+  type: 'test'
+  ...
+# Subtest: touching the form pauses the pending automatic move without discarding recorded facts
+ok 67 - touching the form pauses the pending automatic move without discarding recorded facts
+  ---
+  duration_ms: 11.2995
+  type: 'test'
+  ...
+# Subtest: cargo must be valid before moving to windows and incomplete contacts keep review blocked
+ok 68 - cargo must be valid before moving to windows and incomplete contacts keep review blocked
+  ---
+  duration_ms: 10.5274
+  type: 'test'
+  ...
+# Subtest: ambiguous multi-group chat leaves draft and change tracking untouched
+ok 69 - ambiguous multi-group chat leaves draft and change tracking untouched
+  ---
+  duration_ms: 10.5765
+  type: 'test'
+  ...
+# Subtest: repeated transcript facts do not cancel an already valid automatic transition
+ok 70 - repeated transcript facts do not cancel an already valid automatic transition
+  ---
+  duration_ms: 11.464
+  type: 'test'
+  ...
+# Subtest: simple Nova prompts pass through the real controller, save one ID and reopen the corrected version
+ok 71 - simple Nova prompts pass through the real controller, save one ID and reopen the corrected version
+  ---
+  duration_ms: 51.9913
+  type: 'test'
+  ...
+# Subtest: superseded requests abort and an old completion cannot clear the new request
+ok 72 - superseded requests abort and an old completion cannot clear the new request
+  ---
+  duration_ms: 1.1651
+  type: 'test'
+  ...
+# Subtest: unchanged drafts preserve the request; close/unmount aborts and completed work is released
+ok 73 - unchanged drafts preserve the request; close/unmount aborts and completed work is released
+  ---
+  duration_ms: 0.2111
+  type: 'test'
+  ...
+# Subtest: spoken axis labels resolve individual dimensions and retain scope ambiguity
+ok 74 - spoken axis labels resolve individual dimensions and retain scope ambiguity
+  ---
+  duration_ms: 6.6723
+  type: 'test'
+  ...
+# Subtest: ambiguous dimensions remain pending without altering the draft
+ok 75 - ambiguous dimensions remain pending without altering the draft
+  ---
+  duration_ms: 0.4156
+  type: 'test'
+  ...
+# Subtest: explicit per-unit resolution computes 150 m3 for ten units and preserves weight
+ok 76 - explicit per-unit resolution computes 150 m3 for ten units and preserves weight
+  ---
+  duration_ms: 0.9364
+  type: 'test'
+  ...
+# Subtest: group dimensions do not invent per-unit dimensions or divide volume
+ok 77 - group dimensions do not invent per-unit dimensions or divide volume
+  ---
+  duration_ms: 0.4525
+  type: 'test'
+  ...
+# Subtest: missing measurement unit cannot be silently assumed
+ok 78 - missing measurement unit cannot be silently assumed
+  ---
+  duration_ms: 0.2093
+  type: 'test'
+  ...
+# Subtest: height correction recalculates volume while preserving all other fields
+ok 79 - height correction recalculates volume while preserving all other fields
+  ---
+  duration_ms: 0.6873
+  type: 'test'
+  ...
+# Subtest: unrelated turns retain pending clarification and conflicting scopes do not resolve it
+ok 80 - unrelated turns retain pending clarification and conflicting scopes do not resolve it
+  ---
+  duration_ms: 0.2829
+  type: 'test'
+  ...
+# Subtest: zero dimensions cannot become a complete cargo measurement
+ok 81 - zero dimensions cannot become a complete cargo measurement
+  ---
+  duration_ms: 0.2867
+  type: 'test'
+  ...
+# Subtest: negative dimensions are rejected rather than read as positive numbers
+ok 82 - negative dimensions are rejected rather than read as positive numbers
+  ---
+  duration_ms: 0.3907
+  type: 'test'
+  ...
+# Subtest: explicit cancellation discards only the pending proposal
+ok 83 - explicit cancellation discards only the pending proposal
+  ---
+  duration_ms: 0.4181
+  type: 'test'
+  ...
+# Subtest: numeric dates retain pickup range and delivery deadline without inventing clocks
+ok 84 - numeric dates retain pickup range and delivery deadline without inventing clocks
+  ---
+  duration_ms: 30.0061
+  type: 'test'
+  ...
+# Subtest: a date alone and an impossible numeric date never become midnight windows
+ok 85 - a date alone and an impossible numeric date never become midnight windows
+  ---
+  duration_ms: 0.8215
+  type: 'test'
+  ...
+# Subtest: a voiced date clarification needs role, exact day and an unambiguous clock
+ok 86 - a voiced date clarification needs role, exact day and an unambiguous clock
+  ---
+  duration_ms: 2.5609
+  type: 'test'
+  ...
+# Subtest: voice can choose an explicit date from alternatives and never chooses one silently
+ok 87 - voice can choose an explicit date from alternatives and never chooses one silently
+  ---
+  duration_ms: 1.7135
+  type: 'test'
+  ...
+# Subtest: cargo classification needs an explicit reviewed category and product, using the real catalog
+ok 88 - cargo classification needs an explicit reviewed category and product, using the real catalog
+  ---
+  duration_ms: 2.2492
+  type: 'test'
+  ...
+# Subtest: Spanish review and correction commands are distinct from explicit consent
+ok 89 - Spanish review and correction commands are distinct from explicit consent
+  ---
+  duration_ms: 1.2762
+  type: 'test'
+  ...
+# Subtest: Spanish short answers bind to Nova's actual last question
+ok 90 - Spanish short answers bind to Nova's actual last question
+  ---
+  duration_ms: 8.2194
+  type: 'test'
+  ...
+# Subtest: spoken contact values must match literal dictated data, without invented country or mailbox
+ok 91 - spoken contact values must match literal dictated data, without invented country or mailbox
+  ---
+  duration_ms: 0.9625
+  type: 'test'
+  ...
+# Subtest: a short time-range answer uses the explicit pickup question, never a guessed role
+ok 92 - a short time-range answer uses the explicit pickup question, never a guessed role
+  ---
+  duration_ms: 0.9075
+  type: 'test'
+  ...
+# Subtest: a contradictory or alternative day never inherits a previously proposed date
+ok 93 - a contradictory or alternative day never inherits a previously proposed date
+  ---
+  duration_ms: 2.0433
+  type: 'test'
+  ...
+# Subtest: morning describes a clock period and is not tomorrow
+ok 94 - morning describes a clock period and is not tomorrow
+  ---
+  duration_ms: 0.2947
+  type: 'test'
+  ...
+# Subtest: English scheduling answers bind to the latest question rather than an earlier pickup recap
+ok 95 - English scheduling answers bind to the latest question rather than an earlier pickup recap
+  ---
+  duration_ms: 1.5845
+  type: 'test'
+  ...
+# Subtest: reported November pickup and December delivery retain separate partial dates and clocks
+ok 96 - reported November pickup and December delivery retain separate partial dates and clocks
+  ---
+  duration_ms: 2.3772
+  type: 'test'
+  ...
+# Subtest: a new day cannot inherit another day's clocks and unsupported dates never produce a window
+ok 97 - a new day cannot inherit another day's clocks and unsupported dates never produce a window
+  ---
+  duration_ms: 1.787
+  type: 'test'
+  ...
+# Subtest: robots in each box and weight each survive compound quantity answers
+ok 98 - robots in each box and weight each survive compound quantity answers
+  ---
+  duration_ms: 6.2336
+  type: 'test'
+  ...
+# Subtest: short category acceptance selects only one named catalog category, never consent or hazardous clearance
+ok 99 - short category acceptance selects only one named catalog category, never consent or hazardous clearance
+  ---
+  duration_ms: 1.9117
+  type: 'test'
+  ...
+# Subtest: greetings and general questions reach the provider instead of a fixed transport reply
+ok 100 - greetings and general questions reach the provider instead of a fixed transport reply
+  ---
+  duration_ms: 1.9648
+  type: 'test'
+  ...
+# Subtest: ambiguous/negative speech is clarification, never transport consent
+ok 101 - ambiguous/negative speech is clarification, never transport consent
+  ---
+  duration_ms: 0.2046
+  type: 'test'
+  ...
+# Subtest: Road acceptance opens the existing form from dashboard and selects its first step
+ok 102 - Road acceptance opens the existing form from dashboard and selects its first step
+  ---
+  duration_ms: 0.788
+  type: 'test'
+  ...
+# Subtest: explicit Road consent stays local; unavailable modes never select Road
+ok 103 - explicit Road consent stays local; unavailable modes never select Road
+  ---
+  duration_ms: 0.1695
+  type: 'test'
+  ...
+# Subtest: workflow reads use same-origin credentials and follow every page
+ok 104 - workflow reads use same-origin credentials and follow every page
+  ---
+  duration_ms: 23.1791
+  type: 'test'
+  ...
+# Subtest: workflow authorization failure is surfaced rather than replaced with fixture data
+ok 105 - workflow authorization failure is surfaced rather than replaced with fixture data
+  ---
+  duration_ms: 0.7145
+  type: 'test'
+  ...
+# Subtest: invalid or incomplete workflow pagination fails visibly
+ok 106 - invalid or incomplete workflow pagination fails visibly
+  ---
+  duration_ms: 0.5085
+  type: 'test'
+  ...
+# Subtest: readiness rejects mismatched request/version and never confirms capacity
+ok 107 - readiness rejects mismatched request/version and never confirms capacity
+  ---
+  duration_ms: 36.7424
+  type: 'test'
+  ...
+# Subtest: C-01: flexed booking questions read persisted bookings
+ok 108 - C-01: flexed booking questions read persisted bookings
+  ---
+  duration_ms: 1.8439
+  type: 'test'
+  ...
+# Subtest: other read-only workflow questions remain distinct
+ok 109 - other read-only workflow questions remain distinct
+  ---
+  duration_ms: 0.3786
+  type: 'test'
+  ...
+# Subtest: readiness uses its real backend read and mixed cargo questions retain capture
+ok 110 - readiness uses its real backend read and mixed cargo questions retain capture
+  ---
+  duration_ms: 0.1839
+  type: 'test'
+  ...
+# Subtest: empty commercial records never imply a quote, booking, or live tracking
+ok 111 - empty commercial records never imply a quote, booking, or live tracking
+  ---
+  duration_ms: 1.1751
+  type: 'test'
+  ...
+# Subtest: shipper authorization remains distinct from carrier confirmation
+ok 112 - shipper authorization remains distinct from carrier confirmation
+  ---
+  duration_ms: 0.2735
+  type: 'test'
+  ...
+# Subtest: C-03: confirmed and cancelled records use their persisted carrier status without stale caveats
+ok 113 - C-03: confirmed and cancelled records use their persisted carrier status without stale caveats
+  ---
+  duration_ms: 0.2792
+  type: 'test'
+  ...
+# Subtest: withdrawn and expired offers are not presented as current
+ok 114 - withdrawn and expired offers are not presented as current
+  ---
+  duration_ms: 0.2753
+  type: 'test'
+  ...
+# Subtest: current offer summary includes issuer price, components, terms and version without booking claim
+ok 115 - current offer summary includes issuer price, components, terms and version without booking claim
+  ---
+  duration_ms: 0.2728
+  type: 'test'
+  ...
+# Subtest: Spanish commercial summaries retain absent-offer and consent boundaries
+ok 116 - Spanish commercial summaries retain absent-offer and consent boundaries
+  ---
+  duration_ms: 0.1319
+  type: 'test'
+  ...
+1..116
+# tests 116
+# suites 0
+# pass 116
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5522.7751

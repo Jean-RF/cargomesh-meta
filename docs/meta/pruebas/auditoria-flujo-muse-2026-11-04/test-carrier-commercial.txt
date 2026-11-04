@@ -1,0 +1,739 @@
+TAP version 13
+# Subtest: inbox reads only scoped Carrier opportunities, including a valid empty inbox
+ok 1 - inbox reads only scoped Carrier opportunities, including a valid empty inbox
+  ---
+  duration_ms: 37.8601
+  type: 'test'
+  ...
+# Subtest: foreign records and denied reads fail instead of falling back to local requests
+ok 2 - foreign records and denied reads fail instead of falling back to local requests
+  ---
+  duration_ms: 6.2248
+  type: 'test'
+  ...
+# Subtest: an explicit response preserves expectedVersion and audit evidence and never edits customer data
+ok 3 - an explicit response preserves expectedVersion and audit evidence and never edits customer data
+  ---
+  duration_ms: 2.453
+  type: 'test'
+  ...
+# Subtest: decline is an opportunity response, not a booking cancellation
+ok 4 - decline is an opportunity response, not a booking cancellation
+  ---
+  duration_ms: 1.3481
+  type: 'test'
+  ...
+# Subtest: expired, forbidden-role and cross-Carrier actions cannot send a request
+ok 5 - expired, forbidden-role and cross-Carrier actions cannot send a request
+  ---
+  duration_ms: 1.3626
+  type: 'test'
+  ...
+# Subtest: stale or foreign response results remain errors and identical retry receipts keep their key
+ok 6 - stale or foreign response results remain errors and identical retry receipts keep their key
+  ---
+  duration_ms: 2.2585
+  type: 'test'
+  ...
+# Subtest: missing cargo and customer windows stay unknown; resource windows are not substituted
+ok 7 - missing cargo and customer windows stay unknown; resource windows are not substituted
+  ---
+  duration_ms: 8.0878
+  type: 'test'
+  ...
+# Subtest: valid explicit windows and recorded zero weight are retained; malformed values remain unknown
+ok 8 - valid explicit windows and recorded zero weight are retained; malformed values remain unknown
+  ---
+  duration_ms: 1.2152
+  type: 'test'
+  ...
+# Subtest: response permissions use role, actual status and response deadline
+ok 9 - response permissions use role, actual status and response deadline
+  ---
+  duration_ms: 1.0355
+  type: 'test'
+  ...
+# Subtest: details accept only valid API identities and do not reinterpret local example references
+ok 10 - details accept only valid API identities and do not reinterpret local example references
+  ---
+  duration_ms: 1.5387
+  type: 'test'
+  ...
+# Subtest: authorized request code, version and customer windows come from the minimum projection
+ok 11 - authorized request code, version and customer windows come from the minimum projection
+  ---
+  duration_ms: 9.109
+  type: 'test'
+  ...
+# Subtest: a stale invitation remains readable but cannot be accepted as the current request
+ok 12 - a stale invitation remains readable but cannot be accepted as the current request
+  ---
+  duration_ms: 1.5406
+  type: 'test'
+  ...
+# Subtest: a mismatched tenant or request brief cannot enable a response
+ok 13 - a mismatched tenant or request brief cannot enable a response
+  ---
+  duration_ms: 2.5595
+  type: 'test'
+  ...
+# Subtest: invalid windows and inconsistent current-version assertions fail closed
+ok 14 - invalid windows and inconsistent current-version assertions fail closed
+  ---
+  duration_ms: 2.3734
+  type: 'test'
+  ...
+# Subtest: a closed request does not regain review permission from an open opportunity deadline
+ok 15 - a closed request does not regain review permission from an open opportunity deadline
+  ---
+  duration_ms: 2.7421
+  type: 'test'
+  ...
+# Subtest: carrier estimate uses persisted ROAD leg once and recorded equipment, never synthetic defaults
+ok 16 - carrier estimate uses persisted ROAD leg once and recorded equipment, never synthetic defaults
+  ---
+  duration_ms: 6.2086
+  type: 'test'
+  ...
+# Subtest: unknown distance, non-road leg, and invalid carrier rates cannot produce a numeric recommendation
+ok 17 - unknown distance, non-road leg, and invalid carrier rates cannot produce a numeric recommendation
+  ---
+  duration_ms: 0.5236
+  type: 'test'
+  ...
+# Subtest: spoken acceptance only marks an estimate for review
+ok 18 - spoken acceptance only marks an estimate for review
+  ---
+  duration_ms: 0.9112
+  type: 'test'
+  ...
+# Subtest: a carrier's explicit spoken USD amount becomes only a proposed form value
+ok 19 - a carrier's explicit spoken USD amount becomes only a proposed form value
+  ---
+  duration_ms: 3.1042
+  type: 'test'
+  ...
+# Subtest: ambiguous, invalid, and context-only speech never becomes an offer amount
+ok 20 - ambiguous, invalid, and context-only speech never becomes an offer amount
+  ---
+  duration_ms: 0.583
+  type: 'test'
+  ...
+# Subtest: a spoken price seeds an editable total but leaves evidence unverified
+ok 21 - a spoken price seeds an editable total but leaves evidence unverified
+  ---
+  duration_ms: 3.9922
+  type: 'test'
+  ...
+# Subtest: commercial collection reads four native Carrier endpoints with no Customer draft access
+ok 22 - commercial collection reads four native Carrier endpoints with no Customer draft access
+  ---
+  duration_ms: 33.1717
+  type: 'test'
+  ...
+# Subtest: detail checks exact ID and carrier; denial is never an empty successful list
+ok 23 - detail checks exact ID and carrier; denial is never an empty successful list
+  ---
+  duration_ms: 4.2596
+  type: 'test'
+  ...
+# Subtest: Carrier commercial read model
+    # Subtest: alerts only for loaded open opportunities that still need review or a quote
+    ok 1 - alerts only for loaded open opportunities that still need review or a quote
+      ---
+      duration_ms: 10.0414
+      type: 'test'
+      ...
+    # Subtest: uses one card per opportunity across offer replacements
+    ok 2 - uses one card per opportunity across offer replacements
+      ---
+      duration_ms: 8.1118
+      type: 'test'
+      ...
+    # Subtest: does not turn opportunities or offers into Orders
+    ok 3 - does not turn opportunities or offers into Orders
+      ---
+      duration_ms: 0.8814
+      type: 'test'
+      ...
+    # Subtest: booking remains pending until carrier confirmation, and keeps multiple executions
+    ok 4 - booking remains pending until carrier confirmation, and keeps multiple executions
+      ---
+      duration_ms: 2.3856
+      type: 'test'
+      ...
+    # Subtest: one completed execution cannot complete an order with missing booked services or partial reads
+    ok 5 - one completed execution cannot complete an order with missing booked services or partial reads
+      ---
+      duration_ms: 1.6212
+      type: 'test'
+      ...
+    # Subtest: active operation takes precedence over an otherwise completed stage
+    ok 6 - active operation takes precedence over an otherwise completed stage
+      ---
+      duration_ms: 1.429
+      type: 'test'
+      ...
+    # Subtest: rejects stale, withdrawn and superseded offers as current quotes
+    ok 7 - rejects stale, withdrawn and superseded offers as current quotes
+      ---
+      duration_ms: 1.1111
+      type: 'test'
+      ...
+    # Subtest: does not guess a booking offer from a matching customer or request
+    ok 8 - does not guess a booking offer from a matching customer or request
+      ---
+      duration_ms: 3.1901
+      type: 'test'
+      ...
+    # Subtest: never joins cross-organization records even when referenced IDs match
+    ok 9 - never joins cross-organization records even when referenced IDs match
+      ---
+      duration_ms: 1.0695
+      type: 'test'
+      ...
+    # Subtest: a closed opportunity stays visible and an unknown status requires review
+    ok 10 - a closed opportunity stays visible and an unknown status requires review
+      ---
+      duration_ms: 1.2891
+      type: 'test'
+      ...
+    # Subtest: validates response carrier, kind, identity and commercial total
+    ok 11 - validates response carrier, kind, identity and commercial total
+      ---
+      duration_ms: 3.7983
+      type: 'test'
+      ...
+    # Subtest: allows audited additions while still validating the original offer contract
+    ok 12 - allows audited additions while still validating the original offer contract
+      ---
+      duration_ms: 1.6805
+      type: 'test'
+      ...
+    # Subtest: binds an offer only to recorded assignments and services
+    ok 13 - binds an offer only to recorded assignments and services
+      ---
+      duration_ms: 3.3129
+      type: 'test'
+      ...
+    # Subtest: full quotes support legacy binding snapshots, but partial quotes require an explicit grouped-leg link
+    ok 14 - full quotes support legacy binding snapshots, but partial quotes require an explicit grouped-leg link
+      ---
+      duration_ms: 1.2379
+      type: 'test'
+      ...
+    # Subtest: response uses current optimistic version and requires a sourced note
+    ok 15 - response uses current optimistic version and requires a sourced note
+      ---
+      duration_ms: 0.9392
+      type: 'test'
+      ...
+    1..15
+ok 24 - Carrier commercial read model
+  ---
+  duration_ms: 44.8876
+  type: 'suite'
+  ...
+# Subtest: carrier-only login returns to portal, without shipper membership or open redirects
+ok 25 - carrier-only login returns to portal, without shipper membership or open redirects
+  ---
+  duration_ms: 2.083
+  type: 'test'
+  ...
+# Subtest: catalog editing requires ADMIN; operational records remain available to dispatcher
+ok 26 - catalog editing requires ADMIN; operational records remain available to dispatcher
+  ---
+  duration_ms: 0.3667
+  type: 'test'
+  ...
+# Subtest: actions follow booking and execution lifecycle, fail closed for unknown transitions
+ok 27 - actions follow booking and execution lifecycle, fail closed for unknown transitions
+  ---
+  duration_ms: 0.3633
+  type: 'test'
+  ...
+# Subtest: commercial choice requires every current offer, never an expired, withdrawn or missing one
+ok 28 - commercial choice requires every current offer, never an expired, withdrawn or missing one
+  ---
+  duration_ms: 2.1894
+  type: 'test'
+  ...
+# Subtest: booking retry excludes an offer already authorized by this decision
+ok 29 - booking retry excludes an offer already authorized by this decision
+  ---
+  duration_ms: 0.3797
+  type: 'test'
+  ...
+# Subtest: booking price is linked only when persisted decision and carrier identify one offer
+ok 30 - booking price is linked only when persisted decision and carrier identify one offer
+  ---
+  duration_ms: 0.5043
+  type: 'test'
+  ...
+# Subtest: refresh reads the exact customer request and correlated collections without writes
+ok 31 - refresh reads the exact customer request and correlated collections without writes
+  ---
+  duration_ms: 32.7674
+  type: 'test'
+  ...
+# Subtest: scope mismatch in the refreshed request prevents commercial queries
+ok 32 - scope mismatch in the refreshed request prevents commercial queries
+  ---
+  duration_ms: 1.8183
+  type: 'test'
+  ...
+# Subtest: repeated pagination and a denied session cannot become an empty success
+ok 33 - repeated pagination and a denied session cannot become an empty success
+  ---
+  duration_ms: 3.1267
+  type: 'test'
+  ...
+# Subtest: aborted requests stay cancelled and do not replace the current view
+ok 34 - aborted requests stay cancelled and do not replace the current view
+  ---
+  duration_ms: 0.4517
+  type: 'test'
+  ...
+# Subtest: hydrates actual Carrier identity and service through authorized native reads
+ok 35 - hydrates actual Carrier identity and service through authorized native reads
+  ---
+  duration_ms: 13.423
+  type: 'test'
+  ...
+# Subtest: missing pagination metadata, non-JSON failure and wrong collection scope stay failures
+ok 36 - missing pagination metadata, non-JSON failure and wrong collection scope stay failures
+  ---
+  duration_ms: 18.5773
+  type: 'test'
+  ...
+# Subtest: reads all native pages but rejects duplicate records across pages
+ok 37 - reads all native pages but rejects duplicate records across pages
+  ---
+  duration_ms: 33.825
+  type: 'test'
+  ...
+# Subtest: carrier voice scope accepts only the exact persisted opportunity
+ok 38 - carrier voice scope accepts only the exact persisted opportunity
+  ---
+  duration_ms: 7.6275
+  type: 'test'
+  ...
+# Subtest: voice facts are bounded and cannot carry prompt delimiters
+ok 39 - voice facts are bounded and cannot carry prompt delimiters
+  ---
+  duration_ms: 0.8984
+  type: 'test'
+  ...
+# Subtest: A-01: feasible plan minimizes synthetic whole-trip internal cost
+ok 40 - A-01: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 41.6629
+  type: 'test'
+  ...
+# Subtest: A-02: feasible plan minimizes synthetic whole-trip internal cost
+ok 41 - A-02: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 12.3189
+  type: 'test'
+  ...
+# Subtest: A-03: feasible plan minimizes synthetic whole-trip internal cost
+ok 42 - A-03: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 6.1202
+  type: 'test'
+  ...
+# Subtest: A-04: feasible plan minimizes synthetic whole-trip internal cost
+ok 43 - A-04: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 7.9782
+  type: 'test'
+  ...
+# Subtest: A-05: feasible plan minimizes synthetic whole-trip internal cost
+ok 44 - A-05: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 9.0516
+  type: 'test'
+  ...
+# Subtest: A-06: feasible plan minimizes synthetic whole-trip internal cost
+ok 45 - A-06: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 17.6383
+  type: 'test'
+  ...
+# Subtest: A-07: feasible plan minimizes synthetic whole-trip internal cost
+ok 46 - A-07: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 2.2333
+  type: 'test'
+  ...
+# Subtest: A-08: feasible plan minimizes synthetic whole-trip internal cost
+ok 47 - A-08: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 3.0541
+  type: 'test'
+  ...
+# Subtest: A-09: feasible plan minimizes synthetic whole-trip internal cost
+ok 48 - A-09: feasible plan minimizes synthetic whole-trip internal cost
+  ---
+  duration_ms: 2.4953
+  type: 'test'
+  ...
+# Subtest: A-10: a maintained small truck invalidates the cheaper two-truck plan
+ok 49 - A-10: a maintained small truck invalidates the cheaper two-truck plan
+  ---
+  duration_ms: 4.2844
+  type: 'test'
+  ...
+# Subtest: A-11: a fully known occupied fleet cannot supply 3t with only two 1.1t trucks
+ok 50 - A-11: a fully known occupied fleet cannot supply 3t with only two 1.1t trucks
+  ---
+  duration_ms: 2.8238
+  type: 'test'
+  ...
+# Subtest: A-12: denied heavy truck yields two admitted medium trucks, never a manufactured calendar block
+ok 51 - A-12: denied heavy truck yields two admitted medium trucks, never a manufactured calendar block
+  ---
+  duration_ms: 8.6814
+  type: 'test'
+  ...
+# Subtest: A-12 missing or expired admission cannot validate the only physically compatible truck
+ok 52 - A-12 missing or expired admission cannot validate the only physically compatible truck
+  ---
+  duration_ms: 2.6137
+  type: 'test'
+  ...
+# Subtest: A-13: reject cheap trucks arriving after receiving closes
+ok 53 - A-13: reject cheap trucks arriving after receiving closes
+  ---
+  duration_ms: 3.4659
+  type: 'test'
+  ...
+# Subtest: A-14: stale calendars yield review, and expired costs cannot yield a priced plan
+ok 54 - A-14: stale calendars yield review, and expired costs cannot yield a priced plan
+  ---
+  duration_ms: 2.2685
+  type: 'test'
+  ...
+# Subtest: C-02: a 10t service limit applies to the whole 12t request despite two free trucks
+ok 55 - C-02: a 10t service limit applies to the whole 12t request despite two free trucks
+  ---
+  duration_ms: 0.953
+  type: 'test'
+  ...
+# Subtest: C-01 allocation only: a 20t service can allocate two indivisible 6t crates to two 10t trucks
+ok 56 - C-01 allocation only: a 20t service can allocate two indivisible 6t crates to two 10t trucks
+  ---
+  duration_ms: 1.5002
+  type: 'test'
+  ...
+# Subtest: C-03: only one available 10t truck cannot carry two indivisible 6t units
+ok 57 - C-03: only one available 10t truck cannot carry two indivisible 6t units
+  ---
+  duration_ms: 0.6251
+  type: 'test'
+  ...
+# Subtest: C-04: a transit longer than the accepted delivery window cannot be accelerated
+ok 58 - C-04: a transit longer than the accepted delivery window cannot be accelerated
+  ---
+  duration_ms: 0.3103
+  type: 'test'
+  ...
+# Subtest: C-05: unsupported route provenance never becomes an approved calculated cost
+ok 59 - C-05: unsupported route provenance never becomes an approved calculated cost
+  ---
+  duration_ms: 0.4098
+  type: 'test'
+  ...
+# Subtest: selects one feasible operation within accepted dates, not their envelope
+ok 60 - selects one feasible operation within accepted dates, not their envelope
+  ---
+  duration_ms: 12.0493
+  type: 'test'
+  ...
+# Subtest: confirmed work is not displaced by urgency; proposes the next accepted day
+ok 61 - confirmed work is not displaced by urgency; proposes the next accepted day
+  ---
+  duration_ms: 2.9276
+  type: 'test'
+  ...
+# Subtest: a gap between accepted dates is never an available pickup day
+ok 62 - a gap between accepted dates is never an available pickup day
+  ---
+  duration_ms: 1.3303
+  type: 'test'
+  ...
+# Subtest: manual scheduling authority and urgent eligibility are distinct
+ok 63 - manual scheduling authority and urgent eligibility are distinct
+  ---
+  duration_ms: 1.2093
+  type: 'test'
+  ...
+# Subtest: overlapping windows and an unknown timezone are rejected
+ok 64 - overlapping windows and an unknown timezone are rejected
+  ---
+  duration_ms: 23.4706
+  type: 'test'
+  ...
+# Subtest: two whole packages require two calendars in the same slot
+ok 65 - two whole packages require two calendars in the same slot
+  ---
+  duration_ms: 11.7273
+  type: 'test'
+  ...
+# Subtest: cost search considers each feasible truck instead of accepting the first asset ID
+ok 66 - cost search considers each feasible truck instead of accepting the first asset ID
+  ---
+  duration_ms: 5.9784
+  type: 'test'
+  ...
+# Subtest: scheduled orders compare price first and urgent orders compare arrival first
+ok 67 - scheduled orders compare price first and urgent orders compare arrival first
+  ---
+  duration_ms: 0.3571
+  type: 'test'
+  ...
+# Subtest: an exceeded asset universe returns review instead of a partial cheapest claim
+ok 68 - an exceeded asset universe returns review instead of a partial cheapest claim
+  ---
+  duration_ms: 1.8667
+  type: 'test'
+  ...
+# Subtest: costs depend on consumption, paid duty, stops, trucks and markup with an exact shared shipment charge
+ok 69 - costs depend on consumption, paid duty, stops, trucks and markup with an exact shared shipment charge
+  ---
+  duration_ms: 8.4274
+  type: 'test'
+  ...
+# Subtest: a driver rest longer than paid time policy still delays arrival
+ok 70 - a driver rest longer than paid time policy still delays arrival
+  ---
+  duration_ms: 1.0274
+  type: 'test'
+  ...
+# Subtest: missing route inputs or an invalid rest site never become a guessed automatic offer
+ok 71 - missing route inputs or an invalid rest site never become a guessed automatic offer
+  ---
+  duration_ms: 1.4426
+  type: 'test'
+  ...
+# Subtest: continuous and daily driving constraints block routes that have no adequate rest
+ok 72 - continuous and daily driving constraints block routes that have no adequate rest
+  ---
+  duration_ms: 2.2269
+  type: 'test'
+  ...
+# Subtest: expired rest evidence requires review
+ok 73 - expired rest evidence requires review
+  ---
+  duration_ms: 0.4353
+  type: 'test'
+  ...
+# Subtest: minimum and tax are explicit parts and are not added twice
+ok 74 - minimum and tax are explicit parts and are not added twice
+  ---
+  duration_ms: 0.637
+  type: 'test'
+  ...
+# Subtest: four-decimal rates and nonintegral distances round once at each monetary component
+ok 75 - four-decimal rates and nonintegral distances round once at each monetary component
+  ---
+  duration_ms: 0.416
+  type: 'test'
+  ...
+# Subtest: cost policies cannot silently combine calculated and fixed fuel charges
+ok 76 - cost policies cannot silently combine calculated and fixed fuel charges
+  ---
+  duration_ms: 1.4186
+  type: 'test'
+  ...
+# Subtest: heterogeneous trucks sum separate costs; shared handling, margin and tax are applied once
+ok 77 - heterogeneous trucks sum separate costs; shared handling, margin and tax are applied once
+  ---
+  duration_ms: 14.6109
+  type: 'test'
+  ...
+# Subtest: explicit asset overrides replace the model consumption without changing other trucks
+ok 78 - explicit asset overrides replace the model consumption without changing other trucks
+  ---
+  duration_ms: 3.8363
+  type: 'test'
+  ...
+# Subtest: unknown asset, wrong equipment and duplicate identity never inherit an arbitrary model
+ok 79 - unknown asset, wrong equipment and duplicate identity never inherit an arbitrary model
+  ---
+  duration_ms: 0.7709
+  type: 'test'
+  ...
+# Subtest: speed cap rejects optimistic ETA; it never speeds up an observed route
+ok 80 - speed cap rejects optimistic ETA; it never speeds up an observed route
+  ---
+  duration_ms: 0.9961
+  type: 'test'
+  ...
+# Subtest: the scalar helper cannot silently multiply a heterogeneous fleet policy
+ok 81 - the scalar helper cannot silently multiply a heterogeneous fleet policy
+  ---
+  duration_ms: 0.738
+  type: 'test'
+  ...
+# Subtest: a zero-cost truck still permits the explicit shared shipment charge
+ok 82 - a zero-cost truck still permits the explicit shared shipment charge
+  ---
+  duration_ms: 0.8944
+  type: 'test'
+  ...
+# Subtest: tariff requires sourced distance and rounds each money component to cents
+ok 83 - tariff requires sourced distance and rounds each money component to cents
+  ---
+  duration_ms: 2.1131
+  type: 'test'
+  ...
+# Subtest: trip policy rejects an ambiguous rate, fractions of cents, and unapproved authority
+ok 84 - trip policy rejects an ambiguous rate, fractions of cents, and unapproved authority
+  ---
+  duration_ms: 1.8724
+  type: 'test'
+  ...
+# Subtest: presentation truncates ranked alternatives without changing their source order
+ok 85 - presentation truncates ranked alternatives without changing their source order
+  ---
+  duration_ms: 0.2554
+  type: 'test'
+  ...
+# Subtest: no historical requests or prices never produce a fabricated price
+ok 86 - no historical requests or prices never produce a fabricated price
+  ---
+  duration_ms: 0.8022
+  type: 'test'
+  ...
+# Subtest: past prices are labelled as historical and cannot authorize a booking
+ok 87 - past prices are labelled as historical and cannot authorize a booking
+  ---
+  duration_ms: 1.7501
+  type: 'test'
+  ...
+# Subtest: search requires an explicit version, deadline and consent
+ok 88 - search requires an explicit version, deadline and consent
+  ---
+  duration_ms: 0.2903
+  type: 'test'
+  ...
+# Subtest: multi-resource pricing needs explicit scope and applies it without hidden multiplication
+ok 89 - multi-resource pricing needs explicit scope and applies it without hidden multiplication
+  ---
+  duration_ms: 0.4218
+  type: 'test'
+  ...
+# Subtest: four admission states retain evidence boundaries and safe legacy semantics
+ok 90 - four admission states retain evidence boundaries and safe legacy semantics
+  ---
+  duration_ms: 3.9248
+  type: 'test'
+  ...
+# Subtest: missing, future, estimated or contradictory records do not authorize a resource
+ok 91 - missing, future, estimated or contradictory records do not authorize a resource
+  ---
+  duration_ms: 0.9973
+  type: 'test'
+  ...
+# Subtest: publication rejects contradictory compatibility, arbitrary fields and persisted EXPIRED
+ok 92 - publication rejects contradictory compatibility, arbitrary fields and persisted EXPIRED
+  ---
+  duration_ms: 1.9506
+  type: 'test'
+  ...
+# Subtest: HAC-40 persistent workflow boundary
+    # Subtest: requires the persisted decision in booking output
+    ok 1 - requires the persisted decision in booking output
+      ---
+      duration_ms: 6.2098
+      type: 'test'
+      ...
+    # Subtest: requires positive waypoint sequence in output without making it client-writable
+    ok 2 - requires positive waypoint sequence in output without making it client-writable
+      ---
+      duration_ms: 1.4015
+      type: 'test'
+      ...
+    # Subtest: rejects keys and injected scope before committing a command
+    ok 3 - rejects keys and injected scope before committing a command
+      ---
+      duration_ms: 1.9704
+      type: 'test'
+      ...
+    # Subtest: revision forwards actor, expected version and idempotency to one command
+    ok 4 - revision forwards actor, expected version and idempotency to one command
+      ---
+      duration_ms: 0.8523
+      type: 'test'
+      ...
+    # Subtest: rejects malformed stored nested output instead of passing it to consumers
+    ok 5 - rejects malformed stored nested output instead of passing it to consumers
+      ---
+      duration_ms: 0.8886
+      type: 'test'
+      ...
+    # Subtest: blocks a returned record outside the tenant or requested carrier
+    ok 6 - blocks a returned record outside the tenant or requested carrier
+      ---
+      duration_ms: 0.9632
+      type: 'test'
+      ...
+    # Subtest: returns absent resource without generating a default and bounds pagination
+    ok 7 - returns absent resource without generating a default and bounds pagination
+      ---
+      duration_ms: 0.578
+      type: 'test'
+      ...
+    # Subtest: rejects empty allocation plans and false weighted objectives
+    ok 8 - rejects empty allocation plans and false weighted objectives
+      ---
+      duration_ms: 0.5127
+      type: 'test'
+      ...
+    # Subtest: accepts grouped resources and rejects duplicate physical capacity or cargo on an escort
+    ok 9 - accepts grouped resources and rejects duplicate physical capacity or cargo on an escort
+      ---
+      duration_ms: 1.8855
+      type: 'test'
+      ...
+    # Subtest: requires audit/version for shared trips and rejects a client-selected physical occupancy key
+    ok 10 - requires audit/version for shared trips and rejects a client-selected physical occupancy key
+      ---
+      duration_ms: 1.0184
+      type: 'test'
+      ...
+    1..10
+ok 93 - HAC-40 persistent workflow boundary
+  ---
+  duration_ms: 18.1842
+  type: 'suite'
+  ...
+# Subtest: HAC-45 carrier map read boundary
+    # Subtest: allows shared and own routing records but rejects another carrier and organization
+    ok 1 - allows shared and own routing records but rejects another carrier and organization
+      ---
+      duration_ms: 1.271
+      type: 'test'
+      ...
+    # Subtest: rejects unknown kinds and excessive pages before calling the repository
+    ok 2 - rejects unknown kinds and excessive pages before calling the repository
+      ---
+      duration_ms: 0.5749
+      type: 'test'
+      ...
+    1..2
+ok 94 - HAC-45 carrier map read boundary
+  ---
+  duration_ms: 2.027
+  type: 'suite'
+  ...
+1..94
+# tests 118
+# suites 3
+# pass 118
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5320.6307

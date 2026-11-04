@@ -6,7 +6,7 @@ import {OpenLoadingSessionSchema,type LoadingBundle,type LoadingSession} from '@
 import {loadingComparison} from '@/shared/meta/loading-operation';
 import {LoadingDashboardView} from './dashboard';
 import {loadingApi,loadingErrorMessage} from './operation-api';
-import {readLoadingSessionView} from './operation-read';
+import {readLoadingSessionView,readLoadingCatalog} from './operation-read';
 import {DockMindEvidencePanel} from '@/features/meta-dockmind/evidence-panel';
 import s from './operation.module.css';
 import {PassportExplanations} from './passport-explanations';
@@ -47,13 +47,14 @@ export function LoadingOperation(){
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;readEpoch.current++;};},[]);
  useEffect(()=>{let active=true;void (async()=>{try{
   const r=await loadingApi.list();if(!active)return;setRows(r.data);setCanOperate(r.meta.canOperate);setNext(r.meta.nextOffset);
-  const id=new URL(window.location.href).searchParams.get('session');if(id&&active)await read(id);
+  const params=new URL(window.location.href).searchParams,id=params.get('session');if(id&&active)await read(id);
+  else if(active&&params.get('requestId'))await catalog(params.get('requestId')!);
  }catch(e){if(active)setError(loadingErrorMessage(e));}finally{if(active)setBusy(false);}})();return()=>{active=false;};},[]);
  useEffect(()=>{let active=true;setManifest(null);setUnits({});if(!requestId)return;
   setManifestBusy(true);void loadingApi.manifest(requestId).then(m=>{if(active){setManifest(m);if(!m)setNotice('Esta solicitud aún no tiene un manifiesto confirmado. Confírmalo en el formulario de carga.');}}).catch(e=>{if(active)setError(loadingErrorMessage(e));}).finally(()=>{if(active)setManifestBusy(false);});
   return()=>{active=false;};
  },[requestId]);
- async function catalog(){const [r,f]=await Promise.all([loadingApi.requests(),loadingApi.facilities()]);setRequests(r.data);setFacilities(f.data);setMoreRequests(r.meta.nextOffset);setMoreFacilities(f.meta.nextOffset);setCreating(true);}
+ async function catalog(requestHint?:string){const {requests:r,facilities:f}=await readLoadingCatalog(loadingApi,requestHint);if(!mounted.current)return;setRequests(r.data);setFacilities(f.data);setMoreRequests(r.meta.nextOffset);setMoreFacilities(f.meta.nextOffset);if(requestHint)setRequestId(requestHint);setCreating(true);}
  async function open(){
   if(!manifest)return;
   const value=OpenLoadingSessionSchema.parse({requestId,facilityId,mode,manifestId:manifest.id,manifestRevision:manifest.revision,groups:manifest.declaration.groupBindings.map(g=>({groupId:g.groupId,unit:units[g.groupId]}))});

@@ -1,0 +1,89 @@
+{
+  "sourceSha": "45fd371041feae6351048489fa4a7e77a860c208",
+  "unitPass": 592,
+  "unitFail": 0,
+  "additionalGeometryPass": 15,
+  "catalogRegression": "interrupted after 292s to stop audit CPU consumption; not counted as pass",
+  "liveMetaHttpCalls": 10,
+  "samples": [
+    {
+      "file": "muse-live.json",
+      "case": "greeting-transport",
+      "ms": 4232,
+      "mode": "META",
+      "outcome": "PROPOSED",
+      "httpCalls": 1
+    },
+    {
+      "file": "muse-live.json",
+      "case": "cargo-extraction",
+      "ms": 12306,
+      "mode": "META",
+      "outcome": "PROPOSED",
+      "httpCalls": 1
+    },
+    {
+      "file": "muse-live.json",
+      "case": "memory-follow-up",
+      "ms": 39400,
+      "mode": "DETERMINISTIC",
+      "outcome": "MODEL_OUTPUT_INVALID",
+      "httpCalls": 2
+    },
+    {
+      "file": "muse-live.json",
+      "case": "explicit-correction",
+      "ms": 2,
+      "mode": "DETERMINISTIC",
+      "outcome": null,
+      "httpCalls": 0
+    },
+    {
+      "file": "muse-memory-diagnostic.json",
+      "case": "memory-follow-up",
+      "ms": 32338,
+      "mode": "DETERMINISTIC",
+      "outcome": "MODEL_OUTPUT_INVALID",
+      "httpCalls": 2
+    },
+    {
+      "file": "muse-minimal-experiment.json",
+      "case": "greeting-transport",
+      "ms": 2865,
+      "mode": "META",
+      "outcome": "PROPOSED",
+      "httpCalls": 1
+    },
+    {
+      "file": "muse-minimal-experiment.json",
+      "case": "cargo-extraction",
+      "ms": 4762,
+      "mode": "META",
+      "outcome": "PROPOSED",
+      "httpCalls": 1
+    },
+    {
+      "file": "muse-minimal-experiment.json",
+      "case": "memory-follow-up",
+      "ms": 13435,
+      "mode": "DETERMINISTIC",
+      "outcome": "MODEL_OUTPUT_INVALID",
+      "httpCalls": 2
+    },
+    {
+      "file": "muse-minimal-experiment.json",
+      "case": "explicit-correction",
+      "ms": 4,
+      "mode": "DETERMINISTIC",
+      "outcome": null,
+      "httpCalls": 0
+    }
+  ],
+  "databaseOnline": false,
+  "newDatabaseE2E": false,
+  "visualTests": false,
+  "functionalCodeChanged": false,
+  "envChanged": false,
+  "deployments": false,
+  "secretScan": "no configured private value found in published audit artifacts"
+}

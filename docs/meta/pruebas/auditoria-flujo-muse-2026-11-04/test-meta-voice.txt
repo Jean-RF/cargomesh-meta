@@ -1,0 +1,39 @@
+✔ shared SDK sends the documented ASR JSON field/audio file, authorization and Spanish/English bias (46.8048ms)
+✔ ASR configuration is independent of Muse text, fails closed and never sends unsupported WAVs (24.8407ms)
+✔ documented opaque ASR session IDs allow punctuation but reject control or oversized diagnostics (13.5736ms)
+✔ ASR empty transcript is explicitly EMPTY; missing text, turns and malformed payloads are invalid (10.6475ms)
+✔ ASR non-JSON, oversized buffered or streamed JSON fails within bounded memory (6.9154ms)
+✔ ASR 401/413/429/500 have one SDK attempt, no fallback and sanitized errors (4.7277ms)
+✔ ASR SDK ignores debug environment and never logs audio, transcript, key or raw failures (2.8061ms)
+✔ a stalled ASR response body is cancelled by the service deadline without a late transcript (33.5684ms)
+✔ authorized transcription is reviewable, scoped, has one attempt and unknown cost (9.1765ms)
+✔ missing configuration does not read media or call a provider (0.7814ms)
+✔ injected browser tenant, URLs and malformed input never start a read (1.7525ms)
+✔ inactive member, foreign/revoked evidence or a stale revision cannot reach Meta (2.5078ms)
+✔ bad WAV, metadata-only trust and changed bytes are rejected before invoking (21.6353ms)
+✔ access lost immediately before invoking prevents provider work (0.6512ms)
+✔ manual correction or revoked access during the provider response discards that response (1.3179ms)
+✔ silence is an EMPTY reviewable transcript, not zero cargo or guessed text (0.8458ms)
+✔ incomplete/oversized provider text, extra fields and false durations fail without truncating (4.4578ms)
+✔ provider failures are sanitized and never automatically retried (1.1575ms)
+✔ cancel before starting performs no IO and does not echo an abort reason (0.8634ms)
+✔ non-finite, fractional or out-of-range deadlines cannot silently become a provider budget (1.13ms)
+✔ a dependency rejecting in the same turn as cancellation does not leak an unhandled rejection (0.8613ms)
+✔ deadline also bounds a dependency that ignores the cancellation signal (12.8728ms)
+✔ a late response after cancellation never produces a successful transcription (2.043ms)
+✔ valid mono PCM WAV at both supported rates is inspected from bytes (1.8069ms)
+✔ stereo, unsupported rate, float and bit depth are rejected (0.3554ms)
+✔ empty audio, truncated and mislabeled containers are rejected (0.2291ms)
+✔ ten minutes is a ceiling computed from sample bytes, not metadata (4.2505ms)
+✔ forged chunk lengths, rate/alignment and RIFF size cannot bypass validation (0.3607ms)
+✔ views with a nonzero byte offset are validated without reading unrelated bytes (0.1947ms)
+✔ padded metadata chunks are skipped correctly and duplicate format chunks are rejected (0.2441ms)
+✔ large numbers of tiny chunks cannot create unbounded parsing work (0.3763ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1666.7762

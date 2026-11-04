@@ -1,0 +1,17 @@
+# Axel — corrección reproducible y fluidez de Muse
+
+**Actualización posterior:** por delegación de Cristhian, la corrección ya está implementada en `codex/meta-cristhian`; revisar [cierre y límites](CIERRE_TECNICO_2026-11-04.md) antes de programar. Este prompt conserva el diagnóstico original; no rehacerlo en paralelo. Pendiente de contrato: `targetGroupId` + revisión para edición multigrupo; hoy existe bloqueo seguro y edición manual. Revisar voz/foto reales y despliegue Meta, que estas pruebas de texto no certifican.
+
+Trabaja en tu rama fija `codex/meta-axel` desde main45fd371 o la base Meta vigente. Conserva autoría y contratos; no tocar Amazon, credenciales, IAM, Vercel o migraciones. No hacer push directo a main. Evidencia completa en AUDITORIA_FLUJO_Y_MUSE_2026-11-04.md y su carpeta de resultados.
+
+Problema confirmado contra Meta real: con historial usuario «I need to ship 1000 bottles of medicine from Lima to Arequipa» y asistente «How are the bottles packed for the road shipment?», enviar «They are packed on pallets. Do you remember what I am shipping?». El código actual tarda 32–39 s, hace dos intentos y retorna MODEL_OUTPUT_INVALID/fallback.
+
+Un intento agotó max_tokens2048 (1946 tokens de razonamiento, JSON truncado). Otro devolvió JSON/schema válido, recordó la mercancía y propuso PALLET como PROVIDE; conversation.ts lo rechazó porque el detector local considera HELP cualquier texto terminado en pregunta. En minimal se reprodujo también HELP+declaration, que el contrato prohíbe. No es ausencia total de memoria.
+
+Objetivos:
+1. Resolver el desacuerdo de intención sin borrar validaciones ni convertir preguntas en datos. Caso mixto puede responder el contexto y pedir una confirmación explícita del nuevo embalaje; extracción únicamente de lo dicho en la intervención actual y conservando trazabilidad. Nunca guardar/seleccionar/contratar por una respuesta del modelo.
+2. Probar razonamiento minimal solo para charla/extracción simple o separar schema/instrucciones por pantalla/intent. El schema actual ocupa12799 caracteres incluso para un saludo; instrucciones3965. En un ensayo minimal el saludo pasó4.2→2.9s y cuatro campos12.3→4.8s; muestra pequeña, no benchmark. El caso mixto siguió fallando. No poner none: Meta lo rechaza. No resolver todo solo subiendo max_tokens, ya que puede aumentar espera/coste.
+3. No repetir exactamente una petición que falla por una contradicción determinística conocida. Mantener timeout total, SDK maxRetries0, cancelación y errores seguros. Conservar métricas de intentos/tokens observados incluso si la validación falla, sin inventar uso no reportado ni registrar datos privados/razonamiento.
+4. Revisar con Cristhian la propuesta multigrupo: el schema de campos no tiene targetGroupId y el consumidor aplica escalares al grupo principal. Hasta tener identidad/revisión explícitas, no prometer edición de B por voz/foto ni inferir el grupo por posición.
+
+Aceptación: tests para greeting en TRANSPORT_SELECTION, dato+pregunta en es/en, pregunta pura sin campos, corrección que prevalece, memoria sin convertir1000 botellas en1000pallets, cifras/medidas desconocidas pendientes, grupo ambiguo sin modificación y respuestas obsoletas descartadas. Tres ensayos live pequeños solo con autorización de gasto vigente, input sintético y sin comandos comerciales; reportar muestras individuales y variación/cache, no p95 con tres casos. Conservar el formulario manual si Meta falla. Entrega diff, suites descubiertas, evidencia y limitaciones; no anunciar E2E alojado por tests con dobles.

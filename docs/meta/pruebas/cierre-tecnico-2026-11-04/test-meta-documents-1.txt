@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: document routes reject cookie CSRF, missing versions and malformed body before persistence
+ok 1 - document routes reject cookie CSRF, missing versions and malformed body before persistence
+  ---
+  duration_ms: 71.0866
+  type: 'test'
+  ...
+# Subtest: native document boundary rejects an invalid bearer before service access
+ok 2 - native document boundary rejects an invalid bearer before service access
+  ---
+  duration_ms: 4.0419
+  type: 'test'
+  ...
+# Subtest: each document request authenticates once, including root and nested paths
+ok 3 - each document request authenticates once, including root and nested paths
+  ---
+  duration_ms: 5.2962
+  type: 'test'
+  ...
+# Subtest: actual file inspection rejects empty, oversized, spoofed, encrypted, scripted and invalid PDF content
+ok 4 - actual file inspection rejects empty, oversized, spoofed, encrypted, scripted and invalid PDF content
+  ---
+  duration_ms: 4.4965
+  type: 'test'
+  ...
+# Subtest: bounded structural image validation accepts actual PNG/JPEG and rejects incomplete or excessive images
+ok 5 - bounded structural image validation accepts actual PNG/JPEG and rejects incomplete or excessive images
+  ---
+  duration_ms: 2.421
+  type: 'test'
+  ...
+# Subtest: packing list scope and issue/expiry are explicit, never inferred from a file
+ok 6 - packing list scope and issue/expiry are explicit, never inferred from a file
+  ---
+  duration_ms: 5.0574
+  type: 'test'
+  ...
+# Subtest: upload retry keeps revision, object path and finalization key without creating duplicate document intents
+ok 7 - upload retry keeps revision, object path and finalization key without creating duplicate document intents
+  ---
+  duration_ms: 2.1931
+  type: 'test'
+  ...
+# Subtest: invalid upload never reserves metadata and unsigned download cannot bypass the repository
+ok 8 - invalid upload never reserves metadata and unsigned download cannot bypass the repository
+  ---
+  duration_ms: 0.8973
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1407.0169

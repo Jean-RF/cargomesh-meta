@@ -1,0 +1,250 @@
+{
+  "scope": "Shared production interpreter; synthetic text only; no DB/Next/browser, no commercial writes. Small diagnostic sample, not p50/p95 benchmark.",
+  "experimentalReasoningOverride": "minimal",
+  "cases": [
+    {
+      "id": "greeting-transport",
+      "totalMs": 2865,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "b4ba06b4-008e-453e-ab5f-ea4c09332ab4",
+        "latencyMs": 2862,
+        "attempts": 1,
+        "inputTokens": 2613,
+        "outputTokens": 203,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Hi! I can help you prepare a shipment. Only Road transport is available right now — Air and Sea are unavailable. Please select Road explicitly in the app to get started."
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 2847,
+          "bodyMs": 2849,
+          "bytes": 17215,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "minimal",
+          "stream": false,
+          "finishReason": "stop",
+          "usage": {
+            "completion_tokens": 203,
+            "prompt_tokens": 2613,
+            "total_tokens": 2816,
+            "completion_tokens_details": {
+              "reasoning_tokens": 137
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "contentChars": 244,
+          "refusal": false,
+          "jsonValid": true,
+          "shapeValid": true,
+          "shapeIssues": [],
+          "modelIntent": "HELP",
+          "nonCargoFields": 0,
+          "declarationStatus": null,
+          "acknowledgment": "Hi! I can help you prepare a shipment. Only Road transport is available right now — Air and Sea are unavailable. Please select Road explicitly in the app to get started.",
+          "provideHasQuestion": false,
+          "helpHasFields": false
+        }
+      ]
+    },
+    {
+      "id": "cargo-extraction",
+      "totalMs": 4762,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "462831ee-43ee-4647-bfed-0796e67e6794",
+        "latencyMs": 4748,
+        "attempts": 1,
+        "inputTokens": 2617,
+        "outputTokens": 632,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "error": null,
+      "interpretation": {
+        "intent": "PROVIDE",
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "machine parts"
+          },
+          {
+            "field": "packaging",
+            "value": "PALLET"
+          },
+          {
+            "field": "unitQuantity",
+            "value": "12"
+          },
+          {
+            "field": "unitWeightPerUnitKg",
+            "value": "100"
+          }
+        ],
+        "acknowledgment": "Got it — 12 pallets of machine parts at 100 kg per pallet."
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 4743,
+          "bodyMs": 4744,
+          "bytes": 17242,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "minimal",
+          "stream": false,
+          "finishReason": "stop",
+          "usage": {
+            "completion_tokens": 632,
+            "prompt_tokens": 2617,
+            "total_tokens": 3249,
+            "completion_tokens_details": {
+              "reasoning_tokens": 308
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "contentChars": 1036,
+          "refusal": false,
+          "jsonValid": true,
+          "shapeValid": true,
+          "shapeIssues": [],
+          "modelIntent": "PROVIDE",
+          "nonCargoFields": 0,
+          "declarationStatus": "PROPOSED",
+          "acknowledgment": "Got it — 12 pallets of machine parts at 100 kg per pallet.",
+          "provideHasQuestion": false,
+          "helpHasFields": false
+        }
+      ]
+    },
+    {
+      "id": "memory-follow-up",
+      "totalMs": 13435,
+      "mode": "DETERMINISTIC",
+      "metadata": {
+        "provider": "META",
+        "transport": "INJECTED",
+        "model": "muse-spark-1.3",
+        "requestId": "5087591f-3453-441e-b1d8-7ed6ea9d4e03",
+        "latencyMs": 13431,
+        "attempts": 2,
+        "inputTokens": 5322,
+        "outputTokens": 1321,
+        "estimatedCostUsd": null,
+        "outcome": "MODEL_OUTPUT_INVALID"
+      },
+      "error": {
+        "code": "MODEL_OUTPUT_INVALID",
+        "retryable": false
+      },
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "I can explain the steps and help you prepare the request. What would you like to know?"
+      },
+      "http": [
+        {
+          "status": 200,
+          "headersMs": 7095,
+          "bodyMs": 7095,
+          "bytes": 17435,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "minimal",
+          "stream": false,
+          "finishReason": "stop",
+          "usage": {
+            "completion_tokens": 693,
+            "prompt_tokens": 2661,
+            "total_tokens": 3354,
+            "completion_tokens_details": {
+              "reasoning_tokens": 494
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "contentChars": 668,
+          "refusal": false,
+          "jsonValid": true,
+          "shapeValid": true,
+          "shapeIssues": [],
+          "modelIntent": "HELP",
+          "nonCargoFields": 0,
+          "declarationStatus": "PROPOSED",
+          "acknowledgment": "Yes — you said 1000 bottles of medicine from Lima to Arequipa, now packed on pallets. How many pallets will there be in total?",
+          "provideHasQuestion": false,
+          "helpHasFields": true
+        },
+        {
+          "status": 200,
+          "headersMs": 6330,
+          "bodyMs": 6330,
+          "bytes": 17435,
+          "instructionChars": 3965,
+          "schemaChars": 12799,
+          "reasoning": "minimal",
+          "stream": false,
+          "finishReason": "stop",
+          "usage": {
+            "completion_tokens": 628,
+            "prompt_tokens": 2661,
+            "total_tokens": 3289,
+            "completion_tokens_details": {
+              "reasoning_tokens": 435
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 2545
+            }
+          },
+          "contentChars": 634,
+          "refusal": false,
+          "jsonValid": true,
+          "shapeValid": true,
+          "shapeIssues": [],
+          "modelIntent": "PROVIDE",
+          "nonCargoFields": 0,
+          "declarationStatus": "PROPOSED",
+          "acknowledgment": "Got it — packed on pallets. Yes, you said 1000 bottles of medicine from Lima to Arequipa.",
+          "provideHasQuestion": false,
+          "helpHasFields": false
+        }
+      ]
+    },
+    {
+      "id": "explicit-correction",
+      "totalMs": 4,
+      "mode": "DETERMINISTIC",
+      "metadata": null,
+      "error": null,
+      "interpretation": {
+        "intent": "CORRECT",
+        "fields": [
+          {
+            "field": "unitQuantity",
+            "value": "10"
+          }
+        ]
+      },
+      "http": []
+    }
+  ]
+}

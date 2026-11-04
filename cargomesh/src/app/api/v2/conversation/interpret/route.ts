@@ -32,6 +32,6 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ schemaVersion: "2.0", error: { code: "VALIDATION_ERROR", message: "Invalid conversation message." } }, { status: 400 });
   }
-  const result = await interpretConversationTurn(input);
+  const result = await interpretConversationTurn(input, { signal: request.signal });
   return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
 }
