@@ -1,5 +1,12 @@
 # Base existente e incremento Meta
 
+## Cristhian — catálogo internacional para la demo Meta local — 4 noviembre 2026
+
+Adaptación autorizada del catálogo internacional previo de Jean a la organización sintética QA-V2-A: 32 sedes añadidas con IDs propios y coordenadas urbanas aproximadas; coordenadas vacías completadas en las tres sedes existentes conservando sus IDs y relaciones. Total inicial 35 sedes / 17 países, sin las dos C01. Escenario separado de las migraciones, guardas de organización/colisiones, respaldo previo y replay sin cambios de versión. No crea carriers, capacidad, cobertura u ofertas.
+
+Verificación real local por SQL y HTTP: formulario recibe 35 coordenadas, otro tenant conserva una sola sede, acceso anónimo 401 y Sydney/Buenos Aires bloqueado para ROAD en ambas direcciones. Pedidos, manifiestos, reservas, sesiones y sedes ajenas conservaron sus huellas. Solo meta-cr01-validation; sin carga alojada ni revisión visual. [Escenario y evidencia](supabase/scenarios/v2-meta-international-demo/README.md).
+
+
 ## Cristhian — cierre de conversación, grupos y recorrido local — 4 noviembre 2026
 
 Por delegación expresa del usuario, continuación sobre main45fd371 en codex/meta-cristhian. Corrección de memoria/intención y razonamiento acotado de Muse, cancelación de peticiones obsoletas, bloqueo de propuestas sin grupo explícito y enlace del manifiesto al pedido autorizado en sesiones. Conserva contratos/autoría de Axel, Luis, Juan y Ramón. Trabajo del producto general, sin promoción al repositorio Indie.
