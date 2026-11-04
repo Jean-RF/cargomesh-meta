@@ -1,5 +1,12 @@
 # Base existente e incremento Meta
 
+## Cristhian — exclusión ROAD conectada al formulario y asistente — 4 noviembre 2026
+
+El par geográficamente desconectado ahora produce aviso persistente, guía en la nube/chat y pausa del avance automático. Se conserva el DRAFT tras confirmación, pero no se consulta elegibilidad ROAD al guardar/reabrir ese par. El servidor reemplaza el estado de ruta del navegador con la política calculada desde sedes autorizadas y conserva hechos/errores del proveedor. Corregir una sede recalcula el aviso; no se inventan kilómetros, horas, cobertura o modos implementados.
+
+Pruebas pertinentes: 467 ejecuciones de casos con solapamientos, TypeScript y arquitectura correctos; comprobación HTTP local de ambos sentidos y corrección de destino, sin inferencias ni escrituras comerciales. Parche también aplicado a la copia activa de Front en salida/jean-meta-copilot/repo, conservando sus modificaciones. Sin migración ni datos alojados; revisión visual pendiente. [Informe y evidencia](docs/meta/pruebas/RUTA_ROAD_Y_ASISTENTE_2026-11-04.md).
+
+
 ## Cristhian — catálogo internacional para la demo Meta local — 4 noviembre 2026
 
 Adaptación autorizada del catálogo internacional previo de Jean a la organización sintética QA-V2-A: 32 sedes añadidas con IDs propios y coordenadas urbanas aproximadas; coordenadas vacías completadas en las tres sedes existentes conservando sus IDs y relaciones. Total inicial 35 sedes / 17 países, sin las dos C01. Escenario separado de las migraciones, guardas de organización/colisiones, respaldo previo y replay sin cambios de versión. No crea carriers, capacidad, cobertura u ofertas.

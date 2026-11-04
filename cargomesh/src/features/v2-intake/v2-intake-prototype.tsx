@@ -35,6 +35,7 @@ import { FacilitySelectionWorkspace } from "./components/facility-selection-work
 import { AssistantFieldFeedback, FeedbackInput, FeedbackSelect, FeedbackTextarea, FeedbackCheckbox } from "./assistant-field-feedback";
 import type { DraftField } from "./use-assistant-change-feedback";
 import { ConversationChat } from "./conversation-chat";
+import {draftRoadStatus,disconnectedRoadNotice} from './road-advice';
 import { RoadCandidateMapBoundary } from "./components/road-candidate-map-boundary";
 import type {
   FreightRequestV2Data,
@@ -96,6 +97,7 @@ function IntakeForm({ embedded = false, onPersisted, onEvaluation }: IntakeProps
   const [manifestBusy, setManifestBusy] = useState(false);
   const requestBusy = ["creating", "revising", "reading", "evaluating"].includes(submitPhase);
   const submitting = requestBusy || manifestBusy;
+  const disconnectedRoad=draftRoadStatus(draft,activeOptions)==='DISCONNECTED_NETWORKS';
   useEffect(() => { if (request) onPersisted?.(request); }, [request, onPersisted]);
   useEffect(() => {
     if (request && evaluation && request.id === evaluation.freightRequestId && request.draftVersion === evaluation.evaluatedDraftVersion)
@@ -169,6 +171,7 @@ function IntakeForm({ embedded = false, onPersisted, onEvaluation }: IntakeProps
         })}</nav>
         {embedded ? <div className={styles.stepProgress} aria-hidden="true"><span style={{width:`${step/4*100}%`}}/></div> : null}
 
+        {disconnectedRoad&&<div className={styles.pendingState} role="alert"><strong>{t('Sin conexión terrestre','No land connection')}</strong><p>{disconnectedRoadNotice(locale==='es')}</p></div>}
         <div className={`${styles.workspace} ${!embedded&&step===1?styles.facilitiesWorkspace:""}`}>
           <ContentMotion identity={step} focusOnChange={!assistantNavigation} className={styles.stepMotion}><section className={styles.card} onPointerDownCapture={pauseAssistantAdvance} onFocusCapture={pauseAssistantAdvance} aria-labelledby={`prototype-step-${step}`}>
             {!embedded&&step===1?<h2 className={styles.srOnly} tabIndex={-1} id={`prototype-step-${step}`}>{stepLabels[step-1]}</h2>:<header className={styles.cardHeader}>
@@ -191,7 +194,7 @@ function IntakeForm({ embedded = false, onPersisted, onEvaluation }: IntakeProps
                 {step > 1 ? <Button variant="secondary" type="button" disabled={submitting} onClick={() => { setStep((step - 1) as PrototypeStep); setIssues([]); }}><ArrowLeft size={16} aria-hidden="true" />{t("Anterior", "Back")}</Button> : null}
                 {step < 4 ? <Button type="button" disabled={submitting} onClick={goNext}>{t("Continuar", "Continue")}<ArrowRight size={16} aria-hidden="true" /></Button> : (
                   <Button variant={embedded ? "accent" : "primary"} type="button" disabled={manifestBusy||media.busy||media.recording||media.requestingMic} isLoading={["creating", "revising", "reading", "evaluating"].includes(submitPhase)} loadingLabel={phaseLabel(submitPhase, t)} onClick={createDraftAndEvaluate}>
-                    <ClipboardCheck size={16} aria-hidden="true" />{request && dirtyAfterCreate ? t("Guardar revisión y reevaluar", "Save revision & reevaluate") : request ? t("Consultar evaluación", "Refresh evaluation") : t("Crear DRAFT y evaluar", "Create DRAFT & evaluate")}
+                    <ClipboardCheck size={16} aria-hidden="true" />{disconnectedRoad?t('Guardar borrador pendiente','Save pending draft'):request && dirtyAfterCreate ? t("Guardar revisión y reevaluar", "Save revision & reevaluate") : request ? t("Consultar evaluación", "Refresh evaluation") : t("Crear DRAFT y evaluar", "Create DRAFT & evaluate")}
                   </Button>
                 )}
               </div>
@@ -214,8 +217,8 @@ function IntakeForm({ embedded = false, onPersisted, onEvaluation }: IntakeProps
               "Los cambios del formulario son locales. La evaluación anterior se ocultó; confirma la revisión para actualizar tarjetas y mapa.",
               "Form changes are local. The previous evaluation is hidden; confirm the revision to refresh cards and map.",
             )}</div> : null}
-            {evaluation ? <CandidateResults evaluation={evaluation} selectedCandidateId={selectedCandidateId} onSelectCandidate={setSelectedCandidateId} t={t} /> : <LoadingOrPending phase={submitPhase} dirty={dirtyAfterCreate} retry={retryAfterCreate} t={t} />}
-            {mapProps ? <RoadCandidateMapBoundary props={mapProps} t={t} /> : null}
+            {disconnectedRoad?<div className={styles.pendingState} role="status">{t('Borrador conservado; evaluación ROAD pendiente de cambiar la ruta.','Draft retained; ROAD evaluation requires changing the route.')}</div>:evaluation ? <CandidateResults evaluation={evaluation} selectedCandidateId={selectedCandidateId} onSelectCandidate={setSelectedCandidateId} t={t} /> : <LoadingOrPending phase={submitPhase} dirty={dirtyAfterCreate} retry={retryAfterCreate} t={t} />}
+            {!disconnectedRoad&&mapProps ? <RoadCandidateMapBoundary props={mapProps} t={t} /> : null}
           </section>
         ) : null}
         </> : null}

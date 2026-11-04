@@ -1,0 +1,50 @@
+[
+  {
+    "suite": "test:meta-ai",
+    "stage": 1,
+    "exit": 0,
+    "tests": 63,
+    "passed": 63,
+    "failed": 0
+  },
+  {
+    "suite": "test:v2-chat-workflow",
+    "stage": 1,
+    "exit": 0,
+    "tests": 118,
+    "passed": 118,
+    "failed": 0
+  },
+  {
+    "suite": "test:v2-intake",
+    "stage": 1,
+    "exit": 0,
+    "tests": 90,
+    "passed": 90,
+    "failed": 0
+  },
+  {
+    "suite": "test:v2-conversation",
+    "stage": 1,
+    "exit": 0,
+    "tests": 107,
+    "passed": 107,
+    "failed": 0
+  },
+  {
+    "suite": "test:v2-conversation",
+    "stage": 2,
+    "exit": 0,
+    "tests": 32,
+    "passed": 32,
+    "failed": 0
+  },
+  {
+    "suite": "test:road-routing",
+    "stage": 1,
+    "exit": 0,
+    "tests": 57,
+    "passed": 57,
+    "failed": 0
+  }
+]
