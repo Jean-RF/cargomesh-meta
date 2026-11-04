@@ -200,6 +200,7 @@ export type RoadServiceabilityEvaluationV2Data = {
   };
   commercialNotice: "EVALUATION_ONLY_NO_OFFER_OR_BOOKING";
   candidates: RoadServiceabilityCandidateV2[];
+  requestRoutePreview?: RoadRoutePreviewDto | null;
 };
 
 export type RoadServiceabilityEvaluationV2Response = {
@@ -220,6 +221,7 @@ export type RoadCandidateMapViewProps = {
     serviceCode: string;
     routePreview: RoadRoutePreviewDto | null;
   }>;
+  requestRoutePreview?: RoadRoutePreviewDto | null;
   selectedCandidateId: string | null;
   onSelectCandidate: (candidateId: string) => void;
 };

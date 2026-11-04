@@ -161,6 +161,7 @@ export function ManifestReview({request, draft, dirty, requestBusy, onBusyChange
           {document.code}: {document.reference} · {document.issuedAt ?? '—'} — {document.validUntil ?? '—'}</li>)}</ul>
       </div>}
     </div>}
+    {confirmedCurrent && !dirty && <p><Link href={`/tetris/plan?request=${encodeURIComponent(request.id)}`}>{t('Ensayar acomodo 2D/3D de esta carga', 'Preview this cargo in 2D/3D')}</Link></p>}
     {loaded && editable && !confirmedCurrent && <Button type="button" disabled={busy || requestBusy || dirty} onClick={() => void prepare()}>
       {preparation ? t('Preparar otra revisión', 'Prepare another review') : t('Preparar manifiesto para revisar', 'Prepare declaration for review')}</Button>}
     {preparation && <div>

@@ -6,7 +6,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "test:meta-loading": "node --conditions=react-server --import tsx --test src/features/meta-loading-dashboard/dashboard-model.test.ts src/features/meta-loading-dashboard/vehicle-dashboard-model.test.ts src/features/truck-collection/load-leader-route.test.ts src/server/modules/loading-sessions/dashboard-reader.test.ts src/shared/meta/loading-operation.test.ts src/server/modules/loading-sessions/operation-service.test.ts src/server/hono/routes/meta/loading-sessions.test.ts src/features/meta-loading-dashboard/operation-api.test.ts src/features/meta-loading-dashboard/operation-read.test.ts",
+    "test:meta-loading": "node --conditions=react-server --import tsx --test src/features/meta-loading-dashboard/dashboard-model.test.ts src/features/meta-loading-dashboard/vehicle-dashboard-model.test.ts src/features/truck-collection/load-leader-route.test.ts src/server/modules/loading-sessions/dashboard-reader.test.ts src/shared/meta/loading-operation.test.ts src/server/modules/loading-sessions/operation-service.test.ts src/server/hono/routes/meta/loading-sessions.test.ts src/features/meta-loading-dashboard/operation-api.test.ts src/features/meta-loading-dashboard/operation-read.test.ts src/shared/meta/cargo-packing.test.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

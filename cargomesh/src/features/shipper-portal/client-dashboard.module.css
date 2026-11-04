@@ -96,3 +96,5 @@
 @container dashboard-activity (max-width: 740px) { .activityTable th,.activityTable td { padding-inline: 12px; } }
 @container dashboard-activity (max-width: 430px) { .activityTable th,.activityTable td { padding-inline: 10px; } }
 @media (prefers-reduced-motion: reduce) { .stage, .draftContinue, .quickCard { transition: none; } }
+
+.routePreview{--workspace-map-height:260px;padding-bottom:16px}.routePreview>div{margin-inline:16px}

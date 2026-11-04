@@ -14,6 +14,7 @@ export function mapServiceabilityToMapViewProps(
     origin: request.origin,
     destination: request.destination,
     overallStatus: evaluation.overallStatus,
+    ...(evaluation.requestRoutePreview === undefined ? {} : { requestRoutePreview: evaluation.requestRoutePreview }),
     candidates: evaluation.candidates.map((candidate) => ({
       candidateId: candidate.candidateId,
       status: candidate.status,

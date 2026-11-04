@@ -10,6 +10,7 @@ import styles from "./road-candidate-map-view.module.css";
 import { SchematicMapView } from "./schematic-map-view";
 import { mapFailureCategory, operationMapPoints, type MapFailure } from "./schematic-map-model";
 
+const overviewCenter = { lat: -12.0464, lng: -77.0428 };
 const browserKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_JS_API_KEY?.trim() ?? "";
 
 type Adapter = { provider: "google"; update: (data: MapPresentation) => void; dispose: () => void };
@@ -59,16 +60,17 @@ function mountGoogle(host: HTMLDivElement, center: { lat: number; lng: number })
         });
         operationMapPoints(data).forEach(point => bounds.extend(point));
         if (data.markers.length > 1 || data.paths.length) map.fitBounds(bounds, 42);
-        else if (data.markers.length) map.setCenter(data.markers[0].point);
+        else map.setCenter(data.markers[0]?.point ?? overviewCenter);
       },
       dispose: clear,
     },
   };
 }
 
-export function RoadMapCanvas({ presentation, onProviderChange }: {
+export function RoadMapCanvas({ presentation, onProviderChange, showBasemap = false }: {
   presentation: MapPresentation;
   onProviderChange: (provider: MapProvider) => void;
+  showBasemap?: boolean;
 }) {
   const googleHost = useRef<HTMLDivElement>(null);
   const adapter = useRef<Adapter | null>(null);
@@ -79,14 +81,14 @@ export function RoadMapCanvas({ presentation, onProviderChange }: {
   const [attempt, setAttempt] = useState(0);
   const { t, locale } = useLocale();
   current.current = presentation;
-  const hasMarkers = presentation.markers.length > 0;
+  const canMount = showBasemap || presentation.markers.length > 0;
 
   useEffect(() => { adapter.current?.update(presentation); }, [presentation]);
 
   useEffect(() => {
     setRenderer("none");
     setFailed(false);
-    if (!hasMarkers) { onProviderChange("none"); return; }
+    if (!canMount) { onProviderChange("none"); return; }
     let disposed = false;
     let failedAttempt = false;
     let timeout = 0;
@@ -115,7 +117,7 @@ export function RoadMapCanvas({ presentation, onProviderChange }: {
     } else {
       void loadGoogleMaps(browserKey).then(() => {
         if (disposed || failedAttempt || googleMapsAuthFailed() || !googleHost.current) return;
-        const { adapter: googleAdapter, map } = mountGoogle(googleHost.current, current.current.markers[0].point);
+        const { adapter: googleAdapter, map } = mountGoogle(googleHost.current, current.current.markers[0]?.point ?? overviewCenter);
         adapter.current = googleAdapter;
         googleAdapter.update(current.current);
         setRenderer("google");
@@ -133,9 +135,9 @@ export function RoadMapCanvas({ presentation, onProviderChange }: {
       adapter.current?.dispose();
       adapter.current = null;
     };
-  }, [hasMarkers, onProviderChange, attempt]);
+  }, [canMount, onProviderChange, attempt]);
 
-  if (!hasMarkers) return <div className={styles.mapEmpty}><MapPin size={21} aria-hidden="true" /><span>{t("No hay coordenadas confirmadas para mostrar en el mapa.", "No confirmed coordinates are available for the map.")}</span></div>;
+  if (!canMount) return <div className={styles.mapEmpty}><MapPin size={21} aria-hidden="true" /><span>{t("No hay coordenadas confirmadas para mostrar en el mapa.", "No confirmed coordinates are available for the map.")}</span></div>;
 
   return <div className={styles.canvasWrap} data-renderer={failed ? "schematic" : "google"}>
     <div ref={googleHost} className={styles.mapCanvas} style={{ display: renderer === "google" && !failed ? "block" : "none" }} role="region" aria-label={t("Mapa de origen, destino y geometría declarada de la ruta", "Map of origin, destination, and declared route geometry")} />

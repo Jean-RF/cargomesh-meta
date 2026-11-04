@@ -48,6 +48,12 @@ export function createLoadingApi(fetcher:typeof fetch=workspaceFetch){
   async request(id:string){const item=FreightRequestV2ResponseSchema.parse(await json(`/api/v2/freight/requests/${Id.parse(id)}`)).data;if(item.id!==id)throw new Error('REQUEST_SCOPE_MISMATCH');return item;},
   async facilities(offset=0){return z.object({data:z.array(FacilityV2Schema),meta:z.object({nextOffset:z.number().int().nullable()})}).parse(await json(`/api/v2/facilities?limit=100&offset=${offset}`));},
   async manifest(requestId:string){const r=z.object({data:LoadingManifestProjectionSchema.nullable()}).parse(await json(`/api/v2/freight/requests/${Id.parse(requestId)}/declared-manifests/current`));if(r.data&&r.data.declaration.source.requestId!==requestId)throw new Error('MANIFEST_SCOPE_MISMATCH');return r.data;},
+  async planningManifest(requestId:string){
+   const r=z.object({data:LoadingManifestProjectionSchema.nullable(),meta:z.object({currentRequestDraftVersion:z.number().int().positive(),matchesCurrentRequest:z.boolean().nullable()})}).parse(await json(`/api/v2/freight/requests/${Id.parse(requestId)}/declared-manifests/current`));
+   if(r.data&&r.data.declaration.source.requestId!==requestId)throw new Error('MANIFEST_SCOPE_MISMATCH');
+   if(r.data&&(r.meta.matchesCurrentRequest!==true||r.data.declaration.source.requestDraftVersion!==r.meta.currentRequestDraftVersion))throw new LoadingApiError('STALE_MANIFEST',409);
+   return r.data;
+  },
   async createPassport(id:string,version:number,key:string){const r=z.object({data:PassportSource}).parse(await json(`${base}/${Id.parse(id)}/passports`,{expectedVersion:version},key));if(r.data.sessionId!==id)throw new Error('PASSPORT_SCOPE_MISMATCH');return r.data;},
   async passports(id:string){return z.object({data:z.array(z.object({id:Id,sessionVersion:z.number().int().positive(),createdAt:z.string().datetime({offset:true})})).max(100)}).parse(await json(`${base}/${Id.parse(id)}/passports`)).data;},
   async explanationAttempts(id:string,passportId:string,signal?:AbortSignal){

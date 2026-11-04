@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { FreightLocationV2, RoadServiceabilityEvaluationV2Data } from "@/features/v2-intake/contracts";
-import { compareEvaluations, endpointChanged, manualLocation } from "./hac35-model";
+import { compareEvaluations, draftEndpointRevision, endpointChanged, manualLocation } from "./hac35-model";
 
 const original: FreightLocationV2 = { facilityId: "a", label: "Callao", city: "Callao", countryCode: "PE", region: "Lima", lat: -12, lng: -77 };
 test("manual changes do not retain stale facility IDs or canonical area", () => {
@@ -24,4 +24,11 @@ test("evaluation comparison describes changes without inventing causes", () => {
   const current = { candidates: [{ ...candidate, status: "eligible", reasons: ["VERIFIED"] }] } as RoadServiceabilityEvaluationV2Data;
   assert.deepEqual(compareEvaluations(previous, current), [{ candidateId: "a", previous: "unknown", current: "eligible", currentReasons: ["VERIFIED"] }]);
   assert.deepEqual(compareEvaluations(null, current), []);
+});
+
+test("confirming a proposed pin retains its coordinates and preserves the untouched endpoint", () => {
+  assert.equal(draftEndpointRevision(original, original.label, original.city, undefined, null), original);
+  const moved = draftEndpointRevision(original, original.label, original.city, { lat: -12.04, lng: -77.12 }, null);
+  assert.deepEqual(moved, { ...original, facilityId: null, region: null, lat: -12.04, lng: -77.12 });
+  assert.equal(draftEndpointRevision(original, "New facility", "Callao", undefined, null).lat, null);
 });

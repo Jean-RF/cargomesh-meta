@@ -6,6 +6,8 @@ import type { FreightRequestV2Data } from "@/features/v2-intake/contracts";
 import { translate, type Locale } from "@/features/i18n/config";
 import { locationDisplayLabel } from "@/shared/lib/display-identity";
 import { dashboardRequests } from "./client-dashboard-model";
+import { RoadRouteMap } from "@/features/v2-road-map/road-candidate-map-view";
+import { getMapPresentation } from "@/features/v2-road-map/road-map-model";
 import { DashboardActivity } from "./dashboard-activity";
 import { OperationRequestLink } from "./operations-navigation";
 import s from "./client-dashboard.module.css";
@@ -17,6 +19,7 @@ export function ClientDashboard({ requests, complete, unavailable, counts, local
 }) {
   const t = (es: string, en: string) => translate(locale, es, en);
   const { recent, draft } = dashboardRequests(requests, locale);
+  const recentRequest = requests.find(request => request.id === recent[0]?.id);
   const draftRequest = draft ? requests.find(request => request.id === draft.id) : undefined;
   const moreDrafts = Math.max(0, requests.filter(request => request.status === "DRAFT").length - 1);
   const stages = [
@@ -39,6 +42,12 @@ export function ClientDashboard({ requests, complete, unavailable, counts, local
         <div className={s.stages} data-client-motion-group>{stages.map(({ label, value, Icon, href }) => <Link key={label} href={href} className={s.stage}><span className={s.stageIcon}><Icon size={18} aria-hidden="true"/></span><span><strong>{value}</strong><small>{label}</small></span></Link>)}</div>
         <DashboardActivity items={recent} unavailable={unavailable}/>
       </section>
+      {recentRequest ? <section className={`${s.card} ${s.routePreview}`} aria-labelledby="dashboard-route-title">
+        <header className={s.panelHeader}><div><h2 id="dashboard-route-title">{t("Ruta de la última solicitud", "Latest request route")}</h2><p>{recent[0].route}</p></div>
+          <OperationRequestLink requestId={recentRequest.id} className={s.textLink}>{t("Abrir solicitud", "Open request")}<ArrowRight size={15} aria-hidden="true"/></OperationRequestLink>
+        </header>
+        <RoadRouteMap presentation={getMapPresentation(recentRequest)} showBasemap />
+      </section> : null}
     </div>
     <aside className={s.secondaryColumn} aria-label={t("Herramientas de envío", "Shipment tools")}>
       {draft && <section className={`${s.card} ${s.draftCard}`}><header className={`${s.panelHeader} ${s.sideHeader}`}><FilePenLine size={22} aria-hidden="true"/><div><h2>{t("Continúa tu borrador", "Continue your draft")}</h2><p>{complete ? t("Retoma donde lo dejaste", "Pick up where you left off") : t("Último borrador en los registros cargados", "Latest draft in loaded records")}</p></div><FilePenLine className={s.draftWatermark} size={78} aria-hidden="true"/></header>

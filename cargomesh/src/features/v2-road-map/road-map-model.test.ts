@@ -134,3 +134,13 @@ test("provider restriction applies to selection updates as well as initial fallb
   assert.equal(canRenderGeometry("google", "GOOGLE_ROUTES"), true);
   assert.equal(canRenderGeometry("none", "SCENARIO_SYNTHETIC_GEOMETRY"), false);
 });
+
+test("request-level estimate draws even without a selected carrier, only for confirmed endpoints", () => {
+  const { origin, destination } = sample;
+  const requestRoutePreview = { ...sample.candidates[0].routePreview!, geometrySource: "GOOGLE_ROUTES_API", provenanceStatus: "ESTIMATED" as const };
+  const result = getMapPresentation({ origin, destination, requestRoutePreview });
+  assert.equal(result.paths[0].length, 3);
+  assert.equal(result.selectedCandidate, null);
+  assert.equal(result.provenanceStatus, "ESTIMATED");
+  assert.deepEqual(getMapPresentation({ origin: { ...origin, lng: null }, destination, requestRoutePreview }).paths, []);
+});

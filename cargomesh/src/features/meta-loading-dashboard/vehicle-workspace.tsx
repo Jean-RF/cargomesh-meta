@@ -37,7 +37,7 @@ export function TetrisVehicleWorkspace({initialTruckId='',embedded=false}:{initi
   function reset(){setQuery('');setCategory('all');setWeight('all');search.current?.focus();}
   const Surface=embedded?'section':'main';
   return <Surface className={`${shell.page} ${s.page} ${embedded?s.embedded:''}`}>
-    {embedded?<div className={s.embeddedHeader}><Link href="/tetris?view=sessions">Sesiones y Passport</Link><span>Demostración</span></div>:<header className={`${shell.header} ${s.header}`}><Link href="/" className={shell.brand}><span><Truck size={22}/></span>CargoMesh</Link><nav aria-label="Área de trabajo"><span aria-current="page">Tetris</span><Link href="/tetris?view=sessions">Sesiones y Passport</Link><Link href="/truck-lab" className={s.labLink}>Camiones 3D</Link></nav><span className={s.demo}>Demostración</span></header>}
+    {embedded?<div className={s.embeddedHeader}><Link href="/tetris?view=sessions">Sesiones y Passport</Link><Link href="/tetris/plan">Planificar carga 2D/3D</Link><span>Demostración</span></div>:<header className={`${shell.header} ${s.header}`}><Link href="/" className={shell.brand}><span><Truck size={22}/></span>CargoMesh</Link><nav aria-label="Área de trabajo"><span aria-current="page">Tetris</span><Link href="/tetris?view=sessions">Sesiones y Passport</Link><Link href="/tetris/plan">Planificar carga 2D/3D</Link><Link href="/truck-lab" className={s.labLink}>Camiones 3D</Link></nav><span className={s.demo}>Demostración</span></header>}
     <div className={s.body}>
     {truck&&selected&&summary?<>
       <button className={s.back} onClick={()=>choose('')}><ArrowLeft size={16}/> Volver a los camiones</button>
