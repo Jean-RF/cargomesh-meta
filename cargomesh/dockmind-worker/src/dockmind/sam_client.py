@@ -60,7 +60,9 @@ class MetaSamClient:
             api_key=key,
             base_url=base_url or os.environ.get("META_MODEL_BASE_URL") or DEFAULT_BASE_URL,
             timeout=600,
-            max_retries=1,
+            # A retry may process/bill again. Only an explicit operator retry can
+            # consume another call from the authorized local analysis budget.
+            max_retries=0,
         )
 
     def segment(self, video: Path, concept: str) -> SegmentationRun:

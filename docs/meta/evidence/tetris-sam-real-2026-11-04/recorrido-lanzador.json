@@ -1,0 +1,188 @@
+{
+  "ranAt": "2026-11-04T23:14:39.926Z",
+  "scope": "Supabase local (http://127.0.0.1:64321), app createHonoApp en 127.0.0.1 con DOCKMIND_WORKER_MODE=LOCAL_LOOPBACK y lanzador `dockmind serve-local`; sin Modal ni base alojada",
+  "segmenter": "META_SAM_API real sobre clip SYNTHETIC_RENDER; una llamada autorizada, no captura propia",
+  "checks": [
+    "Sesión DEMO de Juan sobre un manifiesto CR-01 confirmado, por HTTP con Bearer",
+    "Clip privado registrado, subido con URL firmada y verificado READY",
+    "El lanzador responde 401 sin Modal-Key/Modal-Secret",
+    "Job -> despacho HTTP al lanzador -> Storage -> callback firmado -> SUCCEEDED persistido -> una observación de Juan (neto 6, META_SAM_API)",
+    "El video que se reproduce es el del intento 1 y su SHA-256 coincide con el que declaró el worker",
+    "Callback repetido (202 ALREADY_RECORDED), recuperación (409 DELIVERY_NOT_PENDING) y despacho repetido (duplicate): una sola observación y un solo análisis",
+    "Paquete de evidencia: identidad, configuración, procedencia, marcas de tiempo y video verificado; rotulado SYNTHETIC_OR_FIXTURE",
+    "Cobertura QA sintética explícita, cierre versionado, diferencia cero y Passport persistido/reabierto; sin explicación pagada"
+  ],
+  "receipt": {
+    "call_id": "local-8bdb5ad8b266",
+    "job_id": "74e57887-f4ca-4373-ac03-f55016085f4e",
+    "attempt": 1,
+    "group_id": "a2177543-fa5e-47cb-9e19-ee22a02cae8d",
+    "status": "SUCCEEDED",
+    "error": null,
+    "net": 6,
+    "count_status": "OK",
+    "provider": {
+      "segmenter": "META_SAM_API",
+      "real_inference": true,
+      "model": "sam-3.1",
+      "request_id": "resp_6aebbc402d6c545b9343460f",
+      "seconds": 10.78,
+      "estimated_cost_usd": 0.022
+    },
+    "overlay_sha256": "f4623cdb12242f374afee83008cecc75b08450c87a374076932713569c3f97ac",
+    "reused": false,
+    "delivery": {
+      "delivered": true,
+      "tries": 1,
+      "http_status": 200,
+      "problem": null
+    }
+  },
+  "passport": {
+    "id": "e536ee67-174a-4ec6-9b54-4a10aeda6e97",
+    "sessionVersion": 4
+  },
+  "replay": {
+    "status": 202,
+    "reason": "ALREADY_RECORDED"
+  },
+  "evidencePack": {
+    "schema": "dockmind.evidence.v1",
+    "generatedAt": "2026-11-04T23:14:39.735Z",
+    "label": "SYNTHETIC_OR_FIXTURE",
+    "identity": {
+      "jobId": "74e57887-f4ca-4373-ac03-f55016085f4e",
+      "attempt": 1,
+      "organizationId": "c2300000-0000-4000-8000-000000000001",
+      "sessionId": "edacbe20-4263-4a1a-ab99-e4e3acbd1e60",
+      "evidenceId": "3295fe01-ee29-48c7-99fb-7ade1078b2ee",
+      "groupId": "a2177543-fa5e-47cb-9e19-ee22a02cae8d",
+      "manifestRevision": 1,
+      "coverage": "COMPLETE"
+    },
+    "status": "SUCCEEDED",
+    "error": null,
+    "clip": {
+      "source": "SYNTHETIC_RENDER",
+      "sha256Uploaded": "8e2610e167d60a465ebefa6d98aef19e63dc8f3e561b3fd51e891581c70d0a92",
+      "sha256Analyzed": "8e2610e167d60a465ebefa6d98aef19e63dc8f3e561b3fd51e891581c70d0a92",
+      "sameBytes": true,
+      "original": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 330,
+        "duration": 11,
+        "codec": "h264"
+      },
+      "analyzed": {
+        "width": 1280,
+        "height": 720,
+        "fps": 10,
+        "frames": 110,
+        "duration": 11,
+        "codec": "h264"
+      },
+      "roi": null,
+      "timeMapping": "segundo = cuadro / 10"
+    },
+    "config": {
+      "line": {
+        "from": [
+          0.5,
+          0
+        ],
+        "to": [
+          0.5,
+          1
+        ]
+      },
+      "inside": [
+        0.8,
+        0.5
+      ],
+      "direction": "IN cruza hacia el punto de adentro; OUT, al revés. Coordenadas en fracciones del cuadro original.",
+      "unit": "BOX",
+      "concept": "cardboard box",
+      "margin": 0.01,
+      "minTrackFrames": 3
+    },
+    "provenance": {
+      "segmenter": "META_SAM_API",
+      "realInference": true,
+      "model": "sam-3.1",
+      "requestId": "resp_6aebbc402d6c545b9343460f",
+      "analysisVersion": "dockmind-0.1.0",
+      "analyzedAt": "2026-11-04T23:14:38+00:00"
+    },
+    "count": {
+      "status": "OK",
+      "entries": 6,
+      "exits": 0,
+      "net": 6,
+      "unit": "BOX",
+      "events": [
+        {
+          "seconds": 3.1,
+          "frame": 31,
+          "direction": "IN",
+          "objectId": 0
+        },
+        {
+          "seconds": 4.5,
+          "frame": 45,
+          "direction": "IN",
+          "objectId": 1
+        },
+        {
+          "seconds": 5.9,
+          "frame": 59,
+          "direction": "IN",
+          "objectId": 2
+        },
+        {
+          "seconds": 7.3,
+          "frame": 73,
+          "direction": "IN",
+          "objectId": 3
+        },
+        {
+          "seconds": 8.7,
+          "frame": 87,
+          "direction": "IN",
+          "objectId": 4
+        },
+        {
+          "seconds": 10.1,
+          "frame": 101,
+          "direction": "IN",
+          "objectId": 5
+        }
+      ],
+      "reviewFlags": [],
+      "tracksSeen": 6,
+      "tracksCounted": 6,
+      "maxObjectsInFrame": 4
+    },
+    "providerUsage": {
+      "billable": true,
+      "seconds": 10.78,
+      "boxes": 249,
+      "estimatedCostUsd": 0.022
+    },
+    "overlay": {
+      "object": "3295fe01-ee29-48c7-99fb-7ade1078b2ee-74e57887-f4ca-4373-ac03-f55016085f4e-a1-overlay.mp4",
+      "status": "VERIFIED",
+      "sha256Stored": "f4623cdb12242f374afee83008cecc75b08450c87a374076932713569c3f97ac",
+      "sha256Now": "f4623cdb12242f374afee83008cecc75b08450c87a374076932713569c3f97ac",
+      "sizeBytesNow": 98876,
+      "verified": true
+    },
+    "delivery": {
+      "status": "DELIVERED",
+      "tries": 1,
+      "observationId": "487f8ae5-d7da-4125-a3cc-27953a718afe",
+      "deliveredAt": "2026-11-04T23:14:19.603063+00:00"
+    }
+  }
+}

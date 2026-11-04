@@ -12,6 +12,9 @@
  * Uso, desde cargomesh/, con una Supabase local (perfil V2 o la base Meta local) arrancada y su seed sintético:
  *   npx supabase status --workdir ../supabase-v2 -o json > <fuera del repo>/v2-status.json
  *   CARGOMESH_LOCAL_SECRETS_PATH=<ese archivo> node --conditions=react-server --import tsx scripts/meta-dockmind-launcher-e2e.ts
+ * Por defecto usa FIXTURE sin coste. --sam --live requiere autorización explícita
+ * de gasto, una clave local y limita el launcher a una inferencia del clip sintético generado.
+ * DOCKMIND_PYTHON selecciona un venv externo; DOCKMIND_E2E_OUTPUT_DIR separa la evidencia nueva.
  */
 import assert from "node:assert/strict";
 import {spawn, spawnSync} from "node:child_process";
@@ -24,7 +27,8 @@ import {join, resolve} from "node:path";
 import {createClient} from "@supabase/supabase-js";
 
 const WORKER = resolve("dockmind-worker");
-const PYTHON = [join(WORKER, ".venv", "Scripts", "python.exe"), join(WORKER, ".venv", "bin", "python")].find(existsSync);
+// Operator-only CLI setting: permits an isolated venv outside the source checkout.
+const PYTHON = [process.env.DOCKMIND_PYTHON, join(WORKER, ".venv", "Scripts", "python.exe"), join(WORKER, ".venv", "bin", "python")].find((p):p is string=>Boolean(p&&existsSync(p)));
 const ORG_A = "c2300000-0000-4000-8000-000000000001";
 const CONFIG = {line: {x1: 0.5, y1: 0, x2: 0.5, y2: 1, inside_x: 0.8, inside_y: 0.5}, unit: "BOX", concept: "cardboard box"};
 const LAUNCHER_KEYS = ["DOCKMIND_WORKER_MODE", "DOCKMIND_WORKER_URL", "DOCKMIND_CALLBACK_URL", "DOCKMIND_CALLBACK_SECRET", "MODAL_PROXY_TOKEN_ID", "MODAL_PROXY_TOKEN_SECRET"];
@@ -39,6 +43,9 @@ const sha256 = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest(
 const sleep = (ms: number) => new Promise((done) => setTimeout(done, ms));
 
 async function main() {
+  const realSam = process.argv.includes('--sam');
+  assert(!realSam || process.argv.includes('--live'), 'Paid synthetic SAM check requires --sam --live explicitly');
+  assert(!realSam || process.env.META_MODEL_API_KEY, 'Local Meta key required for authorized SAM check');
   const statusPath = process.env.CARGOMESH_LOCAL_SECRETS_PATH;
   assert(statusPath, "Pasa el JSON de `supabase status` en CARGOMESH_LOCAL_SECRETS_PATH, fuera del repositorio");
   assert(PYTHON, "Falta el venv del worker en dockmind-worker/.venv");
@@ -83,7 +90,8 @@ async function main() {
 
   // Clip sintético con su FIXTURE y archivo privado del lanzador, fuera del repositorio.
   const work = mkdtempSync(join(tmpdir(), "dockmind-launcher-"));
-  const childEnv = {NODE_ENV: process.env.NODE_ENV, PATH: process.env.PATH, SYSTEMROOT: process.env.SYSTEMROOT, PYTHONIOENCODING: "utf-8"};
+  const childEnv = {NODE_ENV: process.env.NODE_ENV, PATH: process.env.PATH, SYSTEMROOT: process.env.SYSTEMROOT, PYTHONIOENCODING: "utf-8",
+    ...(realSam ? {META_MODEL_API_KEY:process.env.META_MODEL_API_KEY,META_SAM_MODEL:'sam-3.1'} : {})};
   const python = (args: string[]) => spawnSync(PYTHON!, ["-m", "dockmind", ...args], {cwd: WORKER, encoding: "utf8", env: childEnv});
   let launcher: ReturnType<typeof spawn> | null = null;
   try {
@@ -96,7 +104,8 @@ async function main() {
     const settings = Object.fromEntries(readFileSync(settingsFile, "utf8").split("\n").filter((l) => l.includes("=") && !l.startsWith("#")).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).trim()]));
     for (const name of LAUNCHER_KEYS) process.env[name] = settings[name];
 
-    const child = spawn(PYTHON!, ["-m", "dockmind", "serve-local", "--config", settingsFile, "--segmenter", "fixture", "--fixture", join(work, "sintetico_todas.fixture.txt")], {cwd: WORKER, env: childEnv});
+    const segmentArgs = realSam ? ['--segmenter','sam','--paid-calls','1'] : ['--segmenter','fixture','--fixture',join(work,'sintetico_todas.fixture.txt')];
+    const child = spawn(PYTHON!, ["-m", "dockmind", "serve-local", "--config", settingsFile, ...segmentArgs], {cwd: WORKER, env: childEnv});
     launcher = child;
     const receipts: Record<string, any>[] = [];
     let banner = "";
@@ -109,7 +118,7 @@ async function main() {
     let launcherErrors = "";
     child.stderr.on("data", (chunk: Buffer) => (launcherErrors += chunk.toString("utf8")));
     for (let i = 0; i < 100 && !banner.includes("Lanzador local DockMind en"); i += 1) await sleep(100);
-    assert.ok(banner.includes("Segmentador: FIXTURE"), `El lanzador no arrancó: ${launcherErrors.slice(-500)}`);
+    assert.ok(banner.includes(realSam ? 'Segmentador: META_SAM_API' : 'Segmentador: FIXTURE'), 'El lanzador no arrancó con el segmentador solicitado');
 
     const call = async (path: string, body?: unknown) => {
       const response = await fetch(`${appOrigin}/api/v2${path}`, {
@@ -168,22 +177,22 @@ async function main() {
     assert.equal(createdJob.status, 201, JSON.stringify(createdJob.body.error));
     const jobId = createdJob.body.data.jobId as string;
     let view: Record<string, any> = {};
-    for (let i = 0; i < 240; i += 1) {
+    for (let i = 0; i < (realSam ? 300 : 240); i += 1) {
       view = (await call(`/meta/dockmind/jobs/${jobId}`)).body.data;
       if (view.status !== "QUEUED" && view.status !== "RUNNING" && view.delivery.status !== "PENDING") break;
-      await sleep(250);
+      await sleep(realSam ? 2000 : 250);
     }
     assert.deepEqual([view.status, view.delivery.status, view.overlayStatus, view.attempt], ["SUCCEEDED", "DELIVERED", "VERIFIED", 1], JSON.stringify(view));
-    assert.deepEqual([view.result.net, view.result.clipSource, view.result.realInference, view.groupId, view.coverage], [6, "SYNTHETIC_RENDER", false, groupId, "COMPLETE"]);
+    assert.deepEqual([view.result.net, view.result.clipSource, view.result.realInference, view.groupId, view.coverage], [6, "SYNTHETIC_RENDER", realSam, groupId, "COMPLETE"]);
     for (let i = 0; i < 40 && receipts.length === 0; i += 1) await sleep(100);
     assert.equal(receipts.length, 1);
     const [receipt] = receipts;
     assert.deepEqual([receipt.job_id, receipt.attempt, receipt.group_id, receipt.reused, receipt.delivery.delivered], [jobId, 1, groupId, false, true]);
-    assert.deepEqual([receipt.provider.segmenter, receipt.provider.real_inference], ["FIXTURE", false]);
+    assert.deepEqual([receipt.provider.segmenter, receipt.provider.real_inference], [realSam ? 'META_SAM_API' : 'FIXTURE', realSam]);
     const observations = async () => ((await call(`/meta/loading-sessions/${session.id}`)).body.data.observations as {id: string; jobId: string; attempt: number}[]).filter((o) => o.jobId === jobId);
     const delivered = await observations();
     assert.deepEqual(delivered.map((o) => o.attempt), [1]);
-    checks.push("Job -> despacho HTTP al lanzador -> Storage -> callback firmado -> SUCCEEDED persistido -> una observación de Juan (neto 6, FIXTURE)");
+    checks.push(`Job -> despacho HTTP al lanzador -> Storage -> callback firmado -> SUCCEEDED persistido -> una observación de Juan (neto 6, ${realSam ? 'META_SAM_API' : 'FIXTURE'})`);
 
     // 5. Video anotado del intento correcto: URL del intento 1 y mismos bytes que declaró el worker.
     const overlay = await call(`/meta/dockmind/jobs/${jobId}/overlay`);
@@ -227,16 +236,37 @@ async function main() {
     const record = await server.ledger.get(jobId);
     assert(record);
     const pack = buildEvidencePack(record, await server.overlays.inspect(record.overlayPath), new Date());
-    assert.deepEqual([pack.label, pack.overlay.verified, pack.clip.sameBytes, pack.providerUsage?.billable], ["SYNTHETIC_OR_FIXTURE", true, true, false]);
+    assert.deepEqual([pack.label, pack.overlay.verified, pack.clip.sameBytes, pack.providerUsage?.billable], ["SYNTHETIC_OR_FIXTURE", true, true, realSam]);
     checks.push("Paquete de evidencia: identidad, configuración, procedencia, marcas de tiempo y video verificado; rotulado SYNTHETIC_OR_FIXTURE");
 
-    const out = resolve("..", "docs", "meta", "evidence", "dockmind-local-launcher");
+    // Explicit synthetic QA coverage, not human verification of physical cargo.
+    const beforeSelection = await call(`/meta/loading-sessions/${session.id}`);
+    const selected = await call(`/meta/loading-sessions/${session.id}/observation-selections`, {
+      expectedVersion: beforeSelection.body.data.session.version, groupId, observationId: delivered[0].id,
+      coverage: 'COMPLETE', reason: 'Automated QA of the matching generated synthetic clip; not physical review.',
+    });
+    assert.equal(selected.status, 200, JSON.stringify(selected.body.error));
+    const closed = await call(`/meta/loading-sessions/${session.id}/close`, {expectedVersion:selected.body.data.session.version});
+    assert.equal(closed.status, 200, JSON.stringify(closed.body.error));
+    assert.equal(closed.body.comparison.rows.find((r:{id:string})=>r.id===groupId).delta, 0);
+    const passport = await call(`/meta/loading-sessions/${session.id}/passports`, {expectedVersion:closed.body.data.session.version});
+    assert.equal(passport.status, 201, JSON.stringify(passport.body.error));
+    const reopened = await call(`/meta/loading-sessions/${session.id}/passports/${passport.body.data.id}`);
+    assert.equal(reopened.status, 200);
+    assert.equal(reopened.body.data.id, passport.body.data.id);
+    assert.equal(reopened.body.data.source.observations[0].realInference, realSam);
+    assert.equal(reopened.body.data.comparison.rows.find((r:{id:string})=>r.id===groupId).delta, 0);
+    checks.push('Cobertura QA sintética explícita, cierre versionado, diferencia cero y Passport persistido/reabierto; sin explicación pagada');
+
+    const out = process.env.DOCKMIND_E2E_OUTPUT_DIR
+      ? resolve(process.env.DOCKMIND_E2E_OUTPUT_DIR)
+      : resolve("..", "docs", "meta", "evidence", "dockmind-local-launcher");
     mkdirSync(out, {recursive: true});
     writeFileSync(join(out, "recorrido-lanzador.json"), `${JSON.stringify({
       ranAt: new Date().toISOString(),
-      scope: `Supabase local (${local.API_URL}), app createHonoApp en 127.0.0.1 con DOCKMIND_WORKER_MODE=LOCAL_LOOPBACK y lanzador \`dockmind serve-local\`; sin Modal, SAM ni base alojada`,
-      segmenter: "FIXTURE del clip SYNTHETIC_RENDER sintetico_todas (6 cruces); no es inferencia real ni captura propia",
-      checks, receipt, replay: {status: replay.status, reason: replayBody.data.reason}, evidencePack: pack,
+      scope: `Supabase local (${local.API_URL}), app createHonoApp en 127.0.0.1 con DOCKMIND_WORKER_MODE=LOCAL_LOOPBACK y lanzador \`dockmind serve-local\`; sin Modal ni base alojada`,
+      segmenter: realSam ? 'META_SAM_API real sobre clip SYNTHETIC_RENDER; una llamada autorizada, no captura propia' : 'FIXTURE del clip SYNTHETIC_RENDER sintetico_todas (6 cruces); no es inferencia real ni captura propia',
+      checks, receipt, passport:{id:passport.body.data.id,sessionVersion:passport.body.data.sessionVersion}, replay: {status: replay.status, reason: replayBody.data.reason}, evidencePack: pack,
     }, null, 2)}\n`);
     console.log(checks.map((check, index) => `${index + 1}. ${check}`).join("\n"));
     console.log(`Evidencia: ${join(out, "recorrido-lanzador.json")}`);
