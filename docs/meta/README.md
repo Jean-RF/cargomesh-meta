@@ -1,5 +1,7 @@
 # CargoMesh Meta: entrada del equipo
 
+Incremento de Axel del 4-nov en `Jean-RF/cargomesh-meta`: [manifiesto a vista previa Tetris 2D/3D](TETRIS_PLANNING_2026-11-04.md) y [corrección de la selección de voz](VOICE_PLAYBACK_2026-11-04.md). Estos informes distinguen implementación local, integración y aceptación en producción.
+
 Entorno de trabajo: [solo Meta local activo; bancos de pruebas apagados al terminar](ENTORNO_LOCAL_ACTIVO.md).
 
 La documentación activa de Meta está en esta carpeta. El trabajo nuevo se realiza en `Chujutak2024/meta-hackathon`, ramas `codex/meta-*` y PR a `main` del mismo repositorio. Linear está aplazado por indicación expresa del usuario.

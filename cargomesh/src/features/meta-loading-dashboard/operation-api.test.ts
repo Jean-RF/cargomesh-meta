@@ -35,3 +35,11 @@ it('validates Passport source before deriving comparison and rejects forged evid
  assert.equal((await api.passport(p.sessionId,p.id)).data.comparison.rows[0].delta,2);
  await assert.rejects(api.passport(loadingId(98),p.id));
 });
+it('physical planning rejects a manifest that no longer matches the saved draft',async()=>{
+ const manifest=loadingBundleFixture().session.manifest;
+ const stale=createLoadingApi(async()=>Response.json({data:manifest,meta:{currentRequestDraftVersion:2,matchesCurrentRequest:false}}));
+ await assert.rejects(stale.planningManifest(manifest.declaration.source.requestId),/STALE_MANIFEST/);
+ const current=createLoadingApi(async()=>Response.json({data:manifest,meta:{currentRequestDraftVersion:1,matchesCurrentRequest:true}}));
+ assert.equal((await current.planningManifest(manifest.declaration.source.requestId))?.id,manifest.id);
+ await assert.rejects(current.planningManifest(loadingId(99)),/MANIFEST_SCOPE_MISMATCH/);
+});

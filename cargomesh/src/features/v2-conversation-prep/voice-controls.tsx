@@ -32,7 +32,7 @@ type BraveNavigator = Navigator & { brave?: { isBrave?: () => Promise<boolean> }
 export type VoiceState = "checking" | "available" | "requesting_permission" | "listening" | "processing" | "error" | "unsupported";
 
 /** Browser-only capture and playback. The parent decides how to handle a completed turn. */
-export function useConversationVoice({ onTranscript, onSilence, responseText, language, rate = 0.96 }: {
+export function useConversationVoice({ onTranscript, onSilence, responseText, language, rate = 1 }: {
   onTranscript: (text: string) => void;
   onSilence: (text: string) => void;
   responseText: string;
@@ -204,8 +204,8 @@ export function useConversationVoice({ onTranscript, onSilence, responseText, la
     setSpeaking(true);
     const utterance = new SpeechSynthesisUtterance(text);
     activeUtterance.current = utterance;
-    utterance.lang = language;
     utterance.voice = chosenSpeechVoice(window.speechSynthesis.getVoices(), language, selectedVoiceURI);
+    utterance.lang = utterance.voice?.lang || language;
     utterance.rate = rate;
     utterance.onstart = () => { if (activeUtterance.current === utterance) { setSpeaking(true); setMessage("CargoMesh is speaking. Press Stop audio before starting another voice turn."); } };
     utterance.onend = () => { if (activeUtterance.current === utterance) { activeUtterance.current = null; setSpeaking(false); setState("available"); setMessage(""); } };
