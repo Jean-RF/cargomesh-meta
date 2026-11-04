@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-04",
+  "scope": "META_LOCAL_ONLY",
+  "applicationSource": "f215b2616c452bcdc013c2d89aabc4e881501822",
+  "database": {
+    "scope": "META_LOCAL_ONLY",
+    "container": "supabase_db_meta-cr01-validation",
+    "organizationId": "c2300000-0000-4000-8000-000000000001",
+    "expectedFacilities": 35,
+    "countries": 17,
+    "addedFacilities": 32,
+    "existingCoordinatesCompleted": 3,
+    "backupSha256": "d177b8c74331c1829d74ce73bece1b19ce091b0ee2328b3053bf868f215aef1c",
+    "checks": [
+      "container and loopback identity",
+      "backup saved outside Git",
+      "dry-run rollback",
+      "wrong-tenant guard rejects",
+      "35 expected coordinates",
+      "foreign tenant unchanged",
+      "requests/manifests/bookings/sessions unchanged",
+      "exact replay changes no rows or versions"
+    ],
+    "before": {
+      "facilities": "059650d364cfdf2f08d12f18c0671935",
+      "foreignFacilities": "dfeb3df7632fc6a348c45483d07ef478",
+      "requests": "e3ba98c6394e09bb64fe13c1e7cf7b12",
+      "bookings": "d751713988987e9331980363e24189ce",
+      "v2Bookings": "57abdf4c8f6cbed1dc0f03322a98290b",
+      "manifests": "5288a0f0daa6290192568f590b78bf3f",
+      "sessions": "7b04509496a184d0837d32102327dc8a"
+    },
+    "after": {
+      "facilities": "ee896f850d34f3652075ecf198adf294",
+      "foreignFacilities": "dfeb3df7632fc6a348c45483d07ef478",
+      "requests": "e3ba98c6394e09bb64fe13c1e7cf7b12",
+      "bookings": "d751713988987e9331980363e24189ce",
+      "v2Bookings": "57abdf4c8f6cbed1dc0f03322a98290b",
+      "manifests": "5288a0f0daa6290192568f590b78bf3f",
+      "sessions": "7b04509496a184d0837d32102327dc8a"
+    },
+    "hostedDatabaseChanged": false,
+    "coverageConfirmed": false,
+    "capacityConfirmed": false
+  },
+  "http": {
+    "scope": "META_LOCAL_AUTHENTICATED_HTTP",
+    "facilities": 35,
+    "countries": 17,
+    "withCoordinates": 35,
+    "foreignTenantFacilities": 1,
+    "unauthenticatedStatus": 401,
+    "roadPrechecks": [
+      {
+        "origin": "Sydney",
+        "destination": "Buenos Aires",
+        "status": "blocked",
+        "reason": "DISCONNECTED_NETWORKS"
+      },
+      {
+        "origin": "Buenos Aires",
+        "destination": "Sydney",
+        "status": "blocked",
+        "reason": "DISCONNECTED_NETWORKS"
+      }
+    ],
+    "providerInferenceCalls": 0,
+    "visualTest": false
+  },
+  "visualReview": "PENDING_USER",
+  "hostedApplied": false
+}
