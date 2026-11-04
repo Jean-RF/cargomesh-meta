@@ -33,6 +33,7 @@ import { wantsQuoteSearch } from "./chat-quote-action";
 import { DateClarificationPanel, CargoClassificationPanel } from "./capture-clarification-panel";
 import { explicitCargoFacts, groundedCargoSuggestions } from "./explicit-cargo-facts";
 import { assistantNextField, assistantNextQuestion } from "./assistant-form-guide";
+import {draftRoadStatus,disconnectedRoadNotice} from './road-advice';
 import { NovaHelpHint } from "./nova-help-hint";
 import {spokenCategoryAcceptance} from "./spoken-category-acceptance";
 import {spokenCaptureClarification} from "./spoken-capture-clarification";
@@ -259,7 +260,18 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     else add(user,turnLanguage==='es'?'Terrestre está disponible; aéreo y marítimo aún no. ¿Continuamos con terrestre?':'Road is available; Air and Sea are not available yet. Shall we continue with Road?');
     return true;
   }
-  const ask = (field: GuidedConversationField) => questionForField(field, voiceLanguage);
+  const ask = (field: GuidedConversationField) => draftRoadStatus(voiceDraftRef.current,options)==='DISCONNECTED_NETWORKS'
+    ?disconnectedRoadNotice(language==='es'):questionForField(field, voiceLanguage);
+  const blockedRoadPair=draftRoadStatus(draft,options)==='DISCONNECTED_NETWORKS'?draft.originFacilityId+':'+draft.destinationFacilityId:'';
+  const warnedRoadPair=useRef('');
+  useEffect(()=>{
+    if(transportSelectionRequired||!blockedRoadPair){warnedRoadPair.current='';return;}
+    if(warnedRoadPair.current===blockedRoadPair)return;
+    warnedRoadPair.current=blockedRoadPair;
+    confirmationRef.current=null;setAwaitingConfirmation(false);
+    const notice=disconnectedRoadNotice(language==='es');
+    setHistory(current=>[...current,{speaker:'assistant',text:notice}]);setAnnouncement(notice);
+  },[blockedRoadPair,transportSelectionRequired,language]);
 
 
   const scrollToLatest = () => {
@@ -461,7 +473,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     }
     confirmationRef.current = { review: proposeDraftReview(nextDraft), requestId: request?.id ?? null, version: request?.draftVersion ?? null };
     setAwaitingConfirmation(true);
-    add(user, draftSummary(nextDraft, options, request, language));
+    add(user, [draftSummary(nextDraft, options, request, language),draftRoadStatus(nextDraft,options)==='DISCONNECTED_NETWORKS'?disconnectedRoadNotice(language==='es'):null].filter(Boolean).join(' '));
   }
 
   function confirmSave(user: string | null) {
@@ -482,7 +494,9 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
       setAwaitingConfirmation(false);
       return;
     }
-    add(user, request ? (language==="es"?"Guardando la revisión confirmada y consultando ROAD para la nueva versión…":"Saving the confirmed revision, then refreshing ROAD for its new version…") : (language==="es"?"Creando tu borrador autorizado y consultando elegibilidad ROAD…":"Creating your authorized draft, then checking ROAD eligibility…"));
+    add(user, draftRoadStatus(draft,options)==='DISCONNECTED_NETWORKS'
+      ?t('Guardando el borrador pendiente. No se evaluará una opción ROAD para esta ruta.','Saving the pending draft. A ROAD option will not be evaluated for this route.')
+      :request ? (language==="es"?"Guardando la revisión confirmada y consultando ROAD para la nueva versión…":"Saving the confirmed revision, then refreshing ROAD for its new version…") : (language==="es"?"Creando tu borrador autorizado y consultando elegibilidad ROAD…":"Creating your authorized draft, then checking ROAD eligibility…"));
     confirmationRef.current = null;
     setAwaitingConfirmation(false);
     onSave();
@@ -559,7 +573,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     }
     if (voiceSaveInFlightRef.current) return;
     voiceSaveInFlightRef.current = true;voiceConfirmationRef.current=null;
-    setVoiceReviewNotice(request ? (language==="es"?"Guardando la revisión confirmada…":"Saving the confirmed draft revision…") : (language==="es"?"Creando el borrador confirmado y consultando opciones preliminares ROAD…":"Creating your confirmed draft and checking preliminary ROAD options…"));
+    setVoiceReviewNotice(draftRoadStatus(draft,options)==='DISCONNECTED_NETWORKS'?disconnectedRoadNotice(language==='es'):request ? (language==="es"?"Guardando la revisión confirmada…":"Saving the confirmed draft revision…") : (language==="es"?"Creando el borrador confirmado y consultando opciones preliminares ROAD…":"Creating your confirmed draft and checking preliminary ROAD options…"));
     onSave();
   }
 
@@ -567,7 +581,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     const started = { draft: JSON.stringify(latestInterpretDraftRef.current), scope: textScopeRef.current, revision: ++interpretationRevisionRef.current };
     const currentField = transportSelectionRequired ? null : preferredField ?? missingField(currentDraft);
     const input = { schemaVersion: "2.0" as const, text: value, currentField, inputRevision: started.revision, language: conversationLanguage(value, language),
-      context: { ...(transportSelectionRequired ? {knownFields:[],lastAskedField:null,failedAttempts:0} : conversationContext(currentDraft, currentField, failedAttempts.current)),
+      context: { ...(transportSelectionRequired ? {knownFields:[],lastAskedField:null,failedAttempts:0} : conversationContext(currentDraft, currentField, failedAttempts.current,options)),
         screen: transportSelectionRequired ? "TRANSPORT_SELECTION" as const : "ROAD_INTAKE" as const,
         conversation: conversationMemory(history),
         previousHelpTopic: previousHelpTopic.current } };
@@ -799,6 +813,10 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
       }
       if (applied.length) onFields(applied);
       const projected = applyChatFieldsToDraft(draft, applied);
+      if(draftRoadStatus(projected,options)==='DISCONNECTED_NETWORKS'){
+        confirmationRef.current=null;setAwaitingConfirmation(false);
+        add(value,disconnectedRoadNotice(turnLanguage==='es'));return;
+      }
       if (clarification) {
         failedAttempts.current = accepted.size ? 0 : Math.min(3, failedAttempts.current + 1);
         setAwaitingConfirmation(false);

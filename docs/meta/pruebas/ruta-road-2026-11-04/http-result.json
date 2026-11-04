@@ -1,0 +1,36 @@
+{
+  "scope": "META_LOCAL_HTTP",
+  "rows": [
+    {
+      "originId": "cbfec600-77e9-5670-809f-0871d62dcfc3",
+      "destinationId": "0e016a61-b296-5309-bc34-8fb5b78f3766",
+      "httpStatus": 200,
+      "mode": "DETERMINISTIC",
+      "quantityPreserved": true,
+      "warning": true,
+      "providerCalls": 0
+    },
+    {
+      "originId": "0e016a61-b296-5309-bc34-8fb5b78f3766",
+      "destinationId": "cbfec600-77e9-5670-809f-0871d62dcfc3",
+      "httpStatus": 200,
+      "mode": "DETERMINISTIC",
+      "quantityPreserved": true,
+      "warning": true,
+      "providerCalls": 0
+    },
+    {
+      "originId": "cbfec600-77e9-5670-809f-0871d62dcfc3",
+      "destinationId": "d00321cc-36a6-59fe-b11f-ed097cb9cdbb",
+      "httpStatus": 200,
+      "mode": "DETERMINISTIC",
+      "quantityPreserved": true,
+      "warning": false,
+      "providerCalls": 0
+    }
+  ],
+  "unauthenticatedStatus": 401,
+  "providerCalls": 0,
+  "commercialWrites": 0,
+  "visualReview": false
+}

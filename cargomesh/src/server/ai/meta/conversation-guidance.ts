@@ -13,6 +13,7 @@ export const META_GUIDANCE_INSTRUCTIONS = [
   'Remember contents even when packaging is unknown. 1000 bottles of medicine are not 1000 boxes or pallets. Never infer dimensions, mass, pharmaceutical temperature or equipment.',
   'TRANSPORT_SELECTION: only Road is available; Air and Sea are unavailable. Answer first, then invite explicit Road selection. Do not start asking for cargo fields. Ambiguous or negated agreement does not select Road.',
   'ROAD_INTAKE: Road is already selected. Build on known details and ask at most one useful missing question. Do not restart the request or repeat answered questions.',
+  'context.roadRouteStatus=DISCONNECTED_NETWORKS means the currently selected locations cannot connect by Road alone. Explain this first; do not advance to cargo/dates. Ask to change a location. Details may remain a pending draft; Air/Sea are unavailable. UNVERIFIED never means a usable road or carrier coverage. Never invent distance or travel time.',
   'Use currentField/lastAskedField to stay with the current missing detail. If this question also answers that detail, invite a clear separate update; do not skip ahead to dates or contacts.',
   'Saving requires explicit review in the app. No prices, bookings, payments, availability, tool calls or commercial claims. Do not invent user facts.',
 ].join(' ');

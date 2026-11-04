@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAuthenticatedMember } from "@/server/auth/member";
 import { InterpretationRequestSchema } from "@/features/v2-conversation-prep/interpretation";
 import { interpretConversationTurn } from "@/server/conversation/interpret";
+import {withAuthorizedRoadContext,applyRoadResponseAdvice} from '@/server/conversation/road-context';
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -18,8 +19,9 @@ export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return NextResponse.json({ schemaVersion: "2.0", error: { code: "VALIDATION_ERROR", message: "JSON is required." } }, { status: 415 });
   }
+  let member;
   try {
-    await requireAuthenticatedMember();
+    member=await requireAuthenticatedMember();
   } catch {
     return NextResponse.json({ schemaVersion: "2.0", error: { code: "UNAUTHORIZED", message: "An active CargoMesh session and organization membership are required." } }, { status: 401 });
   }
@@ -32,6 +34,15 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ schemaVersion: "2.0", error: { code: "VALIDATION_ERROR", message: "Invalid conversation message." } }, { status: 400 });
   }
-  const result = await interpretConversationTurn(input, { signal: request.signal });
-  return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
+  try {
+    const ids=input.context?.knownFields.filter(f=>f.field==='originFacilityId'||f.field==='destinationFacilityId')??[];
+    const {v2IntakeOptionsRepository}=await import('@/server/modules/intake/infrastructure/supabase-intake-options-repository');
+    const facilities=ids.length?(await (await v2IntakeOptionsRepository()).listActiveFacilities(member.organizationId))??[]:[];
+    const authorized=facilities.filter(f=>f.organization_id===member.organizationId);
+    const scoped=withAuthorizedRoadContext(input,authorized);
+    const result=await interpretConversationTurn(scoped,{signal:request.signal});
+    return NextResponse.json(applyRoadResponseAdvice(scoped,result,authorized),{headers:{'Cache-Control':'no-store'}});
+  } catch {
+    return NextResponse.json({schemaVersion:'2.0',error:{code:'ROAD_CONTEXT_UNAVAILABLE',message:'Could not read the selected locations. Please retry.'}},{status:503,headers:{'Cache-Control':'no-store'}});
+  }
 }

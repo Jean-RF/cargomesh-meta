@@ -1,0 +1,352 @@
+TAP version 13
+# Subtest: C01-shaped full legs retain SIMULATED provenance and fit all operation points
+ok 1 - C01-shaped full legs retain SIMULATED provenance and fit all operation points
+  ---
+  duration_ms: 16.768
+  type: 'test'
+  ...
+# Subtest: route endpoint mismatch and missing route fail closed with a positive route control
+ok 2 - route endpoint mismatch and missing route fail closed with a positive route control
+  ---
+  duration_ms: 1.1555
+  type: 'test'
+  ...
+# Subtest: independent legs preserve their own provenance and are never bridged
+ok 3 - independent legs preserve their own provenance and are never bridged
+  ---
+  duration_ms: 1.2047
+  type: 'test'
+  ...
+# Subtest: every operation chain mismatch rejects geometry after a matching positive read
+ok 4 - every operation chain mismatch rejects geometry after a matching positive read
+  ---
+  duration_ms: 17.5739
+  type: 'test'
+  ...
+# Subtest: mismatched request endpoints remove route, markers and facts while preserving events and milestones
+ok 5 - mismatched request endpoints remove route, markers and facts while preserving events and milestones
+  ---
+  duration_ms: 6.4998
+  type: 'test'
+  ...
+# Subtest: unavailable or foreign corridors omit only their driving facts and preserve route, events and milestones
+ok 6 - unavailable or foreign corridors omit only their driving facts and preserve route, events and milestones
+  ---
+  duration_ms: 12.7867
+  type: 'test'
+  ...
+# Subtest: main's assignment preparation composes with tracking and geometry without reporting departure
+ok 7 - main's assignment preparation composes with tracking and geometry without reporting departure
+  ---
+  duration_ms: 1.2066
+  type: 'test'
+  ...
+# Subtest: tracking facts distinguish geometry, commercial transit, driving and quote ETA without private fields
+ok 8 - tracking facts distinguish geometry, commercial transit, driving and quote ETA without private fields
+  ---
+  duration_ms: 1.0226
+  type: 'test'
+  ...
+# Subtest: provider errors become safe categories without copying provider URLs or key-like text
+ok 9 - provider errors become safe categories without copying provider URLs or key-like text
+  ---
+  duration_ms: 0.1958
+  type: 'test'
+  ...
+# Subtest: fallback renders not-authorized safely with this operation and Retry
+ok 10 - fallback renders not-authorized safely with this operation and Retry
+  ---
+  duration_ms: 1.8141
+  type: 'test'
+  ...
+# Subtest: fallback renders timed-out safely with this operation and Retry
+ok 11 - fallback renders timed-out safely with this operation and Retry
+  ---
+  duration_ms: 0.9986
+  type: 'test'
+  ...
+# Subtest: fallback renders not-configured safely with this operation and Retry
+ok 12 - fallback renders not-configured safely with this operation and Retry
+  ---
+  duration_ms: 0.7991
+  type: 'test'
+  ...
+# Subtest: fallback renders unavailable safely with this operation and Retry
+ok 13 - fallback renders unavailable safely with this operation and Retry
+  ---
+  duration_ms: 0.6939
+  type: 'test'
+  ...
+# Subtest: endpoints have a labeled dashed connection; an absent route has no geometry
+ok 14 - endpoints have a labeled dashed connection; an absent route has no geometry
+  ---
+  duration_ms: 0.855
+  type: 'test'
+  ...
+# Subtest: markup labels remain text nodes, never injected HTML
+ok 15 - markup labels remain text nodes, never injected HTML
+  ---
+  duration_ms: 0.7316
+  type: 'test'
+  ...
+# Subtest: route facts translate every section and use the shared explicit PET format
+ok 16 - route facts translate every section and use the shared explicit PET format
+  ---
+  duration_ms: 13.9263
+  type: 'test'
+  ...
+# Subtest: operation instants share Tracking's PET zone, locale and unknown-value labels
+ok 17 - operation instants share Tracking's PET zone, locale and unknown-value labels
+  ---
+  duration_ms: 0.4378
+  type: 'test'
+  ...
+# Subtest: native mock timers cover readiness, timeout, auth and retry replacing the previous script
+ok 18 - native mock timers cover readiness, timeout, auth and retry replacing the previous script
+  ---
+  duration_ms: 1.7763
+  type: 'test'
+  ...
+# Subtest: draws only declared simulated geometry and labels the Google map honestly
+ok 19 - draws only declared simulated geometry and labels the Google map honestly
+  ---
+  duration_ms: 1.139
+  type: 'test'
+  ...
+# Subtest: routePreview null, empty legs and UNKNOWN never draw a route
+ok 20 - routePreview null, empty legs and UNKNOWN never draw a route
+  ---
+  duration_ms: 0.6218
+  type: 'test'
+  ...
+# Subtest: missing canonical coordinates prevent geometry without inventing markers
+ok 21 - missing canonical coordinates prevent geometry without inventing markers
+  ---
+  duration_ms: 0.2732
+  type: 'test'
+  ...
+# Subtest: selection is entirely controlled by parent props
+ok 22 - selection is entirely controlled by parent props
+  ---
+  duration_ms: 0.1847
+  type: 'test'
+  ...
+# Subtest: zero candidates is a domain empty state, with canonical markers only
+ok 23 - zero candidates is a domain empty state, with canonical markers only
+  ---
+  duration_ms: 0.256
+  type: 'test'
+  ...
+# Subtest: provider note uses actual renderer and Google Routes only for an explicit source
+ok 24 - provider note uses actual renderer and Google Routes only for an explicit source
+  ---
+  duration_ms: 0.2334
+  type: 'test'
+  ...
+# Subtest: absent source, empty waypoints or invalid coordinates cannot assert usable geometry
+ok 25 - absent source, empty waypoints or invalid coordinates cannot assert usable geometry
+  ---
+  duration_ms: 0.1974
+  type: 'test'
+  ...
+# Subtest: separate declared legs are never joined with an invented bridge
+ok 26 - separate declared legs are never joined with an invented bridge
+  ---
+  duration_ms: 0.1931
+  type: 'test'
+  ...
+# Subtest: an outdated parent selection never silently selects the first candidate
+ok 27 - an outdated parent selection never silently selects the first candidate
+  ---
+  duration_ms: 0.1493
+  type: 'test'
+  ...
+# Subtest: provider restriction applies to selection updates as well as initial fallback
+ok 28 - provider restriction applies to selection updates as well as initial fallback
+  ---
+  duration_ms: 0.163
+  type: 'test'
+  ...
+# Subtest: catalog references are unique, bounded city coordinates covering six geographic regions
+ok 29 - catalog references are unique, bounded city coordinates covering six geographic regions
+  ---
+  duration_ms: 0.973
+  type: 'test'
+  ...
+# Subtest: land policy allows reverse routes and does not equate continents with land networks
+ok 30 - land policy allows reverse routes and does not equate continents with land networks
+  ---
+  duration_ms: 0.2192
+  type: 'test'
+  ...
+# Subtest: city and country labels follow Spanish and English, not a hardcoded Peru label
+ok 31 - city and country labels follow Spanish and English, not a hardcoded Peru label
+  ---
+  duration_ms: 16.8245
+  type: 'test'
+  ...
+# Subtest: decodes declared Google polyline points without interpolation
+ok 32 - decodes declared Google polyline points without interpolation
+  ---
+  duration_ms: 1.6177
+  type: 'test'
+  ...
+# Subtest: sends canonical coordinates to Routes from the server and retains estimated provenance
+ok 33 - sends canonical coordinates to Routes from the server and retains estimated provenance
+  ---
+  duration_ms: 19.6962
+  type: 'test'
+  ...
+# Subtest: missing key and upstream failure never produce replacement geometry or leak errors
+ok 34 - missing key and upstream failure never produce replacement geometry or leak errors
+  ---
+  duration_ms: 0.6424
+  type: 'test'
+  ...
+# Subtest: empty, malformed or incomplete provider responses have no geometry or metrics
+ok 35 - empty, malformed or incomplete provider responses have no geometry or metrics
+  ---
+  duration_ms: 1.1793
+  type: 'test'
+  ...
+# Subtest: local adapter is disabled by default and rejects non-local or foreign origins before calling Google
+ok 36 - local adapter is disabled by default and rejects non-local or foreign origins before calling Google
+  ---
+  duration_ms: 2.9905
+  type: 'test'
+  ...
+# Subtest: invalid IDs, identical cities and oversize bodies cannot make paid routing calls
+ok 37 - invalid IDs, identical cities and oversize bodies cannot make paid routing calls
+  ---
+  duration_ms: 1.4257
+  type: 'test'
+  ...
+# Subtest: Next internal URL reconstruction does not reject an authorized local Host and Origin
+ok 38 - Next internal URL reconstruction does not reject an authorized local Host and Origin
+  ---
+  duration_ms: 0.7892
+  type: 'test'
+  ...
+# Subtest: duplicate in-flight requests share one call
+ok 39 - duplicate in-flight requests share one call
+  ---
+  duration_ms: 26.4759
+  type: 'test'
+  ...
+# Subtest: ferry, ferry train and non-driving steps are rejected, including a later leg
+ok 40 - ferry, ferry train and non-driving steps are rejected, including a later leg
+  ---
+  duration_ms: 1.0644
+  type: 'test'
+  ...
+# Subtest: missing leg, step or maneuver metadata cannot establish a road-only result
+ok 41 - missing leg, step or maneuver metadata cannot establish a road-only result
+  ---
+  duration_ms: 0.9019
+  type: 'test'
+  ...
+# Subtest: ocean crossings and the Americas road gap are blocked without a provider call
+ok 42 - ocean crossings and the Americas road gap are blocked without a provider call
+  ---
+  duration_ms: 0.9134
+  type: 'test'
+  ...
+# Subtest: different simultaneous pairs use their own server catalog coordinates and results
+ok 43 - different simultaneous pairs use their own server catalog coordinates and results
+  ---
+  duration_ms: 27.1918
+  type: 'test'
+  ...
+# Subtest: routing call budget permits browsing pairs but limits calls to twenty per minute
+ok 44 - routing call budget permits browsing pairs but limits calls to twenty per minute
+  ---
+  duration_ms: 5.4003
+  type: 'test'
+  ...
+# Subtest: current workspace port requires its exact Host and Origin, while other origins remain forbidden
+ok 45 - current workspace port requires its exact Host and Origin, while other origins remain forbidden
+  ---
+  duration_ms: 0.6357
+  type: 'test'
+  ...
+# Subtest: selection minimizes the declared objective, not provider order
+ok 46 - selection minimizes the declared objective, not provider order
+  ---
+  duration_ms: 3.717
+  type: 'test'
+  ...
+# Subtest: tie breaks by the secondary metric then original index, independent of input ordering
+ok 47 - tie breaks by the secondary metric then original index, independent of input ordering
+  ---
+  duration_ms: 0.366
+  type: 'test'
+  ...
+# Subtest: malformed alternatives cannot hide a later valid route; original index retained
+ok 48 - malformed alternatives cannot hide a later valid route; original index retained
+  ---
+  duration_ms: 0.5744
+  type: 'test'
+  ...
+# Subtest: all legs must be road-only; ferry preference alone is not proof
+ok 49 - all legs must be road-only; ferry preference alone is not proof
+  ---
+  duration_ms: 0.458
+  type: 'test'
+  ...
+# Subtest: rejects wrong, reversed or broken geometry and ignored restrictions without fallback
+ok 50 - rejects wrong, reversed or broken geometry and ignored restrictions without fallback
+  ---
+  duration_ms: 0.8067
+  type: 'test'
+  ...
+# Subtest: server requests high-quality alternatives with the chosen traffic model and no truck claim
+ok 51 - server requests high-quality alternatives with the chosen traffic model and no truck claim
+  ---
+  duration_ms: 18.4958
+  type: 'test'
+  ...
+# Subtest: missing server key, denial, timeout, malformed JSON and upstream errors expose no credential or geometry
+ok 52 - missing server key, denial, timeout, malformed JSON and upstream errors expose no credential or geometry
+  ---
+  duration_ms: 1.0879
+  type: 'test'
+  ...
+# Subtest: local disabled/origin/Host/content/body validation prevent paid calls
+ok 53 - local disabled/origin/Host/content/body validation prevent paid calls
+  ---
+  duration_ms: 7.9551
+  type: 'test'
+  ...
+# Subtest: city scenarios use catalog coordinates; synthetic responses test plumbing, not real road access
+ok 54 - city scenarios use catalog coordinates; synthetic responses test plumbing, not real road access
+  ---
+  duration_ms: 4.0826
+  type: 'test'
+  ...
+# Subtest: disconnected city networks block before missing credentials or paid calls
+ok 55 - disconnected city networks block before missing credentials or paid calls
+  ---
+  duration_ms: 1.1071
+  type: 'test'
+  ...
+# Subtest: deduplicates only simultaneous identical queries; objectives and cities never share a result
+ok 56 - deduplicates only simultaneous identical queries; objectives and cities never share a result
+  ---
+  duration_ms: 61.8136
+  type: 'test'
+  ...
+# Subtest: ten calls per process per minute budget and reset
+ok 57 - ten calls per process per minute budget and reset
+  ---
+  duration_ms: 4.6838
+  type: 'test'
+  ...
+1..57
+# tests 57
+# suites 0
+# pass 57
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1042.7343

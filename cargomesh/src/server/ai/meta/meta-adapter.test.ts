@@ -371,6 +371,16 @@ test('follow-up memory reaches Meta as untrusted context and a remembered declar
   assert.equal(messages.length,2); // History cannot inject new system/tool messages.
 });
 
+test('Meta receives route exclusion with no distance or eligibility claim',async()=>{
+ const mock=transport([{acknowledgment:'These locations need a different route. Air and Sea are unavailable.'}]);
+ const result=await interpretConversationTurn({...input,text:'What should I do with this route?',currentField:null,
+  context:{screen:'ROAD_INTAKE',roadRouteStatus:'DISCONNECTED_NETWORKS',knownFields:[],lastAskedField:null,failedAttempts:0}},{env,metaFetch:mock.fetch});
+ assert.equal(result.mode,'META');assert.deepEqual(result.interpretation.fields,[]);
+ const messages=mock.seen[0].body.messages as Array<{content:string}>;
+ assert.equal(JSON.parse(messages[1].content).context.roadRouteStatus,'DISCONNECTED_NETWORKS');
+ assert.match(messages[0].content,/DISCONNECTED_NETWORKS/);
+});
+
 test('remembered user text is never reused as a new field quote on the Road form',async()=>{
   const mock=transport([turn()]);
   const result=await interpretConversationTurn({...input,text:'I am ready to continue',

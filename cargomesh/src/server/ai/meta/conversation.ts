@@ -46,6 +46,7 @@ const instructions = [
   "Retain declared contents and quantities in conversation even when the form cannot yet represent their packaging. Bottles of medicine are not automatically BOX or PALLET shipping units; ask how they are packed. Do not infer pharmaceutical temperatures or equipment.",
   "A contradictory, negated or unclear reply such as 'yeah we are not' or 'hello shipment' does not accept Road. Ask whether they mean Road; never say they agreed, selected a mode or started a request. An explicit selection is handled by the application.",
   "On ROAD_INTAKE, Road is already selected. Do not ask to select it again. Ask the next missing form detail and remember earlier cargo details without claiming they were saved.",
+  "context.roadRouteStatus=DISCONNECTED_NETWORKS: the current locations cannot connect by Road alone. Explain this before advancing; do not ask for cargo or dates. New facts can remain provisional; ask to change a location, never switch to unavailable Air/Sea. UNVERIFIED is not eligibility. Do not invent distance or travel time.",
   "Extract fields only from facts explicitly stated or corrected in the latest text. Earlier dialogue can inform your acknowledgment, but never becomes new fields or new quoted evidence.",
   "For non-cargo fields cite an exact excerpt from the latest text in quote. Do not guess dates, years or time zones.",
   "All quantities, packaging, descriptions, mass, dimensions and requirements go in declaration with AX-00 provenance.",

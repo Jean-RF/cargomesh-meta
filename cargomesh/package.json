@@ -15,7 +15,7 @@
     "e2e:meta-dockmind-launcher": "node --conditions=react-server --import tsx scripts/meta-dockmind-launcher-e2e.ts",
     "test:meta-dockmind": "node --conditions=react-server --import tsx --test src/shared/schemas/meta/dockmind.test.ts src/server/modules/analysis-jobs/callback-signature.test.ts src/server/modules/analysis-jobs/service.test.ts src/server/modules/analysis-jobs/clip-service.test.ts src/server/modules/analysis-jobs/supabase-repositories.test.ts src/server/hono/routes/meta/dockmind.test.ts src/features/meta-dockmind/models.test.ts",
     "test:meta-contract": "node --conditions=react-server --import tsx --test src/server/ai/meta/proposal-boundary.test.ts",
-    "test:meta-ai": "node --conditions=react-server --import tsx --test src/server/ai/meta/proposal-boundary.test.ts src/server/ai/meta/meta-adapter.test.ts src/server/ai/meta/meta-media.test.ts",
+    "test:meta-ai": "node --conditions=react-server --import tsx --test src/server/ai/meta/proposal-boundary.test.ts src/server/ai/meta/meta-adapter.test.ts src/server/ai/meta/meta-media.test.ts src/server/conversation/road-context.test.ts",
     "smoke:meta-media": "node --conditions=react-server --env-file-if-exists=.env.local --import tsx scripts/meta-media-smoke.ts",
     "smoke:meta-media-luis": "node --conditions=react-server --env-file-if-exists=.env.local --import tsx scripts/meta-media-smoke.ts --suite=luis",
     "smoke:meta-text": "node --conditions=react-server --env-file-if-exists=.env.local --import tsx scripts/meta-text-smoke.ts",

@@ -3,6 +3,18 @@ import test from "node:test";
 import { InterpretationRequestSchema } from "@/features/v2-conversation-prep/interpretation";
 import { conversationContext, conversationMemory } from "./conversation-context";
 import type { V2IntakePrototypeDraft } from "./prototype-model";
+import {getIntakeOptionsFixture} from './intake-options';
+import {EMPTY_PROTOTYPE_DRAFT} from './prototype-model';
+
+test('route advice reaches conversation without inventing distance or coverage',()=>{
+ const options=getIntakeOptionsFixture().data;
+ options.facilities[1]={...options.facilities[1],countryCode:'AU',lat:-33.87,lng:151.21};
+ const draft={...EMPTY_PROTOTYPE_DRAFT,originFacilityId:options.facilities[0].facilityId,destinationFacilityId:options.facilities[1].facilityId};
+ const context=conversationContext(draft,null,0,options);
+ assert.equal(context.roadRouteStatus,'DISCONNECTED_NETWORKS');assert.equal('distanceMeters' in context,false);
+ options.facilities[1]={...options.facilities[1],countryCode:'PE',lat:-16.4,lng:-71.54};
+ assert.equal(conversationContext(draft,null,0,options).roadRouteStatus,'UNVERIFIED');
+});
 
 test("context summarizes current non-contact draft values without exposing contact details", () => {
   const draft = { originFacilityId: "facility-1", destinationFacilityId: "facility-2", unitQuantity: "2", cargoDescription: "private detail", pickupContactEmail: "person@example.com" } as V2IntakePrototypeDraft;

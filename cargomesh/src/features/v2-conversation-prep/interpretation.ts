@@ -20,6 +20,8 @@ export const ConversationContextFieldSchema = ConversationFieldNameSchema.exclud
 ]);
 
 export const ConversationContextSchema = z.object({
+  // Provisional browser hint; authenticated HTTP replaces it from authorized facilities.
+  roadRouteStatus: z.enum(['INCOMPLETE','COORDINATES_REQUIRED','DISCONNECTED_NETWORKS','UNVERIFIED']).optional(),
   screen: z.enum(["TRANSPORT_SELECTION", "ROAD_INTAKE"]).optional(),
   conversation: z.array(z.object({
     role: z.enum(["user", "assistant"]),
