@@ -58,6 +58,7 @@ export interface RoadCandidateMapViewProps {
     serviceCode: string;
     routePreview: RoadRoutePreviewDto | null;
   }>;
+  requestRoutePreview?: RoadRoutePreviewDto | null;
   selectedCandidateId: string | null;
   onSelectCandidate: (candidateId: string) => void;
 }

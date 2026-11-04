@@ -110,6 +110,7 @@ export const RoadServiceabilityEvaluationV2ResponseSchema = z.object({
     }).strict(),
     commercialNotice: z.literal("EVALUATION_ONLY_NO_OFFER_OR_BOOKING"),
     candidates: z.array(RoadCandidateV2Schema),
+    requestRoutePreview: RoadRoutePreviewV2Schema.nullable().optional(),
   }).strict().superRefine((evaluation, context) => {
     const counts = evaluation.summaryCounts;
     if (counts.totalEvaluated !== evaluation.candidates.length

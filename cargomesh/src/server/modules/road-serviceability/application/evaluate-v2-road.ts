@@ -1,5 +1,6 @@
 import {planWholePackages} from '../../commercial/domain/multi-resource-plan';
 import { z } from "zod";
+import type { RoadRoutePreviewV2 } from "@/shared/schemas/v2/serviceability";
 import type {FreightRequestV2Response} from "@/shared/schemas/v2/freight-request";
 import { cargoUnitTotalsV2 } from "@/shared/schemas/v2/freight-request";
 import { RoadServiceabilityEvaluationV2ResponseSchema, type RoadCandidateV2 } from
@@ -28,6 +29,7 @@ function combine(a: Status, b: Status): Status {
 export async function evaluateV2RoadByRequestId(
   id: string, expectedDraftVersion: number | undefined, actor: V2Actor,
   drafts: V2DraftRepository, catalog: RoadCatalogRepository,
+  previewRoad?: (origin: { lat: number; lng: number; city: string }, destination: { lat: number; lng: number; city: string }) => Promise<RoadRoutePreviewV2 | null>,
 ) {
   if (expectedDraftVersion !== undefined && (!Number.isInteger(expectedDraftVersion)
       || expectedDraftVersion < 1)) {
@@ -135,6 +137,12 @@ export async function evaluateV2RoadByRequestId(
     }
     return mapped;
   });
+  const { origin, destination } = request;
+  const requestRoutePreview = previewRoad && origin.lat !== null && origin.lng !== null
+    && destination.lat !== null && destination.lng !== null
+    && (origin.lat !== destination.lat || origin.lng !== destination.lng)
+    ? await previewRoad({ lat: origin.lat, lng: origin.lng, city: origin.city },
+      { lat: destination.lat, lng: destination.lng, city: destination.city }) : null;
   return RoadServiceabilityEvaluationV2ResponseSchema.parse({
     schemaVersion: "2.0",
     data: {
@@ -148,6 +156,7 @@ export async function evaluateV2RoadByRequestId(
       },
       commercialNotice: "EVALUATION_ONLY_NO_OFFER_OR_BOOKING",
       candidates,
+      ...(previewRoad ? { requestRoutePreview } : {}),
     },
   });
 }

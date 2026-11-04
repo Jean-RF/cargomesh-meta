@@ -1,3 +1,4 @@
+import {createRoadRouteCalculator} from '@/server/maps/road-routing-http';
 import {CarrierPointRoadService} from '@/server/modules/carrier-road-routing/application/point-road-service';
 import {geocodeRoadStop} from '@/server/modules/carrier-road-routing/infrastructure/google-geocoding';
 import {CarrierRoadOptionsV2Schema} from '@/shared/schemas/v2/road-options';
@@ -27,9 +28,18 @@ async function body(request:Request) {
   } finally {reader.releaseLock();}
 }
 export function createCarrierRoadRouter(dependencies:{enabled?:boolean;authenticate?:(carrierId:string)=>Promise<RoadActor>;
-  service?:()=>Promise<Pick<CarrierRoadService,'assess'>>;pointService?:()=>Promise<Pick<CarrierPointRoadService,'assess'>>}={}) {
+  service?:()=>Promise<Pick<CarrierRoadService,'assess'>>;pointService?:()=>Promise<Pick<CarrierPointRoadService,'assess'>>;routeLab?:ReturnType<typeof createRoadRouteCalculator>}={}) {
   const router=new Hono();
   const provider=coveredRoadProvider;
+  const calculateRoute=dependencies.routeLab??createRoadRouteCalculator({apiKey:process.env.GOOGLE_ROUTES_API_KEY});
+  router.post('/carrier-portal/carriers/:carrierId/route-lab',c=>carrierPortalIdentity(c,async()=>{
+    const carrierId=z.string().uuid().parse(c.req.param('carrierId'));
+    const actor=await (dependencies.authenticate??requireAuthenticatedCarrier)(carrierId);
+    if(actor.carrierId!==carrierId)throw new V2DraftError('FORBIDDEN_CARRIER_IDENTITY','Carrier scope mismatch.',403);
+    const {result,status}=await calculateRoute(await body(c.req.raw));
+    if(status>=400 && result.status!=='estimated')throw new V2DraftError(result.reason,'Road calculation unavailable.',status);
+    return c.json({schemaVersion:'2.0',data:result});
+  }));
   router.get('/carrier-portal/carriers/:carrierId/road-assessments/options',c=>carrierPortalIdentity(c,async()=>{
     const carrierId=z.string().uuid().parse(c.req.param('carrierId'));
     const actor=await (dependencies.authenticate??requireAuthenticatedCarrier)(carrierId);

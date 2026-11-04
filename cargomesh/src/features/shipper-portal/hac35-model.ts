@@ -38,6 +38,14 @@ export function manualLocation(original: FreightLocationV2, edit: LocationEdit):
     region: null };
 }
 
+export function draftEndpointRevision(original: FreightLocationV2, label: string, city: string,
+  point: { lat: number; lng: number } | undefined, resolved: FreightLocationV2 | null): FreightLocationV2 {
+  if (resolved) return resolved;
+  if (!point && label.trim() === original.label && city.trim() === original.city) return original;
+  return { ...original, facilityId: null, label: label.trim(), city: city.trim(), region: null,
+    lat: point?.lat ?? null, lng: point?.lng ?? null };
+}
+
 export type CandidateChange = {
   candidateId: string;
   previous: string;

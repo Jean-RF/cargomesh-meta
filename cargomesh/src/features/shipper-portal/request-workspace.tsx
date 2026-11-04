@@ -12,6 +12,9 @@ import { Button, Dialog, Input, Select, Textarea } from "@/components/ui";
 import { EquipmentCodeV2Schema } from "@/shared/schemas/v2/freight-request";
 import { useLocale } from "@/features/i18n/locale-provider";
 import { CandidateResults } from "@/features/v2-intake/components/candidate-results";
+import { RoadRouteMap } from "@/features/v2-road-map/road-candidate-map-view";
+import { getMapPresentation } from "@/features/v2-road-map/road-map-model";
+import { draftEndpointRevision } from "./hac35-model";
 import { RoadCandidateMapBoundary } from "@/features/v2-intake/components/road-candidate-map-boundary";
 import type { FreightLocationV2, FreightRequestV2Data, RoadServiceabilityEvaluationV2Data } from "@/features/v2-intake/contracts";
 import { getRoadServiceabilityV2, reconcileCandidateSelection } from "@/features/v2-intake/v2-intake-client";
@@ -48,6 +51,7 @@ import commercialStyles from './commercial-workspace.module.css';
 type Workflow = Record<string, WorkflowRecordV2[]>;
 type EditState = {
   originLabel: string; originCity: string; destinationLabel: string; destinationCity: string;
+  originPoint?: { lat: number; lng: number }; destinationPoint?: { lat: number; lng: number };
   pickupStartsAt: string; pickupEndsAt: string; deliveryStartsAt: string; deliveryEndsAt: string;
   description: string; equipment: string; quantity: string; weightPerUnitKg: string; volumePerUnitM3: string;
 };
@@ -132,7 +136,7 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
     if(refreshBusy.current)return;
     setPhase("evaluating"); setError(null); setEvaluation(null); setSelectedCandidateId(null);
     try {
-      const response = await getRoadServiceabilityV2(next.id, next.draftVersion);
+      const response = await getRoadServiceabilityV2(next.id, next.draftVersion, undefined, true);
       setEvaluation(response.data);
       setSelectedCandidateId(reconcileCandidateSelection(null, response.data));
     } catch (caught) { setError(toShipperError(caught)); }
@@ -141,8 +145,9 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
 
   async function saveRevision() {
     if(readIncomplete||phase!=="idle"||refreshBusy.current)return;
-    const placeChanged = edit.originLabel !== request.origin.label || edit.originCity !== request.origin.city
-      || edit.destinationLabel !== request.destination.label || edit.destinationCity !== request.destination.city;
+    const origin = draftEndpointRevision(request.origin, edit.originLabel, edit.originCity, edit.originPoint, resolvedOrigin);
+    const destination = draftEndpointRevision(request.destination, edit.destinationLabel, edit.destinationCity, edit.destinationPoint, resolvedDestination);
+    const placeChanged = origin !== request.origin && !resolvedOrigin || destination !== request.destination && !resolvedDestination;
     if (placeChanged && !placeConfirmed) {
       setError(new ShipperApiError("PLACE_CONFIRMATION_REQUIRED", t("Confirma explícitamente los nuevos extremos antes de guardar.", "Explicitly confirm the new endpoints before saving."), 400, false));
       return;
@@ -152,10 +157,8 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
       const value = requestToRevisionInput(request);
       const quantity = positiveNumber(edit.quantity, "quantity"), weight = positiveNumber(edit.weightPerUnitKg, "weight"), volume = positiveNumber(edit.volumePerUnitM3, "volume");
       const units = value.cargoSpecification.units.map((unit, index) => index === 0 ? { ...unit, quantity, weightPerUnitKg: weight, volumePerUnitM3: volume } : unit);
-      value.origin = resolvedOrigin ?? { ...value.origin, facilityId: placeChanged ? null : value.origin.facilityId,
-        label: edit.originLabel.trim(), city: edit.originCity.trim(), lat: placeChanged ? null : value.origin.lat, lng: placeChanged ? null : value.origin.lng };
-      value.destination = resolvedDestination ?? { ...value.destination, facilityId: placeChanged ? null : value.destination.facilityId,
-        label: edit.destinationLabel.trim(), city: edit.destinationCity.trim(), lat: placeChanged ? null : value.destination.lat, lng: placeChanged ? null : value.destination.lng };
+      value.origin = origin;
+      value.destination = destination;
       value.pickupWindow = { startsAt: toIso(edit.pickupStartsAt), endsAt: toIso(edit.pickupEndsAt) };
       value.deliveryWindow = { startsAt: toIso(edit.deliveryStartsAt), endsAt: toIso(edit.deliveryEndsAt) };
       const equipment = edit.equipment ? EquipmentCodeV2Schema.parse(edit.equipment) : null;
@@ -286,10 +289,13 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
       overview={<div className={frame.stack}>
         <div className={frame.overviewGrid}>
           <div className={frame.stack}>
-            {evaluation || phase === "evaluating" ? <section className={styles.panel}><header className={styles.panelHeader}><h2>{t("Ruta y cobertura", "Route & coverage")}</h2><MapPin size={18}/></header>
-              <ContentMotion identity={phase === 'evaluating' ? 'reading' : 'evaluated:' + selectedCandidateId}>{phase === "evaluating" ? <WorkspaceSkeleton shape="detail" label={t("Evaluando ruta…", "Evaluating route…")}/>
-                : evaluation ? <div className={styles.section}><CandidateResults evaluation={evaluation} selectedCandidateId={selectedCandidateId} onSelectCandidate={setSelectedCandidateId} t={t}/>{mapProps && <RoadCandidateMapBoundary props={mapProps} t={t}/>}</div> : null}</ContentMotion>
-            </section> : <div className={`${frame.compactCard} ${frame.evaluate}`}><div><h2>{t("Ruta y cobertura", "Route & coverage")}</h2><p>{t("Consulta las opciones de transporte para este trayecto.", "Check transport options for this route.")}</p></div><Button variant="secondary" size="compact" disabled={phase !== "idle"} onClick={() => void evaluate()}>{t("Evaluar ahora", "Evaluate now")}</Button></div>}
+            <section className={styles.panel}><header className={styles.panelHeader}><h2>{t("Ruta y cobertura", "Route & coverage")}</h2><MapPin size={18}/></header>
+              <ContentMotion identity={phase === 'evaluating' ? 'reading' : evaluation ? 'evaluated:' + selectedCandidateId : 'empty'}>{phase === "evaluating" ? <WorkspaceSkeleton shape="detail" label={t("Evaluando ruta…", "Evaluating route…")}/>
+                : evaluation ? <div className={styles.section}><CandidateResults evaluation={evaluation} selectedCandidateId={selectedCandidateId} onSelectCandidate={setSelectedCandidateId} t={t}/>{mapProps && <RoadCandidateMapBoundary props={mapProps} showBasemap t={t}/>}</div>
+                : <div className={styles.section}><RoadRouteMap presentation={getMapPresentation(request)} showBasemap
+                  subtitle={t("Evalúa la solicitud para calcular el trayecto por carretera.", "Evaluate the request to calculate the driving route.")}/>
+                  <Button variant="secondary" size="compact" disabled={phase !== "idle"} onClick={() => void evaluate()}>{t("Evaluar ahora", "Evaluate now")}</Button></div>}</ContentMotion>
+            </section>
             <RequestFacts request={request}/>
           </div>
           <div className={frame.stack}>
@@ -345,8 +351,9 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
       </div> : null}
     </Dialog>
     <EditDialog open={editOpen} edit={edit} setEdit={setEdit} request={request} confirmed={placeConfirmed} setConfirmed={setPlaceConfirmed}
-      onResolveOrigin={(location) => { setResolvedOrigin(location); setEdit((current) => ({ ...current, originLabel: location.label, originCity: location.city })); setPlaceConfirmed(true); }}
-      onResolveDestination={(location) => { setResolvedDestination(location); setEdit((current) => ({ ...current, destinationLabel: location.label, destinationCity: location.city })); setPlaceConfirmed(true); }}
+      resolvedOrigin={resolvedOrigin} resolvedDestination={resolvedDestination}
+      onResolveOrigin={(location) => { setResolvedOrigin(location); if (location) setEdit((current) => ({ ...current, originLabel: location.label, originCity: location.city, originPoint: undefined })); }}
+      onResolveDestination={(location) => { setResolvedDestination(location); if (location) setEdit((current) => ({ ...current, destinationLabel: location.label, destinationCity: location.city, destinationPoint: undefined })); }}
       busy={phase === "saving"} onClose={() => setEditOpen(false)} onSave={() => void saveRevision()} t={t}/>
     <Dialog open={decisionOpen} title={t("Confirmar alternativa", "Confirm alternative")} description={t("Esta decisión queda auditada y no crea una reserva por sí sola.", "This decision is audited and does not create a booking by itself.")} closeLabel={t("Cerrar", "Close")} onClose={() => setDecisionOpen(false)}>
       <div className={styles.dialogCopy}>{error ? <ErrorNotice error={error} t={t}/> : null}<p>{selectedOption ? `${t("Plan", "Plan")}: ${selectedOption.planId} · ${selectedOption.offerIds.length} ${t("oferta(s)", "offer(s)")}` : t("No hay opción seleccionada.", "No option selected.")}</p><p>{t("La comparación es una instantánea: el servidor volverá a validar vigencia, permisos y elegibilidad.", "The comparison is a snapshot: the server will revalidate validity, permissions and eligibility.")}</p><Button disabled={readIncomplete || commercialReadBlocked || !inspectRankedOption(selectedOption, commercialContext).available || phase !== "idle"} isLoading={phase === "deciding"} onClick={() => void chooseOption()}><CheckCircle2 size={16}/>{t("Confirmar selección", "Confirm selection")}</Button></div>
@@ -371,24 +378,30 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
   </div>;
 }
 
-function EditDialog({ open, edit, setEdit, request, confirmed, setConfirmed, onResolveOrigin, onResolveDestination, busy, onClose, onSave, t }: {
+function EditDialog({ open, edit, setEdit, request, confirmed, setConfirmed, resolvedOrigin, resolvedDestination, onResolveOrigin, onResolveDestination, busy, onClose, onSave, t }: {
   open: boolean; edit: EditState; setEdit: (next: EditState) => void; request: FreightRequestV2Data; confirmed: boolean; setConfirmed: (next: boolean) => void;
-  onResolveOrigin: (location: FreightLocationV2) => void; onResolveDestination: (location: FreightLocationV2) => void;
+  resolvedOrigin: FreightLocationV2 | null; resolvedDestination: FreightLocationV2 | null;
+  onResolveOrigin: (location: FreightLocationV2 | null) => void; onResolveDestination: (location: FreightLocationV2 | null) => void;
   busy: boolean; onClose: () => void; onSave: () => void; t: (es: string, en: string) => string;
 }) {
   const field = (key: keyof EditState) => (value: string) => setEdit({ ...edit, [key]: value });
-  const placeChanged = edit.originLabel !== request.origin.label || edit.originCity !== request.origin.city || edit.destinationLabel !== request.destination.label || edit.destinationCity !== request.destination.city;
+  const placeChanged = !resolvedOrigin && draftEndpointRevision(request.origin, edit.originLabel, edit.originCity, edit.originPoint, null) !== request.origin
+    || !resolvedDestination && draftEndpointRevision(request.destination, edit.destinationLabel, edit.destinationCity, edit.destinationPoint, null) !== request.destination;
+  function editEndpoint(key: "originLabel" | "originCity" | "destinationLabel" | "destinationCity", value: string) {
+    const origin = key === "originLabel" || key === "originCity";
+    if (origin) onResolveOrigin(null); else onResolveDestination(null);
+    setEdit({ ...edit, [key]: value, [origin ? "originPoint" : "destinationPoint"]: undefined });
+    setConfirmed(false);
+  }
   return <Dialog open={open} title={t("Editar borrador versionado", "Edit versioned draft")} description={t(`Se guardará contra draftVersion ${request.draftVersion} y después se reevaluará.`, `It will save against draftVersion ${request.draftVersion} and then reevaluate.`)} closeLabel={t("Cerrar", "Close")} onClose={onClose}>
-    <div className={styles.editGrid}><Input label={t("Referencia de origen", "Origin reference")} value={displayDemoText(edit.originLabel)} onChange={(e) => field("originLabel")(e.target.value)}/><Input label={t("Ciudad de origen", "Origin city")} value={edit.originCity} onChange={(e) => field("originCity")(e.target.value)}/>
-      <Input label={t("Referencia de destino", "Destination reference")} value={displayDemoText(edit.destinationLabel)} onChange={(e) => field("destinationLabel")(e.target.value)}/><Input label={t("Ciudad de destino", "Destination city")} value={edit.destinationCity} onChange={(e) => field("destinationCity")(e.target.value)}/>
+    <div className={styles.editGrid}><Input label={t("Referencia de origen", "Origin reference")} value={displayDemoText(edit.originLabel)} onChange={(e) => editEndpoint("originLabel", e.target.value)}/><Input label={t("Ciudad de origen", "Origin city")} value={edit.originCity} onChange={(e) => editEndpoint("originCity", e.target.value)}/>
+      <Input label={t("Referencia de destino", "Destination reference")} value={displayDemoText(edit.destinationLabel)} onChange={(e) => editEndpoint("destinationLabel", e.target.value)}/><Input label={t("Ciudad de destino", "Destination city")} value={edit.destinationCity} onChange={(e) => editEndpoint("destinationCity", e.target.value)}/>
       <LocationResolver
   label={t("Buscar origen autorizado", "Search authorized origin")}
   onConfirmed={onResolveOrigin}
   onProposedCoordinates={(lat, lng) => {
-    setEdit({
-      ...edit,
-      originLabel: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
-    });
+    onResolveOrigin(null);
+    setEdit({ ...edit, originPoint: { lat, lng } });
     setConfirmed(false);
   }}
 />
@@ -397,10 +410,8 @@ function EditDialog({ open, edit, setEdit, request, confirmed, setConfirmed, onR
   label={t("Buscar destino autorizado", "Search authorized destination")}
   onConfirmed={onResolveDestination}
   onProposedCoordinates={(lat, lng) => {
-    setEdit({
-      ...edit,
-      destinationLabel: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
-    });
+    onResolveDestination(null);
+    setEdit({ ...edit, destinationPoint: { lat, lng } });
     setConfirmed(false);
   }}
 />
@@ -409,6 +420,10 @@ function EditDialog({ open, edit, setEdit, request, confirmed, setConfirmed, onR
       <Textarea fieldClassName={styles.wide} label={t("Descripción", "Description")} value={displayDemoText(edit.description)} onChange={(e) => field("description")(e.target.value)}/>
       <Select label={t("Equipo ROAD", "ROAD equipment")} value={edit.equipment} onChange={(e) => field("equipment")(e.target.value)}><option value="">UNKNOWN</option>{["BOX_TRUCK", "REEFER_TRUCK", "FLATBED", "TANKER_TRUCK", "TRACTOR_TRAILER"].map((code) => <option key={code}>{code}</option>)}</Select>
       <Input label={t("Cantidad primera unidad", "First unit quantity")} type="number" min="1" step="1" value={edit.quantity} onChange={(e) => field("quantity")(e.target.value)}/><Input label={t("Kg por unidad", "Kg per unit")} type="number" min="0.001" step="0.001" value={edit.weightPerUnitKg} onChange={(e) => field("weightPerUnitKg")(e.target.value)}/><Input label={t("m³ por unidad", "m³ per unit")} type="number" min="0.001" step="0.001" value={edit.volumePerUnitM3} onChange={(e) => field("volumePerUnitM3")(e.target.value)}/>
+      {edit.originPoint || edit.destinationPoint ? <p className={`${styles.locationNote} ${styles.wide}`}>
+        {edit.originPoint ? `${t("Origen propuesto", "Proposed origin")}: ${edit.originPoint.lat}, ${edit.originPoint.lng}. ` : null}
+        {edit.destinationPoint ? `${t("Destino propuesto", "Proposed destination")}: ${edit.destinationPoint.lat}, ${edit.destinationPoint.lng}.` : null}
+      </p> : null}
       {placeChanged ? <label className={`${styles.confirm} ${styles.wide}`}><input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)}/><span>{t("Confirmo que estas referencias manuales serán los nuevos extremos operativos. La selección no confirma ruta, cobertura ni capacidad.", "I confirm that these manual references will become the new operational endpoints. Selection does not confirm route, coverage, or capacity.")}</span></label> : null}
       <Button className={styles.wide} isLoading={busy} disabled={placeChanged && !confirmed} onClick={onSave}>{t("Guardar revisión y reevaluar", "Save revision and reevaluate")}</Button>
     </div>

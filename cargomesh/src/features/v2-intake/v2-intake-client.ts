@@ -271,6 +271,7 @@ export async function getRoadServiceabilityV2(
   id: string,
   expectedDraftVersion: number,
   fetcher: FetchLike = workspaceFetch,
+  includeRoutePreview = false,
 ) {
   const query = new URLSearchParams({ expectedDraftVersion: String(expectedDraftVersion) });
   const response = await fetcher(
@@ -278,7 +279,7 @@ export async function getRoadServiceabilityV2(
     {
       method: "GET",
       credentials: "same-origin",
-      headers: { Accept: "application/json" },
+      headers: { Accept: "application/json", ...(includeRoutePreview ? { "X-CargoMesh-Route-Preview": "1" } : {}) },
       cache: "no-store",
     },
   );
