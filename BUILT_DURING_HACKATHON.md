@@ -1,5 +1,21 @@
 # Base existente e incremento Meta
 
+## Cristhian — sincronización de Front y correcciones pendientes — 4 noviembre 2026
+
+Por solicitud expresa del usuario se conserva el commit de Front `5144a4d` (Organización, biblioteca y reutilización de perfiles) y se guarda en un incremento separado el trabajo pendiente: compatibilidad de lectura de moneda, contexto documental de Meta, packing list, calendario/horarios, contactos y evidencia. El arnés de Organización se adapta a la composición entregada por Front, conservando sus pruebas de Documentos ante fallos del perfil. Se sincroniza la rama con `origin/main` y se publica mediante PR, sin push directo a main, migraciones remotas ni cambios de despliegue. Las notas previas «sin commit/publicación pendiente» describen el momento de su ejecución, anterior a esta integración.
+
+## Cristhian — Organización y Documentos: compatibilidad de lectura — 4 noviembre 2026
+
+Corrección del 400 real al leer una organización con PEN mediante el esquema USD de mutaciones. La lectura preserva la moneda guardada; los comandos conservan su contrato, sin conversión silenciosa. Documentos se monta aunque falle la lectura del perfil, y el tab directo responde a cambios de URL. Se retiran datos de empresa/contacto de respaldo y afirmaciones de actividad/compliance inventadas, usando los timestamps persistidos.
+
+18 pruebas focalizadas, tipos y arquitectura correctos. HTTP real: Organización/PEN 200, cinco documentos 200, disponibilidad 200 y descarga privada con SHA-256 coincidente; anónimo 401. Sin escrituras, inferencias, migraciones o despliegue. Revisión visual pendiente. [Informe y evidencia](docs/meta/pruebas/ORGANIZACION_DOCUMENTOS_2026-11-04.md).
+
+## Cristhian — biblioteca consultada por Meta, packing list y calendario — 4 noviembre 2026
+
+Corrección solicitada por el usuario tras distinguir el expediente documental existente de la integración IA pendiente. Se conectan consulta autorizada de la biblioteca, recordatorio descartable y navegación a Organización/Documentos, contexto documental del servidor para Meta e importación de PDF textual con propuestas por grupo y revisión humana. Se conserva el trabajo de Front del PR #4. La selección de rango/horas usa calendario compartido y zona IANA; el ejemplo carga fechas futuras; se corrigen cronología independiente de prioridad y captura nativa de contactos.
+
+Validación técnica: 458 ejecuciones de casos con solapamientos, tipos y arquitectura correctos, HTTP 200 del formulario y Documentos. Siete llamadas sintéticas Meta (seis del arnés más una aclaración normativa); un único DRAFT local creado/repetido/reabierto con dos grupos, sin ofertas ni bookings. La revisión normativa permanece NOT_ASSESSED: no hay certificación legal ni se envía automáticamente el expediente a carriers. Sin OCR de escaneos. Revisión visual pendiente. Build aislada y publicación pendientes por restricciones de ejecución/revisión automática; sin cambios remotos ni migraciones. [Informe completo y evidencia](docs/meta/pruebas/DOCUMENTOS_Y_CALENDARIO_2026-11-04.md).
+
 ## 4-nov: entrega conjunta de los cambios locales de Front
 
 Por autorización expresa de Cristhian, se reúne el trabajo local de `codex/meta-copilot-overlay-ui` en un commit y PR hacia `main` de `Jean-RF/cargomesh-meta`: Copilot superpuesto, adjuntos, Requests y filtros, Bookings, página de revisión, expediente documental y mensajes de conexión. Se conservan los cambios de Front y la corrección ROAD previamente integrada; sincronizar la rama no equivale a desplegar ni a completar la automatización comercial.

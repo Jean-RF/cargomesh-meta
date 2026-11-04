@@ -1,0 +1,32 @@
+✔ empty placeholder is replaced by distinct PDF groups without inventing missing weight (5.0438ms)
+✔ existing groups are preserved when appending, including identity and measured facts (0.5825ms)
+✔ explicit target preserves ID, original index and fields absent from the PDF (0.4777ms)
+✔ duplicate targets, unknown targets and reimport cannot merge groups or silently duplicate them (1.2661ms)
+✔ Lima wall clock keeps its date and hour across UTC hosts (46.8454ms)
+✔ impossible dates and DST gaps/ambiguity are not silently normalized (1.5869ms)
+✔ priority or size cannot bypass impossible delivery chronology (20.5553ms)
+✔ overlapping availability is allowed when arrival after pickup is possible (2.3408ms)
+✔ elapsed choices need correction; future alternative remains usable (1.8097ms)
+✔ one-click example uses future dates and does not depend on October fixtures (3.1421ms)
+✔ backend dispatch rejects chronology with no possible pickup/delivery pair (0.7486ms)
+✔ document routes reject cookie CSRF, missing versions and malformed body before persistence (77.4094ms)
+✔ native document boundary rejects an invalid bearer before service access (2.2554ms)
+✔ each document request authenticates once, including root and nested paths (5.6839ms)
+✔ readiness is read-only and missing documents do not assert a legal requirement (30.4676ms)
+✔ packing list endpoint rejects CSRF, invalid files and missing membership before inference (25.1783ms)
+✔ company profile is reused; a packing list is not a company profile (3.2022ms)
+✔ latest expired or incomplete revision never falls back to a previous ready revision (0.4132ms)
+✔ readiness follows pagination rather than claiming missing on the first page (96.8619ms)
+✔ failure, tenant mismatch or pagination loop means unknown, not missing (1.7454ms)
+✔ actual PDF text extraction preserves both cargo lines (556.4654ms)
+✔ empty or disguised PDF never reaches the model (5.2036ms)
+✔ two groups remain distinct and do not produce legal approval or invented weight (4.8119ms)
+✔ quotes, revision and duplicate fields are verified at the model boundary (1.5499ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3615.5444

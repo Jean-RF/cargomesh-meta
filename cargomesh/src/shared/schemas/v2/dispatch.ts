@@ -5,7 +5,7 @@ export const DispatchWindowSchema=z.object({startsAt:instant,endsAt:instant}).st
 export const UrgencySchema=z.enum(["URGENT","SCHEDULED"]);
 export const LoadSizeSchema=z.enum(["LIGHT","MEDIUM","HEAVY"]);
 const windows=z.array(DispatchWindowSchema).min(1).max(14).refine(items=>{const sorted=[...items].sort((a,b)=>Date.parse(a.startsAt)-Date.parse(b.startsAt));return sorted.every((w,i)=>!i||Date.parse(sorted[i-1].endsAt)<=Date.parse(w.startsAt));},"Accepted windows must not overlap");
-export const DispatchPreferencesSchema=z.object({urgency:UrgencySchema,loadSize:LoadSizeSchema.nullable(),timeZone:z.string().min(1).max(100).refine(value=>{try{new Intl.DateTimeFormat('en',{timeZone:value});return true;}catch{return false;}}),pickupWindows:windows,deliveryWindows:windows}).strict();
+export const DispatchPreferencesSchema=z.object({urgency:UrgencySchema,loadSize:LoadSizeSchema.nullable(),timeZone:z.string().min(1).max(100).refine(value=>{try{new Intl.DateTimeFormat('en',{timeZone:value});return true;}catch{return false;}}),pickupWindows:windows,deliveryWindows:windows}).strict().refine(value=>value.pickupWindows.some(pickup=>value.deliveryWindows.some(delivery=>Date.parse(delivery.endsAt)>Date.parse(pickup.startsAt))),'At least one delivery window must allow arrival after pickup');
 export type DispatchPreferences=z.infer<typeof DispatchPreferencesSchema>;
 export type DispatchWindow=z.infer<typeof DispatchWindowSchema>;
 export function windowEnvelope(items:readonly DispatchWindow[]):DispatchWindow{return {startsAt:new Date(Math.min(...items.map(w=>Date.parse(w.startsAt)))).toISOString(),endsAt:new Date(Math.max(...items.map(w=>Date.parse(w.endsAt)))).toISOString()};}

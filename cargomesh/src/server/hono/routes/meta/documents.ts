@@ -10,6 +10,7 @@ import {v2Error} from '../../middleware/v2-error';
 import {carrierPortalIdentity} from '../carrier-portal';
 import {DocumentService,type DocumentActor} from '@/server/modules/media-evidence/document-service';
 import {DOCUMENT_LIMIT} from '@/shared/schemas/meta/documents';
+import {readDocumentReadiness} from '@/server/modules/media-evidence/document-readiness';
 const base='/meta/documents';
 export function createDocumentsRouter(service:()=>Promise<DocumentService>,authenticate:MiddlewareHandler<{Variables:AuthVariables}>=v2AuthMiddleware){
  const router=new Hono<{Variables:AuthVariables}>();
@@ -22,6 +23,16 @@ export function createDocumentsRouter(service:()=>Promise<DocumentService>,authe
   router.use(path,bodyLimit({maxSize:DOCUMENT_LIMIT+65536,onError:c=>v2Error(c,new V2DraftError('DOCUMENT_SIZE','Maximum file size is 4 MiB.',413))}));
  }
  const actor=(m:AuthVariables['member']):DocumentActor=>({organizationId:m.organizationId,actorId:m.memberId,carrierId:null});
+ router.get(`${base}/readiness`,async c=>{try{return c.json(await readDocumentReadiness(await service(),actor(c.get('member'))));}catch(e){return v2Error(c,e);}});
+ router.post(`${base}/packing-list/prepare`,async c=>{try{
+  const member=c.get('member');if(member.status!=='ACTIVE'||!['OWNER','SUPERVISOR','REQUESTER'].includes(member.role))throw new V2DraftError('FORBIDDEN_DOCUMENT','Active client membership required.',403);
+  if(!c.req.header('Content-Type')?.startsWith('multipart/form-data;'))throw new V2DraftError('VALIDATION_ERROR','Multipart PDF required.',400);
+  const form=await c.req.formData(),file=form.get('file');
+  if(!file||typeof file==='string'||file.size>DOCUMENT_LIMIT||file.type!=='application/pdf')throw new V2DraftError('DOCUMENT_TYPE_MISMATCH','Select a packing list PDF up to 4 MiB.',400);
+  const revision=z.string().regex(/^\d{1,9}$/).transform(Number).pipe(z.number().int().nonnegative()).parse(form.get('inputRevision')),language=z.enum(['es','en']).parse(form.get('language'));
+  const {analyzePackingList}=await import('@/server/modules/media-evidence/packing-list');
+  return c.json(await analyzePackingList(new Uint8Array(await file.arrayBuffer()),revision,language,c.req.raw.signal));
+ }catch(e){return v2Error(c,e instanceof V2DraftError||e instanceof z.ZodError?e:new V2DraftError('PACKING_LIST_ANALYSIS_FAILED','Unable to analyze this PDF. No draft was changed; retry or enter the data manually.',502));}});
  router.get(base,async c=>{try{return c.json(await (await service()).library(actor(c.get('member')),c.req.query()));}catch(e){return v2Error(c,e);}});
  router.post(base,async c=>{try{
   // Authenticate before buffering bytes. Never trust object paths or organization IDs from the browser.

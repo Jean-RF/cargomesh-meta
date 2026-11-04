@@ -17,7 +17,7 @@ export function DocumentUploadDialog({ requestId, replacement, onClose, onSaved 
     if(!parsed.success)throw new Error(t("Revisa el nombre y las fechas del documento.","Check the document name and dates."));
     const metadata=parsed.data;
     const signature=JSON.stringify({metadata,name:file.name,size:file.size,lastModified:file.lastModified});if(intent.current?.signature!==signature)intent.current={signature,key:crypto.randomUUID()};
-    if(!saved.current){await documents.upload(file,metadata,intent.current.key);saved.current=true;}
+    if(!saved.current){await documents.upload(file,metadata,intent.current.key);saved.current=true;window.dispatchEvent(new Event('cargomesh:documents-changed'));}
     await onSaved();intent.current=null;onClose();
   }catch(e){setError(e instanceof Error?e.message:t("No se pudo subir el archivo.","Upload failed."));}finally{inFlight.current=false;setBusy(false);}}
   return <Dialog open title={replacement?t("Subir nueva versión","Upload new revision"):t("Subir documento","Upload document")} description={requestId?t("Se guarda de forma privada. Tú eliges cuándo adjuntarlo y compartirlo.","Saved privately. You choose when to attach and share it."):t("Agrega un archivo a tu biblioteca privada.","Add a file to your private library.")} className={`${s.dialog} ${!requestId?s.libraryUpload:''}`} closeLabel={t("Cerrar","Close")} closeDisabled={busy} onClose={onClose}

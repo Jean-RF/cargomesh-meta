@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "path": "/api/v2/organizations/current",
+      "status": 200,
+      "currency": "PEN"
+    },
+    {
+      "path": "/api/v2/meta/documents",
+      "status": 200,
+      "documents": 5
+    },
+    {
+      "path": "/api/v2/meta/documents/readiness",
+      "status": 200,
+      "companyProfile": "AVAILABLE"
+    },
+    {
+      "check": "private-document-download",
+      "status": 200,
+      "bytes": 610,
+      "sha256Matches": true
+    },
+    {
+      "check": "documents-deep-link",
+      "status": 200
+    },
+    {
+      "check": "anonymous-organization",
+      "status": 401
+    }
+  ],
+  "writes": 0
+}

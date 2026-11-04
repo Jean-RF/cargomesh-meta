@@ -10,6 +10,7 @@ import * as groups from "./cargo-groups";
 import * as groupScope from './assistant-group-scope';
 import * as roadAdvice from '@/shared/lib/road-intake-advice';
 import * as formGuide from "./assistant-form-guide";
+import {upcomingWindowIssues} from "./upcoming-windows";
 import { ROAD_REQUEST_FIXTURE, ELIGIBLE_UNKNOWN_EVALUATION_FIXTURE } from "./fixtures/contract-flow.fixture";
 import type { FreightRequestV2Data } from "./contracts";
 import type { useIntakeController } from "./intake-controller";
@@ -29,7 +30,7 @@ const code = ts.transpileModule(readFileSync(new URL("./intake-controller.ts", i
 }).outputText;
 
 /** Execute the real controller with deterministic React lifecycle and deferred native APIs. */
-function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof client> } = {}) {
+function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof client>, now=Date.parse('2026-10-01T00:00:00Z') } = {}) {
   type Effect = { deps: unknown[]; cleanup?: () => void };
   const slots: unknown[] = [], effects: Array<() => void> = [];
   let cursor = 0, changed = false, mounted = true;
@@ -78,6 +79,7 @@ function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof
     if (name.includes("locale-provider")) return { useLocale: () => ({ locale: "es", t: (es: string) => es }) };
     if (name === "./use-assistant-change-feedback") return feedbackExports;
     if (name === "./prototype-model") return prototype;
+    if (name === "./upcoming-windows") return {upcomingWindowIssues:(draft:prototype.V2IntakePrototypeDraft)=>upcomingWindowIssues(draft,now)};
     if (name === "./cargo-groups") return groups;
     if (name === './assistant-group-scope') return groupScope;
     if (name === '@/shared/lib/road-intake-advice') return roadAdvice;
@@ -104,6 +106,11 @@ function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof
 }
 const loaded = () => ({ data: structuredClone(ROAD_REQUEST_FIXTURE) });
 const evaluation = (version = 1) => ({ data: { ...structuredClone(ELIGIBLE_UNKNOWN_EVALUATION_FIXTURE), evaluatedDraftVersion: version } });
+
+test('an elapsed reopened draft remains readable but cannot advance to a new operational review',async()=>{
+ const app=setup({now:Date.parse('2026-11-04T12:00:00Z'),storage:new Map([[key,ROAD_REQUEST_FIXTURE.id]]),api:{getFreightRequestV2:async()=>loaded() as never,getRoadServiceabilityV2:async()=>evaluation() as never}});
+ await app.settle();assert.equal(app.state.request?.id,ROAD_REQUEST_FIXTURE.id);assert.equal(app.state.enterReview(),false);app.render();assert.equal(app.state.step,3);assert.ok(app.state.issues.some(issue=>issue.code==='past-window'));app.unmount();
+});
 
 test('disconnected ROAD draft saves and reopens the same ID without a serviceability call',async()=>{
  let persisted=structuredClone(ROAD_REQUEST_FIXTURE),creates=0,evaluations=0;

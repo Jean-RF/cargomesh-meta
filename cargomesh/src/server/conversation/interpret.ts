@@ -157,6 +157,8 @@ export async function interpretConversationTurn(
       interpretation: { intent: "HELP", fields: [] } };
   }
   const fallback = { schemaVersion: "2.0" as const, interpretation: interpretDeterministically(input), mode: "DETERMINISTIC" as const, telemetry: null };
+  // Contacts are captured natively, never sent to the model that explicitly excludes them.
+  if(input.currentField?.includes('Contact')&&fallback.interpretation.intent!=='HELP'&&fallback.interpretation.fields.some(field=>field.field===input.currentField))return fallback;
   if (isNoisyTranscript(input.text)) return fallback;
   if (fallback.interpretation.intent === "HELP" && helpTopic(input.text) === "SERVICES") return fallback;
   // Explicit corrections and unresolved references must not be retargeted by the model.

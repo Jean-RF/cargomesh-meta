@@ -35,6 +35,7 @@ import { DateClarificationPanel, CargoClassificationPanel } from "./capture-clar
 import { explicitCargoFacts, groundedCargoSuggestions } from "./explicit-cargo-facts";
 import { assistantNextField, assistantNextQuestion } from "./assistant-form-guide";
 import {draftRoadStatus,disconnectedRoadNotice} from './road-advice';
+import {DocumentReminder} from '@/features/documents/document-reminder';
 import { NovaHelpHint } from "./nova-help-hint";
 import {spokenCategoryAcceptance} from "./spoken-category-acceptance";
 import {spokenCaptureClarification} from "./spoken-capture-clarification";
@@ -990,6 +991,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
       </div>
       </div>
       <div className={styles.composerDock}>
+        <DocumentReminder enabled={open&&optionsSource!=='fixture'&&!transportSelectionRequired}/>
         <DeclarationMediaChips onOpen={() => setMediaExpanded(true)}/>
         {sendNotice && <p className={styles.voiceStatus} role="status">{sendNotice}</p>}
         <form onSubmit={(event) => { event.preventDefault(); void send(); }} className={styles.composer}>

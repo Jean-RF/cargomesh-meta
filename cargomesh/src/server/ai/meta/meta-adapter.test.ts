@@ -14,6 +14,13 @@ const input = {
   schemaVersion: "2.0" as const, text: fixture.input.text, currentField: "unitQuantity" as const,
   language: "en" as const, inputRevision: 7,
 };
+
+test('explicit contact answers stay native instead of disappearing at the Meta boundary',async()=>{
+ for(const [currentField,text] of [['pickupContactName','Lucas'],['recipientContactName','Carlos'],['pickupContactPhoneE164','+51932019293'],['recipientContactEmail','NONE']] as const){
+  let invoked=0;const response=await interpretConversationTurn({schemaVersion:'2.0',text,currentField,language:'es'},{env,metaFetch:async()=>{invoked++;throw Error('Private contact must not reach Meta');}});
+  assert.equal(response.mode,'DETERMINISTIC');assert.equal(invoked,0);assert.deepEqual(response.interpretation.fields,[{field:currentField,value:text}]);
+ }
+});
 const turn = () => ({
   intent: "PROVIDE", fields: [], acknowledgment: "I noted the declared quantity, packaging and weight for review.",
   declaration: structuredClone(fixture.proposal),

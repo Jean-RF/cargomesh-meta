@@ -33,3 +33,13 @@ test('each document request authenticates once, including root and nested paths'
  assert.equal((await app.request('http://localhost/api/v2/meta/documents',{method:'POST',headers:{Origin:'https://foreign.invalid'},body:'{}'})).status,403);
  assert.equal(authenticated,1);
 });
+test('readiness is read-only and missing documents do not assert a legal requirement',async()=>{
+ const app=new Hono().route('/api/v2',createDocumentsRouter(service,auth));const reply=await app.request('http://localhost/api/v2/meta/documents/readiness');assert.equal(reply.status,200);const data=await reply.json();assert.equal(data.companyProfile,'MISSING');assert.equal(data.requiredToCreate,false);assert.equal(data.regulatoryReview,'NOT_ASSESSED');assert.equal(data.organizationId,'d0510000-0000-4000-8000-000000000002');
+});
+test('packing list endpoint rejects CSRF, invalid files and missing membership before inference',async()=>{
+ const app=new Hono().route('/api/v2',createDocumentsRouter(service,auth)),url='http://localhost/api/v2/meta/documents/packing-list/prepare';
+ assert.equal((await app.request(url,{method:'POST',headers:{Origin:'https://other.invalid'},body:'x'})).status,403);
+ assert.equal((await app.request(url,{method:'POST',headers:{Origin:'http://localhost','Content-Type':'application/json'},body:'{}'})).status,400);
+ const form=new FormData();form.set('file',new File(['x'],'fake.jpg',{type:'image/jpeg'}));form.set('inputRevision','1');form.set('language','es');assert.equal((await app.request(url,{method:'POST',headers:{Origin:'http://localhost'},body:form})).status,400);
+ const secured=new Hono().route('/api/v2',createDocumentsRouter(service));assert.equal((await secured.request(url,{method:'POST',headers:{Authorization:'invalid'},body:'x'})).status,401);
+});

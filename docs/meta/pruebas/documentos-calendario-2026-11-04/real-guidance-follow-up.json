@@ -1,0 +1,17 @@
+{
+  "mode": "META",
+  "error": null,
+  "reply": "Your company profile is stored, but this app has not assessed legal compliance or authenticity, so legal certification is unknown. Carrier review is separate.",
+  "metadata": {
+    "provider": "META",
+    "transport": "META_MODEL_API",
+    "model": "muse-spark-1.3",
+    "requestId": "fd991264-585a-4e91-a212-fb4173aaea0a",
+    "latencyMs": 2569,
+    "attempts": 1,
+    "inputTokens": 772,
+    "outputTokens": 224,
+    "estimatedCostUsd": null,
+    "outcome": "PROPOSED"
+  }
+}
