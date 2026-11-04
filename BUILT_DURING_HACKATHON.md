@@ -1,5 +1,13 @@
 # Base existente e incremento Meta
 
+## Axel + Codex — manifiesto a ensayo físico Tetris — 4 noviembre 2026
+
+Se recupera el planificador local de Axel/Codex del 1-nov para `Jean-RF/cargomesh-meta`: lectura de manifiesto vigente, revisión de unidades/dimensiones/carga útil, acomodo determinístico en una capa y vista 2D/3D. Conserva el catálogo, fábrica y sesiones de Juan. [Alcance, pruebas y pendientes](docs/meta/TETRIS_PLANNING_2026-11-04.md). No persiste planes operativos, reserva capacidad ni sustituye conteos SAM por geometría. Sin cambios en el repositorio o despliegue Amazon.
+
+## Axel + Codex — selección de voz del navegador — 4 noviembre 2026
+
+Corrección local en `codex/meta-axel` desde main `78aad26` de `Jean-RF/cargomesh-meta`: prioriza voces anunciadas como naturales/neuronales sobre Zira Desktop, mantiene preferencias e idioma y usa velocidad nativa. Meta sigue generando el texto; Web Speech produce el audio. Meta Model API no documenta síntesis de voz de salida. [Diagnóstico, cambios y límites](docs/meta/VOICE_PLAYBACK_2026-11-04.md). Once pruebas focales aprobadas; aceptación acústica y despliegue pendientes. Sin nuevas claves, cambios de infraestructura ni modificación de Amazon.
+
 ## 4-nov: entrega conjunta de los cambios locales de Front
 
 Por autorización expresa de Cristhian, se reúne el trabajo local de `codex/meta-copilot-overlay-ui` en un commit y PR hacia `main` de `Jean-RF/cargomesh-meta`: Copilot superpuesto, adjuntos, Requests y filtros, Bookings, página de revisión, expediente documental y mensajes de conexión. Se conservan los cambios de Front y la corrección ROAD previamente integrada; sincronizar la rama no equivale a desplegar ni a completar la automatización comercial.

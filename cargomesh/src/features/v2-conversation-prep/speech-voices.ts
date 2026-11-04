@@ -8,12 +8,12 @@ export function voicesForLanguage<T extends AvailableSpeechVoice>(voices: T[], l
 
 function scoreVoice(voice: AvailableSpeechVoice, language: string): number {
   const locale = voice.lang.toLowerCase();
-  return (language === "en-US" && /\bzira\b/i.test(voice.name) ? 40 : 0)
-    + (language === "en-US" && /google.*(?:uk|female)|google.*female/i.test(voice.name) ? 25 : 0)
-    + (language === "en-US" && /\b(?:jenny|aria|samantha|victoria|karen|moira|tessa|ava|susan|hazel)\b|\bfemale\b/i.test(voice.name) ? 18 : 0)
+  // Web Speech exposes no quality metric. Prefer advertised higher-quality engines
+  // over legacy desktop voices; gender and a particular speaker are not quality signals.
+  return (/natural|neural|enhanced|premium/i.test(voice.name) ? 100 : 0)
+    + (/\bgoogle\b/i.test(voice.name) ? 20 : 0)
     + (voice.localService ? 4 : 0)
     + (locale === language.toLowerCase() ? 3 : 0)
-    + (/natural|neural|enhanced|premium/i.test(voice.name) ? 2 : 0)
     + (language === "es-PE" && locale === "es-mx" ? 1 : 0);
 }
 

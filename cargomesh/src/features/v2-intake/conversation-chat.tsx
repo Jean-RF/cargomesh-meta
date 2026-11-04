@@ -183,7 +183,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   const novaVoiceEnabled = process.env.NEXT_PUBLIC_CARGOMESH_NOVA_VOICE_PREVIEW === "true";
   const audioReplies = true;
   const voiceLanguage = language === "es" ? "es-PE" as const : "en-US" as const;
-  const voiceRate = 0.96;
+  const voiceRate = 1;
   const [awaitingConfirmation, setAwaitingConfirmation] = useState(false);
   const confirmationRef = useRef<{ review: DraftReview; requestId: string | null; version: number | null } | null>(null);
   const measurementPendingRef = useRef<PendingMeasurement | null>(null);
