@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import ts from "typescript";
 import * as schemas from "@/shared/schemas/meta/declaration-media";
 import * as model from "./media-draft-model";
+import * as groupScope from './assistant-group-scope';
 import {
   EMPTY_PROTOTYPE_DRAFT,
   applyChatFieldsToDraft,
@@ -161,6 +162,7 @@ function setup(
         if (name === "react") return hooks;
         if (name.includes("schemas/meta/declaration-media")) return schemas;
         if (name === "./media-draft-model") return model;
+        if (name === './assistant-group-scope') return groupScope;
         throw Error(name);
       },
       crypto,
@@ -279,6 +281,22 @@ test("review is required; selected facts update the existing draft and canonical
   assert.equal(app.draft.originFacilityId, "keep-origin");
   assert.equal(app.state.analysis, null);
 });
+test("reviewed media cannot silently apply quantity to the first of multiple cargo groups", async () => {
+  const app = setup();
+  app.change({ unitQuantity: '8', additionalUnits: [{ ...EMPTY_PROTOTYPE_DRAFT, id: 'group-1', unitQuantity: '4' }] });
+  await attach(app);
+  await app.state.analyze('', 'es');
+  await app.settle();
+  app.state.setReviewed(true);
+  app.render();
+  const before = JSON.stringify(app.draft);
+  app.state.confirm();
+  app.render();
+  assert.equal(app.applied.length, 0);
+  assert.equal(JSON.stringify(app.draft), before);
+  assert.match(app.state.error, /varios grupos/i);
+});
+
 test("unchecked proposed fields preserve the manual value", async () => {
   const app = setup();
   app.change({ unitWeightPerUnitKg: "12" });

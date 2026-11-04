@@ -1,0 +1,496 @@
+TAP version 13
+# Subtest: local owner setup requires exact local gateway, app and explicit consent
+ok 1 - local owner setup requires exact local gateway, app and explicit consent
+  ---
+  duration_ms: 3.6091
+  type: 'test'
+  ...
+# Subtest: credential output cannot be relative or anywhere inside the checkout
+ok 2 - credential output cannot be relative or anywhere inside the checkout
+  ---
+  duration_ms: 0.9478
+  type: 'test'
+  ...
+# Subtest: prepare is valid now but cannot execute the next-day shipment early
+ok 3 - prepare is valid now but cannot execute the next-day shipment early
+  ---
+  duration_ms: 2.6805
+  type: 'test'
+  ...
+# Subtest: old recipes, future evidence, arbitrary paths/phases and wrong package fail before authentication
+ok 4 - old recipes, future evidence, arbitrary paths/phases and wrong package fail before authentication
+  ---
+  duration_ms: 1.3388
+  type: 'test'
+  ...
+# Subtest: response and hold deadlines cannot exceed native request/assignment windows
+ok 5 - response and hold deadlines cannot exceed native request/assignment windows
+  ---
+  duration_ms: 0.4651
+  type: 'test'
+  ...
+# Subtest: projects native names and services with deduplication and bounded concurrency
+ok 6 - projects native names and services with deduplication and bounded concurrency
+  ---
+  duration_ms: 5.0005
+  type: 'test'
+  ...
+# Subtest: catalog 404 is explicit and cannot provide a guessed Carrier name or channel
+ok 7 - catalog 404 is explicit and cannot provide a guessed Carrier name or channel
+  ---
+  duration_ms: 0.4881
+  type: 'test'
+  ...
+# Subtest: catalog 403 is explicit and cannot provide a guessed Carrier name or channel
+ok 8 - catalog 403 is explicit and cannot provide a guessed Carrier name or channel
+  ---
+  duration_ms: 0.2514
+  type: 'test'
+  ...
+# Subtest: catalog 409 is explicit and cannot provide a guessed Carrier name or channel
+ok 9 - catalog 409 is explicit and cannot provide a guessed Carrier name or channel
+  ---
+  duration_ms: 0.2651
+  type: 'test'
+  ...
+# Subtest: catalog 503 is explicit and cannot provide a guessed Carrier name or channel
+ok 10 - catalog 503 is explicit and cannot provide a guessed Carrier name or channel
+  ---
+  duration_ms: 0.3567
+  type: 'test'
+  ...
+# Subtest: expired authentication, cancellation and malformed contracts fail closed
+ok 11 - expired authentication, cancellation and malformed contracts fail closed
+  ---
+  duration_ms: 2.208
+  type: 'test'
+  ...
+# Subtest: catalog IDs and service ownership must match their authorized references
+ok 12 - catalog IDs and service ownership must match their authorized references
+  ---
+  duration_ms: 1.0748
+  type: 'test'
+  ...
+# Subtest: response channels are the intersection of active, loaded services, not a default
+ok 13 - response channels are the intersection of active, loaded services, not a default
+  ---
+  duration_ms: 0.7637
+  type: 'test'
+  ...
+# Subtest: references are derived from persisted plans/opportunities/offers, never a fixed Carrier list
+ok 14 - references are derived from persisted plans/opportunities/offers, never a fixed Carrier list
+  ---
+  duration_ms: 4.1955
+  type: 'test'
+  ...
+# Subtest: large historical catalogs use a finite enrichment budget and label unread identities incomplete
+ok 15 - large historical catalogs use a finite enrichment budget and label unread identities incomplete
+  ---
+  duration_ms: 11.1046
+  type: 'test'
+  ...
+# Subtest: links the same request, organization, plan, opportunity, Carrier and native assignments
+ok 16 - links the same request, organization, plan, opportunity, Carrier and native assignments
+  ---
+  duration_ms: 8.4431
+  type: 'test'
+  ...
+# Subtest: unverifiable organization cannot become a selectable/recommended offer
+ok 17 - unverifiable organization cannot become a selectable/recommended offer
+  ---
+  duration_ms: 1.6179
+  type: 'test'
+  ...
+# Subtest: unverifiable request cannot become a selectable/recommended offer
+ok 18 - unverifiable request cannot become a selectable/recommended offer
+  ---
+  duration_ms: 1.6874
+  type: 'test'
+  ...
+# Subtest: unverifiable carrier cannot become a selectable/recommended offer
+ok 19 - unverifiable carrier cannot become a selectable/recommended offer
+  ---
+  duration_ms: 1.2634
+  type: 'test'
+  ...
+# Subtest: unverifiable embeddedId cannot become a selectable/recommended offer
+ok 20 - unverifiable embeddedId cannot become a selectable/recommended offer
+  ---
+  duration_ms: 1.3358
+  type: 'test'
+  ...
+# Subtest: unverifiable opportunity cannot become a selectable/recommended offer
+ok 21 - unverifiable opportunity cannot become a selectable/recommended offer
+  ---
+  duration_ms: 2.2319
+  type: 'test'
+  ...
+# Subtest: unverifiable plan cannot become a selectable/recommended offer
+ok 22 - unverifiable plan cannot become a selectable/recommended offer
+  ---
+  duration_ms: 2.0219
+  type: 'test'
+  ...
+# Subtest: unverifiable assignment cannot become a selectable/recommended offer
+ok 23 - unverifiable assignment cannot become a selectable/recommended offer
+  ---
+  duration_ms: 4.7362
+  type: 'test'
+  ...
+# Subtest: unverifiable service cannot become a selectable/recommended offer
+ok 24 - unverifiable service cannot become a selectable/recommended offer
+  ---
+  duration_ms: 2.1616
+  type: 'test'
+  ...
+# Subtest: unverifiable total cannot become a selectable/recommended offer
+ok 25 - unverifiable total cannot become a selectable/recommended offer
+  ---
+  duration_ms: 2.2808
+  type: 'test'
+  ...
+# Subtest: plan eligibility comes from the backend, not equipment or a matching Carrier name
+ok 26 - plan eligibility comes from the backend, not equipment or a matching Carrier name
+  ---
+  duration_ms: 3.0749
+  type: 'test'
+  ...
+# Subtest: a request revision invalidates the old plan and recommendation without rewriting history
+ok 27 - a request revision invalidates the old plan and recommendation without rewriting history
+  ---
+  duration_ms: 1.0141
+  type: 'test'
+  ...
+# Subtest: WITHDRAWN remains historical, not a selectable quote
+ok 28 - WITHDRAWN remains historical, not a selectable quote
+  ---
+  duration_ms: 0.7371
+  type: 'test'
+  ...
+# Subtest: SUPERSEDED remains historical, not a selectable quote
+ok 29 - SUPERSEDED remains historical, not a selectable quote
+  ---
+  duration_ms: 0.7594
+  type: 'test'
+  ...
+# Subtest: expiry and future issuance are enforced at review time
+ok 30 - expiry and future issuance are enforced at review time
+  ---
+  duration_ms: 1.0827
+  type: 'test'
+  ...
+# Subtest: ranking price, policy and assignment mismatches do not trigger a local rerank
+ok 31 - ranking price, policy and assignment mismatches do not trigger a local rerank
+  ---
+  duration_ms: 3.0636
+  type: 'test'
+  ...
+# Subtest: empty and missing collections never invent offers, plans or opportunities
+ok 32 - empty and missing collections never invent offers, plans or opportunities
+  ---
+  duration_ms: 2.5569
+  type: 'test'
+  ...
+# Subtest: opportunity targets retain native grouped assignments and do not mix tenants
+ok 33 - opportunity targets retain native grouped assignments and do not mix tenants
+  ---
+  duration_ms: 0.8572
+  type: 'test'
+  ...
+# Subtest: an otherwise valid quote cannot use another tenant's ranking or opportunity
+ok 34 - an otherwise valid quote cannot use another tenant's ranking or opportunity
+  ---
+  duration_ms: 1.9502
+  type: 'test'
+  ...
+# Subtest: native envelope supersession/withdrawal is authoritative over the immutable issuer snapshot
+ok 35 - native envelope supersession/withdrawal is authoritative over the immutable issuer snapshot
+  ---
+  duration_ms: 2.1986
+  type: 'test'
+  ...
+# Subtest: commercial choice requires every current offer, never an expired, withdrawn or missing one
+ok 36 - commercial choice requires every current offer, never an expired, withdrawn or missing one
+  ---
+  duration_ms: 2.1392
+  type: 'test'
+  ...
+# Subtest: booking retry excludes an offer already authorized by this decision
+ok 37 - booking retry excludes an offer already authorized by this decision
+  ---
+  duration_ms: 0.3612
+  type: 'test'
+  ...
+# Subtest: booking price is linked only when persisted decision and carrier identify one offer
+ok 38 - booking price is linked only when persisted decision and carrier identify one offer
+  ---
+  duration_ms: 0.77
+  type: 'test'
+  ...
+# Subtest: legacy voice context without request/plan/opportunity references cannot recommend a plan
+ok 39 - legacy voice context without request/plan/opportunity references cannot recommend a plan
+  ---
+  duration_ms: 2.3034
+  type: 'test'
+  ...
+# Subtest: complete context preserves backend ranking position, not a locally recomputed recommendation
+ok 40 - complete context preserves backend ranking position, not a locally recomputed recommendation
+  ---
+  duration_ms: 5.5691
+  type: 'test'
+  ...
+# Subtest: filter/search/sort/date/selection survive URL roundtrip, reload and detail return
+ok 41 - filter/search/sort/date/selection survive URL roundtrip, reload and detail return
+  ---
+  duration_ms: 2.9576
+  type: 'test'
+  ...
+# Subtest: untrusted query fields cannot become arbitrary back URLs or invalid filters
+ok 42 - untrusted query fields cannot become arbitrary back URLs or invalid filters
+  ---
+  duration_ms: 0.3708
+  type: 'test'
+  ...
+# Subtest: history updates notify Next rather than impersonating an internal router replace
+ok 43 - history updates notify Next rather than impersonating an internal router replace
+  ---
+  duration_ms: 0.4251
+  type: 'test'
+  ...
+# Subtest: bounded dates, duplicate URL parameters and overly long search are normalized
+ok 44 - bounded dates, duplicate URL parameters and overly long search are normalized
+  ---
+  duration_ms: 0.3949
+  type: 'test'
+  ...
+# Subtest: detail links retain the existing connected/demo route namespace
+ok 45 - detail links retain the existing connected/demo route namespace
+  ---
+  duration_ms: 0.7595
+  type: 'test'
+  ...
+# Subtest: filters use only supplied authorized records and do not mutate the source collection
+ok 46 - filters use only supplied authorized records and do not mutate the source collection
+  ---
+  duration_ms: 1.3418
+  type: 'test'
+  ...
+# Subtest: sorts are stable and update-date filtering uses explicit UTC boundaries
+ok 47 - sorts are stable and update-date filtering uses explicit UTC boundaries
+  ---
+  duration_ms: 0.4114
+  type: 'test'
+  ...
+# Subtest: explicit opportunity creation reuses the native endpoint, payload and retry key; never emits an offer or booking
+ok 48 - explicit opportunity creation reuses the native endpoint, payload and retry key; never emits an offer or booking
+  ---
+  duration_ms: 38.5861
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response with a different requestId cannot become a sent opportunity
+ok 49 - a successful HTTP response with a different requestId cannot become a sent opportunity
+  ---
+  duration_ms: 2.6815
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response with a different carrierId cannot become a sent opportunity
+ok 50 - a successful HTTP response with a different carrierId cannot become a sent opportunity
+  ---
+  duration_ms: 1.3932
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response with a different planId cannot become a sent opportunity
+ok 51 - a successful HTTP response with a different planId cannot become a sent opportunity
+  ---
+  duration_ms: 1.6267
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response with a different assignmentIds cannot become a sent opportunity
+ok 52 - a successful HTTP response with a different assignmentIds cannot become a sent opportunity
+  ---
+  duration_ms: 1.4605
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response with a different responseChannel cannot become a sent opportunity
+ok 53 - a successful HTTP response with a different responseChannel cannot become a sent opportunity
+  ---
+  duration_ms: 1.4553
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response with a different responseDeadline cannot become a sent opportunity
+ok 54 - a successful HTTP response with a different responseDeadline cannot become a sent opportunity
+  ---
+  duration_ms: 1.6296
+  type: 'test'
+  ...
+# Subtest: permission, conflict, server and network failures never create a local success
+ok 55 - permission, conflict, server and network failures never create a local success
+  ---
+  duration_ms: 3.32
+  type: 'test'
+  ...
+# Subtest: commercial selection sends explicit evidence and a unique idempotency key
+ok 56 - commercial selection sends explicit evidence and a unique idempotency key
+  ---
+  duration_ms: 38.9803
+  type: 'test'
+  ...
+# Subtest: booking authorization keeps the same idempotency key on retry and parses a persisted pending booking
+ok 57 - booking authorization keeps the same idempotency key on retry and parses a persisted pending booking
+  ---
+  duration_ms: 4.2664
+  type: 'test'
+  ...
+# Subtest: booking conflict stays visible instead of creating a local confirmation
+ok 58 - booking conflict stays visible instead of creating a local confirmation
+  ---
+  duration_ms: 0.7904
+  type: 'test'
+  ...
+# Subtest: wrong booking/decision/offer response cannot become a success
+ok 59 - wrong booking/decision/offer response cannot become a success
+  ---
+  duration_ms: 1.0553
+  type: 'test'
+  ...
+# Subtest: lost response preserves the exact selection body on retry instead of generating another decision intent
+ok 60 - lost response preserves the exact selection body on retry instead of generating another decision intent
+  ---
+  duration_ms: 0.8857
+  type: 'test'
+  ...
+# Subtest: refresh reads the exact customer request and correlated collections without writes
+ok 61 - refresh reads the exact customer request and correlated collections without writes
+  ---
+  duration_ms: 57.9451
+  type: 'test'
+  ...
+# Subtest: scope mismatch in the refreshed request prevents commercial queries
+ok 62 - scope mismatch in the refreshed request prevents commercial queries
+  ---
+  duration_ms: 1.6644
+  type: 'test'
+  ...
+# Subtest: repeated pagination and a denied session cannot become an empty success
+ok 63 - repeated pagination and a denied session cannot become an empty success
+  ---
+  duration_ms: 3.3018
+  type: 'test'
+  ...
+# Subtest: aborted requests stay cancelled and do not replace the current view
+ok 64 - aborted requests stay cancelled and do not replace the current view
+  ---
+  duration_ms: 0.3425
+  type: 'test'
+  ...
+# Subtest: hydrates actual Carrier identity and service through authorized native reads
+ok 65 - hydrates actual Carrier identity and service through authorized native reads
+  ---
+  duration_ms: 8.6965
+  type: 'test'
+  ...
+# Subtest: missing pagination metadata, non-JSON failure and wrong collection scope stay failures
+ok 66 - missing pagination metadata, non-JSON failure and wrong collection scope stay failures
+  ---
+  duration_ms: 27.0542
+  type: 'test'
+  ...
+# Subtest: reads all native pages but rejects duplicate records across pages
+ok 67 - reads all native pages but rejects duplicate records across pages
+  ---
+  duration_ms: 42.8114
+  type: 'test'
+  ...
+# Subtest: reads beyond the old SSR first page and retains native pagination
+ok 68 - reads beyond the old SSR first page and retains native pagination
+  ---
+  duration_ms: 2.6493
+  type: 'test'
+  ...
+# Subtest: a bounded read is explicit and provides the next batch offset
+ok 69 - a bounded read is explicit and provides the next batch offset
+  ---
+  duration_ms: 0.6772
+  type: 'test'
+  ...
+# Subtest: a later range is never represented as an organization total
+ok 70 - a later range is never represented as an organization total
+  ---
+  duration_ms: 0.2656
+  type: 'test'
+  ...
+# Subtest: an empty successful read is different from an unavailable service
+ok 71 - an empty successful read is different from an unavailable service
+  ---
+  duration_ms: 0.4364
+  type: 'test'
+  ...
+# Subtest: a failed later page retains only observed rows and blocks complete-read decisions
+ok 72 - a failed later page retains only observed rows and blocks complete-read decisions
+  ---
+  duration_ms: 0.4548
+  type: 'test'
+  ...
+# Subtest: HTTP 400 propagates; it cannot become an empty fallback
+ok 73 - HTTP 400 propagates; it cannot become an empty fallback
+  ---
+  duration_ms: 0.7697
+  type: 'test'
+  ...
+# Subtest: HTTP 401 propagates; it cannot become an empty fallback
+ok 74 - HTTP 401 propagates; it cannot become an empty fallback
+  ---
+  duration_ms: 0.2342
+  type: 'test'
+  ...
+# Subtest: HTTP 403 propagates; it cannot become an empty fallback
+ok 75 - HTTP 403 propagates; it cannot become an empty fallback
+  ---
+  duration_ms: 0.192
+  type: 'test'
+  ...
+# Subtest: HTTP 404 propagates; it cannot become an empty fallback
+ok 76 - HTTP 404 propagates; it cannot become an empty fallback
+  ---
+  duration_ms: 0.2078
+  type: 'test'
+  ...
+# Subtest: HTTP 409 propagates; it cannot become an empty fallback
+ok 77 - HTTP 409 propagates; it cannot become an empty fallback
+  ---
+  duration_ms: 0.268
+  type: 'test'
+  ...
+# Subtest: schema failures and malformed pagination fail closed
+ok 78 - schema failures and malformed pagination fail closed
+  ---
+  duration_ms: 1.3027
+  type: 'test'
+  ...
+# Subtest: duplicate records across pages cannot be counted twice
+ok 79 - duplicate records across pages cannot be counted twice
+  ---
+  duration_ms: 0.3316
+  type: 'test'
+  ...
+# Subtest: out-of-bounds offsets never call the service
+ok 80 - out-of-bounds offsets never call the service
+  ---
+  duration_ms: 0.4083
+  type: 'test'
+  ...
+# Subtest: native request tenant rejection is retained by the operations adapter
+ok 81 - native request tenant rejection is retained by the operations adapter
+  ---
+  duration_ms: 0.6009
+  type: 'test'
+  ...
+1..81
+# tests 81
+# suites 0
+# pass 81
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3552.5988

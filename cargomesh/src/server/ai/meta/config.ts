@@ -20,6 +20,13 @@ export type MetaProposalConfig = z.infer<typeof ConfigSchema>;
 export type MetaSpeechConfig = z.infer<typeof SpeechConfigSchema>;
 export type MetaEnvironment = Readonly<Record<string, string | undefined>>;
 
+/** Text chat can use the shortest supported reasoning pass without changing media/explanations. */
+export function readMetaConversationConfig(env: MetaEnvironment = process.env) {
+  const base = readMetaProposalConfig(env);
+  const reasoning = z.enum(['minimal', 'low']).safeParse(env.META_CONVERSATION_REASONING_EFFORT ?? 'minimal');
+  return base && reasoning.success ? { ...base, reasoningEffort: reasoning.data } : null;
+}
+
 // Explicit opt-in. This helper never constructs an SDK client or reads AWS config.
 export function readMetaProposalConfig(env: MetaEnvironment = process.env): MetaProposalConfig | null {
   if (env.CARGOMESH_AI_PROVIDER !== "META") return null;

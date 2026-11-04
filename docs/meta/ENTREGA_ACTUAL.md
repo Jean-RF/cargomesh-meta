@@ -1,5 +1,7 @@
 # Entrega actual: qué abrir, qué probar y qué falta
 
+**Estado vigente 4-nov:** base `main@45fd371`; corrección Muse con proveedor real, protección multigrupo y enlace manifiesto → sesión. Manifiesto/documentos y vídeo sintético de dos grupos verificados por HTTP local; Passport nuevo reabierto. TypeScript, arquitectura y build correctos. [Cierre, evidencia y pasos de usuario](pruebas/CIERRE_TECNICO_2026-11-04.md). Prevalece sobre cortes históricos siguientes: documentos/adjuntos/sesiones sí están implementados. SAM real, revisión visual y configuración/despliegue Meta pendientes. Git no certifica Vercel.
+
 **2-nov, fluidez técnica:** medición HTTP local de19 rutas y cambios sin diseño: Documentos evita autenticación duplicada; Tetris lee sesión/historial/Passport en paralelo. Pruebas de permisos, lecturas concurrentes y tipos correctas. [Informe con mediciones, límites y pendientes](pruebas/FLUIDEZ_TECNICA_2026-11-02.md). Todo sigue local sin publicación; no equivale a benchmark de producción ni cierre SAM/RA-00.
 
 **2-nov, entrega sintética de Ramón:** descargada/verificada y conectada por la web local en una sesión nueva: A8/8 y B4/4 MATCH, Passport guardado/reabierto. El caso anterior3/4 permanece. [Evidencia y enlaces](pruebas/CLIPS_RAMON_DEMO_2026-11-02.md). No son los clips propios pendientes: RA-00 y SAM real siguen sin aceptación. Launcher actualmente usa fixtureB de este paquete.

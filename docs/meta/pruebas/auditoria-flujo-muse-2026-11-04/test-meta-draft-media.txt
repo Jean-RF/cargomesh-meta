@@ -1,0 +1,35 @@
+✔ review is required; selected facts update the existing draft and canonical totals (220.099ms)
+✔ unchecked proposed fields preserve the manual value (66.9013ms)
+✔ manual correction during inference discards its late proposal (62.8035ms)
+✔ reset cannot resurrect an in-flight proposal or its attachments (43.0789ms)
+✔ first native save binds media; opening another request uses a new draft scope (44.7807ms)
+✔ closing recording before microphone permission resolves stops the returned tracks (36.1956ms)
+✔ unmount during pending microphone access releases tracks (27.2394ms)
+✔ unsaved attachments are recovered instead of invisibly occupying the quota (44.1323ms)
+✔ saving remains blocked while analysis is in flight (60.17ms)
+✔ recorded browser audio is converted to valid bounded mono PCM16 WAV (55.1268ms)
+✔ only three reviewed dimensions derive volume; partial dimensions do not invent it (0.7696ms)
+✔ photo: lost initialize response retries identical key/payload despite occupied quota (40.4622ms)
+✔ audio: lost initialize response retries identical key/payload despite occupied quota (48.2073ms)
+✔ reload then reselect same bytes recovers the persisted operation key (82.2162ms)
+✔ READY replay recovers lost finish response without another PUT or finish (35.8282ms)
+✔ first native save does not rotate an unresolved upload operation (34.6168ms)
+✔ saved request recovery keys remain separate across direct links and reloads (110.5682ms)
+✔ removing an unrelated photo frees quota without discarding the voice retry (26.5892ms)
+✔ isolated Meta media cookies never replace Amazon or hosted sessions (1.9116ms)
+✔ only the exact development fixture profile receives an isolated cookie name (0.2371ms)
+✔ HAC-52 cookies are isolated from Carrier and default profiles (0.2209ms)
+✔ photo: service recovers a lost response using the same authenticated RPC key (178.3517ms)
+✔ audio: service recovers a lost response using the same authenticated RPC key (62.1407ms)
+✔ storage failure preserves the committed reservation for retry (45.5413ms)
+✔ READY replay never signs an upload or overwrites the original (33.8744ms)
+✔ initialization requires both stable key and original byte fingerprint (34.8254ms)
+✔ binding uses the authenticated atomic command and expected saved version (25.039ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2081.2598

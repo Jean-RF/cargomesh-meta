@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   }
   try {
     const input = InterpretationRequestSchema.parse(await request.json());
-    return NextResponse.json(await interpretConversationTurn(input), { headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json(await interpretConversationTurn(input, { signal: request.signal }), { headers: { "Cache-Control": "no-store" } });
   } catch {
     return NextResponse.json({ error: "VALIDATION_ERROR" }, { status: 400 });
   }

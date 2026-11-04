@@ -1,5 +1,7 @@
 # Entorno local activo
 
+**4-nov:** frontend unificado 8080 y cinco contenedores Meta 64321 activos tras la aceptación técnica. Worker detenido; último fixture usado B, pero no hay launcher por defecto. Resultados/vídeos guardados consultables sin worker. Build aislada terminada, sin proceso. No se iniciaron HAC, Amazon ni dealer. [Recorrido y límites actuales](pruebas/CIERRE_TECNICO_2026-11-04.md).
+
 Actualización posterior2-nov: la entrega sintética de Ramón ya pasó por8080/8765; launcher activo con **fixtureB de Ramón**, solo compatible con su MP4B. Reemplaza el fixtureA anterior a efectos de ejecución nueva; los resultados previos siguen guardados. [Recorrido y enlaces](pruebas/CLIPS_RAMON_DEMO_2026-11-02.md).
 
 Actualización 2-nov, 08:22 PET: frontend8080 y los cinco contenedores Meta activos. Se añadió un launcher Python en8765 con `LOCAL_LOOPBACK`, credenciales privadas y FIXTURE explícito del clip sintéticoA. Sin Modal, GPU o SAM pagado. El launcher no sirve para analizar cualquier vídeo con ese fixture. [Recorrido real por la web e instrucciones](pruebas/WEB_Y_WORKER_LOCAL_2026-11-02.md).

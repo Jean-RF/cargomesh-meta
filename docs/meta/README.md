@@ -4,7 +4,7 @@ Entorno de trabajo: [solo Meta local activo; bancos de pruebas apagados al termi
 
 La documentación activa de Meta está en esta carpeta. El trabajo nuevo se realiza en `Chujutak2024/meta-hackathon`, ramas `codex/meta-*` y PR a `main` del mismo repositorio. Linear está aplazado por indicación expresa del usuario.
 
-**Para revisar esta entrega, empieza por [Entrega actual](ENTREGA_ACTUAL.md) y sigue la [guía de prueba como usuario](pruebas/GUIA_USUARIO_CR01.md).** El formulario/manifiesto funciona en Meta local; el punto 4 documental tiene plantillas y criterios, todavía sin subida/reutilización implementadas. Los cortes históricos de los planes no sustituyen este estado.
+**Empieza por [Cierre técnico del 4-nov](pruebas/CIERRE_TECNICO_2026-11-04.md), [Entrega actual](ENTREGA_ACTUAL.md) y la [guía de usuario](pruebas/GUIA_USUARIO_CR01.md).** Formulario/manifiesto, biblioteca documental privada y sesiones/Passport tienen aceptación técnica local. Muse texto tiene corrección y llamadas reales verificadas. El vídeo aceptado es sintético/FIXTURE; SAM real y el despliegue publicado tienen pendientes explícitos. Los cortes históricos no sustituyen este estado.
 
 | Necesidad | Documento |
 | --- | --- |

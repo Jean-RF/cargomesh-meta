@@ -15,6 +15,7 @@ import {
 import type { V2IntakePrototypeDraft } from "./prototype-model";
 import type { FreightRequestV2Data } from "./contracts";
 import type { ConversationField } from "./conversation-fields";
+import {needsExplicitCargoGroup,cargoGroupHelp} from './assistant-group-scope';
 export async function mediaCommand(action: string, body: unknown) {
   const reply = await fetch("/api/v2/declaration-media/" + action, {
     method: "POST",
@@ -347,6 +348,10 @@ export function useDeclarationMedia(
       return;
     const fields = selectedMediaFields(analysis.proposal, selected);
     if (!fields.length) return;
+    if (needsExplicitCargoGroup(draft, fields)) {
+      setError(cargoGroupHelp(true));
+      return;
+    }
     apply(fields);
     setAnalysis(null);
     setReviewed(false);

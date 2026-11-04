@@ -1,0 +1,202 @@
+TAP version 13
+# Subtest: request help appears after a short delay without requesting a microphone or taking action
+ok 1 - request help appears after a short delay without requesting a microphone or taking action
+  ---
+  duration_ms: 148.2187
+  type: 'test'
+  ...
+# Subtest: dismissal is retained for the browser session and never begins talking
+ok 2 - dismissal is retained for the browser session and never begins talking
+  ---
+  duration_ms: 36.7364
+  type: 'test'
+  ...
+# Subtest: open chat and other routes never show an unsolicited help bubble
+ok 3 - open chat and other routes never show an unsolicited help bubble
+  ---
+  duration_ms: 14.3432
+  type: 'test'
+  ...
+# Subtest: navigation before the delay cancels the invitation; Spanish keeps the same explicit CTA
+ok 4 - navigation before the delay cancels the invitation; Spanish keeps the same explicit CTA
+  ---
+  duration_ms: 16.0386
+  type: 'test'
+  ...
+# Subtest: compact composer control starts only after an explicit click, pauses and resumes the same session
+ok 5 - compact composer control starts only after an explicit click, pauses and resumes the same session
+  ---
+  duration_ms: 226.3074
+  type: 'test'
+  ...
+# Subtest: compact microphone stays blocked during playback and keeps connection errors visible
+ok 6 - compact microphone stays blocked during playback and keeps connection errors visible
+  ---
+  duration_ms: 60.2267
+  type: 'test'
+  ...
+# Subtest: recognized fields and pending clarifications update the draft without closing voice
+ok 7 - recognized fields and pending clarifications update the draft without closing voice
+  ---
+  duration_ms: 38.9186
+  type: 'test'
+  ...
+# Subtest: draft updates while obtaining a grant still allow the connection to open
+ok 8 - draft updates while obtaining a grant still allow the connection to open
+  ---
+  duration_ms: 37.7432
+  type: 'test'
+  ...
+# Subtest: changing authorized request scope still closes the old voice connection
+ok 9 - changing authorized request scope still closes the old voice connection
+  ---
+  duration_ms: 28.7604
+  type: 'test'
+  ...
+# Subtest: unmounting live content releases the microphone and socket before the visual exit finishes
+ok 10 - unmounting live content releases the microphone and socket before the visual exit finishes
+  ---
+  duration_ms: 29.746
+  type: 'test'
+  ...
+# Subtest: connection close drains all received audio before closing context or notifying completion
+ok 11 - connection close drains all received audio before closing context or notifying completion
+  ---
+  duration_ms: 238.7654
+  type: 'test'
+  ...
+# Subtest: summary completion waits for response boundary and playback, not the text transcript
+ok 12 - summary completion waits for response boundary and playback, not the text transcript
+  ---
+  duration_ms: 468.5146
+  type: 'test'
+  ...
+# Subtest: microphone sends silence while Nova speaks and resumes real PCM after playback
+ok 13 - microphone sends silence while Nova speaks and resumes real PCM after playback
+  ---
+  duration_ms: 254.6835
+  type: 'test'
+  ...
+# Subtest: an unsolicited barge-in never discards already queued speech
+ok 14 - an unsolicited barge-in never discards already queued speech
+  ---
+  duration_ms: 37.6463
+  type: 'test'
+  ...
+# Subtest: a late final transcript cannot fire the previous response completion twice
+ok 15 - a late final transcript cannot fire the previous response completion twice
+  ---
+  duration_ms: 470.5131
+  type: 'test'
+  ...
+# Subtest: typed questions use the same Nova socket, PCM playback and history without microphone permission
+ok 16 - typed questions use the same Nova socket, PCM playback and history without microphone permission
+  ---
+  duration_ms: 25.7667
+  type: 'test'
+  ...
+# Subtest: an older gateway never receives text frames and permits the native text fallback
+ok 17 - an older gateway never receives text frames and permits the native text fallback
+  ---
+  duration_ms: 27.2611
+  type: 'test'
+  ...
+# Subtest: typed turns wait for Nova to finish instead of cutting its speech
+ok 18 - typed turns wait for Nova to finish instead of cutting its speech
+  ---
+  duration_ms: 22.6918
+  type: 'test'
+  ...
+# Subtest: muting spoken replies preserves the transcript and response completion
+ok 19 - muting spoken replies preserves the transcript and response completion
+  ---
+  duration_ms: 245.1095
+  type: 'test'
+  ...
+# Subtest: native workflow speech does not echo into the Nova microphone
+ok 20 - native workflow speech does not echo into the Nova microphone
+  ---
+  duration_ms: 35.6631
+  type: 'test'
+  ...
+# Subtest: written reconnects use the current authorized request scope, not a stale mounted callback
+ok 21 - written reconnects use the current authorized request scope, not a stale mounted callback
+  ---
+  duration_ms: 36.467
+  type: 'test'
+  ...
+# Subtest: typed-only sessions prime bounded PCM after ready and before text, without microphone permission
+ok 22 - typed-only sessions prime bounded PCM after ready and before text, without microphone permission
+  ---
+  duration_ms: 36.8851
+  type: 'test'
+  ...
+# Subtest: live microphone replaces silence and pausing/resuming never duplicates PCM streams
+ok 23 - live microphone replaces silence and pausing/resuming never duplicates PCM streams
+  ---
+  duration_ms: 27.0915
+  type: 'test'
+  ...
+# Subtest: silence covers microphone permission/setup delay and stops when capture is ready
+ok 24 - silence covers microphone permission/setup delay and stops when capture is ready
+  ---
+  duration_ms: 20.8234
+  type: 'test'
+  ...
+# Subtest: unmount and stale timer callbacks cannot send more silent audio
+ok 25 - unmount and stale timer callbacks cannot send more silent audio
+  ---
+  duration_ms: 23.646
+  type: 'test'
+  ...
+# Subtest: changing authorization scope stops silence before closing the old connection
+ok 26 - changing authorization scope stops silence before closing the old connection
+  ---
+  duration_ms: 19.2007
+  type: 'test'
+  ...
+# Subtest: closing a typed session stops input immediately but drains all received speech
+ok 27 - closing a typed session stops input immediately but drains all received speech
+  ---
+  duration_ms: 234.0746
+  type: 'test'
+  ...
+# Subtest: provider errors and socket errors release the silent input timer
+ok 28 - provider errors and socket errors release the silent input timer
+  ---
+  duration_ms: 49.696
+  type: 'test'
+  ...
+# Subtest: silence is not user activity and does not renew an idle session
+ok 29 - silence is not user activity and does not renew an idle session
+  ---
+  duration_ms: 231.7723
+  type: 'test'
+  ...
+# Subtest: a failed silent send shuts down input without an uncaught timer error
+ok 30 - a failed silent send shuts down input without an uncaught timer error
+  ---
+  duration_ms: 23.1531
+  type: 'test'
+  ...
+# Subtest: voice uses the supplied native catalog without inventing fleet or freight availability
+ok 31 - voice uses the supplied native catalog without inventing fleet or freight availability
+  ---
+  duration_ms: 2.3715
+  type: 'test'
+  ...
+# Subtest: missing or truncated catalogs never certify availability or completeness
+ok 32 - missing or truncated catalogs never certify availability or completeness
+  ---
+  duration_ms: 0.2517
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3916.4995

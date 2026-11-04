@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import {createLoadingApi} from './operation-api';
 import {loadingBundleFixture,loadingPassportFixture,loadingId} from '@/shared/schemas/meta/loading-operation.fixtures';
 import {loadingPassport} from '@/shared/meta/loading-operation';
+import {ROAD_REQUEST_FIXTURE} from '@/features/v2-intake/fixtures/contract-flow.fixture';
+
+it('request handoff rejects foreign identity, invalid IDs and denied reads',async()=>{
+ const request=structuredClone(ROAD_REQUEST_FIXTURE),seen:string[]=[];
+ const api=createLoadingApi(async(url)=>{seen.push(String(url));return Response.json({schemaVersion:'2.0',data:request,meta:{idempotentReplay:false,environmentProfile:'v2-clean'}});});
+ assert.equal((await api.request(request.id)).id,request.id);assert.equal(seen[0],'/api/v2/freight/requests/'+request.id);
+ await assert.rejects(api.request(loadingId(99)),/REQUEST_SCOPE_MISMATCH/);
+ const before=seen.length;await assert.rejects(api.request('../other-tenant'));assert.equal(seen.length,before);
+ const denied=createLoadingApi(async()=>Response.json({error:{code:'FORBIDDEN'}},{status:403}));
+ await assert.rejects(denied.request(request.id));
+});
 it('keeps caller idempotency on transport retries and reads the authorized source only',async()=>{
  const b=loadingBundleFixture(),seen:string[]=[],api=createLoadingApi(async(_url,init)=>{seen.push((init!.headers as Record<string,string>)['Idempotency-Key']);if(seen.length===1)throw new Error('offline');return Response.json({data:b});});
  await assert.rejects(api.change(b.session.id,'close',{expectedVersion:4},loadingId(99)));

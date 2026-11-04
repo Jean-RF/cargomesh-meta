@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useId, useRef, useState } from 'react';
+import Link from 'next/link';
 import { Button, Checkbox, Select } from '@/components/ui';
 import { useLocale } from '@/features/i18n/locale-provider';
 import type { ConfirmedManifest, ManifestPreparation } from '@/shared/schemas/meta/manifest-commands';
@@ -110,6 +111,8 @@ export function ManifestReview({request, draft, dirty, requestBusy, onBusyChange
     {baseline && <p role="status">{t('Manifiesto confirmado', 'Confirmed declaration')} · v{baseline.revision}
       {' · '}{confirmedCurrent ? t('Corresponde al borrador guardado', 'Matches the saved draft') : t('Histórico: el pedido tiene una versión posterior', 'Historical: the request has a newer version')}
       {' · '}<Button type="button" variant="secondary" disabled={busy || requestBusy} onClick={() => void reopen()}>{t('Reabrir revisión guardada', 'Reopen saved revision')}</Button></p>}
+    {confirmedCurrent && !dirty && !busy && !requestBusy && <p><Link href={'/tetris?view=sessions&requestId=' + encodeURIComponent(request.id)}>
+      {t('Continuar a sesión de carga de esta solicitud', 'Continue to a loading session for this request')}</Link></p>}
     {loaded && !baseline && !preparation && <p>{t('Aún no se ha confirmado ningún manifiesto.', 'No declaration has been confirmed yet.')}</p>}
     {loaded && baseline && !confirmedCurrent && editable && <fieldset disabled={busy || requestBusy || dirty}>
       <legend>{t('Identifica cada grupo de esta revisión', 'Identify each group in this revision')}</legend>

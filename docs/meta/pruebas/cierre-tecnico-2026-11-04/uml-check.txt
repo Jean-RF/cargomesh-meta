@@ -1,0 +1,2 @@
+check-v2-full-model.py: PASS; 57 classes, 397 attributes, 93 relations; implementationCertified=false
+build-v2-full-der.py --check: PASS; migrationCertified=false

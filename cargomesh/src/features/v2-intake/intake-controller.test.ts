@@ -7,6 +7,7 @@ import * as prototype from "./prototype-model";
 import * as catalog from "./intake-options";
 import * as client from "./v2-intake-client";
 import * as groups from "./cargo-groups";
+import * as groupScope from './assistant-group-scope';
 import * as formGuide from "./assistant-form-guide";
 import { ROAD_REQUEST_FIXTURE, ELIGIBLE_UNKNOWN_EVALUATION_FIXTURE } from "./fixtures/contract-flow.fixture";
 import type { FreightRequestV2Data } from "./contracts";
@@ -77,6 +78,7 @@ function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof
     if (name === "./use-assistant-change-feedback") return feedbackExports;
     if (name === "./prototype-model") return prototype;
     if (name === "./cargo-groups") return groups;
+    if (name === './assistant-group-scope') return groupScope;
     if (name === "./assistant-form-guide") return formGuide;
     if (name === "./intake-options") return catalog;
     if (name === "./v2-intake-client") return native;
@@ -367,6 +369,15 @@ test("cargo must be valid before moving to windows and incomplete contacts keep 
  assert.equal(app.state.step,3);assert.equal(app.state.request,null);app.unmount();
 });
 
+
+test("ambiguous multi-group chat leaves draft and change tracking untouched", async () => {
+ const app=setup();await app.settle();
+ app.state.update('additionalUnits', [{...groups.cargoGroups(app.state.draft)[0], unitQuantity:'4'}]);app.render();
+ const draft=JSON.stringify(app.state.draft),feedback=app.state.assistantChange,dirty=app.state.dirtyAfterCreate;
+ app.state.updateFromChat([{field:'unitQuantity',value:'99'},{field:'cargoDescription',value:'ambiguous update'}]);app.render();
+ assert.equal(JSON.stringify(app.state.draft),draft);assert.equal(app.state.assistantChange,feedback);
+ assert.equal(app.state.dirtyAfterCreate,dirty);app.unmount();
+});
 
 test("repeated transcript facts do not cancel an already valid automatic transition",async()=>{
  const app=setup();await app.settle();app.state.updateFromChat(routeFields());app.render();

@@ -1,0 +1,46 @@
+[
+  {
+    "text": "Change group B quantity to 6 boxes.",
+    "intent": "CORRECT",
+    "fields": [],
+    "before": {
+      "A": "8",
+      "B": "4"
+    },
+    "after": {
+      "A": "8",
+      "B": "4"
+    }
+  },
+  {
+    "text": "Change the quantity to 6 boxes.",
+    "intent": "CORRECT",
+    "fields": [
+      {
+        "field": "unitQuantity",
+        "value": "6"
+      }
+    ],
+    "before": {
+      "A": "8",
+      "B": "4"
+    },
+    "after": {
+      "A": "6",
+      "B": "4"
+    }
+  },
+  {
+    "text": "Cambia el grupo B a 6 cajas.",
+    "intent": "CORRECT",
+    "fields": [],
+    "before": {
+      "A": "8",
+      "B": "4"
+    },
+    "after": {
+      "A": "8",
+      "B": "4"
+    }
+  }
+]

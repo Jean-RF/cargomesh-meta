@@ -181,6 +181,7 @@ test('voice smoke is opt-in, independent of Muse text, and does not claim accura
   const env = { ...configured(), META_MUSE_MODEL: undefined };
   assert.equal(inspectMetaEnvironment(env, target).providerReady, false);
   assert.equal(inspectMetaEnvironment(env, target).voiceReady, true);
+  assert.equal(inspectMetaEnvironment({ ...env, META_CONVERSATION_REASONING_EFFORT: 'none' }, target).voiceReady, true);
   await runMetaSmoke([], env, target, adapter); assert.equal(voiceCalls, 0);
   const result = await runMetaSmoke(['--live-voice', 'own.wav'], env, target, adapter);
   assert.equal(result.report.status, 'PASS_VOICE_TRANSPORT'); assert.equal(voiceCalls, 1); assert.equal(textCalls, 0);

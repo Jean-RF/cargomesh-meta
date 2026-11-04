@@ -43,6 +43,8 @@ import { ChatQuotePanel } from "./chat-quote-panel";
 import { measurementTurn, measurementReply, type PendingMeasurement } from "./measurement-clarification";
 import { interpretDeterministically } from "@/features/v2-conversation-prep/interpretation";
 import { conversationContext, conversationMemory } from "./conversation-context";
+import {needsExplicitCargoGroup,cargoGroupHelp} from './assistant-group-scope';
+import {InterpretationRequestGate} from './interpretation-request-gate';
 import { serviceabilityReply } from "./serviceability-reply";
 import type { V2IntakeApiError } from "./v2-intake-client";
 import { readRequestWorkflow } from "./workflow-chat-client";
@@ -146,9 +148,10 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   useEffect(()=>{if(open&&startNovaOnOpenRef.current&&novaMicrophoneRef.current){startNovaOnOpenRef.current=false;novaMicrophoneRef.current.toggle();}},[open,novaMicrophone]);
   const [novaTextPending, setNovaTextPending] = useState(false);
   const chatMountedRef = useRef(true);
+  const interpretationRequests = useRef(new InterpretationRequestGate());
   const currentTextScope = JSON.stringify([pathname, optionsSource, transportSelectionRequired, request?.id ?? null, request?.draftVersion ?? null]);
   const textScopeRef = useRef(currentTextScope); textScopeRef.current = currentTextScope;
-  useEffect(() => { chatMountedRef.current = true; return () => { chatMountedRef.current = false; }; }, []);
+  useEffect(() => { chatMountedRef.current = true; return () => { chatMountedRef.current = false; interpretationRequests.current.cancel(); }; }, []);
   const [queuedVoiceAction,setQueuedVoiceAction]=useState<"review"|"confirm"|"apply"|null>(null);
   const awaitVoiceReplyRef=useRef(false);
   const [responseFinishedEpoch,setResponseFinishedEpoch]=useState(0);
@@ -168,6 +171,8 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   const [providerFailure,setProviderFailure]=useState<{code:ProposalErrorCode;retryable:boolean}|null>(null);
   const interpretationRevisionRef=useRef(0);
   const latestInterpretDraftRef=useRef(draft); latestInterpretDraftRef.current=draft;
+  const interpretationIdentity = currentTextScope + '\n' + JSON.stringify(draft);
+  useEffect(() => { interpretationRequests.current.invalidate(interpretationIdentity); }, [interpretationIdentity]);
   const [commercialCommand,setCommercialCommand] = useState<{kind:"SELECT"|"BOOK";index:number;nonce:number}|null>(null);
   const [quotePanelOpen, setQuotePanelOpen] = useState(false);
   const [workflowBusy, setWorkflowBusy] = useState(false);
@@ -386,6 +391,10 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     if(category.length){voiceDraftRef.current=applyChatFieldsToDraft(voiceDraftRef.current,category);onFields(category);return true;}
     const prompted=lastSpokenQuestionField(voiceHistoryRef.current);
     const clearFields=explicitCargoFacts(value,voiceDraftRef.current,options,prompted);
+    if (needsExplicitCargoGroup(voiceDraftRef.current, clearFields)) {
+      const reply = cargoGroupHelp(conversationLanguage(value, language) === 'es');
+      setVoiceReviewNotice(reply); add(user, reply); return true;
+    }
     const roleHint=prompted?.startsWith("pickupWindow")?"pickup":prompted?.startsWith("deliveryWindow")?"delivery":undefined;
     const resolved=spokenCaptureClarification(value,capturePendingRef.current,options,Intl.DateTimeFormat().resolvedOptions().timeZone,Date.now(),roleHint);
     if(resolved.fields.length){
@@ -407,6 +416,10 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   function hasCaptureClarification(){return Boolean(capturePendingRef.current.date||capturePendingRef.current.classification);}
 
   function handleMeasurement(value: string, user: string | null): boolean {
+    if (voiceDraftRef.current.additionalUnits?.length && (measurementPendingRef.current || /\b(?:kg|kilos?|kilograms?|cm|meters?|metros?|cent[ií]metros?|m3|m³|largo|ancho|alto|length|width|height|dimensions?|medidas?)\b/i.test(value))) {
+      const reply = cargoGroupHelp(conversationLanguage(value, language) === 'es');
+      measurementPendingRef.current = null; setMeasurementPending(null); setVoiceReviewNotice(reply); add(user, reply); return true;
+    }
     const current = voiceDraftRef.current;
     const result = measurementTurn(value, measurementPendingRef.current, current);
     if (!result.handled) return false;
@@ -476,6 +489,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   }
 
   function closePanel() {
+    interpretationRequests.current.cancel();
     if (voice.state === "listening" || voice.state === "requesting_permission") voice.stop();
     voice.stopResponse();
     setOpen(false);
@@ -511,6 +525,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   }
 
   function applySpokenDetails() {
+    if (needsExplicitCargoGroup(draft, voiceReview.fields)) { setVoiceReviewNotice(cargoGroupHelp(language === 'es')); return; }
     if (hasCaptureClarification() || measurementPendingRef.current) { setVoiceReviewNotice(language === "es" ? "Aclara primero las medidas pendientes." : "Clarify the pending measurements first."); return; }
     if (!voiceReview.fields.length) {
       setVoiceReviewNotice((language==="es"?"Los datos reconocidos ya están en el borrador local. Completa los campos pendientes.":"All matched spoken details are already in the local draft. Complete any missing fields below."));
@@ -557,9 +572,12 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
         conversation: conversationMemory(history),
         previousHelpTopic: previousHelpTopic.current } };
     const endpoint = optionsSource === "fixture" ? "/api/v2/conversation/preview" : "/api/v2/conversation/interpret";
+    const ticket = interpretationRequests.current.start(started.scope + '\n' + started.draft);
+    try {
     const response = await workspaceFetch(endpoint, {
       method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(input),
+      signal: ticket.signal,
     });
     if (!response.ok) throw new Error(response.status === 401 ? (language==="es"?"Tu sesión o pertenencia a la organización ya no está activa. Inicia sesión de nuevo.":"Your session or organization membership is no longer active. Sign in again.") : (language==="es"?"No pude interpretar ese mensaje. Inténtalo otra vez.":"I could not interpret that message. Please retry."));
     const parsed = InterpretationResponseSchema.safeParse(await response.json());
@@ -570,6 +588,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     setProviderMode(parsed.data.mode);
     setProviderFailure(parsed.data.providerError ?? null);
     return { interpretation: parsed.data.interpretation, mode: parsed.data.mode };
+    } finally { ticket.finish(); }
   }
 
   async function interpretSpokenDetail(value: string, turns: Message[]) {
@@ -581,6 +600,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
       const expectedField = lastSpokenQuestionField(turns) ?? missingField(currentDraft);
       const { interpretation } = await interpret(value, currentDraft, expectedField);
       const proposal = guardExplicitCorrection(value, expectedField, interpretation);
+      if (needsExplicitCargoGroup(currentDraft, proposal.fields)) { setVoiceReviewNotice(cargoGroupHelp(language === 'es')); return; }
       if (proposal.intent !== "PROVIDE" && proposal.intent !== "CORRECT") return;
       if(voiceDraftRef.current.categoryCode!=='CHEMICAL'&&proposal.fields.some(f=>f.field==='categoryCode'&&f.value.toUpperCase()==='CHEMICAL'))setCaptureClarification({...capturePendingRef.current,classification:true});
       const fields = resolveConversationSuggestions(groundedCargoSuggestions(value,currentDraft,options,expectedField,proposal.fields), options)
@@ -640,7 +660,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
         const result=await interpret(value);
         // This screen only discusses the choice. Provider output never edits cargo or selects a mode.
         add(value,conversationAcknowledgment(result.interpretation.acknowledgment)??transportHelp);
-      }catch(error){setFailedMessage(value);add(value,error instanceof Error?error.message:transportHelp);}
+      }catch(error){if(!chatMountedRef.current||(error instanceof Error&&error.name==='AbortError'))return;setFailedMessage(value);add(value,error instanceof Error?error.message:transportHelp);}
       finally{setInterpretationBusy(false);}
       return;
     }
@@ -745,6 +765,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
         prepareConfirmation(draft, value);
         return;
       }
+      if (needsExplicitCargoGroup(draft, proposal.fields)) { add(value, cargoGroupHelp(turnLanguage === 'es')); return; }
       const accepted = new Set<ConversationField>();
       const applied: Array<{ field: ConversationField; value: string }> = [];
       let clarification: string | null = null;
@@ -812,6 +833,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
         add(value, turnLanguage === "es" ? `${preface} El resumen está actualizado. Revísalo y confirma cuando esté listo.` : `${preface}${changed} The structured summary is updated. Review and confirm when ready.`);
       }
     } catch (error) {
+      if (!chatMountedRef.current || (error instanceof Error && error.name === 'AbortError')) return;
       setFailedMessage(value);
       add(value, error instanceof Error ? error.message : "I could not process that message. Please retry.");
     } finally {

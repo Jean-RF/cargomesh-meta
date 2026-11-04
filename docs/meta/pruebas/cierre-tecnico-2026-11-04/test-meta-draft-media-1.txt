@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: review is required; selected facts update the existing draft and canonical totals
+ok 1 - review is required; selected facts update the existing draft and canonical totals
+  ---
+  duration_ms: 173.9584
+  type: 'test'
+  ...
+# Subtest: reviewed media cannot silently apply quantity to the first of multiple cargo groups
+ok 2 - reviewed media cannot silently apply quantity to the first of multiple cargo groups
+  ---
+  duration_ms: 53.5044
+  type: 'test'
+  ...
+# Subtest: unchecked proposed fields preserve the manual value
+ok 3 - unchecked proposed fields preserve the manual value
+  ---
+  duration_ms: 47.1067
+  type: 'test'
+  ...
+# Subtest: manual correction during inference discards its late proposal
+ok 4 - manual correction during inference discards its late proposal
+  ---
+  duration_ms: 30.6095
+  type: 'test'
+  ...
+# Subtest: reset cannot resurrect an in-flight proposal or its attachments
+ok 5 - reset cannot resurrect an in-flight proposal or its attachments
+  ---
+  duration_ms: 34.3905
+  type: 'test'
+  ...
+# Subtest: first native save binds media; opening another request uses a new draft scope
+ok 6 - first native save binds media; opening another request uses a new draft scope
+  ---
+  duration_ms: 27.2204
+  type: 'test'
+  ...
+# Subtest: closing recording before microphone permission resolves stops the returned tracks
+ok 7 - closing recording before microphone permission resolves stops the returned tracks
+  ---
+  duration_ms: 22.6194
+  type: 'test'
+  ...
+# Subtest: unmount during pending microphone access releases tracks
+ok 8 - unmount during pending microphone access releases tracks
+  ---
+  duration_ms: 34.7687
+  type: 'test'
+  ...
+# Subtest: unsaved attachments are recovered instead of invisibly occupying the quota
+ok 9 - unsaved attachments are recovered instead of invisibly occupying the quota
+  ---
+  duration_ms: 46.8565
+  type: 'test'
+  ...
+# Subtest: saving remains blocked while analysis is in flight
+ok 10 - saving remains blocked while analysis is in flight
+  ---
+  duration_ms: 30.3205
+  type: 'test'
+  ...
+# Subtest: recorded browser audio is converted to valid bounded mono PCM16 WAV
+ok 11 - recorded browser audio is converted to valid bounded mono PCM16 WAV
+  ---
+  duration_ms: 32.1231
+  type: 'test'
+  ...
+# Subtest: only three reviewed dimensions derive volume; partial dimensions do not invent it
+ok 12 - only three reviewed dimensions derive volume; partial dimensions do not invent it
+  ---
+  duration_ms: 0.7213
+  type: 'test'
+  ...
+# Subtest: photo: lost initialize response retries identical key/payload despite occupied quota
+ok 13 - photo: lost initialize response retries identical key/payload despite occupied quota
+  ---
+  duration_ms: 28.3953
+  type: 'test'
+  ...
+# Subtest: audio: lost initialize response retries identical key/payload despite occupied quota
+ok 14 - audio: lost initialize response retries identical key/payload despite occupied quota
+  ---
+  duration_ms: 32.6876
+  type: 'test'
+  ...
+# Subtest: reload then reselect same bytes recovers the persisted operation key
+ok 15 - reload then reselect same bytes recovers the persisted operation key
+  ---
+  duration_ms: 54.7744
+  type: 'test'
+  ...
+# Subtest: READY replay recovers lost finish response without another PUT or finish
+ok 16 - READY replay recovers lost finish response without another PUT or finish
+  ---
+  duration_ms: 26.667
+  type: 'test'
+  ...
+# Subtest: first native save does not rotate an unresolved upload operation
+ok 17 - first native save does not rotate an unresolved upload operation
+  ---
+  duration_ms: 21.2625
+  type: 'test'
+  ...
+# Subtest: saved request recovery keys remain separate across direct links and reloads
+ok 18 - saved request recovery keys remain separate across direct links and reloads
+  ---
+  duration_ms: 81.9252
+  type: 'test'
+  ...
+# Subtest: removing an unrelated photo frees quota without discarding the voice retry
+ok 19 - removing an unrelated photo frees quota without discarding the voice retry
+  ---
+  duration_ms: 21.7691
+  type: 'test'
+  ...
+# Subtest: isolated Meta media cookies never replace Amazon or hosted sessions
+ok 20 - isolated Meta media cookies never replace Amazon or hosted sessions
+  ---
+  duration_ms: 1.6104
+  type: 'test'
+  ...
+# Subtest: only the exact development fixture profile receives an isolated cookie name
+ok 21 - only the exact development fixture profile receives an isolated cookie name
+  ---
+  duration_ms: 0.208
+  type: 'test'
+  ...
+# Subtest: HAC-52 cookies are isolated from Carrier and default profiles
+ok 22 - HAC-52 cookies are isolated from Carrier and default profiles
+  ---
+  duration_ms: 0.1849
+  type: 'test'
+  ...
+# Subtest: photo: service recovers a lost response using the same authenticated RPC key
+ok 23 - photo: service recovers a lost response using the same authenticated RPC key
+  ---
+  duration_ms: 144.4641
+  type: 'test'
+  ...
+# Subtest: audio: service recovers a lost response using the same authenticated RPC key
+ok 24 - audio: service recovers a lost response using the same authenticated RPC key
+  ---
+  duration_ms: 47.6171
+  type: 'test'
+  ...
+# Subtest: storage failure preserves the committed reservation for retry
+ok 25 - storage failure preserves the committed reservation for retry
+  ---
+  duration_ms: 28.1582
+  type: 'test'
+  ...
+# Subtest: READY replay never signs an upload or overwrites the original
+ok 26 - READY replay never signs an upload or overwrites the original
+  ---
+  duration_ms: 32.7561
+  type: 'test'
+  ...
+# Subtest: initialization requires both stable key and original byte fingerprint
+ok 27 - initialization requires both stable key and original byte fingerprint
+  ---
+  duration_ms: 30.4116
+  type: 'test'
+  ...
+# Subtest: binding uses the authenticated atomic command and expected saved version
+ok 28 - binding uses the authenticated atomic command and expected saved version
+  ---
+  duration_ms: 23.3847
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1669.3211

@@ -80,8 +80,8 @@ export function isProductHelpQuestion(text: string): boolean {
 
 /** A question is a conversation turn, not a value for the current form field. */
 export function isOpenQuestion(text: string): boolean {
-  const trimmed = text.trim().replace(/^(?:hi|hey|hello|hola)[,!\s]*/i, "");
-  return /\?$/.test(trimmed) || /^(?:what|why|how|when|where|who|can|could|would|should|do you|does|is there|are there|tell me|explain|show me|qu[eé]|c[oó]mo|por qu[eé]|cu[aá]ndo|d[oó]nde|puedes|podr[ií]as|expl[ií]came)\b/i.test(trimmed);
+  const trimmed = text.trim().replace(/^[¿¡\s]+/, '').replace(/^(?:hi|hey|hello|hola)[,!\s]*/i, "");
+  return /\?$/.test(trimmed) || /^(?:what|why|how|when|where|who|can|could|would|should|do you|does|is there|are there|tell me|explain|show me|qu[eé]|c[oó]mo|por qu[eé]|cu[aá]ndo|d[oó]nde|puedes|podr[ií]as|expl[ií]came)(?=\s|[?!.,:]|$)/i.test(trimmed);
 }
 
 export function helpTopic(text: string): "PURPOSE" | "SELECTION" | "SERVICES" {
@@ -108,6 +108,9 @@ export function productHelpFallback(text: string): string {
 
 /** A bounded, local fallback. It extracts only explicit statements and never infers domain facts. */
 export function interpretDeterministically(input: InterpretationRequest): Interpretation {
+  // Classify questions BEFORE normalizing "un"/"a" into quantities. A question
+  // mentioning cargo is not a declaration, consent or an instruction to save.
+  const question = isOpenQuestion(input.text);
   const text = normalizeSpokenQuantities(input.text).trim();
   const lower = text.toLowerCase();
   const captureFacts = /\b(?:\d+|diez|ten)\s*(?:pallets?|palets?|cajas?|boxes?|kg|kilos?)\b/i.test(text);
@@ -118,6 +121,9 @@ export function interpretDeterministically(input: InterpretationRequest): Interp
   }
   if (!captureFacts && /\b(price|quote|cost|rate|precio|cotizaci[oó]n|costo|tarifa)\b/.test(lower)) return { intent: "PRICE", fields: [] };
   if (/\b(book(?:ed|ing)?|reserv(?:e|ed|ation|ations|ar|a|as)|contratar)\b/.test(lower)) return { intent: "BOOKING", fields: [] };
+  if (question) return { intent: 'HELP', fields: [], acknowledgment: input.language === 'es'
+    ? 'Puedo ayudarte con esa pregunta. No cambié los datos del formulario.'
+    : 'I can help with that question. I did not change the form details.' };
   if (/^(start over|reset|new request|empezar de nuevo|reiniciar|nueva solicitud)$/i.test(text)) return { intent: "START_OVER", fields: [] };
   if (/^(help|what can you do|ayuda|qu[eé] puedes hacer)\??$/i.test(text)) return { intent: "HELP", fields: [], acknowledgment: productHelpFallback(text) };
   if (/\b(evaluate|eligib|road options|road result|check road|availability|available|evaluar|elegibilidad|opciones road|revisar road|disponibilidad|disponible)\b/.test(lower)) return { intent: "EVALUATE", fields: [] };

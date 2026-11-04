@@ -7,6 +7,7 @@ import type {
 } from "./contracts";
 
 import {cargoGroups,groupTotals,cargoGroupInput,type DraftCargoGroup} from './cargo-groups';
+import {needsExplicitCargoGroup} from './assistant-group-scope';
 
 export type PrototypeStep = 1 | 2 | 3 | 4;
 
@@ -94,6 +95,7 @@ export function applyChatFieldsToDraft(
   draft: V2IntakePrototypeDraft,
   fields: ReadonlyArray<{ field: keyof V2IntakePrototypeDraft; value: string }>,
 ): V2IntakePrototypeDraft {
+  if (needsExplicitCargoGroup(draft, fields)) return draft;
   return fields.reduce((current, { field, value }) => applyChatFieldToDraft(current, field, value), draft);
 }
 

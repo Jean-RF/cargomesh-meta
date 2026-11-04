@@ -1,0 +1,21 @@
+✔ prepare → explicit confirmation → reopen retains request, revision, units and every group UUID (43.6257ms)
+✔ a failed network confirmation retries the same intent, never a new request or booking (1.7235ms)
+✔ client rejects another tenant, stale source versions and receipts for another preparation/hash (3.7311ms)
+✔ revisions require explicit complete unique group mappings; reordering retains the chosen UUIDs (1.4852ms)
+✔ manual changes, unsaved data, expiry or another request invalidate review consent (0.3239ms)
+✔ 403 and missing migration stay explicit errors and never become simulated success (1.4037ms)
+▶ Declared manifest command boundary
+  ✔ rejects forged scope, implicit approval, duplicate mappings and unbounded reads before persistence (4.5789ms)
+  ✔ preserves confirmation receipts without rechecking an elapsed local clock or newer request (2.1615ms)
+  ✔ rejects cross-tenant/cross-request repository responses and mismatched review hashes (2.8742ms)
+  ✔ reports the historical manifest when the request version has advanced (0.7871ms)
+  ✔ empty history has no fabricated manifest (0.4956ms)
+✔ Declared manifest command boundary (12.8097ms)
+ℹ tests 11
+ℹ suites 1
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 694.502

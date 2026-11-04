@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "environment": "meta-cr01-validation",
+  "requestId": "18bbe016-ab3c-401d-a0a6-5b77a8c28dba",
+  "requestVersion": 2,
+  "manifestId": "e6379cfc-6ff3-41f1-8188-2e37e851b256",
+  "manifestRevision": 2,
+  "groups": 2,
+  "checks": [
+    "native form payload",
+    "idempotent creation",
+    "concurrent confirmation replay",
+    "same-ID correction",
+    "explicit group identity mapping",
+    "different-key confirmation serialization",
+    "reopen identical content",
+    "historical snapshot",
+    "tenant isolation",
+    "401 without session",
+    "automatic local session without login",
+    "cross-origin rejection",
+    "request remains DRAFT"
+  ]
+}

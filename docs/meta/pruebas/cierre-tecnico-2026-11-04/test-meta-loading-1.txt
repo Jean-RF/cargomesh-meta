@@ -1,0 +1,337 @@
+TAP version 13
+# Subtest: JU-00: unknown and zero denominators never produce a percentage
+ok 1 - JU-00: unknown and zero denominators never produce a percentage
+  ---
+  duration_ms: 2.8824
+  type: 'test'
+  ...
+# Subtest: JU-00: no observation is unknown, never confirmed zero
+ok 2 - JU-00: no observation is unknown, never confirmed zero
+  ---
+  duration_ms: 9.1176
+  type: 'test'
+  ...
+# Subtest: JU-00: a session without an authorized operation is visibly a demo
+ok 3 - JU-00: a session without an authorized operation is visibly a demo
+  ---
+  duration_ms: 4.2868
+  type: 'test'
+  ...
+# Subtest: JU-01: pallets and boxes stay in separate totals
+ok 4 - JU-01: pallets and boxes stay in separate totals
+  ---
+  duration_ms: 4.2374
+  type: 'test'
+  ...
+# Subtest: JU-01: partial pages and unknown group counts never become global totals
+ok 5 - JU-01: partial pages and unknown group counts never become global totals
+  ---
+  duration_ms: 1.4596
+  type: 'test'
+  ...
+# Subtest: JU-01: complete plan with no allocation means explicit zero, incomplete plan means pending
+ok 6 - JU-01: complete plan with no allocation means explicit zero, incomplete plan means pending
+  ---
+  duration_ms: 2.0074
+  type: 'test'
+  ...
+# Subtest: JU-01: stale or incompatible plans cannot supply planned quantities
+ok 7 - JU-01: stale or incompatible plans cannot supply planned quantities
+  ---
+  duration_ms: 3.3949
+  type: 'test'
+  ...
+# Subtest: JU-01: empty and older refreshes preserve the previous snapshot
+ok 8 - JU-01: empty and older refreshes preserve the previous snapshot
+  ---
+  duration_ms: 1.7288
+  type: 'test'
+  ...
+# Subtest: an open session shows progress without declaring a shortage
+ok 9 - an open session shows progress without declaring a shortage
+  ---
+  duration_ms: 1.0983
+  type: 'test'
+  ...
+# Subtest: closed sufficient evidence gives a proposed difference and a match deterministically
+ok 10 - closed sufficient evidence gives a proposed difference and a match deterministically
+  ---
+  duration_ms: 2.9428
+  type: 'test'
+  ...
+# Subtest: incomplete coverage or uncertainty cannot prove a difference
+ok 11 - incomplete coverage or uncertainty cannot prove a difference
+  ---
+  duration_ms: 2.5174
+  type: 'test'
+  ...
+# Subtest: a changed manifest revision makes the comparison outdated
+ok 12 - a changed manifest revision makes the comparison outdated
+  ---
+  duration_ms: 1.0401
+  type: 'test'
+  ...
+# Subtest: units and sessions must match before comparing
+ok 13 - units and sessions must match before comparing
+  ---
+  duration_ms: 1.1995
+  type: 'test'
+  ...
+# Subtest: an explicit complete count of zero remains a confirmed zero
+ok 14 - an explicit complete count of zero remains a confirmed zero
+  ---
+  duration_ms: 0.9451
+  type: 'test'
+  ...
+# Subtest: duplicate observations, negative counts and foreign allocations fail contract validation
+ok 15 - duplicate observations, negative counts and foreign allocations fail contract validation
+  ---
+  duration_ms: 4.8854
+  type: 'test'
+  ...
+# Subtest: integer overflow in a total is unknown rather than a rounded count
+ok 16 - integer overflow in a total is unknown rather than a rounded count
+  ---
+  duration_ms: 1.0458
+  type: 'test'
+  ...
+# Subtest: request handoff rejects foreign identity, invalid IDs and denied reads
+ok 17 - request handoff rejects foreign identity, invalid IDs and denied reads
+  ---
+  duration_ms: 51.3606
+  type: 'test'
+  ...
+# Subtest: keeps caller idempotency on transport retries and reads the authorized source only
+ok 18 - keeps caller idempotency on transport retries and reads the authorized source only
+  ---
+  duration_ms: 5.5757
+  type: 'test'
+  ...
+# Subtest: checks explanation response scope and sends stable command keys with an abort signal
+ok 19 - checks explanation response scope and sends stable command keys with an abort signal
+  ---
+  duration_ms: 3.1662
+  type: 'test'
+  ...
+# Subtest: validates Passport source before deriving comparison and rejects forged evidence scope
+ok 20 - validates Passport source before deriving comparison and rejects forged evidence scope
+  ---
+  duration_ms: 17.0887
+  type: 'test'
+  ...
+# Subtest: request handoff reads the exact authorized record beyond the first page without losing pagination
+ok 21 - request handoff reads the exact authorized record beyond the first page without losing pagination
+  ---
+  duration_ms: 7.7512
+  type: 'test'
+  ...
+# Subtest: a request already in the authorized page is not fetched again
+ok 22 - a request already in the authorized page is not fetched again
+  ---
+  duration_ms: 0.9268
+  type: 'test'
+  ...
+# Subtest: starts session, history and exact selected Passport before any read resolves
+ok 23 - starts session, history and exact selected Passport before any read resolves
+  ---
+  duration_ms: 2.2666
+  type: 'test'
+  ...
+# Subtest: does not read a Passport when none is selected and propagates authorization failures
+ok 24 - does not read a Passport when none is selected and propagates authorization failures
+  ---
+  duration_ms: 0.8504
+  type: 'test'
+  ...
+# Subtest: the directory preserves all sixty truck/driver identities and isolates its illustrative tariffs
+ok 25 - the directory preserves all sixty truck/driver identities and isolates its illustrative tariffs
+  ---
+  duration_ms: 1.4886
+  type: 'test'
+  ...
+# Subtest: category, weight, accented names and sorting compose without mutating the fleet
+ok 26 - category, weight, accented names and sorting compose without mutating the fleet
+  ---
+  duration_ms: 5.2846
+  type: 'test'
+  ...
+# Subtest: 3D groups partition the actual placed units, retain weight and contain their geometry envelopes
+ok 27 - 3D groups partition the actual placed units, retain weight and contain their geometry envelopes
+  ---
+  duration_ms: 5.6426
+  type: 'test'
+  ...
+# Subtest: selected leader uses reserved gutters and approaches the selected boundary from its chosen side
+ok 28 - selected leader uses reserved gutters and approaches the selected boundary from its chosen side
+  ---
+  duration_ms: 2.0339
+  type: 'test'
+  ...
+# Subtest: offscreen and invalid targets never get a misleading clamped leader
+ok 29 - offscreen and invalid targets never get a misleading clamped leader
+  ---
+  duration_ms: 0.423
+  type: 'test'
+  ...
+# Subtest: Loading HTTP routes
+    # Subtest: authenticates root GET/POST and nested reads once while retaining root guards
+    ok 1 - authenticates root GET/POST and nested reads once while retaining root guards
+      ---
+      duration_ms: 59.5389
+      type: 'test'
+      ...
+    # Subtest: blocks cross-origin cookies, malformed JSON, oversized bodies and missing versions
+    ok 2 - blocks cross-origin cookies, malformed JSON, oversized bodies and missing versions
+      ---
+      duration_ms: 11.2899
+      type: 'test'
+      ...
+    # Subtest: uses the native authentication boundary when no injected test actor is supplied
+    ok 3 - uses the native authentication boundary when no injected test actor is supplied
+      ---
+      duration_ms: 2.8887
+      type: 'test'
+      ...
+    # Subtest: protects explanation commands, forwards identity/scope/key and makes status a read-only call
+    ok 4 - protects explanation commands, forwards identity/scope/key and makes status a read-only call
+      ---
+      duration_ms: 5.4774
+      type: 'test'
+      ...
+    1..4
+ok 30 - Loading HTTP routes
+  ---
+  duration_ms: 81.2746
+  type: 'suite'
+  ...
+# Subtest: reader passes trusted organization and session to the repository
+ok 31 - reader passes trusted organization and session to the repository
+  ---
+  duration_ms: 9.2705
+  type: 'test'
+  ...
+# Subtest: other organizations, facilities and sessions cannot leak a snapshot
+ok 32 - other organizations, facilities and sessions cannot leak a snapshot
+  ---
+  duration_ms: 4.1857
+  type: 'test'
+  ...
+# Subtest: no granted facility means no repository call
+ok 33 - no granted facility means no repository call
+  ---
+  duration_ms: 0.3208
+  type: 'test'
+  ...
+# Subtest: production reader rejects fixture data and malformed sources
+ok 34 - production reader rejects fixture data and malformed sources
+  ---
+  duration_ms: 2.5845
+  type: 'test'
+  ...
+# Subtest: missing session is not found
+ok 35 - missing session is not found
+  ---
+  duration_ms: 0.2769
+  type: 'test'
+  ...
+# Subtest: Loading operation trust boundary
+    # Subtest: requires identity, explicit unit mapping, versions and UUID idempotency before writes
+    ok 1 - requires identity, explicit unit mapping, versions and UUID idempotency before writes
+      ---
+      duration_ms: 3.1877
+      type: 'test'
+      ...
+    # Subtest: does not return a foreign session or list and propagates a persistence failure
+    ok 2 - does not return a foreign session or list and propagates a persistence failure
+      ---
+      duration_ms: 2.1975
+      type: 'test'
+      ...
+    # Subtest: rejects an opening receipt that changes the operator chosen unit mapping
+    ok 3 - rejects an opening receipt that changes the operator chosen unit mapping
+      ---
+      duration_ms: 1.1146
+      type: 'test'
+      ...
+    # Subtest: keeps historical Passport readable but refuses explanation from a stale source
+    ok 4 - keeps historical Passport readable but refuses explanation from a stale source
+      ---
+      duration_ms: 10.5479
+      type: 'test'
+      ...
+    # Subtest: rechecks the bound actor and currency for producer read ports
+    ok 5 - rechecks the bound actor and currency for producer read ports
+      ---
+      duration_ms: 9.3533
+      type: 'test'
+      ...
+    # Subtest: uses scoped RPC args and exposes missing capability without a fallback
+    ok 6 - uses scoped RPC args and exposes missing capability without a fallback
+      ---
+      duration_ms: 0.6301
+      type: 'test'
+      ...
+    # Subtest: does not forward invalid worker counts to privileged persistence
+    ok 7 - does not forward invalid worker counts to privileged persistence
+      ---
+      duration_ms: 0.782
+      type: 'test'
+      ...
+    1..7
+ok 36 - Loading operation trust boundary
+  ---
+  duration_ms: 29.4426
+  type: 'suite'
+  ...
+# Subtest: Operational loading facts
+    # Subtest: compares a closed evidenced group and preserves the immutable Passport source
+    ok 1 - compares a closed evidenced group and preserves the immutable Passport source
+      ---
+      duration_ms: 15.9596
+      type: 'test'
+      ...
+    # Subtest: does not conclude a difference from open, incomplete, uncertain, stale or negative-net evidence
+    ok 2 - does not conclude a difference from open, incomplete, uncertain, stale or negative-net evidence
+      ---
+      duration_ms: 10.376
+      type: 'test'
+      ...
+    # Subtest: keeps a workflow-only draft-version change current but rejects synthetic verification evidence
+    ok 3 - keeps a workflow-only draft-version change current but rejects synthetic verification evidence
+      ---
+      duration_ms: 1.337
+      type: 'test'
+      ...
+    # Subtest: rejects forged quantities, foreign observations and changed identities at the boundary
+    ok 4 - rejects forged quantities, foreign observations and changed identities at the boundary
+      ---
+      duration_ms: 3.0661
+      type: 'test'
+      ...
+    # Subtest: projects exact event aliases for Luis, validates response scope and refuses lossy projections
+    ok 5 - projects exact event aliases for Luis, validates response scope and refuses lossy projections
+      ---
+      duration_ms: 8.251
+      type: 'test'
+      ...
+    # Subtest: checks the worker supplied net and event counts instead of inventing conversions
+    ok 6 - checks the worker supplied net and event counts instead of inventing conversions
+      ---
+      duration_ms: 1.0354
+      type: 'test'
+      ...
+    1..6
+ok 37 - Operational loading facts
+  ---
+  duration_ms: 41.8464
+  type: 'suite'
+  ...
+1..37
+# tests 51
+# suites 3
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3659.8214

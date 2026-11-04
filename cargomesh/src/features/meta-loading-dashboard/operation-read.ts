@@ -11,3 +11,13 @@ export async function readLoadingSessionView(api:Reader,id:string,selectedPasspo
  ]);
  return {bundle,passports,passport};
 }
+
+/** A request link is only a selection hint. Read it through the authenticated API,
+ * including when it lies outside the first list page; never substitute a demo ID. */
+export async function readLoadingCatalog(api:Pick<typeof loadingApi,'requests'|'facilities'|'request'>,requestHint?:string){
+ const [requests,facilities]=await Promise.all([api.requests(),api.facilities()]);
+ if(!requestHint||requests.data.some(r=>r.id===requestHint))return {requests,facilities};
+ const selected=await api.request(requestHint);
+ if(selected.id!==requestHint)throw Error('REQUEST_SCOPE_MISMATCH');
+ return {requests:{...requests,data:[selected,...requests.data]},facilities};
+}

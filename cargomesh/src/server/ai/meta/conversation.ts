@@ -8,11 +8,12 @@ import {
 import {
   ModelProposalShapeSchema, type DeclarationInput, type ModelProposal, type ProposalErrorCode,
 } from "@/shared/schemas/meta/model-proposal";
-import { readMetaProposalConfig, type MetaEnvironment } from "./config";
+import { readMetaConversationConfig, type MetaEnvironment } from "./config";
 import { requestMetaJson, InvalidMetaOutput, type MetaFetch } from "./client";
 import { validateProposalContext } from "./proposal-validation";
 import { DECLARATION_INSTRUCTIONS } from "./interpret-declaration";
 import type { ProposalTelemetry } from "./proposal-boundary";
+import { MetaGuidanceSchema, metaGuidanceResponseFormat, META_GUIDANCE_INSTRUCTIONS, claimsExecutedAction } from './conversation-guidance';
 
 // Cargo fields must pass the AX-00 provenance contract, not a second untracked path.
 const NonCargoFieldSchema = ConversationFieldNameSchema.exclude([
@@ -68,11 +69,12 @@ function mapDeclaration(proposal: ModelProposal) {
 }
 
 export async function interpretMetaConversationTurn(input: InterpretationRequest,
-  options: { env?: MetaEnvironment; fetch?: MetaFetch } = {}) {
+  options: { env?: MetaEnvironment; fetch?: MetaFetch; signal?: AbortSignal } = {}) {
   input = InterpretationRequestSchema.parse(input);
-  const config = readMetaProposalConfig(options.env);
+  const config = readMetaConversationConfig(options.env);
   const selectingTransport = input.context?.screen === "TRANSPORT_SELECTION";
   const fallback = selectingTransport ? { intent: "HELP" as const, fields: [] } : interpretDeterministically(input);
+  const guidanceOnly = selectingTransport || fallback.intent === 'HELP';
   const started = performance.now();
   const revision = input.inputRevision ?? 0;
   const metadata: ProposalTelemetry = {
@@ -95,27 +97,45 @@ export async function interpretMetaConversationTurn(input: InterpretationRequest
   };
   // A cancellable timer avoids keeping the request alive after a successful response.
   const controller = new AbortController();
+  const cancel = () => controller.abort();
+  options.signal?.addEventListener('abort', cancel, { once: true });
+  if (options.signal?.aborted) controller.abort();
   const deadlineTimer = setTimeout(() => controller.abort(), config.timeoutMs);
   const bounded = new Promise<never>((_, reject) => {
     controller.signal.addEventListener("abort", () => reject(new Error("Meta deadline")), { once: true });
   });
+  const observe = (reply: { requestId: string | null; usage: { inputTokens: number | null; outputTokens: number | null } | null }) => {
+    metadata.requestId = reply.requestId;
+    metadata.inputTokens = metadata.attempts === 1 ? reply.usage?.inputTokens ?? null :
+      metadata.inputTokens !== null && reply.usage?.inputTokens != null ? metadata.inputTokens + reply.usage.inputTokens : null;
+    metadata.outputTokens = metadata.attempts === 1 ? reply.usage?.outputTokens ?? null :
+      metadata.outputTokens !== null && reply.usage?.outputTokens != null ? metadata.outputTokens + reply.usage.outputTokens : null;
+  };
   try {
     for (let attempt = 1; attempt <= 2; attempt++) {
+      if (controller.signal.aborted) return fail('PROVIDER_UNAVAILABLE', true);
       metadata.attempts = attempt;
       try {
         const reply = await Promise.race([
           requestMetaJson({
-            config, instructions, responseFormat: metaConversationResponseFormat, signal: controller.signal,
+            config, instructions: guidanceOnly ? META_GUIDANCE_INSTRUCTIONS : instructions,
+            responseFormat: guidanceOnly ? metaGuidanceResponseFormat : metaConversationResponseFormat,
+            reasoningEffort: config.reasoningEffort, signal: controller.signal,
             payload: { ...input, inputRevision: revision }, fetch: options.fetch,
           }), bounded,
         ]);
-        metadata.requestId = reply.requestId;
-        metadata.inputTokens = attempt === 1 ? reply.usage?.inputTokens ?? null :
-          metadata.inputTokens !== null && reply.usage?.inputTokens != null ? metadata.inputTokens + reply.usage.inputTokens : null;
-        metadata.outputTokens = attempt === 1 ? reply.usage?.outputTokens ?? null :
-          metadata.outputTokens !== null && reply.usage?.outputTokens != null ? metadata.outputTokens + reply.usage.outputTokens : null;
+        observe(reply);
         let decoded: unknown;
         try { decoded = JSON.parse(reply.content); } catch { throw new InvalidMetaOutput(); }
+        if (guidanceOnly) {
+          const answer = MetaGuidanceSchema.safeParse(decoded);
+          if (!answer.success || !answer.data.acknowledgment.trim() || claimsExecutedAction(answer.data.acknowledgment)) throw new InvalidMetaOutput();
+          metadata.latencyMs = Math.round(performance.now() - started);
+          metadata.outcome = 'PROPOSED';
+          return { schemaVersion: '2.0' as const, mode: 'META' as const, telemetry: null,
+            interpretation: { intent: 'HELP' as const, fields: [], acknowledgment: answer.data.acknowledgment },
+            inputRevision: revision, declarationProposal: null, providerMetadata: { ...metadata } };
+        }
         const parsed = MetaConversationShapeSchema.safeParse(decoded);
         if (!parsed.success) throw new InvalidMetaOutput();
         const turn = parsed.data;
@@ -126,7 +146,7 @@ export async function interpretMetaConversationTurn(input: InterpretationRequest
             (turn.intent === "HELP" && (turn.fields.length || turn.declaration !== null)) ||
             (turn.intent !== "HELP" && /[?¿]/.test(turn.acknowledgment)) ||
             (fallback.intent === "HELP" && turn.intent !== "HELP") ||
-            /\bI (?:have )?(?:saved|booked|paid|confirmed|selected|created)\b|\bhe (?:guardado|reservado|pagado|confirmado|seleccionado)\b|[$€£]/i.test(turn.acknowledgment))
+            claimsExecutedAction(turn.acknowledgment))
           throw new InvalidMetaOutput();
         let proposal: ModelProposal | null = null;
         if (turn.declaration) {
@@ -153,6 +173,7 @@ export async function interpretMetaConversationTurn(input: InterpretationRequest
           declarationProposal: proposal, providerMetadata: { ...metadata },
         };
       } catch (error) {
+        if (error instanceof InvalidMetaOutput && error.observation) observe(error.observation);
         if (error instanceof InvalidMetaOutput && error.missingUsage) {
           metadata.inputTokens = null; metadata.outputTokens = null;
         }
@@ -165,5 +186,6 @@ export async function interpretMetaConversationTurn(input: InterpretationRequest
     return fail("MODEL_OUTPUT_INVALID");
   } finally {
     clearTimeout(deadlineTimer);
+    options.signal?.removeEventListener('abort', cancel);
   }
 }

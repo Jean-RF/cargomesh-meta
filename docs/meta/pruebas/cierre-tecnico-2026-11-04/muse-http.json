@@ -1,0 +1,72 @@
+{
+  "scope": "META_LOCAL_AUTHENTICATED_HTTP",
+  "cases": [
+    {
+      "id": "memory-http",
+      "httpStatus": 200,
+      "totalMs": 11127,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "0409016f-ddd2-4a14-9483-9e28966be344",
+        "latencyMs": 4614,
+        "attempts": 1,
+        "inputTokens": 501,
+        "outputTokens": 444,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Yes — you’re shipping 1000 bottles of medicine from Lima to Arequipa, and you mention they are packed on pallets. If you want that added to the form, please say so separately for review. How many pallets are there in total?"
+      }
+    },
+    {
+      "id": "extraction-http",
+      "httpStatus": 200,
+      "totalMs": 6382,
+      "mode": "META",
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "97ddeb98-5176-4a22-afa5-200ecff2c3c0",
+        "latencyMs": 6203,
+        "attempts": 1,
+        "inputTokens": 2617,
+        "outputTokens": 676,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "interpretation": {
+        "intent": "PROVIDE",
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "machine parts"
+          },
+          {
+            "field": "packaging",
+            "value": "PALLET"
+          },
+          {
+            "field": "unitQuantity",
+            "value": "12"
+          },
+          {
+            "field": "unitWeightPerUnitKg",
+            "value": "100"
+          }
+        ],
+        "acknowledgment": "Got it — 12 pallets of machine parts at 100 kg per pallet."
+      }
+    }
+  ],
+  "unauthenticatedStatus": 401,
+  "foreignOriginStatus": 403,
+  "commercialWrites": 0,
+  "visualTest": false
+}

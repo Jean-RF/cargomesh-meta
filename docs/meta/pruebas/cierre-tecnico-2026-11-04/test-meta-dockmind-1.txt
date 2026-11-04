@@ -1,0 +1,347 @@
+TAP version 13
+# Subtest: los clics van extremo, extremo, adentro y un cuarto clic empieza otra línea
+ok 1 - los clics van extremo, extremo, adentro y un cuarto clic empieza otra línea
+  ---
+  duration_ms: 1.9759
+  type: 'test'
+  ...
+# Subtest: el clic se convierte a fracciones del cuadro y se recorta a sus bordes
+ok 2 - el clic se convierte a fracciones del cuadro y se recorta a sus bordes
+  ---
+  duration_ms: 0.2054
+  type: 'test'
+  ...
+# Subtest: una línea válida cumple el contrato del job
+ok 3 - una línea válida cumple el contrato del job
+  ---
+  duration_ms: 1.4616
+  type: 'test'
+  ...
+# Subtest: se rechazan líneas incompletas, muy cortas o con el adentro sobre la línea
+ok 4 - se rechazan líneas incompletas, muy cortas o con el adentro sobre la línea
+  ---
+  duration_ms: 0.3023
+  type: 'test'
+  ...
+# Subtest: se consulta mientras el job está en cola o en curso y se detiene al terminar
+ok 5 - se consulta mientras el job está en cola o en curso y se detiene al terminar
+  ---
+  duration_ms: 0.2781
+  type: 'test'
+  ...
+# Subtest: los segundos se muestran como minutos y décimas
+ok 6 - los segundos se muestran como minutos y décimas
+  ---
+  duration_ms: 0.2638
+  type: 'test'
+  ...
+# Subtest: el estado y las marcas se explican en lenguaje del operador
+ok 7 - el estado y las marcas se explican en lenguaje del operador
+  ---
+  duration_ms: 0.4888
+  type: 'test'
+  ...
+# Subtest: un render o un fixture nunca se presentan como cámara o inferencia real
+ok 8 - un render o un fixture nunca se presentan como cámara o inferencia real
+  ---
+  duration_ms: 0.2618
+  type: 'test'
+  ...
+# Subtest: DockMind HTTP routes
+    # Subtest: bloquean cookies de otro origen, JSON roto, cuerpos grandes y comandos sin clave de idempotencia
+    ok 1 - bloquean cookies de otro origen, JSON roto, cuerpos grandes y comandos sin clave de idempotencia
+      ---
+      duration_ms: 39.9022
+      type: 'test'
+      ...
+    # Subtest: usan la autenticación nativa; el callback no pide sesión de usuario, solo la firma
+    ok 2 - usan la autenticación nativa; el callback no pide sesión de usuario, solo la firma
+      ---
+      duration_ms: 3.3764
+      type: 'test'
+      ...
+    # Subtest: recorren clip -> job -> callback firmado -> observación entregada, con la firma sobre el cuerpo crudo
+    ok 3 - recorren clip -> job -> callback firmado -> observación entregada, con la firma sobre el cuerpo crudo
+      ---
+      duration_ms: 24.801
+      type: 'test'
+      ...
+    # Subtest: si Juan falla responden 503 para que el worker reenvíe y la entrega se recupera por HTTP
+    ok 4 - si Juan falla responden 503 para que el worker reenvíe y la entrega se recupera por HTTP
+      ---
+      duration_ms: 6.1951
+      type: 'test'
+      ...
+    1..4
+ok 9 - DockMind HTTP routes
+  ---
+  duration_ms: 75.4308
+  type: 'suite'
+  ...
+# Subtest: la firma coincide con la del worker en Python
+ok 10 - la firma coincide con la del worker en Python
+  ---
+  duration_ms: 1.3093
+  type: 'test'
+  ...
+# Subtest: un cuerpo alterado, otro secreto o una firma vieja se rechazan
+ok 11 - un cuerpo alterado, otro secreto o una firma vieja se rechazan
+  ---
+  duration_ms: 0.3213
+  type: 'test'
+  ...
+# Subtest: faltan datos o vienen mal formados
+ok 12 - faltan datos o vienen mal formados
+  ---
+  duration_ms: 0.2201
+  type: 'test'
+  ...
+# Subtest: el formato real sale de los primeros bytes, no de la extensión
+ok 13 - el formato real sale de los primeros bytes, no de la extensión
+  ---
+  duration_ms: 1.8283
+  type: 'test'
+  ...
+# Subtest: registrar deja el clip en PENDING con una URL de subida y la misma clave lo repite
+ok 14 - registrar deja el clip en PENDING con una URL de subida y la misma clave lo repite
+  ---
+  duration_ms: 7.1687
+  type: 'test'
+  ...
+# Subtest: la subida se verifica: sin objeto, tamaño, hash y formato distintos nunca quedan READY
+ok 15 - la subida se verifica: sin objeto, tamaño, hash y formato distintos nunca quedan READY
+  ---
+  duration_ms: 2.7865
+  type: 'test'
+  ...
+# Subtest: una subida correcta queda READY una vez y solo entonces se puede reproducir
+ok 16 - una subida correcta queda READY una vez y solo entonces se puede reproducir
+  ---
+  duration_ms: 1.8595
+  type: 'test'
+  ...
+# Subtest: sesión cerrada, lector u otra organización no registran, verifican ni leen clips ajenos
+ok 17 - sesión cerrada, lector u otra organización no registran, verifican ni leen clips ajenos
+  ---
+  duration_ms: 1.7963
+  type: 'test'
+  ...
+# Subtest: crea el job, lo envía una vez al worker con la identidad completa y queda RUNNING
+ok 18 - crea el job, lo envía una vez al worker con la identidad completa y queda RUNNING
+  ---
+  duration_ms: 22.4355
+  type: 'test'
+  ...
+# Subtest: el mismo payload canónico devuelve el mismo job sin volver a pagar el análisis
+ok 19 - el mismo payload canónico devuelve el mismo job sin volver a pagar el análisis
+  ---
+  duration_ms: 2.2588
+  type: 'test'
+  ...
+# Subtest: sin Modal configurado no se crea el job; un lector no opera
+ok 20 - sin Modal configurado no se crea el job; un lector no opera
+  ---
+  duration_ms: 1.4895
+  type: 'test'
+  ...
+# Subtest: solo un clip verificado, de la misma sesión abierta y de la unidad del grupo
+ok 21 - solo un clip verificado, de la misma sesión abierta y de la unidad del grupo
+  ---
+  duration_ms: 1.6901
+  type: 'test'
+  ...
+# Subtest: si el worker no responde el job queda en cola con el motivo y el reintento sale desde el intento visto
+ok 22 - si el worker no responde el job queda en cola con el motivo y el reintento sale desde el intento visto
+  ---
+  duration_ms: 2.0178
+  type: 'test'
+  ...
+# Subtest: de dos reintentos simultáneos solo uno crea el intento y lo despacha
+ok 23 - de dos reintentos simultáneos solo uno crea el intento y lo despacha
+  ---
+  duration_ms: 2.9482
+  type: 'test'
+  ...
+# Subtest: un callback que llega antes de que responda el despacho no vuelve el job a RUNNING
+ok 24 - un callback que llega antes de que responda el despacho no vuelve el job a RUNNING
+  ---
+  duration_ms: 4.6926
+  type: 'test'
+  ...
+# Subtest: el callback guarda el resultado y entrega la observación a Juan una vez
+ok 25 - el callback guarda el resultado y entrega la observación a Juan una vez
+  ---
+  duration_ms: 2.1819
+  type: 'test'
+  ...
+# Subtest: caso obligatorio: SUCCEEDED guardado, falla Juan, callback repetido y una sola observación sin nueva inferencia
+ok 26 - caso obligatorio: SUCCEEDED guardado, falla Juan, callback repetido y una sola observación sin nueva inferencia
+  ---
+  duration_ms: 3.0786
+  type: 'test'
+  ...
+# Subtest: dos callbacks simultáneos guardan un resultado y una observación
+ok 27 - dos callbacks simultáneos guardan un resultado y una observación
+  ---
+  duration_ms: 2.1306
+  type: 'test'
+  ...
+# Subtest: agotados los reenvíos del worker y reiniciado el servidor, la entrega se recupera sin volver a analizar
+ok 28 - agotados los reenvíos del worker y reiniciado el servidor, la entrega se recupera sin volver a analizar
+  ---
+  duration_ms: 4.0794
+  type: 'test'
+  ...
+# Subtest: un rechazo de Juan que repetir no arregla queda REJECTED con su código y el worker no reenvía
+ok 29 - un rechazo de Juan que repetir no arregla queda REJECTED con su código y el worker no reenvía
+  ---
+  duration_ms: 2.5468
+  type: 'test'
+  ...
+# Subtest: un análisis fallido no tiene nada que entregar
+ok 30 - un análisis fallido no tiene nada que entregar
+  ---
+  duration_ms: 1.5344
+  type: 'test'
+  ...
+# Subtest: la identidad exacta del job se compara antes de guardar nada
+ok 31 - la identidad exacta del job se compara antes de guardar nada
+  ---
+  duration_ms: 4.8369
+  type: 'test'
+  ...
+# Subtest: firma inválida o vieja se rechaza; un intento viejo no pisa al nuevo
+ok 32 - firma inválida o vieja se rechaza; un intento viejo no pisa al nuevo
+  ---
+  duration_ms: 2.0869
+  type: 'test'
+  ...
+# Subtest: otra organización no ve, no lista ni reintenta el job
+ok 33 - otra organización no ve, no lista ni reintenta el job
+  ---
+  duration_ms: 2.2331
+  type: 'test'
+  ...
+# Subtest: configuración: Modal y el callback exigen https y un secreto largo; sin ellas, NOT_CONFIGURED
+ok 34 - configuración: Modal y el callback exigen https y un secreto largo; sin ellas, NOT_CONFIGURED
+  ---
+  duration_ms: 0.4693
+  type: 'test'
+  ...
+# Subtest: configuración LOCAL_LOOPBACK: solo fuera de producción y con Supabase, app y worker en 127.0.0.1
+ok 35 - configuración LOCAL_LOOPBACK: solo fuera de producción y con Supabase, app y worker en 127.0.0.1
+  ---
+  duration_ms: 0.5087
+  type: 'test'
+  ...
+# Subtest: el job lleva URLs de 127.0.0.1 solo en modo LOCAL_LOOPBACK; en modo MODAL no sale
+ok 36 - el job lleva URLs de 127.0.0.1 solo en modo LOCAL_LOOPBACK; en modo MODAL no sale
+  ---
+  duration_ms: 3.3016
+  type: 'test'
+  ...
+# Subtest: el despachador manda los headers de proxy auth de Modal y no reintenta solo
+ok 37 - el despachador manda los headers de proxy auth de Modal y no reintenta solo
+  ---
+  duration_ms: 27.898
+  type: 'test'
+  ...
+# Subtest: el arnés usa un MP4 real para la verificación de formato
+ok 38 - el arnés usa un MP4 real para la verificación de formato
+  ---
+  duration_ms: 0.2126
+  type: 'test'
+  ...
+# Subtest: prueba obligatoria: un intento 1 tardío no cambia el video ni la observación del intento 2
+ok 39 - prueba obligatoria: un intento 1 tardío no cambia el video ni la observación del intento 2
+  ---
+  duration_ms: 4.571
+  type: 'test'
+  ...
+# Subtest: el video anotado se verifica en la ruta del intento: ausente o distinto no se reproduce ni se informa a Juan
+ok 40 - el video anotado se verifica en la ruta del intento: ausente o distinto no se reproduce ni se informa a Juan
+  ---
+  duration_ms: 3.2225
+  type: 'test'
+  ...
+# Subtest: paquete de evidencia: identidad, configuración, procedencia y video del intento, sin URLs ni referencia manual
+ok 41 - paquete de evidencia: identidad, configuración, procedencia y video del intento, sin URLs ni referencia manual
+  ---
+  duration_ms: 2.6098
+  type: 'test'
+  ...
+# Subtest: el miembro llama a meta_dockmind_v1 con su organización, membresía, acción y clave
+ok 42 - el miembro llama a meta_dockmind_v1 con su organización, membresía, acción y clave
+  ---
+  duration_ms: 3.8784
+  type: 'test'
+  ...
+# Subtest: el job viaja con el clip como evidencia y vuelve con su entrega
+ok 43 - el job viaja con el clip como evidencia y vuelve con su entrega
+  ---
+  duration_ms: 1.6267
+  type: 'test'
+  ...
+# Subtest: el servidor usa meta_dockmind_server_v1 para el resultado y la entrega
+ok 44 - el servidor usa meta_dockmind_server_v1 para el resultado y la entrega
+  ---
+  duration_ms: 1.2592
+  type: 'test'
+  ...
+# Subtest: los códigos de la base llegan como errores de dominio; lo desconocido no se filtra
+ok 45 - los códigos de la base llegan como errores de dominio; lo desconocido no se filtra
+  ---
+  duration_ms: 1.1448
+  type: 'test'
+  ...
+# Subtest: el job de ejemplo cumple dockmind.job.v2
+ok 46 - el job de ejemplo cumple dockmind.job.v2
+  ---
+  duration_ms: 5.0944
+  type: 'test'
+  ...
+# Subtest: el job del lanzador local solo admite http://127.0.0.1 y el de Modal solo https
+ok 47 - el job del lanzador local solo admite http://127.0.0.1 y el de Modal solo https
+  ---
+  duration_ms: 2.4977
+  type: 'test'
+  ...
+# Subtest: el resultado con oclusión queda en revisión y no inventa el cruce tapado
+ok 48 - el resultado con oclusión queda en revisión y no inventa el cruce tapado
+  ---
+  duration_ms: 2.2532
+  type: 'test'
+  ...
+# Subtest: el resultado fallido trae un código estable y ninguna observación
+ok 49 - el resultado fallido trae un código estable y ninguna observación
+  ---
+  duration_ms: 1.1905
+  type: 'test'
+  ...
+# Subtest: se rechazan resultados incoherentes
+ok 50 - se rechazan resultados incoherentes
+  ---
+  duration_ms: 2.2855
+  type: 'test'
+  ...
+# Subtest: la ventana alrededor de la línea viaja en fracciones del cuadro original
+ok 51 - la ventana alrededor de la línea viaja en fracciones del cuadro original
+  ---
+  duration_ms: 1.1045
+  type: 'test'
+  ...
+# Subtest: se rechazan jobs con URLs no https o unidades desconocidas
+ok 52 - se rechazan jobs con URLs no https o unidades desconocidas
+  ---
+  duration_ms: 1.9872
+  type: 'test'
+  ...
+1..52
+# tests 55
+# suites 1
+# pass 55
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1799.9284
