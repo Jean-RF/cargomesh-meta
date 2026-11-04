@@ -3,6 +3,13 @@
 .tabs a { display: inline-flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .6rem 1rem; border: 1px solid transparent; border-radius: .65rem; color: var(--cm-color-muted); font-size: .85rem; font-weight: 750; text-decoration: none; transition: background .16s ease, color .16s ease; }
 .tabs a:hover { background: var(--cm-color-surface-tint); }
 .tabs a[aria-current="page"] { border-color: var(--cm-color-line); color: var(--cm-color-logistics); background: var(--cm-color-selected); }
+.compactNavigation { min-width: 0; }
+.compactTabs { gap: 2px; width: auto; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.compactTabs a { min-height: 44px; margin-bottom: -9px; padding: 10px 14px 16px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; color: #68778d; font-size: 13px; font-weight: 550; }
+.compactTabs a[aria-current="page"] { border-bottom-color: #2b59ff; background: transparent; color: #2b59ff; }
+.compactTabs a:hover { background: #ffffff4d; }
+.navigationCount { padding: 1px 7px; border-radius: 999px; background: #e2e8f0; color: #63738a; font-size: 11px; font-variant-numeric: tabular-nums; }
+.compactTabs a[aria-current="page"] .navigationCount { background: #dce5ff; color: #365caa; }
 .back { display: inline-flex; align-items: center; gap: .5rem; width: fit-content; min-height: 2.5rem; color: var(--cm-color-logistics); font-size: .85rem; font-weight: 750; text-decoration: none; }
 .readNotice { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .75rem; padding: 1rem; border: 1px solid var(--cm-color-line); border-radius: .9rem; color: var(--cm-color-warning-ink); background: var(--cm-color-warning-surface); }
 .readNotice > div { flex: 1 1 18rem; min-width: 0; }

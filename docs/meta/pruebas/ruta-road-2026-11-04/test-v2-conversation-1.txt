@@ -1,0 +1,652 @@
+TAP version 13
+# Subtest: a constructor alone does not falsely enable Brave speech recognition
+ok 1 - a constructor alone does not falsely enable Brave speech recognition
+  ---
+  duration_ms: 0.8153
+  type: 'test'
+  ...
+# Subtest: Brave with an available local English engine and other supported browsers can dictate
+ok 2 - Brave with an available local English engine and other supported browsers can dictate
+  ---
+  duration_ms: 0.1524
+  type: 'test'
+  ...
+# Subtest: questions mentioning a pallet or quantities never become declarations or consent
+ok 3 - questions mentioning a pallet or quantities never become declarations or consent
+  ---
+  duration_ms: 5.2915
+  type: 'test'
+  ...
+# Subtest: real speech quantities and explicit per-pallet weight survive while totals stay separate
+ok 4 - real speech quantities and explicit per-pallet weight survive while totals stay separate
+  ---
+  duration_ms: 4.3973
+  type: 'test'
+  ...
+# Subtest: bounded conversation context accepts provisional facts but rejects contacts and extra authority
+ok 5 - bounded conversation context accepts provisional facts but rejects contacts and extra authority
+  ---
+  duration_ms: 2.1492
+  type: 'test'
+  ...
+# Subtest: local parser extracts an explicit route and quantity without inventing a facility ID
+ok 6 - local parser extracts an explicit route and quantity without inventing a facility ID
+  ---
+  duration_ms: 0.3827
+  type: 'test'
+  ...
+# Subtest: per-unit measurements require explicit wording; totals are not silently reinterpreted
+ok 7 - per-unit measurements require explicit wording; totals are not silently reinterpreted
+  ---
+  duration_ms: 0.4951
+  type: 'test'
+  ...
+# Subtest: price and booking never become create or evaluation effects
+ok 8 - price and booking never become create or evaluation effects
+  ---
+  duration_ms: 0.192
+  type: 'test'
+  ...
+# Subtest: product questions receive grounded guidance even without Bedrock
+ok 9 - product questions receive grounded guidance even without Bedrock
+  ---
+  duration_ms: 0.59
+  type: 'test'
+  ...
+# Subtest: a noisy dictated greeting is not treated as a saved pickup location
+ok 10 - a noisy dictated greeting is not treated as a saved pickup location
+  ---
+  duration_ms: 0.1392
+  type: 'test'
+  ...
+# Subtest: a bare facility answer still works but a conversational question is not a facility
+ok 11 - a bare facility answer still works but a conversational question is not a facility
+  ---
+  duration_ms: 0.3304
+  type: 'test'
+  ...
+# Subtest: request guidance never becomes a pickup answer
+ok 12 - request guidance never becomes a pickup answer
+  ---
+  duration_ms: 0.2523
+  type: 'test'
+  ...
+# Subtest: spoken quantity and cargo are provisional facts, not invented coverage
+ok 13 - spoken quantity and cargo are provisional facts, not invented coverage
+  ---
+  duration_ms: 0.2256
+  type: 'test'
+  ...
+# Subtest: service questions distinguish current ROAD from future modes
+ok 14 - service questions distinguish current ROAD from future modes
+  ---
+  duration_ms: 0.128
+  type: 'test'
+  ...
+# Subtest: Spanish freight turns keep their explicit values and never imply a booking
+ok 15 - Spanish freight turns keep their explicit values and never imply a booking
+  ---
+  duration_ms: 0.1497
+  type: 'test'
+  ...
+# Subtest: a named correction changes the requested field, not the current prompt
+ok 16 - a named correction changes the requested field, not the current prompt
+  ---
+  duration_ms: 0.6979
+  type: 'test'
+  ...
+# Subtest: explicit Spanish per-unit corrections strip compatible units and punctuation without changing another field
+ok 17 - explicit Spanish per-unit corrections strip compatible units and punctuation without changing another field
+  ---
+  duration_ms: 0.6994
+  type: 'test'
+  ...
+# Subtest: a natural Spanish turn captures only explicit cargo and route facts
+ok 18 - a natural Spanish turn captures only explicit cargo and route facts
+  ---
+  duration_ms: 0.2407
+  type: 'test'
+  ...
+# Subtest: natural corrections target one field and never guess a relative date
+ok 19 - natural corrections target one field and never guess a relative date
+  ---
+  duration_ms: 0.2869
+  type: 'test'
+  ...
+# Subtest: model output cannot expand a clear correction to unrelated fields or invent Tuesday
+ok 20 - model output cannot expand a clear correction to unrelated fields or invent Tuesday
+  ---
+  duration_ms: 0.2163
+  type: 'test'
+  ...
+# Subtest: untrusted model output must use the versioned bounded response contract
+ok 21 - untrusted model output must use the versioned bounded response contract
+  ---
+  duration_ms: 0.4935
+  type: 'test'
+  ...
+# Subtest: mixed commercial questions stay read-only even when they mention cargo quantities
+ok 22 - mixed commercial questions stay read-only even when they mention cargo quantities
+  ---
+  duration_ms: 0.095
+  type: 'test'
+  ...
+# Subtest: Spanish spoken numbers are captured without assigning a cargo category
+ok 23 - Spanish spoken numbers are captured without assigning a cargo category
+  ---
+  duration_ms: 0.1888
+  type: 'test'
+  ...
+# Subtest: comparison questions with explicit cargo do not discard intake facts
+ok 24 - comparison questions with explicit cargo do not discard intake facts
+  ---
+  duration_ms: 0.1171
+  type: 'test'
+  ...
+# Subtest: urgency and commercial load size are explicit hints, never truck capacities
+ok 25 - urgency and commercial load size are explicit hints, never truck capacities
+  ---
+  duration_ms: 0.1552
+  type: 'test'
+  ...
+# Subtest: a pause sends the latest transcript once, and browser end cannot duplicate it
+ok 26 - a pause sends the latest transcript once, and browser end cannot duplicate it
+  ---
+  duration_ms: 1.3058
+  type: 'test'
+  ...
+# Subtest: manual stop prevents auto-send; silence without speech sends nothing
+ok 27 - manual stop prevents auto-send; silence without speech sends nothing
+  ---
+  duration_ms: 0.1908
+  type: 'test'
+  ...
+# Subtest: the default browser clock can schedule and cancel a voice turn
+ok 28 - the default browser clock can schedule and cancel a voice turn
+  ---
+  duration_ms: 20.3132
+  type: 'test'
+  ...
+# Subtest: Spanish output never selects an English voice and prefers a local natural voice
+ok 29 - Spanish output never selects an English voice and prefers a local natural voice
+  ---
+  duration_ms: 1.7417
+  type: 'test'
+  ...
+# Subtest: an explicit supported voice choice wins over the default
+ok 30 - an explicit supported voice choice wins over the default
+  ---
+  duration_ms: 0.1752
+  type: 'test'
+  ...
+# Subtest: Google UK English Female is preferred for English replies when available
+ok 31 - Google UK English Female is preferred for English replies when available
+  ---
+  duration_ms: 0.3795
+  type: 'test'
+  ...
+# Subtest: Zira is the default English voice when installed, while an explicit choice still wins
+ok 32 - Zira is the default English voice when installed, while an explicit choice still wins
+  ---
+  duration_ms: 0.1486
+  type: 'test'
+  ...
+# Subtest: bounded spoken quantities accept actual Nova transcript and Spanish equivalents
+ok 33 - bounded spoken quantities accept actual Nova transcript and Spanish equivalents
+  ---
+  duration_ms: 2.8967
+  type: 'test'
+  ...
+# Subtest: normalization does not rewrite names, contacts, digit sequences, negatives or unsupported grammar
+ok 34 - normalization does not rewrite names, contacts, digit sequences, negatives or unsupported grammar
+  ---
+  duration_ms: 0.1952
+  type: 'test'
+  ...
+# Subtest: a timed-out active voice conversation renews without renewing idle or failed connections
+ok 35 - a timed-out active voice conversation renews without renewing idle or failed connections
+  ---
+  duration_ms: 1.3894
+  type: 'test'
+  ...
+# Subtest: recognition errors explain permission, microphone, network and silence separately
+ok 36 - recognition errors explain permission, microphone, network and silence separately
+  ---
+  duration_ms: 0.9065
+  type: 'test'
+  ...
+# Subtest: unexpected disconnect never claims that a transcript was captured
+ok 37 - unexpected disconnect never claims that a transcript was captured
+  ---
+  duration_ms: 0.1966
+  type: 'test'
+  ...
+# Subtest: Nova partial transcripts appear before the final block without duplicate turns
+ok 38 - Nova partial transcripts appear before the final block without duplicate turns
+  ---
+  duration_ms: 1.5099
+  type: 'test'
+  ...
+# Subtest: spoken handoff keeps earlier details and later corrections, without claiming draft state
+ok 39 - spoken handoff keeps earlier details and later corrections, without claiming draft state
+  ---
+  duration_ms: 0.4902
+  type: 'test'
+  ...
+# Subtest: an in-turn correction does not prefill the rejected city
+ok 40 - an in-turn correction does not prefill the rejected city
+  ---
+  duration_ms: 0.1581
+  type: 'test'
+  ...
+# Subtest: renewal retains early cargo facts and recent assistant questions within the existing envelope
+ok 41 - renewal retains early cargo facts and recent assistant questions within the existing envelope
+  ---
+  duration_ms: 0.3399
+  type: 'test'
+  ...
+# Subtest: an invalid first suggestion does not prevent later valid details from resolving
+ok 42 - an invalid first suggestion does not prevent later valid details from resolving
+  ---
+  duration_ms: 1.8638
+  type: 'test'
+  ...
+# Subtest: facility and category choices resolve only published V2 options
+ok 43 - facility and category choices resolve only published V2 options
+  ---
+  duration_ms: 0.3827
+  type: 'test'
+  ...
+# Subtest: quantity, dimensions and dates reject invalid provisional turns
+ok 44 - quantity, dimensions and dates reject invalid provisional turns
+  ---
+  duration_ms: 0.1673
+  type: 'test'
+  ...
+# Subtest: equipment prompts use English labels even when persisted selector copy is Spanish
+ok 45 - equipment prompts use English labels even when persisted selector copy is Spanish
+  ---
+  duration_ms: 0.1819
+  type: 'test'
+  ...
+# Subtest: natural English category and packaging values resolve only configured V2 codes
+ok 46 - natural English category and packaging values resolve only configured V2 codes
+  ---
+  duration_ms: 0.2723
+  type: 'test'
+  ...
+# Subtest: Spanish category and packaging names still resolve only configured V2 codes
+ok 47 - Spanish category and packaging names still resolve only configured V2 codes
+  ---
+  duration_ms: 0.1993
+  type: 'test'
+  ...
+# Subtest: two tenant facilities in one city stay ambiguous until one is selected
+ok 48 - two tenant facilities in one city stay ambiguous until one is selected
+  ---
+  duration_ms: 0.1917
+  type: 'test'
+  ...
+# Subtest: all international demo cities resolve to authorized selector IDs, never an invented facility
+ok 49 - all international demo cities resolve to authorized selector IDs, never an invented facility
+  ---
+  duration_ms: 5.8243
+  type: 'test'
+  ...
+# Subtest: international seed only appends reviewed synthetic facilities and guards collisions
+ok 50 - international seed only appends reviewed synthetic facilities and guards collisions
+  ---
+  duration_ms: 2.0315
+  type: 'test'
+  ...
+# Subtest: multi-slot chat updates derive totals from the latest provisional values
+ok 51 - multi-slot chat updates derive totals from the latest provisional values
+  ---
+  duration_ms: 1.2635
+  type: 'test'
+  ...
+# Subtest: chat correction and form edit share one draft without clearing unrelated fields
+ok 52 - chat correction and form edit share one draft without clearing unrelated fields
+  ---
+  duration_ms: 4.4368
+  type: 'test'
+  ...
+# Subtest: saved single-unit draft recovers into intake and revisions preserve unexposed fields
+ok 53 - saved single-unit draft recovers into intake and revisions preserve unexposed fields
+  ---
+  duration_ms: 17.4828
+  type: 'test'
+  ...
+# Subtest: form unit inputs derive totals without requiring duplicate entry
+ok 54 - form unit inputs derive totals without requiring duplicate entry
+  ---
+  duration_ms: 0.3178
+  type: 'test'
+  ...
+# Subtest: facility search uses only catalog fields and excludes the opposite endpoint
+ok 55 - facility search uses only catalog fields and excludes the opposite endpoint
+  ---
+  duration_ms: 1.3677
+  type: 'test'
+  ...
+# Subtest: the local HAC-27 options fixture covers every visible selector
+ok 56 - the local HAC-27 options fixture covers every visible selector
+  ---
+  duration_ms: 0.6922
+  type: 'test'
+  ...
+# Subtest: the client fixture contains no V1 Callao to Santiago markers
+ok 57 - the client fixture contains no V1 Callao to Santiago markers
+  ---
+  duration_ms: 0.3218
+  type: 'test'
+  ...
+# Subtest: step one rejects identical origin and destination facilities
+ok 58 - step one rejects identical origin and destination facilities
+  ---
+  duration_ms: 0.1621
+  type: 'test'
+  ...
+# Subtest: cargo step maps every required aggregate and units field
+ok 59 - cargo step maps every required aggregate and units field
+  ---
+  duration_ms: 0.1959
+  type: 'test'
+  ...
+# Subtest: temperature range is required only for TEMP_CONTROLLED cargo
+ok 60 - temperature range is required only for TEMP_CONTROLLED cargo
+  ---
+  duration_ms: 0.3228
+  type: 'test'
+  ...
+# Subtest: cargo totals must match quantity times each unit measurement
+ok 61 - cargo totals must match quantity times each unit measurement
+  ---
+  duration_ms: 0.2204
+  type: 'test'
+  ...
+# Subtest: windows preserve pickup and delivery order
+ok 62 - windows preserve pickup and delivery order
+  ---
+  duration_ms: 0.1678
+  type: 'test'
+  ...
+# Subtest: contacts enforce email and E.164 without inventing defaults
+ok 63 - contacts enforce email and E.164 without inventing defaults
+  ---
+  duration_ms: 0.1582
+  type: 'test'
+  ...
+# Subtest: the full contract example reaches review
+ok 64 - the full contract example reaches review
+  ---
+  duration_ms: 0.1597
+  type: 'test'
+  ...
+# Subtest: review revalidates an earlier step after it was edited
+ok 65 - review revalidates an earlier step after it was edited
+  ---
+  duration_ms: 0.1962
+  type: 'test'
+  ...
+# Subtest: draft mapper produces the HAC-27 POST shape without organizationId
+ok 66 - draft mapper produces the HAC-27 POST shape without organizationId
+  ---
+  duration_ms: 0.6089
+  type: 'test'
+  ...
+# Subtest: draft mapper only sends codes supplied by the options contract
+ok 67 - draft mapper only sends codes supplied by the options contract
+  ---
+  duration_ms: 0.7742
+  type: 'test'
+  ...
+# Subtest: the one-click example uses facility ids and selector codes from the current backend response
+ok 68 - the one-click example uses facility ids and selector codes from the current backend response
+  ---
+  duration_ms: 1.5812
+  type: 'test'
+  ...
+# Subtest: the one-click example keeps the HAC-12 positive lane when facilities arrive in another order
+ok 69 - the one-click example keeps the HAC-12 positive lane when facilities arrive in another order
+  ---
+  duration_ms: 0.456
+  type: 'test'
+  ...
+# Subtest: requirement toggling is deterministic and duplicate-free
+ok 70 - requirement toggling is deterministic and duplicate-free
+  ---
+  duration_ms: 0.1414
+  type: 'test'
+  ...
+# Subtest: the intake keeps provisional details in React memory and stores only the request ID for recovery
+ok 71 - the intake keeps provisional details in React memory and stores only the request ID for recovery
+  ---
+  duration_ms: 1.4098
+  type: 'test'
+  ...
+# Subtest: intake actions stay in flow rather than covering fields inside the clipped card
+ok 72 - intake actions stay in flow rather than covering fields inside the clipped card
+  ---
+  duration_ms: 1.2037
+  type: 'test'
+  ...
+# Subtest: intake and facility layouts respond to their available container, including a docked assistant
+ok 73 - intake and facility layouts respond to their available container, including a docked assistant
+  ---
+  duration_ms: 1.6646
+  type: 'test'
+  ...
+# Subtest: flexible accepted days survive create, reload and revision without filling the gaps
+ok 74 - flexible accepted days survive create, reload and revision without filling the gaps
+  ---
+  duration_ms: 3.6087
+  type: 'test'
+  ...
+# Subtest: unknown availability is not described as a rejection
+ok 75 - unknown availability is not described as a rejection
+  ---
+  duration_ms: 0.8136
+  type: 'test'
+  ...
+# Subtest: ineligible ROAD result guides a new request without claiming another mode is live
+ok 76 - ineligible ROAD result guides a new request without claiming another mode is live
+  ---
+  duration_ms: 0.1389
+  type: 'test'
+  ...
+# Subtest: zero candidates follows the backend ineligible result instead of calling it unknown
+ok 77 - zero candidates follows the backend ineligible result instead of calling it unknown
+  ---
+  duration_ms: 0.1349
+  type: 'test'
+  ...
+# Subtest: eligible ROAD result remains preliminary
+ok 78 - eligible ROAD result remains preliminary
+  ---
+  duration_ms: 0.1115
+  type: 'test'
+  ...
+# Subtest: word numbers stay grounded in real spoken quantities, not group totals
+ok 79 - word numbers stay grounded in real spoken quantities, not group totals
+  ---
+  duration_ms: 3.6247
+  type: 'test'
+  ...
+# Subtest: total weight and relative timing cannot become invented unit measurements or exact windows
+ok 80 - total weight and relative timing cannot become invented unit measurements or exact windows
+  ---
+  duration_ms: 0.2495
+  type: 'test'
+  ...
+# Subtest: a spoken exact date becomes a local datetime and unrelated text cannot become a contact
+ok 81 - a spoken exact date becomes a local datetime and unrelated text cannot become a contact
+  ---
+  duration_ms: 4.0497
+  type: 'test'
+  ...
+# Subtest: a short answer is interpreted against Nova's latest explicit question
+ok 82 - a short answer is interpreted against Nova's latest explicit question
+  ---
+  duration_ms: 1.9025
+  type: 'test'
+  ...
+# Subtest: spoken request cannot produce a create JSON while required fields are missing
+ok 83 - spoken request cannot produce a create JSON while required fields are missing
+  ---
+  duration_ms: 3.5412
+  type: 'test'
+  ...
+# Subtest: the reviewed voice JSON uses the canonical intake payload and preserves a route conflict guard
+ok 84 - the reviewed voice JSON uses the canonical intake payload and preserves a route conflict guard
+  ---
+  duration_ms: 2.9345
+  type: 'test'
+  ...
+# Subtest: spoken total weight is retained as a check, not invented per-unit measurements
+ok 85 - spoken total weight is retained as a check, not invented per-unit measurements
+  ---
+  duration_ms: 1.2468
+  type: 'test'
+  ...
+# Subtest: only explicit spoken review commands authorize applying details or creating a draft
+ok 86 - only explicit spoken review commands authorize applying details or creating a draft
+  ---
+  duration_ms: 1.2498
+  type: 'test'
+  ...
+# Subtest: voice review shows corrected international route, weight and handling without inventing price or destination ID
+ok 87 - voice review shows corrected international route, weight and handling without inventing price or destination ID
+  ---
+  duration_ms: 4.0937
+  type: 'test'
+  ...
+# Subtest: natural Lima to Germany speech appears in the review without inventing a German facility
+ok 88 - natural Lima to Germany speech appears in the review without inventing a German facility
+  ---
+  duration_ms: 0.6102
+  type: 'test'
+  ...
+# Subtest: a spoken Lima to Arequipa route stops before the next sentence and applies the authorized destination
+ok 89 - a spoken Lima to Arequipa route stops before the next sentence and applies the authorized destination
+  ---
+  duration_ms: 0.3702
+  type: 'test'
+  ...
+# Subtest: a later Spanish route correction supersedes the earlier English route
+ok 90 - a later Spanish route correction supersedes the earlier English route
+  ---
+  duration_ms: 0.2961
+  type: 'test'
+  ...
+# Subtest: per-unit weight never becomes a contradictory shipment total in the voice review
+ok 91 - per-unit weight never becomes a contradictory shipment total in the voice review
+  ---
+  duration_ms: 0.2124
+  type: 'test'
+  ...
+# Subtest: a destination-only correction supersedes the earlier complete route without changing pickup
+ok 92 - a destination-only correction supersedes the earlier complete route without changing pickup
+  ---
+  duration_ms: 0.3186
+  type: 'test'
+  ...
+# Subtest: Bedrock receives bounded prior facts as context, never as a business action
+ok 93 - Bedrock receives bounded prior facts as context, never as a business action
+  ---
+  duration_ms: 1.3466
+  type: 'test'
+  ...
+# Subtest: disabled Bedrock uses deterministic extraction without an AWS call
+ok 94 - disabled Bedrock uses deterministic extraction without an AWS call
+  ---
+  duration_ms: 5.3684
+  type: 'test'
+  ...
+# Subtest: an explicit ROAD command bypasses the model and retains domain intent
+ok 95 - an explicit ROAD command bypasses the model and retains domain intent
+  ---
+  duration_ms: 0.5699
+  type: 'test'
+  ...
+# Subtest: configuration bounds tokens and timeout and never embeds credentials
+ok 96 - configuration bounds tokens and timeout and never embeds credentials
+  ---
+  duration_ms: 0.1404
+  type: 'test'
+  ...
+# Subtest: Bedrock Mantle configuration selects the AWS adapter without storing a key
+ok 97 - Bedrock Mantle configuration selects the AWS adapter without storing a key
+  ---
+  duration_ms: 0.1288
+  type: 'test'
+  ...
+# Subtest: valid Bedrock proposal is Zod-validated and records bounded cost evidence
+ok 98 - valid Bedrock proposal is Zod-validated and records bounded cost evidence
+  ---
+  duration_ms: 1.9854
+  type: 'test'
+  ...
+# Subtest: a bounded Spanish guidance sentence can be returned without inventing a field
+ok 99 - a bounded Spanish guidance sentence can be returned without inventing a field
+  ---
+  duration_ms: 0.658
+  type: 'test'
+  ...
+# Subtest: Nova fenced JSON with a field map is normalized then strictly validated
+ok 100 - Nova fenced JSON with a field map is normalized then strictly validated
+  ---
+  duration_ms: 1.0208
+  type: 'test'
+  ...
+# Subtest: forced Nova tool proposal is data only and passes the versioned validator
+ok 101 - forced Nova tool proposal is data only and passes the versioned validator
+  ---
+  duration_ms: 0.3588
+  type: 'test'
+  ...
+# Subtest: invalid model output and AWS failures fall back without logging user text
+ok 102 - invalid model output and AWS failures fall back without logging user text
+  ---
+  duration_ms: 0.608
+  type: 'test'
+  ...
+# Subtest: Bedrock cannot turn a help question into a facility or booking
+ok 103 - Bedrock cannot turn a help question into a facility or booking
+  ---
+  duration_ms: 0.2752
+  type: 'test'
+  ...
+# Subtest: long multi-detail input always respects the published response contract
+ok 104 - long multi-detail input always respects the published response contract
+  ---
+  duration_ms: 8.2373
+  type: 'test'
+  ...
+# Subtest: renewal projection retains initial product anchors and the latest delivery exchange
+ok 105 - renewal projection retains initial product anchors and the latest delivery exchange
+  ---
+  duration_ms: 1.4377
+  type: 'test'
+  ...
+# Subtest: role-specific transcript budgets preserve offer limits and exclude Carrier hints
+ok 106 - role-specific transcript budgets preserve offer limits and exclude Carrier hints
+  ---
+  duration_ms: 0.29
+  type: 'test'
+  ...
+# Subtest: native voice-session route signs all sixteen renewal turns and rejects oversized input
+ok 107 - native voice-session route signs all sixteen renewal turns and rejects oversized input
+  ---
+  duration_ms: 40.7576
+  type: 'test'
+  ...
+1..107
+# tests 107
+# suites 0
+# pass 107
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4013.2298

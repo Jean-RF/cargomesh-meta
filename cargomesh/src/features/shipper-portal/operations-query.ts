@@ -3,10 +3,15 @@ import type { FreightRequestV2Data } from "@/features/v2-intake/contracts";
 
 export const operationStatuses = ["ALL", "DRAFT", "PENDING", "ORCHESTRATING", "AWAITING_SELECTION", "BOOKING", "BOOKED", "FAILED", "CANCELLED"] as const;
 export const operationSorts = ["UPDATED_DESC", "UPDATED_ASC", "PICKUP_ASC"] as const;
+export type OperationRequestStatus = Exclude<typeof operationStatuses[number], "ALL">;
 export type OperationsView = "requests" | "bookings" | "history";
+export const bookingGroups = ["ALL", "PENDING", "CONFIRMED", "CLOSED"] as const;
+export type BookingGroup = typeof bookingGroups[number];
 export type OperationsQuery = {
   q: string; status: typeof operationStatuses[number]; sort: typeof operationSorts[number];
   from: string; to: string; selected: string; offset: number; view: OperationsView;
+  statuses?: readonly OperationRequestStatus[];
+  bookingQ?: string; bookingGroup?: BookingGroup;
 };
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function date(value: string | null) {
@@ -16,8 +21,15 @@ function date(value: string | null) {
 export function parseOperationsQuery(params: Pick<URLSearchParams, "get">): OperationsQuery {
   const status = params.get("status"), sort = params.get("sort"), view = params.get("view"), selected = params.get("selected") ?? "";
   const offset = Number(params.get("offset") ?? 0), from = date(params.get("from")), to = date(params.get("to"));
+  const requestedStatuses = (params.get("statuses") ?? "").slice(0, 200).split(",");
+  const statuses = operationStatuses.filter((value): value is OperationRequestStatus => value !== "ALL" && requestedStatuses.includes(value));
+  const bookingQ = (params.get("bookingQ") ?? "").slice(0, 200);
+  const bookingGroup = bookingGroups.find(value => value === params.get("bookingGroup"));
   return { q: (params.get("q") ?? "").slice(0, 200),
-    status: operationStatuses.find(value => value === status) ?? "ALL",
+    status: statuses.length ? "ALL" : operationStatuses.find(value => value === status) ?? "ALL",
+    ...(statuses.length ? { statuses } : {}),
+    ...(bookingQ ? { bookingQ } : {}),
+    ...(bookingGroup && bookingGroup !== "ALL" ? { bookingGroup } : {}),
     sort: operationSorts.find(value => value === sort) ?? "UPDATED_DESC",
     from, to: to && (!from || to >= from) ? to : "", selected: uuid.test(selected) ? selected : "",
     offset: Number.isInteger(offset) && offset >= 0 && offset <= 100000 ? offset : 0,
@@ -25,8 +37,11 @@ export function parseOperationsQuery(params: Pick<URLSearchParams, "get">): Oper
 }
 export function operationsSearch(query: OperationsQuery) {
   const params = new URLSearchParams();
+  if (query.bookingQ) params.set("bookingQ", query.bookingQ);
+  if (query.bookingGroup && query.bookingGroup !== "ALL") params.set("bookingGroup", query.bookingGroup);
   if (query.q) params.set("q", query.q);
-  if (query.status !== "ALL") params.set("status", query.status);
+  if (query.statuses?.length) params.set("statuses", [...new Set(query.statuses)].join(","));
+  else if (query.status !== "ALL") params.set("status", query.status);
   if (query.sort !== "UPDATED_DESC") params.set("sort", query.sort);
   if (query.from) params.set("from", query.from);
   if (query.to) params.set("to", query.to);
@@ -52,7 +67,7 @@ export function operationsHistoryState(state: unknown): Record<string, unknown> 
 export function filterOperationRequests(requests: FreightRequestV2Data[], query: OperationsQuery, localeTag: string,
   formattedDate: (value: string) => string) {
   const needle = query.q.trim().toLocaleLowerCase(localeTag);
-  return requests.filter(request => (query.status === "ALL" || request.status === query.status)
+  return requests.filter(request => (query.statuses?.length ? query.statuses.includes(request.status) : query.status === "ALL" || request.status === query.status)
     && (!query.from || new Date(request.updatedAt).toISOString().slice(0, 10) >= query.from)
     && (!query.to || new Date(request.updatedAt).toISOString().slice(0, 10) <= query.to)
     && (!needle || [request.referenceCode, displayReference(request.referenceCode,'PED',request.id), request.origin.label, request.destination.label, request.origin.city,

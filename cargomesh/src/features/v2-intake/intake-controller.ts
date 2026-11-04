@@ -4,6 +4,7 @@ import {replaceCargoGroups,type DraftCargoGroup} from "./cargo-groups";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAssistantChangeFeedback } from "./use-assistant-change-feedback";
 import { assistantNextStep, ASSISTANT_ADVANCE_MS } from "./assistant-form-guide";
+import {roadIntakeStatus} from '@/shared/lib/road-intake-advice';
 import { useLocale } from "@/features/i18n/locale-provider";
 import type { ConversationField } from "./conversation-fields";
 import type { FreightRequestV2Data, IntakeOptionsData, RoadServiceabilityEvaluationV2Data } from "./contracts";
@@ -97,6 +98,9 @@ export function useIntakeController() {
       setMaxVisited(4);
       setDirtyAfterCreate(draftRevisionRef.current !== submittedDraftRevision);
       if (draftRevisionRef.current !== submittedDraftRevision) { setSubmitPhase("success"); return; }
+      if(roadIntakeStatus(loaded.data.origin,loaded.data.destination)==='DISCONNECTED_NETWORKS'){
+        setEvaluation(null);setSelectedCandidateId(null);setSubmitPhase('success');return;
+      }
       setSubmitPhase("evaluating");
       const result = await getRoadServiceabilityV2(loaded.data.id, loaded.data.draftVersion);
       if (!active || flowSequence !== flowSequenceRef.current) return;
@@ -258,6 +262,11 @@ export function useIntakeController() {
     const savedRevision = submittedDraftRevision ?? persistedDraftRevisionRef.current;
     if (savedRevision !== draftRevisionRef.current) {
       setEvaluation(null); setSelectedCandidateId(null); setSubmitPhase("success");
+      return;
+    }
+    if(roadIntakeStatus(roundTrip.data.origin,roundTrip.data.destination)==='DISCONNECTED_NETWORKS'){
+      setEvaluation(null);setSelectedCandidateId(null);setSubmitPhase('success');
+      if(submittedDraftRevision!==undefined)setDirtyAfterCreate(draftRevisionRef.current!==submittedDraftRevision);
       return;
     }
     setSubmitPhase("evaluating");

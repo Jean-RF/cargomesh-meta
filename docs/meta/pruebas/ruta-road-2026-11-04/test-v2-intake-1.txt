@@ -1,0 +1,550 @@
+TAP version 13
+# Subtest: boxes and pallets preserve distinct measurements and derive one total through creation
+ok 1 - boxes and pallets preserve distinct measurements and derive one total through creation
+  ---
+  duration_ms: 5.8126
+  type: 'test'
+  ...
+# Subtest: untargeted chat corrections preserve all groups instead of selecting the first
+ok 2 - untargeted chat corrections preserve all groups instead of selecting the first
+  ---
+  duration_ms: 0.8003
+  type: 'test'
+  ...
+# Subtest: removing/reordering groups preserves the original package metadata on revision
+ok 3 - removing/reordering groups preserves the original package metadata on revision
+  ---
+  duration_ms: 15.596
+  type: 'test'
+  ...
+# Subtest: a newly appended incomplete group prevents request creation and retains other fields
+ok 4 - a newly appended incomplete group prevents request creation and retains other fields
+  ---
+  duration_ms: 0.9567
+  type: 'test'
+  ...
+# Subtest: known weight remains visible before volume is provided, and vice versa
+ok 5 - known weight remains visible before volume is provided, and vice versa
+  ---
+  duration_ms: 1.1443
+  type: 'test'
+  ...
+# Subtest: an incomplete second group never exposes a partial shipment total or invents zero
+ok 6 - an incomplete second group never exposes a partial shipment total or invents zero
+  ---
+  duration_ms: 0.4532
+  type: 'test'
+  ...
+# Subtest: simple Spanish prompts build one valid form, with optional emails and unchanged review semantics
+ok 7 - simple Spanish prompts build one valid form, with optional emails and unchanged review semantics
+  ---
+  duration_ms: 43.1949
+  type: 'test'
+  ...
+# Subtest: mixed measurements keep contacts, route, contents and split facts instead of dropping them
+ok 8 - mixed measurements keep contacts, route, contents and split facts instead of dropping them
+  ---
+  duration_ms: 1.1389
+  type: 'test'
+  ...
+# Subtest: English prompt preserves the cargo, explicit per-unit weight and catalog route
+ok 9 - English prompt preserves the cargo, explicit per-unit weight and catalog route
+  ---
+  duration_ms: 1.2659
+  type: 'test'
+  ...
+# Subtest: the PR163 robot-in-each-box case retains the product instead of replacing it with a packaging phrase
+ok 10 - the PR163 robot-in-each-box case retains the product instead of replacing it with a packaging phrase
+  ---
+  duration_ms: 0.443
+  type: 'test'
+  ...
+# Subtest: false booleans remain false and explicit requirement corrections remove previous choices
+ok 11 - false booleans remain false and explicit requirement corrections remove previous choices
+  ---
+  duration_ms: 0.7694
+  type: 'test'
+  ...
+# Subtest: equipment, per-unit values and contact roles cannot be invented by a model
+ok 12 - equipment, per-unit values and contact roles cannot be invented by a model
+  ---
+  duration_ms: 0.3652
+  type: 'test'
+  ...
+# Subtest: short scalar answers only fill the field actually asked and preserve decimal commas
+ok 13 - short scalar answers only fill the field actually asked and preserve decimal commas
+  ---
+  duration_ms: 0.7214
+  type: 'test'
+  ...
+# Subtest: questions and uncertainty do not create a shipment or select its requirements
+ok 14 - questions and uncertainty do not create a shipment or select its requirements
+  ---
+  duration_ms: 0.2609
+  type: 'test'
+  ...
+# Subtest: national phones are normalized only with a known Peruvian role facility; ambiguous cities stay unresolved
+ok 15 - national phones are normalized only with a known Peruvian role facility; ambiguous cities stay unresolved
+  ---
+  duration_ms: 0.5864
+  type: 'test'
+  ...
+# Subtest: guided conversation asks split and handling instead of treating unchecked defaults as answers
+ok 16 - guided conversation asks split and handling instead of treating unchecked defaults as answers
+  ---
+  duration_ms: 2.0682
+  type: 'test'
+  ...
+# Subtest: disconnected ROAD draft saves and reopens the same ID without a serviceability call
+ok 17 - disconnected ROAD draft saves and reopens the same ID without a serviceability call
+  ---
+  duration_ms: 58.2783
+  type: 'test'
+  ...
+# Subtest: recovery merges a correction made during loading into the same saved draft
+ok 18 - recovery merges a correction made during loading into the same saved draft
+  ---
+  duration_ms: 11.5729
+  type: 'test'
+  ...
+# Subtest: reset while recovery is in flight cannot resurrect the previous request
+ok 19 - reset while recovery is in flight cannot resurrect the previous request
+  ---
+  duration_ms: 14.1169
+  type: 'test'
+  ...
+# Subtest: an old evaluation cannot reappear after a correction during its read
+ok 20 - an old evaluation cannot reappear after a correction during its read
+  ---
+  duration_ms: 10.3907
+  type: 'test'
+  ...
+# Subtest: confirmed create, correction and revision keep one ID; reopening loads the revised values
+ok 21 - confirmed create, correction and revision keep one ID; reopening loads the revised values
+  ---
+  duration_ms: 19.7518
+  type: 'test'
+  ...
+# Subtest: corrections made during a save keep the saved ID but cannot revive its older ROAD result
+ok 22 - corrections made during a save keep the saved ID but cannot revive its older ROAD result
+  ---
+  duration_ms: 10.7994
+  type: 'test'
+  ...
+# Subtest: catalog refresh during recovery restarts safely and ignores the old read
+ok 23 - catalog refresh during recovery restarts safely and ignores the old read
+  ---
+  duration_ms: 10.2248
+  type: 'test'
+  ...
+# Subtest: reload discards pre-existing edits but keeps corrections arriving after reload started
+ok 24 - reload discards pre-existing edits but keeps corrections arriving after reload started
+  ---
+  duration_ms: 12.8787
+  type: 'test'
+  ...
+# Subtest: unsupported recovered locations finish with an error, never an endless reading state
+ok 25 - unsupported recovered locations finish with an error, never an endless reading state
+  ---
+  duration_ms: 8.3063
+  type: 'test'
+  ...
+# Subtest: version conflict preserves corrections and retries the same revision intent, never creates a second request
+ok 26 - version conflict preserves corrections and retries the same revision intent, never creates a second request
+  ---
+  duration_ms: 10.1281
+  type: 'test'
+  ...
+# Subtest: assistant feedback marks only committed changes, including derived totals, without saving
+ok 27 - assistant feedback marks only committed changes, including derived totals, without saving
+  ---
+  duration_ms: 8.5898
+  type: 'test'
+  ...
+# Subtest: no-op turns and manual edits do not produce an assistant success cue
+ok 28 - no-op turns and manual edits do not produce an assistant success cue
+  ---
+  duration_ms: 8.1219
+  type: 'test'
+  ...
+# Subtest: new corrections restart feedback and an old timer cannot clear the latest change
+ok 29 - new corrections restart feedback and an old timer cannot clear the latest change
+  ---
+  duration_ms: 8.9537
+  type: 'test'
+  ...
+# Subtest: batched assistant facts retain each changed field and reset releases feedback
+ok 30 - batched assistant facts retain each changed field and reset releases feedback
+  ---
+  duration_ms: 11.693
+  type: 'test'
+  ...
+# Subtest: assistant completes facilities then advances after showing feedback, never saves
+ok 31 - assistant completes facilities then advances after showing feedback, never saves
+  ---
+  duration_ms: 9.1057
+  type: 'test'
+  ...
+# Subtest: manual navigation and reset cancel scheduled assistant advancement
+ok 32 - manual navigation and reset cancel scheduled assistant advancement
+  ---
+  duration_ms: 9.068
+  type: 'test'
+  ...
+# Subtest: manual edits and unsupported or same-facility routes cannot trigger advancement
+ok 33 - manual edits and unsupported or same-facility routes cannot trigger advancement
+  ---
+  duration_ms: 9.3427
+  type: 'test'
+  ...
+# Subtest: complete cargo and contacts advance to review only after form validation
+ok 34 - complete cargo and contacts advance to review only after form validation
+  ---
+  duration_ms: 8.1433
+  type: 'test'
+  ...
+# Subtest: receipts show authorized route values and form guidance identifies actual missing data
+ok 35 - receipts show authorized route values and form guidance identifies actual missing data
+  ---
+  duration_ms: 1.638
+  type: 'test'
+  ...
+# Subtest: touching the form pauses the pending automatic move without discarding recorded facts
+ok 36 - touching the form pauses the pending automatic move without discarding recorded facts
+  ---
+  duration_ms: 8.9299
+  type: 'test'
+  ...
+# Subtest: cargo must be valid before moving to windows and incomplete contacts keep review blocked
+ok 37 - cargo must be valid before moving to windows and incomplete contacts keep review blocked
+  ---
+  duration_ms: 10.3587
+  type: 'test'
+  ...
+# Subtest: ambiguous multi-group chat leaves draft and change tracking untouched
+ok 38 - ambiguous multi-group chat leaves draft and change tracking untouched
+  ---
+  duration_ms: 8.6245
+  type: 'test'
+  ...
+# Subtest: repeated transcript facts do not cancel an already valid automatic transition
+ok 39 - repeated transcript facts do not cancel an already valid automatic transition
+  ---
+  duration_ms: 8.7085
+  type: 'test'
+  ...
+# Subtest: simple Nova prompts pass through the real controller, save one ID and reopen the corrected version
+ok 40 - simple Nova prompts pass through the real controller, save one ID and reopen the corrected version
+  ---
+  duration_ms: 51.5748
+  type: 'test'
+  ...
+# Subtest: mapper projects nested carrier and service plus flat aliases
+ok 41 - mapper projects nested carrier and service plus flat aliases
+  ---
+  duration_ms: 0.8629
+  type: 'test'
+  ...
+# Subtest: mapper preserves UNKNOWN route preview with empty legs
+ok 42 - mapper preserves UNKNOWN route preview with empty legs
+  ---
+  duration_ms: 0.5877
+  type: 'test'
+  ...
+# Subtest: mapper preserves zero candidates instead of inventing a route
+ok 43 - mapper preserves zero candidates instead of inventing a route
+  ---
+  duration_ms: 0.1278
+  type: 'test'
+  ...
+# Subtest: mapper normalizes an absent route preview to null
+ok 44 - mapper normalizes an absent route preview to null
+  ---
+  duration_ms: 0.2264
+  type: 'test'
+  ...
+# Subtest: mapper preserves provider condition severity strings from HAC-12
+ok 45 - mapper preserves provider condition severity strings from HAC-12
+  ---
+  duration_ms: 0.2563
+  type: 'test'
+  ...
+# Subtest: multi-slot chat updates derive totals from the latest provisional values
+ok 46 - multi-slot chat updates derive totals from the latest provisional values
+  ---
+  duration_ms: 1.151
+  type: 'test'
+  ...
+# Subtest: chat correction and form edit share one draft without clearing unrelated fields
+ok 47 - chat correction and form edit share one draft without clearing unrelated fields
+  ---
+  duration_ms: 4.3787
+  type: 'test'
+  ...
+# Subtest: saved single-unit draft recovers into intake and revisions preserve unexposed fields
+ok 48 - saved single-unit draft recovers into intake and revisions preserve unexposed fields
+  ---
+  duration_ms: 16.3704
+  type: 'test'
+  ...
+# Subtest: form unit inputs derive totals without requiring duplicate entry
+ok 49 - form unit inputs derive totals without requiring duplicate entry
+  ---
+  duration_ms: 0.1881
+  type: 'test'
+  ...
+# Subtest: facility search uses only catalog fields and excludes the opposite endpoint
+ok 50 - facility search uses only catalog fields and excludes the opposite endpoint
+  ---
+  duration_ms: 1.2171
+  type: 'test'
+  ...
+# Subtest: the local HAC-27 options fixture covers every visible selector
+ok 51 - the local HAC-27 options fixture covers every visible selector
+  ---
+  duration_ms: 0.6162
+  type: 'test'
+  ...
+# Subtest: the client fixture contains no V1 Callao to Santiago markers
+ok 52 - the client fixture contains no V1 Callao to Santiago markers
+  ---
+  duration_ms: 0.3065
+  type: 'test'
+  ...
+# Subtest: step one rejects identical origin and destination facilities
+ok 53 - step one rejects identical origin and destination facilities
+  ---
+  duration_ms: 0.1398
+  type: 'test'
+  ...
+# Subtest: cargo step maps every required aggregate and units field
+ok 54 - cargo step maps every required aggregate and units field
+  ---
+  duration_ms: 0.176
+  type: 'test'
+  ...
+# Subtest: temperature range is required only for TEMP_CONTROLLED cargo
+ok 55 - temperature range is required only for TEMP_CONTROLLED cargo
+  ---
+  duration_ms: 0.3235
+  type: 'test'
+  ...
+# Subtest: cargo totals must match quantity times each unit measurement
+ok 56 - cargo totals must match quantity times each unit measurement
+  ---
+  duration_ms: 0.237
+  type: 'test'
+  ...
+# Subtest: windows preserve pickup and delivery order
+ok 57 - windows preserve pickup and delivery order
+  ---
+  duration_ms: 0.1558
+  type: 'test'
+  ...
+# Subtest: contacts enforce email and E.164 without inventing defaults
+ok 58 - contacts enforce email and E.164 without inventing defaults
+  ---
+  duration_ms: 0.1535
+  type: 'test'
+  ...
+# Subtest: the full contract example reaches review
+ok 59 - the full contract example reaches review
+  ---
+  duration_ms: 0.1698
+  type: 'test'
+  ...
+# Subtest: review revalidates an earlier step after it was edited
+ok 60 - review revalidates an earlier step after it was edited
+  ---
+  duration_ms: 0.178
+  type: 'test'
+  ...
+# Subtest: draft mapper produces the HAC-27 POST shape without organizationId
+ok 61 - draft mapper produces the HAC-27 POST shape without organizationId
+  ---
+  duration_ms: 0.6186
+  type: 'test'
+  ...
+# Subtest: draft mapper only sends codes supplied by the options contract
+ok 62 - draft mapper only sends codes supplied by the options contract
+  ---
+  duration_ms: 0.7837
+  type: 'test'
+  ...
+# Subtest: the one-click example uses facility ids and selector codes from the current backend response
+ok 63 - the one-click example uses facility ids and selector codes from the current backend response
+  ---
+  duration_ms: 0.7045
+  type: 'test'
+  ...
+# Subtest: the one-click example keeps the HAC-12 positive lane when facilities arrive in another order
+ok 64 - the one-click example keeps the HAC-12 positive lane when facilities arrive in another order
+  ---
+  duration_ms: 0.486
+  type: 'test'
+  ...
+# Subtest: requirement toggling is deterministic and duplicate-free
+ok 65 - requirement toggling is deterministic and duplicate-free
+  ---
+  duration_ms: 0.1249
+  type: 'test'
+  ...
+# Subtest: the intake keeps provisional details in React memory and stores only the request ID for recovery
+ok 66 - the intake keeps provisional details in React memory and stores only the request ID for recovery
+  ---
+  duration_ms: 2.3216
+  type: 'test'
+  ...
+# Subtest: intake actions stay in flow rather than covering fields inside the clipped card
+ok 67 - intake actions stay in flow rather than covering fields inside the clipped card
+  ---
+  duration_ms: 1.9223
+  type: 'test'
+  ...
+# Subtest: intake and facility layouts respond to their available container, including a docked assistant
+ok 68 - intake and facility layouts respond to their available container, including a docked assistant
+  ---
+  duration_ms: 2.0727
+  type: 'test'
+  ...
+# Subtest: flexible accepted days survive create, reload and revision without filling the gaps
+ok 69 - flexible accepted days survive create, reload and revision without filling the gaps
+  ---
+  duration_ms: 3.7369
+  type: 'test'
+  ...
+# Subtest: null or malformed observedAt remains UNKNOWN
+ok 70 - null or malformed observedAt remains UNKNOWN
+  ---
+  duration_ms: 0.8225
+  type: 'test'
+  ...
+# Subtest: a valid observedAt remains visible as a timestamp
+ok 71 - a valid observedAt remains visible as a timestamp
+  ---
+  duration_ms: 16.1339
+  type: 'test'
+  ...
+# Subtest: expired capacity provenance is flagged without changing the service's eligibility
+ok 72 - expired capacity provenance is flagged without changing the service's eligibility
+  ---
+  duration_ms: 0.2297
+  type: 'test'
+  ...
+# Subtest: GET maps the real five-group contract into selector codes
+ok 73 - GET maps the real five-group contract into selector codes
+  ---
+  duration_ms: 20.3966
+  type: 'test'
+  ...
+# Subtest: revision posts the expected version and stable idempotency key without changing tenant identity
+ok 74 - revision posts the expected version and stable idempotency key without changing tenant identity
+  ---
+  duration_ms: 4.4861
+  type: 'test'
+  ...
+# Subtest: revision exposes a stale-draft conflict instead of falling back to fixture
+ok 75 - revision exposes a stale-draft conflict instead of falling back to fixture
+  ---
+  duration_ms: 1.2444
+  type: 'test'
+  ...
+# Subtest: parser preserves HAC-12 guidance objects for all eight cargo categories
+ok 76 - parser preserves HAC-12 guidance objects for all eight cargo categories
+  ---
+  duration_ms: 1.669
+  type: 'test'
+  ...
+# Subtest: facilities: [] is a valid authenticated empty state
+ok 77 - facilities: [] is a valid authenticated empty state
+  ---
+  duration_ms: 0.7424
+  type: 'test'
+  ...
+# Subtest: 401 UNAUTHORIZED is exposed and never replaced by the fixture
+ok 78 - 401 UNAUTHORIZED is exposed and never replaced by the fixture
+  ---
+  duration_ms: 0.4564
+  type: 'test'
+  ...
+# Subtest: 403 FORBIDDEN_TENANT is exposed and never replaced by the fixture
+ok 79 - 403 FORBIDDEN_TENANT is exposed and never replaced by the fixture
+  ---
+  duration_ms: 0.3308
+  type: 'test'
+  ...
+# Subtest: an incomplete options contract is exposed instead of activating the fixture
+ok 80 - an incomplete options contract is exposed instead of activating the fixture
+  ---
+  duration_ms: 0.8844
+  type: 'test'
+  ...
+# Subtest: a network failure is exposed instead of activating the fixture
+ok 81 - a network failure is exposed instead of activating the fixture
+  ---
+  duration_ms: 0.2454
+  type: 'test'
+  ...
+# Subtest: the simulated fixture requires an explicit development source mode
+ok 82 - the simulated fixture requires an explicit development source mode
+  ---
+  duration_ms: 0.5822
+  type: 'test'
+  ...
+# Subtest: a non-JSON 404 is reported as HTTP_404
+ok 83 - a non-JSON 404 is reported as HTTP_404
+  ---
+  duration_ms: 0.4776
+  type: 'test'
+  ...
+# Subtest: GET selection maps backend codes into the POST without client tenant authorization
+ok 84 - GET selection maps backend codes into the POST without client tenant authorization
+  ---
+  duration_ms: 2.6039
+  type: 'test'
+  ...
+# Subtest: GET performs a request round-trip with same-origin authentication
+ok 85 - GET performs a request round-trip with same-origin authentication
+  ---
+  duration_ms: 0.564
+  type: 'test'
+  ...
+# Subtest: serviceability GET includes expectedDraftVersion and remains read-only
+ok 86 - serviceability GET includes expectedDraftVersion and remains read-only
+  ---
+  duration_ms: 0.8143
+  type: 'test'
+  ...
+# Subtest: POST, GET, and serviceability remain correlated to one request version
+ok 87 - POST, GET, and serviceability remain correlated to one request version
+  ---
+  duration_ms: 0.4265
+  type: 'test'
+  ...
+# Subtest: card and map selection share one candidate id across refreshed evaluations
+ok 88 - card and map selection share one candidate id across refreshed evaluations
+  ---
+  duration_ms: 0.1377
+  type: 'test'
+  ...
+# Subtest: a legacy or malformed success envelope is rejected instead of treated as V2
+ok 89 - a legacy or malformed success envelope is rejected instead of treated as V2
+  ---
+  duration_ms: 3.3927
+  type: 'test'
+  ...
+# Subtest: standard V2 API errors preserve code, status, and retryability
+ok 90 - standard V2 API errors preserve code, status, and retryability
+  ---
+  duration_ms: 0.3206
+  type: 'test'
+  ...
+1..90
+# tests 90
+# suites 0
+# pass 90
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1776.4213

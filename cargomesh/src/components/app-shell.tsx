@@ -132,7 +132,7 @@ export function AppShell({ children, identity, preview=false }: { children: Reac
   ];
   const contexts = [
     ["/freight-request/new", t("Nueva carga", "New shipment"), ""],
-    ["/bookings", t("Reservas V2", "V2 bookings"), t("Compromisos persistidos", "Persisted commitments")],
+    ["/bookings", t("Reservas", "Bookings"), ""],
     ["/requests", t("Mis cargas", "My shipments"), t("Solicitudes de la organización", "Organization requests")],
     ["/tracking", t("Seguimiento", "Tracking"), t("Eventos reportados por carriers", "Carrier-reported events")],
     ["/facilities", t("Sedes y perfiles", "Facilities & profiles"), t("Datos canónicos de tu organización", "Canonical organization data")],

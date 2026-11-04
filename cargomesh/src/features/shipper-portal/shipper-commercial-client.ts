@@ -6,7 +6,12 @@ import {ShipperApiError} from './shipper-api';
 import {commercialCatalogReferences,readCommercialCatalog} from './commercial-catalog';
 type RecordV2=z.infer<typeof WorkflowRecordV2Schema>;
 const Envelope=z.object({schemaVersion:z.literal('2.0'),data:z.array(WorkflowRecordV2Schema),meta:z.object({nextOffset:z.number().int().nonnegative().nullable()}).passthrough()}).passthrough();
-async function request(path:string,signal:AbortSignal,fetcher:typeof fetch){const r=await fetcher(path,{signal,credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});const body=await r.json().catch(()=>null);if(!r.ok)throw new ShipperApiError(typeof body?.error?.code==='string'?body.error.code:'API_ERROR','Unable to refresh commercial records.',r.status,r.status>=500);return body;}
+async function request(path:string,signal:AbortSignal,fetcher:typeof fetch){
+ let r:Response;
+ try{r=await fetcher(path,{signal,credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});}
+ catch(error){if(signal.aborted)throw error;throw new ShipperApiError('NETWORK_ERROR','Connection interrupted while refreshing records.',0,true);}
+ const body=await r.json().catch(()=>null);if(!r.ok)throw new ShipperApiError(typeof body?.error?.code==='string'?body.error.code:'API_ERROR','Unable to refresh commercial records.',r.status,r.status>=500);return body;
+}
 export async function refreshRequestCommercial(id:string,organizationId:string,signal:AbortSignal,fetcher:typeof fetch=workspaceFetch){
  z.string().uuid().parse(id);z.string().uuid().parse(organizationId);
  const requestRow=FreightRequestV2ResponseSchema.parse(await request('/api/v2/freight/requests/'+id,signal,fetcher)).data;

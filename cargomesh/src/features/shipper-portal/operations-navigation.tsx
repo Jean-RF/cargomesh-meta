@@ -10,7 +10,7 @@ import type { OperationsCollection, OperationsReadIssue } from "@/server/service
 import { operationDetailHref, operationView, operationsSearch, operationsHistoryState, parseOperationsQuery, type OperationsView } from "./operations-query";
 import styles from "./operations.module.css";
 
-export function OperationsNavigation({ detail = false }: { detail?: boolean }) {
+export function OperationsNavigation({ detail = false, compact = false, loadedRequestsCount, loadedBookingsCount }: { detail?: boolean; compact?: boolean; loadedRequestsCount?: number; loadedBookingsCount?: number }) {
   const { t } = useLocale(), path = usePathname(), params = useSearchParams();
   const query = parseOperationsQuery(params), current = detail ? query.view : operationView(path);
   const items = [
@@ -18,11 +18,12 @@ export function OperationsNavigation({ detail = false }: { detail?: boolean }) {
     { view: "bookings" as const, label: t("Reservas", "Bookings"), icon: CalendarCheck2 },
     { view: "history" as const, label: t("Historial", "History"), icon: History },
   ];
-  return <div className={styles.navigation}>
+  return <div className={`${styles.navigation} ${compact ? styles.compactNavigation : ""}`}>
     {detail ? <Link className={styles.back} href={`/${query.view}${operationsSearch(query)}`}><ArrowLeft size={16}/>{t("Volver a Operaciones", "Back to Operations")}</Link> : null}
-    <nav className={styles.tabs} aria-label={t("Vistas de Operaciones", "Operations views")}>{items.map(({ view, label, icon: Icon }) =>
+    <nav className={`${styles.tabs} ${compact ? styles.compactTabs : ""}`} aria-label={t("Vistas de Operaciones", "Operations views")}>{items.map(({ view, label, icon: Icon }) =>
       <Link key={view} href={`/${view}${operationsSearch({ ...query, view })}`} aria-current={current === view ? "page" : undefined}>
-        <Icon size={17} aria-hidden="true"/>{label}
+        {!compact && <Icon size={17} aria-hidden="true"/>}{label}{view === "requests" && loadedRequestsCount !== undefined && <span className={styles.navigationCount} title={t("Solicitudes cargadas", "Loaded requests")}>{loadedRequestsCount}</span>}
+        {view === "bookings" && loadedBookingsCount !== undefined && <span className={styles.navigationCount} title={t("Reservas cargadas", "Loaded bookings")}>{loadedBookingsCount}</span>}
       </Link>)}</nav>
   </div>;
 }

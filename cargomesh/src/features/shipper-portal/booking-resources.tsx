@@ -7,16 +7,16 @@ import { bookingResources } from "./booking-resources-model";
 type Booking = Extract<WorkflowRecordV2, {kind:"bookings"}>;
 
 /** A planned execution is not started transport; a proposed asset is not confirmed capacity or crew. */
-export function BookingResources({ booking, rows, offers, decisions, complete, t, localeTag }: {
+export function BookingResources({ booking, rows, offers, decisions, complete, t, localeTag, summaryLabel }: {
   booking: Booking; rows: WorkflowRecordV2[]; offers: Extract<WorkflowRecordV2,{kind:"offers"}>[];
-  decisions: Extract<WorkflowRecordV2,{kind:"decisions"}>[]; complete: boolean; t: (es:string,en:string)=>string; localeTag: string;
+  decisions: Extract<WorkflowRecordV2,{kind:"decisions"}>[]; complete: boolean; t: (es:string,en:string)=>string; localeTag: string; summaryLabel?: string;
 }) {
   const state = bookingResources(booking,rows,complete), offer = resolveBookingOffer(booking,decisions,offers);
   const holdLabel = (status:string) => ({ HELD:t("Retención temporal","Temporary hold"), CONFIRMED:t("Capacidad comprometida","Committed capacity"),
     RELEASED:t("Capacidad liberada","Released capacity"), EXPIRED:t("Retención vencida","Expired hold") })[status] ?? t("Estado no reconocido","Unrecognized state");
   const executionLabel = (status:string) => ({PLANNED:t("Operación planificada","Planned operation"), IN_PROGRESS:t("En curso","In progress"),
     COMPLETED:t("Finalizada","Completed"), CANCELLED:t("Cancelada","Cancelled")})[status] ?? t("Estado desconocido","Unknown state");
-  return <details className={styles.offerArchive}><summary><Box size={15}/>{t("Recursos y operación vinculados","Linked resources and operation")}</summary>
+  return <details className={styles.offerArchive}><summary><Box size={15}/>{summaryLabel ?? t("Recursos y operación vinculados","Linked resources and operation")}</summary>
     <div className={styles.bookingFacts}>
       {!state.complete ? <p role="status">{t("Lectura incompleta: los recursos no cargados no se consideran disponibles.","Incomplete read: unloaded resources are not considered available.")}</p> : null}
       {state.holds.map(hold => <div key={hold.id}><strong><Box size={14}/> {holdLabel(hold.status)}</strong>

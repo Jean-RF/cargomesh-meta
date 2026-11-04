@@ -1,0 +1,388 @@
+TAP version 13
+# Subtest: real SDK transport uses Meta JSON Schema, low reasoning and server-only key
+ok 1 - real SDK transport uses Meta JSON Schema, low reasoning and server-only key
+  ---
+  duration_ms: 12.6743
+  type: 'test'
+  ...
+# Subtest: text-only adapter rejects media before transport and cannot route a key elsewhere
+ok 2 - text-only adapter rejects media before transport and cannot route a key elsewhere
+  ---
+  duration_ms: 0.5096
+  type: 'test'
+  ...
+# Subtest: SDK debug environment cannot enable prompt, key or raw-response logging
+ok 3 - SDK debug environment cannot enable prompt, key or raw-response logging
+  ---
+  duration_ms: 1.7462
+  type: 'test'
+  ...
+# Subtest: Meta chat maps AX-00 proposal to existing fields without executing or losing context
+ok 4 - Meta chat maps AX-00 proposal to existing fields without executing or losing context
+  ---
+  duration_ms: 8.6323
+  type: 'test'
+  ...
+# Subtest: Meta guidance answers in the requested language without changing a draft
+ok 5 - Meta guidance answers in the requested language without changing a draft
+  ---
+  duration_ms: 3.7606
+  type: 'test'
+  ...
+# Subtest: mixed new fact and memory question uses compact read-only guidance in both languages
+ok 6 - mixed new fact and memory question uses compact read-only guidance in both languages
+  ---
+  duration_ms: 3.036
+  type: 'test'
+  ...
+# Subtest: compact help rejects hidden fields, empty output and claimed business actions
+ok 7 - compact help rejects hidden fields, empty output and claimed business actions
+  ---
+  duration_ms: 7.9641
+  type: 'test'
+  ...
+# Subtest: chat supports a low reasoning rollback but rejects unsupported reasoning before network
+ok 8 - chat supports a low reasoning rollback but rejects unsupported reasoning before network
+  ---
+  duration_ms: 1.4285
+  type: 'test'
+  ...
+# Subtest: truncated responses retain observed usage and a bounded retry can recover
+ok 9 - truncated responses retain observed usage and a bounded retry can recover
+  ---
+  duration_ms: 1.8753
+  type: 'test'
+  ...
+# Subtest: caller cancellation aborts pending Meta and never starts a retry
+ok 10 - caller cancellation aborts pending Meta and never starts a retry
+  ---
+  duration_ms: 1.3408
+  type: 'test'
+  ...
+# Subtest: non-cargo facts require a quote from the latest turn, never old context
+ok 11 - non-cargo facts require a quote from the latest turn, never old context
+  ---
+  duration_ms: 1.1521
+  type: 'test'
+  ...
+# Subtest: invalid output retries once and cannot emit booking intent, tools or extra fields
+ok 12 - invalid output retries once and cannot emit booking intent, tools or extra fields
+  ---
+  duration_ms: 6.3518
+  type: 'test'
+  ...
+# Subtest: bad first response can be repaired once within one request budget
+ok 13 - bad first response can be repaired once within one request budget
+  ---
+  duration_ms: 1.2681
+  type: 'test'
+  ...
+# Subtest: missing key stays visibly unconfigured and never falls back to AWS
+ok 14 - missing key stays visibly unconfigured and never falls back to AWS
+  ---
+  duration_ms: 0.3696
+  type: 'test'
+  ...
+# Subtest: 429/auth/network failures have no SDK retry storm or private errors in response
+ok 15 - 429/auth/network failures have no SDK retry storm or private errors in response
+  ---
+  duration_ms: 2.1782
+  type: 'test'
+  ...
+# Subtest: a stalled SDK transport is aborted by the shared total deadline
+ok 16 - a stalled SDK transport is aborted by the shared total deadline
+  ---
+  duration_ms: 1009.3868
+  type: 'test'
+  ...
+# Subtest: truncated or wrong-model output cannot be treated as a valid response
+ok 17 - truncated or wrong-model output cannot be treated as a valid response
+  ---
+  duration_ms: 4.656
+  type: 'test'
+  ...
+# Subtest: stale declaration revision and invented sources are rejected
+ok 18 - stale declaration revision and invented sources are rejected
+  ---
+  duration_ms: 3.844
+  type: 'test'
+  ...
+# Subtest: explicit corrections and business requests bypass the model
+ok 19 - explicit corrections and business requests bypass the model
+  ---
+  duration_ms: 1.5935
+  type: 'test'
+  ...
+# Subtest: explicit deterministic selector overrides a configured legacy provider
+ok 20 - explicit deterministic selector overrides a configured legacy provider
+  ---
+  duration_ms: 0.2613
+  type: 'test'
+  ...
+# Subtest: late response guard preserves manual edits, scope changes and newer revisions
+ok 21 - late response guard preserves manual edits, scope changes and newer revisions
+  ---
+  duration_ms: 0.2151
+  type: 'test'
+  ...
+# Subtest: Meta response contract requires honest provider metadata and revision
+ok 22 - Meta response contract requires honest provider metadata and revision
+  ---
+  duration_ms: 0.1572
+  type: 'test'
+  ...
+# Subtest: transport screen sends greetings and arithmetic to Meta with no form mutations
+ok 23 - transport screen sends greetings and arithmetic to Meta with no form mutations
+  ---
+  duration_ms: 1.9074
+  type: 'test'
+  ...
+# Subtest: provider cannot turn transport discussion into cargo edits
+ok 24 - provider cannot turn transport discussion into cargo edits
+  ---
+  duration_ms: 1.8588
+  type: 'test'
+  ...
+# Subtest: transport discussion remains read-only when Meta is not configured
+ok 25 - transport discussion remains read-only when Meta is not configured
+  ---
+  duration_ms: 0.3631
+  type: 'test'
+  ...
+# Subtest: follow-up memory reaches Meta as untrusted context and a remembered declaration stays read-only
+ok 26 - follow-up memory reaches Meta as untrusted context and a remembered declaration stays read-only
+  ---
+  duration_ms: 1.0988
+  type: 'test'
+  ...
+# Subtest: Meta receives route exclusion with no distance or eligibility claim
+ok 27 - Meta receives route exclusion with no distance or eligibility claim
+  ---
+  duration_ms: 1.5679
+  type: 'test'
+  ...
+# Subtest: remembered user text is never reused as a new field quote on the Road form
+ok 28 - remembered user text is never reused as a new field quote on the Road form
+  ---
+  duration_ms: 2.3406
+  type: 'test'
+  ...
+# Subtest: SDK sends actual image bytes paired with evidence; result never includes bytes/key
+ok 29 - SDK sends actual image bytes paired with evidence; result never includes bytes/key
+  ---
+  duration_ms: 12.9178
+  type: 'test'
+  ...
+# Subtest: foreign evidence and stale input are rejected before transport
+ok 30 - foreign evidence and stale input are rejected before transport
+  ---
+  duration_ms: 0.416
+  type: 'test'
+  ...
+# Subtest: missing, duplicate, extra or URL-based image inputs cannot invoke provider
+ok 31 - missing, duplicate, extra or URL-based image inputs cannot invoke provider
+  ---
+  duration_ms: 0.6809
+  type: 'test'
+  ...
+# Subtest: MIME, truncation, dimensions, per-image and combined-byte bounds fail closed
+ok 32 - MIME, truncation, dimensions, per-image and combined-byte bounds fail closed
+  ---
+  duration_ms: 0.7609
+  type: 'test'
+  ...
+# Subtest: a photograph cannot invent weight, even if provider complies structurally
+ok 33 - a photograph cannot invent weight, even if provider complies structurally
+  ---
+  duration_ms: 2.8683
+  type: 'test'
+  ...
+# Subtest: readable label permits explicit quoted measurements with unverified warning
+ok 34 - readable label permits explicit quoted measurements with unverified warning
+  ---
+  duration_ms: 1.9567
+  type: 'test'
+  ...
+# Subtest: unreadable label returns missing fields, not fabricated measurements
+ok 35 - unreadable label returns missing fields, not fabricated measurements
+  ---
+  duration_ms: 3.9362
+  type: 'test'
+  ...
+# Subtest: audio accepts transcript only and explicit correction is sourced to latest text
+ok 36 - audio accepts transcript only and explicit correction is sourced to latest text
+  ---
+  duration_ms: 1.3424
+  type: 'test'
+  ...
+# Subtest: audio quote must occur in resolved transcript
+ok 37 - audio quote must occur in resolved transcript
+  ---
+  duration_ms: 2.1071
+  type: 'test'
+  ...
+# Subtest: new draft revision discards a delayed result before any application
+ok 38 - new draft revision discards a delayed result before any application
+  ---
+  duration_ms: 1.3168
+  type: 'test'
+  ...
+# Subtest: revoked evidence also rejects empty/refusal responses
+ok 39 - revoked evidence also rejects empty/refusal responses
+  ---
+  duration_ms: 1.377
+  type: 'test'
+  ...
+# Subtest: provider error has one attempt, safe metadata and keeps manual path available
+ok 40 - provider error has one attempt, safe metadata and keeps manual path available
+  ---
+  duration_ms: 1.1981
+  type: 'test'
+  ...
+# Subtest: labeled fixtures validate; refusal does not propose business actions
+ok 41 - labeled fixtures validate; refusal does not propose business actions
+  ---
+  duration_ms: 2.4107
+  type: 'test'
+  ...
+# Subtest: strict provider JSON Schema is generated from the shared Zod shape
+ok 42 - strict provider JSON Schema is generated from the shared Zod shape
+  ---
+  duration_ms: 2.7583
+  type: 'test'
+  ...
+# Subtest: success remains a proposal with unknown dimensions, no calculated totals
+ok 43 - success remains a proposal with unknown dimensions, no calculated totals
+  ---
+  duration_ms: 2.72
+  type: 'test'
+  ...
+# Subtest: missing key/model or disabled provider never invokes a transport
+ok 44 - missing key/model or disabled provider never invokes a transport
+  ---
+  duration_ms: 0.7796
+  type: 'test'
+  ...
+# Subtest: configuration rejects key routing to another provider and unsafe limits
+ok 45 - configuration rejects key routing to another provider and unsafe limits
+  ---
+  duration_ms: 0.4988
+  type: 'test'
+  ...
+# Subtest: oversized, empty, duplicate or extra-key input fails before invocation
+ok 46 - oversized, empty, duplicate or extra-key input fails before invocation
+  ---
+  duration_ms: 0.478
+  type: 'test'
+  ...
+# Subtest: foreign evidence and stale input are rejected before any provider call
+ok 47 - foreign evidence and stale input are rejected before any provider call
+  ---
+  duration_ms: 0.3304
+  type: 'test'
+  ...
+# Subtest: unknown output fields get only one validation retry
+ok 48 - unknown output fields get only one validation retry
+  ---
+  duration_ms: 0.6211
+  type: 'test'
+  ...
+# Subtest: one corrected output is accepted and usage accounts for both attempts
+ok 49 - one corrected output is accepted and usage accounts for both attempts
+  ---
+  duration_ms: 0.7456
+  type: 'test'
+  ...
+# Subtest: invalid JSON, model mismatch and oversized responses cannot bypass validation
+ok 50 - invalid JSON, model mismatch and oversized responses cannot bypass validation
+  ---
+  duration_ms: 2.7663
+  type: 'test'
+  ...
+# Subtest: duplicates, missing/proposed overlap, negative quantity and fake confirmation fail
+ok 51 - duplicates, missing/proposed overlap, negative quantity and fake confirmation fail
+  ---
+  duration_ms: 0.633
+  type: 'test'
+  ...
+# Subtest: photo can suggest visible count but cannot establish mass or dimensions
+ok 52 - photo can suggest visible count but cannot establish mass or dimensions
+  ---
+  duration_ms: 0.8076
+  type: 'test'
+  ...
+# Subtest: fabricated evidence, wrong source kind and excerpts absent from text are rejected
+ok 53 - fabricated evidence, wrong source kind and excerpts absent from text are rejected
+  ---
+  duration_ms: 1.4644
+  type: 'test'
+  ...
+# Subtest: authorization revoked during inference invalidates returned evidence
+ok 54 - authorization revoked during inference invalidates returned evidence
+  ---
+  duration_ms: 0.2197
+  type: 'test'
+  ...
+# Subtest: PALLET cannot silently become BOX
+ok 55 - PALLET cannot silently become BOX
+  ---
+  duration_ms: 0.3327
+  type: 'test'
+  ...
+# Subtest: server scope is rechecked after inference; stale proposals cannot apply
+ok 56 - server scope is rechecked after inference; stale proposals cannot apply
+  ---
+  duration_ms: 0.3685
+  type: 'test'
+  ...
+# Subtest: provider failures and diagnostics never include raw errors or private input
+ok 57 - provider failures and diagnostics never include raw errors or private input
+  ---
+  duration_ms: 0.4778
+  type: 'test'
+  ...
+# Subtest: a logging failure does not lose a valid proposal; unknown usage stays null
+ok 58 - a logging failure does not lose a valid proposal; unknown usage stays null
+  ---
+  duration_ms: 0.6079
+  type: 'test'
+  ...
+# Subtest: deadline aborts a stalled provider with no unbounded retry
+ok 59 - deadline aborts a stalled provider with no unbounded retry
+  ---
+  duration_ms: 1014.8087
+  type: 'test'
+  ...
+# Subtest: AX-00 runtime modules import no AWS, persistence or live transport client
+ok 60 - AX-00 runtime modules import no AWS, persistence or live transport client
+  ---
+  duration_ms: 2.9571
+  type: 'test'
+  ...
+# Subtest: authorized locations override a browser claim and never imply road coverage
+ok 61 - authorized locations override a browser claim and never imply road coverage
+  ---
+  duration_ms: 1.0906
+  type: 'test'
+  ...
+# Subtest: blocked reply keeps valid facts and metadata but cannot ask for dates or imply ROAD eligibility
+ok 62 - blocked reply keeps valid facts and metadata but cannot ask for dates or imply ROAD eligibility
+  ---
+  duration_ms: 0.6844
+  type: 'test'
+  ...
+# Subtest: a validated change of endpoint is recomputed; old route warning does not stick
+ok 63 - a validated change of endpoint is recomputed; old route warning does not stick
+  ---
+  duration_ms: 0.1802
+  type: 'test'
+  ...
+1..63
+# tests 63
+# suites 0
+# pass 63
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3561.6424

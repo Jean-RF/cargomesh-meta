@@ -11,6 +11,7 @@ import type { CommercialCatalog } from "./commercial-catalog";
 import { carrierLabel } from "./opportunity-panel";
 import styles from "./shipper-portal.module.css";
 import comparison from "./commercial-comparison.module.css";
+import compactStyles from "./commercial-workspace.module.css";
 
 type Decision = Extract<WorkflowRecordV2, { kind: "decisions" }>;
 type Booking = Extract<WorkflowRecordV2, { kind: "bookings" }>;
@@ -31,9 +32,9 @@ export function commercialReason(reason: string, t: Translate) {
   return labels[reason] ? t(...labels[reason]) : t(`Referencia sin verificar (${reason})`, `Unverified reference (${reason})`);
 }
 
-export function CommercialPanel({ context, catalog, selectedOptionIndex, setSelectedOptionIndex, decision, bookings, onDecide, onBook, t, localeTag, busy = false }: {
+export function CommercialPanel({ context, catalog, selectedOptionIndex, setSelectedOptionIndex, decision, bookings, onDecide, onBook, t, localeTag, busy = false, compact = false }: {
   context: CommercialContext; catalog: CommercialCatalog; selectedOptionIndex: number; setSelectedOptionIndex: (index: number) => void;
-  decision: Decision | null; bookings: Booking[]; onDecide: () => void; onBook: () => void; t: Translate; localeTag: string; busy?: boolean;
+  decision: Decision | null; bookings: Booking[]; onDecide: () => void; onBook: () => void; t: Translate; localeTag: string; busy?: boolean; compact?: boolean;
 }) {
   const { offers, ranking } = context, option = ranking?.data.options[selectedOptionIndex] ?? null;
   const contract=requestContractState(context.request,bookings);
@@ -41,13 +42,13 @@ export function CommercialPanel({ context, catalog, selectedOptionIndex, setSele
     const bookedOffers=[...new Map(contract.active.flatMap(booking=>{const offer=resolveBookingOffer(booking,decision?[decision]:[],offers);return offer?[[offer.id,offer] as const]:[];})).values()];
     const history=offers.filter(offer=>!bookedOffers.some(booked=>booked.id===offer.id));
     return <section className={styles.panel} aria-labelledby="commercial-title"><header className={styles.panelHeader}><h2 id="commercial-title">{t('Contratación','Contract')}</h2><FileCheck2 size={18}/></header><div className={styles.section}>
-      <p className={styles.notice}><ShieldCheck size={16}/>{contract.phase==='CONFIRMED'?t('Booking confirmado.','Booking confirmed.'):t('Autorización registrada; revisa su confirmación en Reservas.','Authorization recorded; check confirmation in Bookings.')}</p>
       {bookedOffers.map(offer=><OfferDetails key={offer.id} offer={offer} context={context} catalog={catalog} t={t} localeTag={localeTag} contracted/>)}
       {!bookedOffers.length?<p>{t('Consulta la referencia de la oferta en la reserva vinculada.','Review the offer reference in the linked booking.')}</p>:null}
       {history.length?<details className={styles.offerArchive}><summary>{t('Historial de cotizaciones','Quote history')} ({history.length})</summary>{history.map(offer=><OfferDetails key={offer.id} offer={offer} context={context} catalog={catalog} t={t} localeTag={localeTag}/>)}</details>:null}
     </div></section>;
   }
   const state = inspectRankedOption(option, context);
+  if(compact&&!offers.length)return <section className={compactStyles.empty}><FileCheck2 size={22} aria-hidden="true"/><div><h2>{t("Todavía no hay ofertas","No offers yet")}</h2><p>{t("Las cotizaciones aparecerán aquí cuando respondan los transportistas.","Carrier quotes will appear here when they respond.")}</p></div></section>;
   const decisionBookings = bookings.filter(row => row.data.decisionId === decision?.id);
   const rejected = decisionBookings.length > 0 && decisionBookings.every(row => ["REJECTED", "CANCELLED"].includes(row.data.carrierConfirmationStatus));
   const different = option && decision && (option.planId !== decision.data.planId || option.offerIds.length !== decision.data.selectedOfferIds.length || option.offerIds.some(id => !decision.data.selectedOfferIds.includes(id)));
@@ -106,10 +107,10 @@ function OfferDetails({ offer, context, catalog, t, localeTag, contracted=false 
     {!contracted&&!state.current ? <ul className={comparison.issues}>{state.reasons.map(reason => <li key={reason}>{commercialReason(reason, t)}</li>)}</ul> : null}
     <dl className={comparison.metadata}>
       <Fact label={contracted?t('Vigencia para nuevas contrataciones','Validity for new bookings'):t("Vigencia", "Validity")} value={`${formatDateTime(offer.data.validity.startsAt, localeTag)} → ${formatDateTime(offer.data.validity.endsAt, localeTag)}`}/>
-      <Fact label={t("Recojo estimado", "Estimated pickup")} value={formatDateTime(offer.data.estimatedPickupAt, localeTag)}/><Fact label={t("Entrega estimada", "Estimated delivery")} value={formatDateTime(offer.data.estimatedDeliveryAt, localeTag)}/>
+      {offer.data.estimatedPickupAt && <Fact label={t("Recojo estimado", "Estimated pickup")} value={formatDateTime(offer.data.estimatedPickupAt, localeTag)}/>}{offer.data.estimatedDeliveryAt && <Fact label={t("Entrega estimada", "Estimated delivery")} value={formatDateTime(offer.data.estimatedDeliveryAt, localeTag)}/>}
       <Fact label={t("Servicios", "Services")} value={offer.data.coveredServiceIds.map(id => { const row = catalog.services[id]; return row?.state === "AVAILABLE" ? `${row.mode} · ${row.serviceClass}` : `${t("Servicio", "Service")} ${displayReference(id,'SRV')}`; }).join(" / ")}/>
-      <Fact label={t("Tránsito declarado", "Declared transit")} value={offer.data.transitDurationSeconds === null ? t("Desconocido", "Unknown") : `${(offer.data.transitDurationSeconds / 3600).toLocaleString(localeTag, { maximumFractionDigits: 1 })} h`}/>
-      <Fact label={t("Capacidad reservable declarada", "Declared reservable capacity")} value={offer.data.reservableCapacity ? `${offer.data.reservableCapacity.weightKg.toLocaleString(localeTag)} kg · ${offer.data.reservableCapacity.volumeM3?.toLocaleString(localeTag) ?? "?"} m³` : t("Desconocida", "Unknown")}/>
+      {offer.data.transitDurationSeconds !== null && <Fact label={t("Tránsito declarado", "Declared transit")} value={`${(offer.data.transitDurationSeconds / 3600).toLocaleString(localeTag, { maximumFractionDigits: 1 })} h`}/>}
+      {offer.data.reservableCapacity && <Fact label={t("Capacidad reservable declarada", "Declared reservable capacity")} value={`${offer.data.reservableCapacity.weightKg.toLocaleString(localeTag)} kg${offer.data.reservableCapacity.volumeM3 == null ? "" : ` · ${offer.data.reservableCapacity.volumeM3.toLocaleString(localeTag)} m³`}`}/>}
     </dl>
     {state.plan ? <details><summary>{t("Reparto de la carga", "Cargo allocation")}</summary>
       {state.plan.data.legAssignments.filter(leg => offer.data.coveredAssignmentIds.includes(leg.id)).map(leg => <section key={leg.id}>
@@ -122,7 +123,7 @@ function OfferDetails({ offer, context, catalog, t, localeTag, contracted=false 
       </section>)}
     </details> : null}
     <details><summary>{t("Desglose del precio", "Price breakdown")}</summary><dl className={styles.breakdown}>{offer.data.breakdown.map((item, index) => <div key={index}><dt>{item.kind} · {item.treatment}{item.details ? ` · ${item.details}` : ""}</dt><dd>{item.amount ? money(item.amount.amount, item.amount.currency, localeTag) : t("Desconocido", "Unknown")}</dd></div>)}</dl></details>
-    <details><summary>{t("Condiciones comerciales", "Commercial terms")} ({offer.data.commercialTerms.length})</summary>{offer.data.commercialTerms.length ? <ul>{offer.data.commercialTerms.map((term, index) => <li key={index}>{term.code}: {term.description}</li>)}</ul> : <p>{t("Sin condiciones adicionales registradas", "No additional terms recorded")}</p>}</details>
+    <details><summary>{t("Condiciones comerciales", "Commercial terms")}</summary>{offer.data.commercialTerms.length ? <ul>{offer.data.commercialTerms.map((term, index) => <li key={index}>{term.description}</li>)}</ul> : <p>{t("Sin condiciones adicionales registradas", "No additional terms recorded")}</p>}</details>
     <details><summary>{t("Autoría y trazabilidad", "Authorship and traceability")}</summary><dl className={comparison.metadata}>
       <Fact label="Carrier ID" value={offer.data.carrierId}/><Fact label="Offer ID" value={offer.id}/><Fact label={t("Oportunidad / plan", "Opportunity / plan")} value={`${offer.data.opportunityId} / ${offer.data.planCandidateId}`}/>
       <Fact label={t("Canal / emisor", "Channel / issuer")} value={`${offer.data.source.channel} · ${offer.data.source.issuerId}`}/><Fact label={t("Evidencia de origen", "Source evidence")} value={`${offer.data.source.evidence.provider} · ${offer.data.source.evidence.reference} · ${offer.data.source.evidence.provenanceStatus}`}/>

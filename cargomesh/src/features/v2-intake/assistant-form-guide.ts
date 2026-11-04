@@ -3,6 +3,7 @@ import type { IntakeOptionsData } from "./contracts";
 import { questionForField, CONVERSATION_FIELDS, type GuidedConversationField } from "./conversation-fields";
 import { validatePrototypeStep, type PrototypeStep, type V2IntakePrototypeDraft } from "./prototype-model";
 import type { DraftField } from "./use-assistant-change-feedback";
+import {draftRoadStatus,disconnectedRoadNotice} from './road-advice';
 
 type Translate = (es: string, en: string) => string;
 export const ASSISTANT_ADVANCE_MS = 1400;
@@ -28,12 +29,14 @@ export function assistantNextField(draft: V2IntakePrototypeDraft): GuidedConvers
   return issues.map(issue => issue.field).find(field => (CONVERSATION_FIELDS as readonly string[]).includes(field)||field==='pickupContactEmail'||field==='recipientContactEmail') as GuidedConversationField | undefined ?? null;
 }
 export function assistantNextStep(step: PrototypeStep, draft: V2IntakePrototypeDraft, options: IntakeOptionsData | null): PrototypeStep {
+  if(draftRoadStatus(draft,options)==='DISCONNECTED_NETWORKS')return step;
   if (!options || step === 4 || !options.facilities.some(f => f.facilityId === draft.originFacilityId)
     || !options.facilities.some(f => f.facilityId === draft.destinationFacilityId)) return step;
   const next = assistantFormProgress(draft).nextStep;
   return next > step ? next : step;
 }
 export function assistantNextQuestion(draft: V2IntakePrototypeDraft, t: Translate, options?: IntakeOptionsData) {
+  if(draftRoadStatus(draft,options)==='DISCONNECTED_NETWORKS')return disconnectedRoadNotice(t('es','en')==='es');
   const { sections, nextStep } = assistantFormProgress(draft, options);
   const next=assistantNextField(draft);
   if(next&&["divisible","unitIndivisible","unitStackable","requirements"].includes(next))return questionForField(next,t("es","en")==="es"?"es-PE":"en-US");

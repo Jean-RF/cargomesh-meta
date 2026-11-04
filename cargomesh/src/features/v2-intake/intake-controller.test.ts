@@ -8,6 +8,7 @@ import * as catalog from "./intake-options";
 import * as client from "./v2-intake-client";
 import * as groups from "./cargo-groups";
 import * as groupScope from './assistant-group-scope';
+import * as roadAdvice from '@/shared/lib/road-intake-advice';
 import * as formGuide from "./assistant-form-guide";
 import { ROAD_REQUEST_FIXTURE, ELIGIBLE_UNKNOWN_EVALUATION_FIXTURE } from "./fixtures/contract-flow.fixture";
 import type { FreightRequestV2Data } from "./contracts";
@@ -79,6 +80,7 @@ function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof
     if (name === "./prototype-model") return prototype;
     if (name === "./cargo-groups") return groups;
     if (name === './assistant-group-scope') return groupScope;
+    if (name === '@/shared/lib/road-intake-advice') return roadAdvice;
     if (name === "./assistant-form-guide") return formGuide;
     if (name === "./intake-options") return catalog;
     if (name === "./v2-intake-client") return native;
@@ -102,6 +104,24 @@ function setup({ storage = new Map<string, string>(), api = {} as Partial<typeof
 }
 const loaded = () => ({ data: structuredClone(ROAD_REQUEST_FIXTURE) });
 const evaluation = (version = 1) => ({ data: { ...structuredClone(ELIGIBLE_UNKNOWN_EVALUATION_FIXTURE), evaluatedDraftVersion: version } });
+
+test('disconnected ROAD draft saves and reopens the same ID without a serviceability call',async()=>{
+ let persisted=structuredClone(ROAD_REQUEST_FIXTURE),creates=0,evaluations=0;
+ const options=catalog.getIntakeOptionsFixture();options.data.facilities[1]={...options.data.facilities[1],countryCode:'AU',city:'Sydney',lat:-33.87,lng:151.21};
+ const api:Partial<typeof client>={
+  loadIntakeOptions:async()=>({options,source:'api',fixtureReason:null}),
+  createFreightRequestV2:async payload=>{creates++;persisted={...persisted,...payload,origin:persisted.origin,destination:{...persisted.destination,countryCode:'AU',city:'Sydney',lat:-33.87,lng:151.21}} as FreightRequestV2Data;return {data:structuredClone(persisted)} as never;},
+  getFreightRequestV2:async()=>({data:structuredClone(persisted)}) as never,
+  getRoadServiceabilityV2:async()=>{evaluations++;throw Error('Must not evaluate disconnected route');},
+ };
+ const app=setup({api});await app.settle();app.state.loadExample();app.render();
+ assert.equal(formGuide.assistantNextStep(1,app.state.draft,options.data),1);
+ assert.match(formGuide.assistantNextQuestion(app.state.draft,(_es,en)=>en,options.data),/road alone/);
+ await app.state.createDraftAndEvaluate();await app.settle();
+ assert.equal(creates,1);assert.equal(evaluations,0);assert.equal(app.state.submitPhase,'success');assert.equal(app.state.dirtyAfterCreate,false);assert.equal(app.state.evaluation,null);
+ const saved=app.state.request!.id,storage=app.storage;app.unmount();
+ const reopened=setup({api,storage});await reopened.settle();assert.equal(reopened.state.request?.id,saved);assert.equal(evaluations,0);assert.equal(reopened.state.submitPhase,'success');reopened.unmount();
+});
 
 test("recovery merges a correction made during loading into the same saved draft", async () => {
   const read = deferred<ReturnType<typeof loaded>>();

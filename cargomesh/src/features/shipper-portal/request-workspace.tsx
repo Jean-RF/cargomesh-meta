@@ -5,7 +5,7 @@ import {ContentMotion} from "@/features/product-motion/content-motion";
 import {WorkspaceSkeleton} from "@/features/product-motion/workspace-skeleton";
 import {displayReference,locationDisplayLabel} from '@/shared/lib/display-identity';
 
-import { AlertTriangle, CalendarClock, CheckCircle2, Edit3, FileCheck2, MapPin, PackageCheck, RefreshCw, Send, ShieldCheck, Truck } from "lucide-react";
+import { AlertTriangle, CheckCircle2, MapPin, ShieldCheck, Truck } from "lucide-react";
 import {WorkspaceLink as Link} from "@/features/workspace-mode/workspace-link";
 import { useEffect, useRef, useState } from "react";
 import { Button, Dialog, Input, Select, Textarea } from "@/components/ui";
@@ -17,7 +17,7 @@ import type { FreightLocationV2, FreightRequestV2Data, RoadServiceabilityEvaluat
 import { getRoadServiceabilityV2, reconcileCandidateSelection } from "@/features/v2-intake/v2-intake-client";
 import { mapServiceabilityToMapViewProps } from "@/features/v2-intake/mappers/road-map-props.mapper";
 import { authorizeBooking, requestCarrierOffer, reviseFreightRequest, selectCommercialOption, ShipperApiError, submitFreightRequest } from "./shipper-api";
-import { formatDateTime, formatMass, latestRecord, requestStatusLabel, requestStatusTone, requestToRevisionInput, type WorkflowRecordV2 } from "./shipper-model";
+import { formatDateTime, latestRecord, requestStatusLabel, requestToRevisionInput, type WorkflowRecordV2 } from "./shipper-model";
 import styles from "./shipper-portal.module.css";
 import { LocationResolver } from "./location-resolver";
 import { CommercialPanel } from "./commercial-panel";
@@ -39,6 +39,11 @@ import {BookingConfirmationWindow} from "@/features/booking-confirmation/panel";
 import {findRequestQuotes} from "./quote-api";
 import {BookingPreparation,prepareBookingCapacity} from "./booking-preparation";
 import {requestContractState} from './contract-state';
+import { RequestWorkspaceFrame } from './request-workspace-frame';
+import { RequestDocumentWorkspace } from '@/features/documents/request-document-workspace';
+import { RequestActivity } from './request-activity';
+import frame from './request-workspace-frame.module.css';
+import commercialStyles from './commercial-workspace.module.css';
 
 type Workflow = Record<string, WorkflowRecordV2[]>;
 type EditState = {
@@ -85,7 +90,6 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
   const [edit, setEdit] = useState<EditState>(() => editState(initialRequest));
   const offers = (workflow.offers ?? []).filter((item): item is Extract<WorkflowRecordV2, { kind: "offers" }> => item.kind === "offers");
   const opportunities = (workflow.opportunities ?? []).filter((item): item is Extract<WorkflowRecordV2, { kind: "opportunities" }> => item.kind === "opportunities");
-  const acceptedOpportunities = opportunities.filter(item => item.status === "ACCEPTED");
   const plans = (workflow.plans ?? []).filter((item): item is Extract<WorkflowRecordV2, { kind: "plans" }> => item.kind === "plans");
   const ranking = latestRecord((workflow.ranking ?? []).filter((item): item is Extract<WorkflowRecordV2, { kind: "ranking" }> => item.kind === "ranking"));
   const commercialContext: CommercialContext = { request, offers, opportunities, plans, ranking };
@@ -265,69 +269,68 @@ export function RequestWorkspace({ initialRequest, initialWorkflow, initialCatal
     return () => window.clearInterval(timer);
   }, [commercialRefreshEnabled, readIncomplete, phase, request.id, request.organizationId, decisionOpen, bookingOpen, opportunityKey, selectedOptionIndex, ranking?.id]);
   const mapProps = evaluation ? mapServiceabilityToMapViewProps(request, evaluation, selectedCandidateId, setSelectedCandidateId) : null;
+  const unverified = readIncomplete || commercialReadBlocked;
+  const statusLabel = !unverified && contract.phase ? contractLabels[contract.phase] : requestStatusLabel(request.status, locale);
+  const canChoose = !unverified && ranking && !decision;
+  const canBook = !unverified && decision && bookingsStillNeeded(decision.data.selectedOfferIds, activeBookings, decision.id).length > 0;
+  const primary = activeBookings.length ? <Link href="/bookings"><Truck size={16}/>{t("Ver reservas", "View bookings")}</Link>
+    : request.status === "DRAFT" ? <Button disabled={phase !== "idle" || unverified} isLoading={phase === "submitting"} onClick={() => void submit()}>{t("Enviar solicitud", "Submit request")}</Button>
+    : canChoose ? <Button disabled={phase !== "idle" || !inspectRankedOption(selectedOption, commercialContext).available} onClick={() => setDecisionOpen(true)}>{t("Revisar selección", "Review selection")}</Button>
+    : canBook ? <Button disabled={phase !== "idle"} onClick={() => { setBookingConsent(false); setBookingOpen(true); }}>{t("Autorizar reserva", "Authorize booking")}</Button> : null;
+  const outcomeCount = incidents.length + offers.filter(row => row.status === "WITHDRAWN").length + activeBookings.filter(row => ["REJECTED", "CANCELLED"].includes(row.data.carrierConfirmationStatus)).length + Number(["FAILED", "CANCELLED"].includes(request.status));
   return <div className={styles.page}>
-    <header className={styles.hero}><div className={styles.heroCopy}><h1>{displayReference(request.referenceCode,'PED',request.id)}</h1><p>{locationDisplayLabel(request.origin.city)} → {locationDisplayLabel(request.destination.city)}</p></div>
-      <div className={styles.heroActions}>{commercialRefreshEnabled && !readIncomplete?<Button variant="secondary" disabled={phase!=="idle"} isLoading={phase==="refreshing"} onClick={()=>void refreshCommercial()}><RefreshCw size={16}/>{t("Actualizar ofertas y reservas","Refresh offers & bookings")}</Button>:null}{request.status === "DRAFT" ? <Button variant="secondary" disabled={phase!=="idle" || readIncomplete} onClick={() => setEditOpen(true)}><Edit3 size={16}/>{t("Editar borrador", "Edit draft")}</Button> : null}
-        <Button disabled={phase!=="idle"} isLoading={phase === "evaluating"} loadingLabel={t("Evaluando…", "Evaluating…")} onClick={() => void evaluate()}><RefreshCw size={16}/>{t("Reevaluar", "Reevaluate")}</Button></div></header>
-
-    {error ? <ErrorNotice error={error} t={t} /> : null}
-    {commercialReadBlocked ? <p className={styles.notice} role="status">{t("La última actualización falló. Los datos conservados son una lectura anterior; actualiza antes de seleccionar, invitar o reservar.", "The last refresh failed. Retained data is an earlier read; refresh before selecting, inviting or booking.")}</p> : null}
-    {!readIncomplete && !commercialReadBlocked && contract.canRequestQuotes && offerBriefing.currentOfferCount > 0 ? <section className={styles.offerArrival} role="status" aria-live="polite">
-      <div><strong>{t("Llegaron ofertas de transportistas", "Carrier offers have arrived")}</strong>
-        <p>{offerBriefing.currentOfferCount} {t("oferta(s) vigente(s)", "current offer(s)")} · {offerBriefing.recommended
-          ? t(`El ranking recomienda revisar primero la opción ${offerBriefing.recommended.position}.`, `The ranking recommends reviewing option ${offerBriefing.recommended.position} first.`)
-          : t("Aún no hay un plan completo y clasificado para recomendar.", "No complete ranked plan is ready to recommend yet.")}</p></div>
-      <Button variant="secondary" onClick={() => { setOfferVoiceTurns([]); setOfferVoiceOpen(true); }}>{t("Escuchar opciones con Nova", "Hear options with Nova")}</Button>
-    </section> : !readIncomplete && !commercialReadBlocked && contract.canRequestQuotes && acceptedOpportunities.length > 0 ? <section className={styles.offerArrival} role="status" aria-live="polite">
-      <div><strong>{t("Un transportista aceptó revisar la solicitud", "A carrier accepted the opportunity")}</strong>
-        <p>{t("Aún no ha enviado una oferta con precio. Te avisaremos aquí cuando llegue; todavía no hay una opción que Nova pueda recomendar.", "No priced offer has arrived yet. We will show it here when it arrives; Nova has no option to recommend yet.")}</p></div>
-    </section> : null}
-    <section className={styles.panel}><div className={styles.summary}>
-      <Summary label={t("Estado", "Status")} value={!readIncomplete&&contract.phase?contractLabels[contract.phase]:requestStatusLabel(request.status, locale)} badge={!readIncomplete&&contract.confirmed.length?'positive':requestStatusTone(request.status)} />
-      <Summary label={t("Carga", "Cargo")} value={`${formatMass(request.cargoSpecification.totalWeightKg, localeTag)} · ${request.cargoSpecification.totalVolumeM3.toLocaleString(localeTag)} m³`} />
-      <Summary label={t("Ventana de recojo", "Pickup window")} value={formatDateTime(request.pickupWindow.startsAt, localeTag)} />
-      <Summary label={t("Clase solicitada", "Requested class")} value={request.serviceType ?? "UNKNOWN"} />
-    </div></section>
-    <RequestFacts request={request}/>
-    {!readIncomplete ? <IncidentRecoveryPanel request={request}/> : null}
-    {!readIncomplete && contract.canRequestQuotes && commercialRefreshEnabled ? <QuoteSearchPanel requestId={request.id} busy={phase!=="idle"||commercialReadBlocked} canSearch={request.status==="DRAFT"||request.status==="PENDING"} onSearch={searchQuotes} onNova={()=>{setOfferVoiceTurns([]);setOfferVoiceOpen(true);}}/> : null}
-    {!readIncomplete && contract.canRequestQuotes ? <OpportunityPanel context={commercialContext} catalog={catalog} busy={phase !== "idle" || commercialReadBlocked}
-      onRequest={key => { const target = opportunityTargets(commercialContext).find(row => row.key === key); if (!target || phase !== "idle" || commercialReadBlocked) return;
-        const channels = commonResponseChannels(target.serviceIds, target.carrierId, catalog); if (!channels.length) return;
-        setOpportunityKey(key); setOpportunityDeadline(""); setResponseChannel(channels[0]); setOpportunityConsent(false); }} t={t} localeTag={localeTag}/> : null}
-
-    <div className={styles.detailGrid}><div className={styles.page}>
-      <section className={styles.panel}><header className={styles.panelHeader}><div><h2>{t("Factibilidad y mapa", "Serviceability and map")}</h2></div><MapPin size={18}/></header>
-        <ContentMotion identity={phase==='evaluating'?'reading':evaluation?'evaluated:'+selectedCandidateId:'empty'}>{phase === "evaluating" ? <WorkspaceSkeleton shape="detail" label={t("Consultando evaluación vigente…", "Loading current evaluation…")}/>
-          : evaluation ? <div className={styles.section}><CandidateResults evaluation={evaluation} selectedCandidateId={selectedCandidateId} onSelectCandidate={setSelectedCandidateId} t={t}/>{mapProps ? <RoadCandidateMapBoundary props={mapProps} t={t}/> : null}</div>
-          : <div className={styles.empty}><span className={styles.emptyIcon}><MapPin size={22}/></span><strong>{t("Evaluación aún no cargada", "Evaluation not loaded yet")}</strong><p>{t("Reevaluar consulta el servicio V2; no usa una ruta anterior mientras carga.", "Reevaluate queries the V2 service; it does not keep an old route while loading.")}</p><Button disabled={phase!=="idle"} onClick={() => void evaluate()}>{t("Evaluar ahora", "Evaluate now")}</Button></div>}</ContentMotion>
-      </section>
-      {!readIncomplete ? <ContentMotion identity={ranking?.id??'no-ranking'}><CommercialPanel context={commercialContext} catalog={catalog} selectedOptionIndex={selectedOptionIndex} setSelectedOptionIndex={setSelectedOptionIndex}
-        decision={decision} bookings={activeBookings} busy={phase!=="idle" || commercialReadBlocked} onDecide={() => {if(phase==="idle" && !commercialReadBlocked)setDecisionOpen(true);}} onBook={() => { if(phase!=="idle" || commercialReadBlocked)return; setBookingConsent(false); setBookingOpen(true); }} t={t} localeTag={localeTag}/></ContentMotion> : <section className={styles.panel}><div className={styles.section}><strong>{t("Alternativas pendientes de lectura completa", "Options await a complete read")}</strong><p>{t("Reintenta la lectura superior. Selección y reserva permanecen bloqueadas hasta recuperar los registros necesarios.", "Retry the read above. Selection and booking stay blocked until the required records are loaded.")}</p></div></section>}
-    </div>
-      <aside className={styles.page}><section className={styles.panel}><header className={styles.panelHeader}><div><h2>{t("Siguiente acción", "Next action")}</h2></div><Send size={18}/></header><div className={styles.section}>
-        {request.status === "FAILED" ? <p className={styles.notice} data-tone="danger"><AlertTriangle size={17}/>{t("La solicitud falló. Revisa la trazabilidad y los datos persistidos; corrige mediante una revisión permitida o crea una nueva solicitud. No se reintenta en silencio.", "The request failed. Review traceability and persisted data; correct it through an allowed revision or create a new request. It is never retried silently.")}</p> : null}
-        {request.status === "CANCELLED" ? <p className={styles.notice} data-tone="warning"><AlertTriangle size={17}/>{t("Esta solicitud fue cancelada y no puede continuar a ofertas o booking. Crea una solicitud nueva si la operación sigue vigente.", "This request was cancelled and cannot continue to offers or booking. Create a new request if the operation is still needed.")}</p> : null}
-        {request.status === "DRAFT" ? <><p className={styles.notice} data-tone="warning"><AlertTriangle size={17}/>{t("Enviar bloquea la versión esperada. Un conflicto 409 debe recargarse, no ocultarse.", "Submit uses the expected version. A 409 conflict must be reloaded, not hidden.")}</p><Button disabled={phase!=="idle" || readIncomplete} isLoading={phase === "submitting"} onClick={() => void submit()}><Send size={16}/>{t("Enviar solicitud", "Submit request")}</Button></> : null}
-        {!readIncomplete && contract.canRequestQuotes && request.status !== "DRAFT" && !ranking ? <p className={styles.notice}><CalendarClock size={17}/>{t("La solicitud está enviada. Las alternativas y ofertas aparecerán cuando el backend las persista.", "The request is submitted. Alternatives and offers appear when the backend persists them.")}</p> : null}
-        {!readIncomplete && ranking && !decision ? <Button disabled={phase!=="idle" || commercialReadBlocked || !inspectRankedOption(selectedOption, commercialContext).available} onClick={() => setDecisionOpen(true)}><FileCheck2 size={16}/>{t("Revisar selección", "Review selection")}</Button> : null}
-        {!readIncomplete && decision && bookingsStillNeeded(decision.data.selectedOfferIds, activeBookings, decision.id).length ? <Button disabled={phase!=="idle" || commercialReadBlocked} onClick={() => { setBookingConsent(false); setBookingOpen(true); }}><PackageCheck size={16}/>{t("Autorizar booking", "Authorize booking")}</Button> : null}
-        {activeBookings.length ? <Link className={styles.primary} href="/bookings"><Truck size={16}/>{t("Ver reservas", "View bookings")}</Link> : null}
-      </div></section>
-      <section className={styles.panel} aria-label={t("Historial de la solicitud", "Request history")}><div className={styles.timeline}>
-        <Timeline label={t("Solicitud creada", "Request created")} value={formatDateTime(request.createdAt, localeTag)} />
-        <Timeline label={t("Última revisión", "Last revision")} value={`${formatDateTime(request.updatedAt, localeTag)} · v${request.draftVersion}`} />
-        <Timeline label={t("Ofertas recibidas", "Offers received")} value={readIncomplete ? "—" : String(offers.length)} />
-        <Timeline label={t("Decisión", "Decision")} value={readIncomplete ? t("Sin verificar", "Unverified") : decision?.status ?? t("Pendiente", "Pending")} />
-        <Timeline label={t("Bookings", "Bookings")} value={readIncomplete ? "—" : String(activeBookings.length)} />
-      </div></section>
-      {!readIncomplete ? <OutcomePanel requests={[request]} offers={offers} bookings={activeBookings} incidents={incidents} t={t} localeTag={localeTag}/> : null}
-      {activeBookings.map(booking => <section className={styles.panel} key={booking.id}><BookingConfirmationWindow bookingId={booking.id} canAct={!readIncomplete&&!commercialReadBlocked&&phase==="idle"} onChanged={()=>void refreshCommercial()}/>{booking.status==="AUTHORIZED"?<BookingPreparation id={booking.id} version={booking.version} enabled={!readIncomplete&&!commercialReadBlocked&&phase==="idle"} onChanged={()=>void refreshCommercial()}/>:null}<BookingResources booking={booking}
-        rows={[...(workflow.holds??[]),...(workflow.executions??[])]} offers={offers}
-        decisions={(workflow.decisions??[]).filter(row=>row.kind==="decisions")} complete={!readIncomplete && !commercialReadBlocked}
-        t={t} localeTag={localeTag}/></section>)}</aside>
-    </div>
-
+    <RequestWorkspaceFrame request={request} status={statusLabel} incomplete={unverified} busy={phase !== "idle"} primary={primary}
+      progress={[true, offers.length > 0, Boolean(decision), activeBookings.length > 0, contract.active.length > 0 && contract.confirmed.length === contract.active.length]}
+      onRefresh={commercialRefreshEnabled && !readIncomplete ? () => void refreshCommercial() : undefined} onEvaluate={() => void evaluate()}
+      onEdit={request.status === "DRAFT" && !readIncomplete ? () => setEditOpen(true) : undefined}
+      overview={<div className={frame.stack}>
+        <div className={frame.overviewGrid}>
+          <div className={frame.stack}>
+            {evaluation || phase === "evaluating" ? <section className={styles.panel}><header className={styles.panelHeader}><h2>{t("Ruta y cobertura", "Route & coverage")}</h2><MapPin size={18}/></header>
+              <ContentMotion identity={phase === 'evaluating' ? 'reading' : 'evaluated:' + selectedCandidateId}>{phase === "evaluating" ? <WorkspaceSkeleton shape="detail" label={t("Evaluando ruta…", "Evaluating route…")}/>
+                : evaluation ? <div className={styles.section}><CandidateResults evaluation={evaluation} selectedCandidateId={selectedCandidateId} onSelectCandidate={setSelectedCandidateId} t={t}/>{mapProps && <RoadCandidateMapBoundary props={mapProps} t={t}/>}</div> : null}</ContentMotion>
+            </section> : <div className={`${frame.compactCard} ${frame.evaluate}`}><div><h2>{t("Ruta y cobertura", "Route & coverage")}</h2><p>{t("Consulta las opciones de transporte para este trayecto.", "Check transport options for this route.")}</p></div><Button variant="secondary" size="compact" disabled={phase !== "idle"} onClick={() => void evaluate()}>{t("Evaluar ahora", "Evaluate now")}</Button></div>}
+            <RequestFacts request={request}/>
+          </div>
+          <div className={frame.stack}>
+            <section className={frame.compactCard}><h2>{t("Siguiente paso", "Next step")}</h2><p>{unverified ? t("Actualiza los datos antes de continuar.", "Refresh the data before continuing.")
+              : request.status === "FAILED" ? t("Revisa la actividad y corrige los datos antes de continuar.", "Review activity and correct the details before continuing.")
+              : request.status === "CANCELLED" ? t("Esta solicitud está cancelada. Inicia otra si aún necesitas el transporte.", "This request is cancelled. Start another if transport is still needed.")
+              : activeBookings.length ? t("Consulta la confirmación del transportista en Reservas.", "Check the carrier confirmation in Bookings.")
+              : canBook ? t("Revisa la oferta seleccionada y autoriza la reserva.", "Review the selected offer and authorize the booking.")
+              : canChoose ? t("Compara las ofertas en Oferta y contrato.", "Compare the offers in Offer & contract.")
+              : request.status === "DRAFT" ? t("Revisa los datos y envía tu solicitud.", "Review the details and submit your request.")
+              : t("Las ofertas aparecerán cuando respondan los transportistas.", "Offers appear when carriers respond.")}</p></section>
+            {!readIncomplete && activeBookings.map(booking => <section className={frame.compactCard} key={booking.id}>
+              <h2>{t("Reserva", "Booking")} {displayReference(null, 'BKG', booking.id)}</h2>
+              <BookingConfirmationWindow bookingId={booking.id} canAct={!unverified && phase === "idle"} onChanged={() => void refreshCommercial()}/>
+              {booking.status === "AUTHORIZED" && <BookingPreparation id={booking.id} version={booking.version} enabled={!unverified && phase === "idle"} onChanged={() => void refreshCommercial()}/>}
+              <BookingResources booking={booking} rows={[...(workflow.holds ?? []), ...(workflow.executions ?? [])]} offers={offers} decisions={(workflow.decisions ?? []).filter(row => row.kind === "decisions")} complete={!unverified} t={t} localeTag={localeTag}/>
+            </section>)}
+          </div>
+        </div>
+      </div>}
+      commercial={<div className={commercialStyles.workspace}>
+        {!commercialRefreshEnabled && !unverified && contract.canRequestQuotes && offerBriefing.currentOfferCount > 0 && <section className={frame.compactCard}><div className={frame.evaluate}><strong>{offerBriefing.currentOfferCount} {t("ofertas vigentes", "current offers")}</strong><Button variant="secondary" size="compact" onClick={() => { setOfferVoiceTurns([]); setOfferVoiceOpen(true); }}>{t("Escuchar opciones", "Hear options")}</Button></div></section>}
+        {!readIncomplete && contract.canRequestQuotes && commercialRefreshEnabled && <QuoteSearchPanel compact pickupAt={request.pickupWindow.startsAt} requestId={request.id} busy={phase !== "idle" || commercialReadBlocked} canSearch={request.status === "DRAFT" || request.status === "PENDING"} onSearch={searchQuotes} onNova={() => { setOfferVoiceTurns([]); setOfferVoiceOpen(true); }}/>}
+        {!readIncomplete ? <div className={commercialStyles.commercial}><CommercialPanel compact context={commercialContext} catalog={catalog} selectedOptionIndex={selectedOptionIndex} setSelectedOptionIndex={setSelectedOptionIndex} decision={decision} bookings={activeBookings} busy={phase !== "idle" || commercialReadBlocked}
+          onDecide={() => { if (phase === "idle" && !commercialReadBlocked) setDecisionOpen(true); }} onBook={() => { if (phase !== "idle" || commercialReadBlocked) return; setBookingConsent(false); setBookingOpen(true); }} t={t} localeTag={localeTag}/></div>
+          : <div className={frame.compactCard}><p>{t("Actualiza la información para revisar las ofertas.", "Refresh the information to review offers.")}</p></div>}
+        {!readIncomplete && contract.canRequestQuotes && <OpportunityPanel compact context={commercialContext} catalog={catalog} busy={phase !== "idle" || commercialReadBlocked}
+          onRequest={key => { const target = opportunityTargets(commercialContext).find(row => row.key === key); if (!target || phase !== "idle" || commercialReadBlocked) return;
+            const channels = commonResponseChannels(target.serviceIds, target.carrierId, catalog); if (!channels.length) return;
+            setOpportunityKey(key); setOpportunityDeadline(""); setResponseChannel(channels[0]); setOpportunityConsent(false); }} t={t} localeTag={localeTag}/>}
+      </div>}
+      documents={<RequestDocumentWorkspace requestId={request.id} blocked={unverified || phase !== "idle"} bookingLabels={Object.fromEntries(activeBookings.map(booking=>[booking.id,carrierLabel(booking.carrierId,catalog,t)]))}/>}
+      activity={<div className={frame.stack}>
+        <div className={frame.counters}><span>{unverified ? '—' : incidents.length} {t("incidencias", "incidents")}</span><span>{unverified ? '—' : activeBookings.filter(row => row.data.carrierConfirmationStatus === 'REJECTED').length} {t("rechazos", "rejections")}</span><span>{unverified ? '—' : offers.filter(row => row.status === 'WITHDRAWN').length} {t("ofertas retiradas", "withdrawn offers")}</span></div>
+        <RequestActivity request={request} offers={offers} bookings={activeBookings} decisions={(workflow.decisions??[]).filter(row=>row.kind==="decisions")} carrierName={id=>carrierLabel(id,catalog,t)}/>
+        {!readIncomplete && outcomeCount > 0 && <OutcomePanel requests={[request]} offers={offers} bookings={activeBookings} incidents={incidents} t={t} localeTag={localeTag}/>}
+        {!readIncomplete && <IncidentRecoveryPanel request={request}/>}
+      </div>}>
+      {commercialReadBlocked ? <div className={frame.connectionNotice} role="status"><div><strong>{error?.status === 0 ? t("Conexión interrumpida", "Connection interrupted") : t("No se pudo actualizar", "Refresh failed")}</strong><p>{t("Conservamos los últimos datos. Reintenta antes de seleccionar o reservar.", "Your last loaded data is preserved. Retry before selecting or booking.")}</p></div><Button variant="secondary" size="compact" disabled={phase !== "idle"} isLoading={phase === "refreshing"} onClick={()=>void refreshCommercial()}>{t("Reintentar", "Retry")}</Button></div>
+        : error ? <ErrorNotice error={error} t={t}/> : null}
+    </RequestWorkspaceFrame>
     <Dialog open={Boolean(opportunityTarget)} title={t("Solicitar oferta al transportista", "Request a Carrier offer")}
       description={t("Revisa el destinatario y el plazo antes de enviar la oportunidad.", "Review the recipient and deadline before sending the opportunity.")} closeLabel={t("Cancelar", "Cancel")} onClose={() => { if (phase !== "requesting") setOpportunityKey(null); }}>
       {opportunityTarget ? <div className={comparisonStyles.confirmation}>
@@ -412,8 +415,6 @@ function EditDialog({ open, edit, setEdit, request, confirmed, setConfirmed, onR
   </Dialog>;
 }
 
-function Summary({ label, value, badge }: { label: string; value: string; badge?: string }) { return <div className={styles.summaryItem}><small>{label}</small>{badge ? <span className={styles.status} data-tone={badge}>{value}</span> : <strong>{value}</strong>}</div>; }
-function Timeline({ label, value }: { label: string; value: string }) { return <div className={styles.timelineItem}><span className={styles.timelineDot}><CheckCircle2 size={13}/></span><div><strong>{label}</strong><span>{value}</span></div></div>; }
 function ErrorNotice({ error, t }: { error: ShipperApiError; t: (es: string, en: string) => string }) {
   const guidance = error.status === 409 ? t("Recarga la solicitud: otra sesión cambió la versión.", "Reload the request: another session changed the version.")
     : error.status === 401 ? t("Tu sesión expiró. Vuelve a iniciar sesión.", "Your session expired. Sign in again.")
