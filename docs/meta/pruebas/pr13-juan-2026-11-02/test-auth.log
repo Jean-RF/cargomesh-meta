@@ -1,0 +1,22 @@
+✔ returns success after Supabase creates an authenticated session (2.5809ms)
+✔ returns a safe authentication error for invalid credentials (0.6513ms)
+✔ keeps unexpected authentication failures recoverable (0.4089ms)
+✔ keeps a non-credential HTTP 400 error recoverable (0.2291ms)
+✔ redirects an anonymous visitor away from an operational route (1.9702ms)
+✔ redirects a non-active member away from an operational route (0.3555ms)
+✔ allows only a resolved active member to render an operational route (0.6712ms)
+✔ redirects an active member away from login and leaves denied visitors on login (0.4522ms)
+✔ carrier frontend preview requires explicit opt-in on development localhost3000 (1.3049ms)
+✔ Client and Carrier sign out before returning to the public home page (180.503ms)
+✔ failed or cross-origin sign out cannot claim success or redirect (29.8528ms)
+✔ local and hosted preview exits clear their grant and return home; entry still opens Client (47.1121ms)
+✔ cookie session mutations accept same origin and Next loopback normalization (35.6034ms)
+✔ cookie session mutations reject missing/external origins and mismatched authorities (1.2217ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1385.5893

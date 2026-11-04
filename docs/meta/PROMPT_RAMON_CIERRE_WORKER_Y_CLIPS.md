@@ -1,0 +1,15 @@
+# Prompt para Ramón/Jean — cerrar el worker de la demo
+
+Tu PR #6 ya está integrado en main de meta-hackathon (`7d185dc`). El aislamiento de videos por intento quedó validado. Nuestra base Meta local64321 ya tiene las dos migraciones DockMind y sus62 pgTAP aprobados. No repitas esa implementación.
+
+Necesitamos cerrar tu parte de operación real, en tu rama codex/meta-ramon actualizada desde origin/main:
+
+1. Entrega el paquete de ejecución/configuración del worker. Si Modal aún no está desplegado, prepara el despliegue concreto y deja explícito qué autorización/acceso falta; no lo presentes como disponible. Necesitamos URL HTTPS del worker, mecanismo de proxy auth y configuración de callback HMAC. Credenciales por archivo privado/canal seguro, no por chat, PR, commit ni capturas. Indica nombres de variables y dónde configurarlas, sin revelar valores.
+2. Resuelve y documenta la conectividad: un worker Modal no puede descargar clips desde127.0.0.1:64321 ni enviar callbacks al frontend8080. Especifica un entorno Meta autorizado con Storage y callback HTTPS alcanzables, o entrega un lanzador local explícito y aislado para probar tu worker desde nuestra web. Nada de permisos abiertos, secretos ficticios o fallback silencioso. No cambies ni despliegues Amazon.
+3. Clips propios (RA-00), referencia manual y permiso de uso: necesitamos evidencia por grupo para el pedido8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe. Manifiesto163cd0cc-a0d2-4f8e-bcde-310c689fcafd rev1. Grupo A879dc96b-3c00-43e1-b772-619996b2b713:8BOX; grupo B d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c:4BOX. Cada clip/job debe tener grupo y cobertura inequívocos. No reutilices un conteo global como si probara ambos grupos. El conteo debe salir del pipeline, no del guion ni de la referencia manual.
+4. Evidencia del worker real: clipSHA, configuración/línea/dirección/unidad, identidad de job/intento/grupo/revisión, origen e indicador real_inference, timecodes, incertidumbre y video anotado verificable. Conservar UNKNOWN/REQUIRES_REVIEW cuando corresponda. La revisión humana puede confirmar cobertura; no convierte un fixture en inferencia real.
+5. Prueba de aceptación: job desde la sesión→resultado persistido→observación entregada a Juan→video del intento correcto. Repetir callback/recuperación no duplica observación ni repite inferencia automáticamente. Registrar consumo real de proveedor si haces una llamada; no ejecutar inferencia pagada o publicar infraestructura sin autorización de su responsable.
+
+Nosotros estamos uniendo localmente el mismo pedido/documentos/booking con Tetris, comparación y Passport, usando el pipeline real con un segmentador FIXTURE claramente rotulado mientras llega tu paquete. Esa prueba local no acredita SAM real, captura propia ni Modal desplegado.
+
+Mantén autoría, pruebas y límites. PR #6 está cerrado: el siguiente incremento requiere PR de continuación sobre la misma rama, no force-push ni otra rama. No hagas merge a main ni despliegues por tu cuenta; entrega el incremento para revisión.

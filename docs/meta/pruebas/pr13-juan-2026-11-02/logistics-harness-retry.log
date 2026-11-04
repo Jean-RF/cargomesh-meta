@@ -1,0 +1,12 @@
+✔ equipment and body distinguish a rigid box, articulated closed box, curtain and reefer (2.652ms)
+✔ an explicit recorded design is respected only within the compatible equipment family (0.4743ms)
+✔ all 23 designs require matching explicit body and chassis; specialist bodies resolve without a hint (1.763ms)
+✔ all eighty persisted scenario rows associate to the published families without changing identity or operational facts (50.9051ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 613.0432

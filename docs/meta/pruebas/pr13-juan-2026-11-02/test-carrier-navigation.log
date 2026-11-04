@@ -1,0 +1,15 @@
+✔ all menu destinations stay in the same workspace document (1.7407ms)
+✔ previews require the explicit server demo flag (1.2507ms)
+✔ nested fleet entries and local review remain addressable (0.3108ms)
+✔ overlapping overlays release scroll in either closing order (0.3602ms)
+✔ cleanup is idempotent and a later overlay starts a fresh lock (0.1845ms)
+✔ existing lock owner state is restored (0.1609ms)
+✔ connected commercial navigation removes redundant entries and highlights every legacy alias (0.4311ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 454.3879

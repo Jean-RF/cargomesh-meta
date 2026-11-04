@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-02T20:43:52.073Z",
+  "newPassportId": "331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+  "newPassportCurrent": true,
+  "rows": [
+    {
+      "id": "879dc96b-3c00-43e1-b772-619996b2b713",
+      "status": "MATCH",
+      "declared": 8,
+      "observed": 8
+    },
+    {
+      "id": "d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c",
+      "status": "MATCH",
+      "declared": 4,
+      "observed": 4
+    }
+  ],
+  "oldDiscrepancyPassportId": "beb6cc9f-7ad4-4a6d-99a8-9d26f1bd709a",
+  "oldDiscrepancyPreserved": true,
+  "visualAcceptance": false
+}

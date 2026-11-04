@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { workspaceHref } from "@/features/workspace-mode/paths";
 import {workspaceFetch} from "@/features/workspace-mode/workspace-fetch";
 import { providerStatus, interpretationStillCurrent, type ConversationProviderMode } from "@/features/v2-conversation-prep/provider-status";
+import {transportChatDecision} from './transport-chat';
 import type { ProposalErrorCode } from "@/shared/schemas/meta/model-proposal";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
@@ -41,7 +42,7 @@ import { commercialChatIntent } from "./chat-commercial-action";
 import { ChatQuotePanel } from "./chat-quote-panel";
 import { measurementTurn, measurementReply, type PendingMeasurement } from "./measurement-clarification";
 import { interpretDeterministically } from "@/features/v2-conversation-prep/interpretation";
-import { conversationContext } from "./conversation-context";
+import { conversationContext, conversationMemory } from "./conversation-context";
 import { serviceabilityReply } from "./serviceability-reply";
 import type { V2IntakeApiError } from "./v2-intake-client";
 import { readRequestWorkflow } from "./workflow-chat-client";
@@ -145,7 +146,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   useEffect(()=>{if(open&&startNovaOnOpenRef.current&&novaMicrophoneRef.current){startNovaOnOpenRef.current=false;novaMicrophoneRef.current.toggle();}},[open,novaMicrophone]);
   const [novaTextPending, setNovaTextPending] = useState(false);
   const chatMountedRef = useRef(true);
-  const currentTextScope = JSON.stringify([pathname, optionsSource, request?.id ?? null, request?.draftVersion ?? null]);
+  const currentTextScope = JSON.stringify([pathname, optionsSource, transportSelectionRequired, request?.id ?? null, request?.draftVersion ?? null]);
   const textScopeRef = useRef(currentTextScope); textScopeRef.current = currentTextScope;
   useEffect(() => { chatMountedRef.current = true; return () => { chatMountedRef.current = false; }; }, []);
   const [queuedVoiceAction,setQueuedVoiceAction]=useState<"review"|"confirm"|"apply"|null>(null);
@@ -246,13 +247,10 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   useEffect(()=>{if(transportSelectionRequired)setHistory(previous=>previous.length===1?[{speaker:'assistant',text:transportHelp}]:previous);},[transportSelectionRequired,transportHelp]);
   function handleTransportSelection(value:string,user:string|null){
     if(!transportSelectionRequired)return false;
-    const text=value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
     const turnLanguage=conversationLanguage(value,language);setLanguage(turnLanguage);
-    const road=/\b(road|terrestre|carretera|camion|truck)\b/.test(text),other=/\b(air|sea|aereo|avion|maritimo|barco)\b/.test(text);
-    const denied=/\b(no|not|dont|don't|sin)\b.{0,24}\b(road|terrestre|carretera|camion|truck)\b/.test(text);
-    const question=/\b(what|why|que|como|cual|explain|explica)\b/.test(text);
-    const affirmative=/^(si|yes|ok|okay|dale|continuar|continue|adelante|vamos)(\s+(por favor|please))?[.!]*$/.test(text);
-    if((road||affirmative)&&!other&&!denied&&!question){onSelectRoad?.();add(user,turnLanguage==='es'?'Elegimos transporte terrestre. Ahora selecciona el origen y el destino, o dime dónde recoger la carga.':'Road selected. Now choose origin and destination, or tell me where to pick up the cargo.');}
+    const decision=transportChatDecision(value);
+    if(decision==='DISCUSS')return false;
+    if(decision==='ROAD'){onSelectRoad?.();add(user,turnLanguage==='es'?'Abrimos el formulario terrestre. Conservo lo conversado; completemos el origen y el destino. Todavía no se ha guardado una solicitud.':'Opening the Road form. I will keep what we discussed; let’s complete pickup and delivery. No request has been saved yet.');}
     else add(user,turnLanguage==='es'?'Terrestre está disponible; aéreo y marítimo aún no. ¿Continuamos con terrestre?':'Road is available; Air and Sea are not available yet. Shall we continue with Road?');
     return true;
   }
@@ -552,9 +550,12 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
 
   async function interpret(value: string, currentDraft = draft, preferredField: GuidedConversationField | null = null): Promise<{ interpretation: Interpretation; mode: ConversationProviderMode }> {
     const started = { draft: JSON.stringify(latestInterpretDraftRef.current), scope: textScopeRef.current, revision: ++interpretationRevisionRef.current };
-    const currentField = preferredField ?? missingField(currentDraft);
+    const currentField = transportSelectionRequired ? null : preferredField ?? missingField(currentDraft);
     const input = { schemaVersion: "2.0" as const, text: value, currentField, inputRevision: started.revision, language: conversationLanguage(value, language),
-      context: { ...conversationContext(currentDraft, currentField, failedAttempts.current), previousHelpTopic: previousHelpTopic.current } };
+      context: { ...(transportSelectionRequired ? {knownFields:[],lastAskedField:null,failedAttempts:0} : conversationContext(currentDraft, currentField, failedAttempts.current)),
+        screen: transportSelectionRequired ? "TRANSPORT_SELECTION" as const : "ROAD_INTAKE" as const,
+        conversation: conversationMemory(history),
+        previousHelpTopic: previousHelpTopic.current } };
     const endpoint = optionsSource === "fixture" ? "/api/v2/conversation/preview" : "/api/v2/conversation/interpret";
     const response = await workspaceFetch(endpoint, {
       method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
@@ -602,7 +603,6 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
 
   async function send(value = text) {
     setOpen(true); setLauncherExpanded(false);
-    if(transportSelectionRequired){setText('');handleTransportSelection(value,value);return;}
     if (catalogStatus !== "ready") {
       setText(value);
       setSendNotice(t("Espera a que estén disponibles los datos de tu organización para enviar el mensaje.", "Wait for your organization's catalog before sending this message."));
@@ -611,6 +611,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     if (sendInFlightRef.current) return;
     sendInFlightRef.current = true;
     try {
+      if(transportSelectionRequired){await processMessage(value);return;}
       setLanguage(conversationLanguage(value, language));
       if (novaVoiceEnabled) await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
       // Read/mutate business data through the existing reviewed workflow, never through the model.
@@ -629,7 +630,20 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   }
 
   async function processMessage(submitted: string) {
-    if(handleTransportSelection(submitted,submitted))return;
+    if(transportSelectionRequired){
+      const gate=chatSendGate(submitted,busy||interpretationBusy||workflowBusy,voice.speaking);
+      if(gate.kind==='wait'){if(gate.notice)setSendNotice(gate.notice);return;}
+      const value=gate.value;setText('');setSendNotice('');setFailedMessage('');
+      if(handleTransportSelection(value,value))return;
+      setInterpretationBusy(true);
+      try{
+        const result=await interpret(value);
+        // This screen only discusses the choice. Provider output never edits cargo or selects a mode.
+        add(value,conversationAcknowledgment(result.interpretation.acknowledgment)??transportHelp);
+      }catch(error){setFailedMessage(value);add(value,error instanceof Error?error.message:transportHelp);}
+      finally{setInterpretationBusy(false);}
+      return;
+    }
     const gate = chatSendGate(submitted, busy || interpretationBusy || workflowBusy, voice.speaking);
     if (gate.kind === "wait") {
       if (gate.notice) setSendNotice(gate.notice);
@@ -939,7 +953,7 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
             if (update.final && update.role === "user") setLanguage(current => conversationLanguage(update.text, current));
             if (update.final && update.role === "user" && !appliedVoiceTurnsRef.current.has(update.contentId)) {
               appliedVoiceTurnsRef.current.add(update.contentId);setVoiceMode(true);
-              if(handleTransportSelection(update.text,null))return;
+              if(transportSelectionRequired){handleTransportSelection(update.text,null);return;}
               const reviewCommand=spokenReviewCommand(update.text);
               if(reviewCommand){
                 if(processedVoiceCommandsRef.current.has(update.contentId))return;

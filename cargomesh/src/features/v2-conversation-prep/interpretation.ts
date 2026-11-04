@@ -20,6 +20,11 @@ export const ConversationContextFieldSchema = ConversationFieldNameSchema.exclud
 ]);
 
 export const ConversationContextSchema = z.object({
+  screen: z.enum(["TRANSPORT_SELECTION", "ROAD_INTAKE"]).optional(),
+  conversation: z.array(z.object({
+    role: z.enum(["user", "assistant"]),
+    text: z.string().trim().min(1).max(350),
+  }).strict()).max(16).optional(),
   knownFields: z.array(z.object({
     field: ConversationContextFieldSchema,
     value: z.string().trim().min(1).max(100),

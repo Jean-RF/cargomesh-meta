@@ -1,0 +1,151 @@
+{
+  "schema": "dockmind.evidence.v1",
+  "generatedAt": "2026-11-02T13:20:04.824Z",
+  "label": "SYNTHETIC_OR_FIXTURE",
+  "identity": {
+    "jobId": "2d5c69e1-8dd4-4b08-a57d-1fe2cfa21700",
+    "attempt": 1,
+    "organizationId": "c2300000-0000-4000-8000-000000000001",
+    "sessionId": "5394399d-e3a3-404c-8181-0b97aad29d49",
+    "evidenceId": "c64d6591-1a57-4e06-938f-7fedd69389cf",
+    "groupId": "879dc96b-3c00-43e1-b772-619996b2b713",
+    "manifestRevision": 1,
+    "coverage": "COMPLETE"
+  },
+  "status": "SUCCEEDED",
+  "error": null,
+  "clip": {
+    "source": "SYNTHETIC_RENDER",
+    "sha256Uploaded": "bc7d5d9143b05fe2aa69013d94b830c309f163d6e1209002550ddf3e5287a0d8",
+    "sha256Analyzed": "bc7d5d9143b05fe2aa69013d94b830c309f163d6e1209002550ddf3e5287a0d8",
+    "sameBytes": true,
+    "original": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "frames": 473,
+      "duration": 15.766667,
+      "codec": "h264"
+    },
+    "analyzed": {
+      "width": 1280,
+      "height": 720,
+      "fps": 10,
+      "frames": 158,
+      "duration": 15.8,
+      "codec": "h264"
+    },
+    "roi": null,
+    "timeMapping": "segundo = cuadro / 10"
+  },
+  "config": {
+    "line": {
+      "from": [
+        0.5,
+        0
+      ],
+      "to": [
+        0.5,
+        1
+      ]
+    },
+    "inside": [
+      0.8,
+      0.5
+    ],
+    "direction": "IN cruza hacia el punto de adentro; OUT, al revés. Coordenadas en fracciones del cuadro original.",
+    "unit": "BOX",
+    "concept": "cardboard box",
+    "margin": 0.01,
+    "minTrackFrames": 3
+  },
+  "provenance": {
+    "segmenter": "FIXTURE",
+    "realInference": false,
+    "model": "FIXTURE",
+    "requestId": null,
+    "analysisVersion": "dockmind-0.1.0",
+    "analyzedAt": "2026-11-02T13:14:40+00:00"
+  },
+  "count": {
+    "status": "OK",
+    "entries": 8,
+    "exits": 0,
+    "net": 8,
+    "unit": "BOX",
+    "events": [
+      {
+        "seconds": 3.2,
+        "frame": 32,
+        "direction": "IN",
+        "objectId": 0
+      },
+      {
+        "seconds": 4.6,
+        "frame": 46,
+        "direction": "IN",
+        "objectId": 1
+      },
+      {
+        "seconds": 6,
+        "frame": 60,
+        "direction": "IN",
+        "objectId": 2
+      },
+      {
+        "seconds": 7.4,
+        "frame": 74,
+        "direction": "IN",
+        "objectId": 3
+      },
+      {
+        "seconds": 8.8,
+        "frame": 88,
+        "direction": "IN",
+        "objectId": 4
+      },
+      {
+        "seconds": 10.2,
+        "frame": 102,
+        "direction": "IN",
+        "objectId": 5
+      },
+      {
+        "seconds": 11.6,
+        "frame": 116,
+        "direction": "IN",
+        "objectId": 6
+      },
+      {
+        "seconds": 13,
+        "frame": 130,
+        "direction": "IN",
+        "objectId": 7
+      }
+    ],
+    "reviewFlags": [],
+    "tracksSeen": 8,
+    "tracksCounted": 8,
+    "maxObjectsInFrame": 4
+  },
+  "providerUsage": {
+    "billable": false,
+    "seconds": 0,
+    "boxes": 352,
+    "estimatedCostUsd": 0
+  },
+  "overlay": {
+    "object": "c64d6591-1a57-4e06-938f-7fedd69389cf-2d5c69e1-8dd4-4b08-a57d-1fe2cfa21700-a1-overlay.mp4",
+    "status": "VERIFIED",
+    "sha256Stored": "e18d6bffdab768da77f6b57763df3f7e06323c4f2fc6b0c700ea30c43321ffb4",
+    "sha256Now": "e18d6bffdab768da77f6b57763df3f7e06323c4f2fc6b0c700ea30c43321ffb4",
+    "sizeBytesNow": 113484,
+    "verified": true
+  },
+  "delivery": {
+    "status": "DELIVERED",
+    "tries": 1,
+    "observationId": "1978675e-30c7-4015-b6b8-c6d5d85a08c7",
+    "deliveredAt": "2026-11-02T13:14:40.99472+00:00"
+  }
+}

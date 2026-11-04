@@ -263,3 +263,62 @@ test("Meta response contract requires honest provider metadata and revision", ()
   });
   assert.equal(parsed.success, false);
 });
+
+test("transport screen sends greetings and arithmetic to Meta with no form mutations", async () => {
+  for (const [text, acknowledgment] of [["hola", "¡Hola! ¿Continuamos con transporte terrestre?"],
+    ["cuanto es 1 +2", "Es 3. ¿Continuamos con transporte terrestre?"]]) {
+    const mock = transport([{intent:"HELP",fields:[],declaration:null,acknowledgment}]);
+    const result = await interpretConversationTurn({...input,text,currentField:null,language:"es",
+      context:{screen:"TRANSPORT_SELECTION",knownFields:[],lastAskedField:null,failedAttempts:0}},
+      {env,metaFetch:mock.fetch});
+    assert.equal(result.mode,"META");
+    assert.equal(result.interpretation.acknowledgment,acknowledgment);
+    assert.deepEqual(result.interpretation.fields,[]);
+    assert.equal(mock.seen.length,1);
+    assert.match(JSON.stringify(mock.seen[0].body.messages),/TRANSPORT_SELECTION/);
+  }
+});
+
+test("provider cannot turn transport discussion into cargo edits", async () => {
+  const mock=transport([turn()]);
+  const result=await interpretConversationTurn({...input,context:{screen:"TRANSPORT_SELECTION",
+    knownFields:[],lastAskedField:null,failedAttempts:0}},{env,metaFetch:mock.fetch});
+  assert.equal(result.mode,"DETERMINISTIC");
+  assert.equal(result.providerError?.code,"MODEL_OUTPUT_INVALID");
+  assert.deepEqual(result.interpretation,{intent:"HELP",fields:[]});
+  assert.equal(mock.seen.length,2);
+});
+
+test("transport discussion remains read-only when Meta is not configured",async()=>{
+  const result=await interpretConversationTurn({...input,text:"save draft",
+    context:{screen:"TRANSPORT_SELECTION",knownFields:[],lastAskedField:null,failedAttempts:0}},
+    {env:{CARGOMESH_AI_PROVIDER:"DETERMINISTIC"}});
+  assert.deepEqual(result.interpretation,{intent:"HELP",fields:[]});
+});
+
+test('follow-up memory reaches Meta as untrusted context and a remembered declaration stays read-only',async()=>{
+  const conversation=[{role:'user' as const,text:'I need to fly at least 1,000 bottles of Medicine'},
+    {role:'assistant' as const,text:'Would you like to continue with Road?'},
+    {role:'user' as const,text:"yeah we're not"}];
+  const acknowledgment='You mentioned 1,000 bottles of medicine. Did you mean Road, or do you still need Air?';
+  const mock=transport([{intent:'HELP',fields:[],declaration:null,acknowledgment}]);
+  const result=await interpretConversationTurn({...input,text:'no I would like to go with hello shipment',
+    currentField:null,context:{screen:'TRANSPORT_SELECTION',knownFields:[],lastAskedField:null,failedAttempts:0,conversation}},
+    {env,metaFetch:mock.fetch});
+  assert.equal(result.mode,'META');
+  assert.equal(result.interpretation.acknowledgment,acknowledgment);
+  assert.deepEqual(result.interpretation.fields,[]);
+  const messages=mock.seen[0].body.messages as Array<{role:string;content:string}>;
+  assert.deepEqual(JSON.parse(messages[1].content).context.conversation,conversation);
+  assert.equal(messages.length,2); // History cannot inject new system/tool messages.
+});
+
+test('remembered user text is never reused as a new field quote on the Road form',async()=>{
+  const mock=transport([turn()]);
+  const result=await interpretConversationTurn({...input,text:'I am ready to continue',
+    context:{screen:'ROAD_INTAKE',knownFields:[],lastAskedField:null,failedAttempts:0,
+      conversation:[{role:'user',text:fixture.input.text}]}},{env,metaFetch:mock.fetch});
+  assert.equal(result.providerError?.code,'MODEL_OUTPUT_INVALID');
+  assert.equal(result.mode,'DETERMINISTIC');
+  assert.equal(mock.seen.length,2);
+});

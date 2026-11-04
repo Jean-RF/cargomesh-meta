@@ -1,10 +1,36 @@
 # Base existente e incremento Meta
 
+## Cristhian — publicación completa de cambios pendientes — 3 noviembre 2026
+
+Por solicitud expresa del usuario se reúne todo el trabajo local pendiente sobre main46beca6: dashboard Cliente con planeta azul, actividad en tabla y accesos laterales; conversación Meta en selección de transporte, memoria acotada y navegación al mismo formulario; guías y contratos documentales, PDF ficticios, escenarios SQL opt-in y arneses/evidencias de los recorridos con documentos, vídeos sintéticos/FIXTURE y Passport. Se conserva la autoría de los productores y los límites originales; no se presenta FIXTURE como SAM real ni una revisión documental como contratación. Se actualiza la regresión del dashboard a la tabla actual.
+
+Los registros fechados que dicen «local/sin commit» describen su corrida original; este incremento publica sus archivos sin volver a ejecutar comandos comerciales, migraciones ni proveedores pagados. El push se hace a codex/meta-cristhian para PR a main del repositorio de trabajo; la candidata Indie sigue separada. [Inventario y validación del conjunto](docs/meta/pruebas/PUBLICACION_COMPLETA_2026-11-03.md).
+
 ## Cristhian — optimización técnica de sesiones, Tracking y visor de Juan — 2 noviembre 2026
 
 Sobre main40f8865 (PR #13), cámara/resize separados de la construcción 3D: el arnés de efectos pasa de11 construcciones a1 en7 cambios de ángulo y3 resize, conservando selección, exportador y tiempo de fábrica. HDR/controles se conservan entre escenarios y el compositor captura métricas sin un render directo extra. Se mantienen los modelos/animaciones y autoría de Juan. Incluye guards únicos de documentos/sesiones, lecturas de Passport en paralelo y deduplicación acotada de Tracking (25 ejecuciones/5 referencias:100→60 llamadas de adaptador), conservando autorización y evidencia parcial.
 
 113 pruebas focalizadas aprobadas y TypeScript correcto. [Evidencia, límites y candidata exacta](docs/meta/pruebas/OPTIMIZACION_PR13_2026-11-02.md). Sin diseño nuevo, inferencia pagada, migración o certificación de FPS; revisión visual pendiente del usuario. Publicación en rama codex/meta-cristhian/PR a main autorizada por el usuario; no implica merge, despliegue ni promoción automática a Indie.
+
+## Cristhian — cierre local de sesiones y Tracking — 2 noviembre 2026
+
+A petición expresa del usuario, corrección local de la doble autenticación en sesiones de Juan y optimización de Tracking con alcance por lectura/actor. Cuatro trabajadores, orden estable y deduplicación por referencia;25 ejecuciones con5 pedidos/reservas:100→60 llamadas de adaptador, sin afirmar latencia de producción. Detalle comercial y oferta se leen en paralelo a eventos.53 pruebas Tracking y43 sesiones, TypeScript y arquitectura correctos; HTTP local200 y rechazos401/403/413 conservados. [Evidencia y límites](docs/meta/pruebas/TRACKING_Y_SESIONES_2026-11-02.md). Sin migración, revisión visual, commit/push ni despliegue. Conserva autoría de Juan para sesiones/Passport.
+
+## Cristhian — auditoría y ajustes de fluidez técnica — 2 noviembre 2026
+
+Sobre main1f07e8a, medición local HTTP (90 respuestas/19rutas iniciales y46/8 tras ajuste). Documentos elimina registro duplicado de auth en raíz, con regresión2→1 y seguridad conservada. Integración de Tetris con lectores existentes de Juan: sesión/historial/Passport seleccionado en paralelo, sin diseño ni comandos nuevos; pruebas de arranque concurrente, denegación e histórico. Ocho lecturas concurrentes consistentes y aislamientoB/anónimo comprobado. Documentos8, sesiones42, workspace46, tipos y arquitectura879/250 correctos. [Evidencia y límites](docs/meta/pruebas/FLUIDEZ_TECNICA_2026-11-02.md). Sin inferencia, migración, push/deploy o aceptación UX; cambios propios aún locales. Pendientes de escala y authlista del dueño documentados sin reescribir sus reglas.
+
+## Cristhian — integración de la entrega sintética A/B de Ramón — 2 noviembre 2026
+
+Paquete original de Ramón/Jean descargado de Drive, hashes/bytes/formato verificados; generador leído, no ejecutado ni medios regenerados. Extensión local del arnés HTTP para admitir entrega.json revisada y conservar su huella. Next8080→launcher8765 con fixture por grupo→Storage/callbackHMAC→observaciones→Passport: A8/8 y B4/4 MATCH. Readback por cookie; caso previo3/4 conservado. EvaluadorRA-00 mantieneSIN_INFERENCIA_REAL en ambos, coste0 y exactos0; no se rebaja la aceptación física. TypeScript correcto. [Evidencia](docs/meta/pruebas/CLIPS_RAMON_DEMO_2026-11-02.md). Trabajo local sin commit; sin publicación, SAM, Modal, migración o aceptación visual. La integración no reasigna la autoría de Ramón ni promueve el producto general aIndie.
+
+## Cristhian — web y launcher local conectados — 2 noviembre 2026
+
+Sobre main`1f07e8a`, configuración privada local del launcher de Ramón y nuevo arnés `meta-web-worker-demo.ts` (trabajo local sin commit). HTTP al frontend Next8080, sin sustituir routers/dispatchers: mismos grupos8+4 del pedido documental, dos clips sintéticos/FIXTURE procesados por separado, resultados8y3, callbacksHMAC, overlaysVERIFIED, dos observaciones y nuevo Passport reabierto. Sesiones automáticas Cliente/Carrier por cookies y documentosACCEPTED/bookingAUTHORIZED conservados. TypeScript correcto, cero inferencia pagada o explicaciones nuevas. [Evidencia y límites](docs/meta/pruebas/WEB_Y_WORKER_LOCAL_2026-11-02.md). Conserva autoría de los módulos de Ramón/Juan/Luis/Axel; sin promoción Indie, SAM/Modal, migración remota o aceptación visual.
+
+## Cristhian — integración local del mismo caso documental con DockMind y Passport — 1 noviembre 2026
+
+Trabajo local sin commit, sobre `main@7d185dc`. Arnés de integración `meta-connected-demo.ts`: conserva el pedido/manifiesto 8+4 BOX, usa el worker/parser/contador de Ramón, sesión/comparador/Passport de Juan y explicaciones de Luis. No reasigna su autoría ni promueve el trabajo general al alcance Indie. Dos clips sintéticos, segmentación FIXTURE y proveedor de explicación INJECTED: 8/8 MATCH y 4/3 DIFFERENCE_PROPOSED, overlays privados verificados, dos observaciones y Passport reabierto. 62 pgTAP, 41 pruebas puras Python, 30 de jobs y TypeScript aprobados; lectura Auth/HTTP local. [Evidencia y pendientes reales](docs/meta/pruebas/RECORRIDO_DOCKMIND_CONECTADO_2026-11-01.md). Sin SAM/Modal/captura propia, publicación o migración alojada; aceptación visual pendiente.
 
 Para delimitar la entrega Indie y el trabajo general de cinco personas, rige el [acuerdo de entrega y reintegración](docs/meta/ENTREGA_Y_REINTEGRACION.md). Registrar autoría real y distinguir el cambio que se presenta del que queda para después del evento. Una integración de Cristhian no reasigna la autoría de Luis.
 
@@ -305,3 +331,18 @@ Implementación `bb36cb2d2318f6b0e5c17f38d36dd2adbd1c4dda` en `codex/meta-luis`,
 Interfaz por grupo con explicación validada, eventos, idioma, estado, metadatos y revisión humana. Guardado/reapertura/descarga del mismo Passport, enlaces que conservan la versión seleccionada y recuperación sin inferencia adicional. Recibos duraderos con clave/huella canónica, reclamación atómica, staging, expiración y reintento explícito; guardado de Juan y recibo SAVED atómicos. La nueva transición `20261101120000` conserva el cuerpo original del writer y añade vigencia material bajo bloqueos. No cambia migraciones anteriores ni cantidades/comandos comerciales.
 
 Verificación: 48 pruebas de explicación, 40 de sesiones/Passport, 138 conversación y 27 adjuntos; 13 casos Auth/HTTP/PostgreSQL con proveedor inyectado; pgTAP 36+13; TypeScript, arquitectura 847/246, manifiesto y build correctos. Desde navegador se generó una vez con Meta real (`muse-spark-1.3`, 6593 ms, 1072/1981 tokens, coste no informado) sobre observación sintética; se reabrió, navegó a eventos y descargó la explicación guardada. Sin errores de consola/desbordamiento de documento en 1365/390 CSS px. Solo migración Docker Meta local con respaldo previo; sin deploy, migración alojada o validación de conteo físico. [Aceptación y evidencia](docs/meta/LUIS_PASSPORT_ACCEPTANCE_2026_11_01.md).
+## 31-oct: conversación Meta antes de seleccionar transporte y acceso Carrier local — Cristhian
+
+El selector de transporte interceptaba todos los mensajes con una respuesta fija, incluso saludos y preguntas generales, sin invocar la API. Ahora solo las decisiones explícitas de transporte se resuelven localmente; el resto pasa por el endpoint autenticado de Meta con contexto TRANSPORT_SELECTION, sin aceptar campos ni ejecutar acciones. Cambiar de pantalla invalida respuestas pendientes. El proveedor conserva errores y fallback visibles; el formulario y las confirmaciones comerciales no cambian.
+
+Pruebas: 22/22 de adaptador/selector y 106/106 de chat/workflow; TypeScript exit 0. Inferencia HTTP local real de «cuanto es 1 +2» y «hola»: META, respuesta directa, campos vacíos y cero escrituras comerciales. Revisión visual pendiente del usuario; sin nueva integración de voz, imágenes o Baseten.
+
+El 503 al abrir Carrier era configuración local incompleta y ausencia de grants en el escenario QA. Se configuró la cuenta sintética existente en el archivo de entorno privado y se aplicó únicamente un CARRIER_EDITOR acotado al Carrier QA ROAD en meta-cr01-validation, con expiración de 14 días. Se mantiene la autenticación y la verificación de operador/grant. Escenario reproducible en supabase/scenarios/v2-meta-local-access/; sesión y página Carrier verificadas por HTTP 200. No se tocó una base alojada ni se publicó este incremento.
+
+## 31-oct: memoria de conversación y apertura del formulario — Cristhian
+
+El chat de texto enviaba solo el último mensaje y campos estructurados; perdía declaraciones todavía no representables en el formulario. Se agrega memoria acotada de la conversación activa (hasta 16 mensajes de 350 caracteres), con anclas de carga/correcciones y turnos recientes, enmascarando emails/teléfonos y omitiendo transcripciones provisionales. Se conserva el contexto entre selector y formulario; una conversación nueva o una orden explícita de empezar de nuevo corta ese historial. No es memoria permanente ni persistencia de chat en base de datos.
+
+El modelo usa el historial como contexto no confiable, sin convertir citas antiguas en propuestas nuevas. Una referencia ambigua o negada no acepta Road. Confirmar Road desde el dashboard abre el formulario existente en su primer paso; no crea una solicitud incompleta ni reserva transporte. Los frascos de medicamentos se conservan como declaración conversada, sin asumir cajas/pallets, requisitos térmicos o equipo.
+
+Verificación: 30 pruebas focalizadas (incluyen las del área), suite chat/workflow 111/111 y TypeScript exit 0; 133 casos distintos entre workflow y adaptador. HTTP real con memoria del ejemplo: META pide aclarar «hello shipment»; en ROAD_INTAKE recuerda «at least 1,000 bottles of Medicine» y pregunta el origen. No hubo escrituras comerciales, inferencia de imágenes/audio, migración, merge ni despliegue. La comprobación de navegación es de lógica/cableado y tipos; la revisión visual permanece pendiente del usuario.

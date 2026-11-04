@@ -6,13 +6,19 @@ import { workspaceHref } from "@/features/workspace-mode/paths";
 import { ConversationChat } from "./conversation-chat";
 import { useIntakeSession } from "./intake-session";
 import { requestToPrototypeDraft, type PrototypeStep } from "./prototype-model";
+import {roadIntakeNavigation} from './transport-chat';
 
 /** The form and assistant consume this same session across client navigation. */
 export function ClientAssistant({ onDockedChange }: { onDockedChange: (docked: boolean) => void }) {
   const session = useIntakeSession();
   const pathname = usePathname();
   const router = useRouter();
-  const choosingTransport=pathname.endsWith('/freight-request/new')&&!session.roadTransportSelected;
+  const choosingTransport=!session.roadTransportSelected&&!session.request;
+  const startRoadRequest=()=>{
+    const navigation=roadIntakeNavigation(pathname);
+    session.selectRoadTransport();session.setStep(navigation.step);
+    if(navigation.openForm)router.push(workspaceHref('/freight-request/new',window.location.pathname));
+  };
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("assistant") === "open")
       window.dispatchEvent(new CustomEvent("cargomesh:open-assistant"));
@@ -28,7 +34,7 @@ export function ClientAssistant({ onDockedChange }: { onDockedChange: (docked: b
   const catalogStatus = session.optionsSource === "loading" ? "loading" : session.optionsSource === "error" ? "error"
     : !session.optionCoverage.complete || session.optionCoverage.emptyFacilities ? "empty" : "ready";
   return <ConversationChat presentation="workspace" draft={session.draft} options={session.activeOptions}
-    transportSelectionRequired={choosingTransport} onSelectRoad={session.selectRoadTransport}
+    transportSelectionRequired={choosingTransport} onSelectRoad={startRoadRequest}
     optionsSource={session.optionsSource === "fixture" ? "fixture" : "api"} request={choosingTransport?null:session.request}
     evaluation={choosingTransport?null:session.evaluation} error={choosingTransport?null:session.submitError} draftDirty={session.dirtyAfterCreate}
     canRevise={Boolean(session.request && requestToPrototypeDraft(session.request) && session.request.status === "DRAFT")}

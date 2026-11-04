@@ -1,5 +1,7 @@
 # Contratos entre frentes
 
+Para el siguiente incremento: [criterios del expediente documental mínimo](EXPEDIENTE_DOCUMENTAL_MVP.md). Subida/reutilización, permisos de compartir y revisión carrier están pendientes; los PDF de ejemplo no los implementan. Para verificar la entrega existente: [guía de usuario CR-01](../pruebas/GUIA_USUARIO_CR01.md).
+
 CR-01 conecta la [base Hono de manifiestos](MANIFEST_HTTP_CR01.md) con el formulario existente: cinco endpoints, servicio, repositorio y migración aplicada exclusivamente en Meta local. [Pruebas SQL, servicio y recorrido HTTP/navegador](../VALIDACION_CR01_2026-10-28.md) ejecutados; no hay despliegue alojado ni aceptación de consumidores acreditados. Las entregas de Axel y Juan mantienen sus límites.
 
 La [propuesta de flujo, expediente documental y carga](../FLUJO_PEDIDO_DOCUMENTOS_Y_CARGA.md) detalla estados, pantallas, revisión humana, responsables y contratos lógicos pendientes. Distingue documentos reutilizables de Organización, documentos del envío y documentos del carrier. No equivale a un repositorio de archivos implementado ni a una política documental aceptada; su capa nueva requiere revisión antes de ampliar schemas estrictos o guardas comerciales.

@@ -1,0 +1,16 @@
+✔ dashboard projects persisted IDs/statuses and cargo without changing source records (74.7209ms)
+✔ recent activity is bounded and the last loaded draft can be outside the recent six (5.2649ms)
+✔ activity controls filter real request states, never infer monthly plans or bookings (22.0135ms)
+✔ connected and isolated demo dashboards share presentation but keep separate data readers (6.1415ms)
+✔ activity summary keeps exact request destinations and timestamps and distinguishes denied from empty data (175.2539ms)
+✔ mockup layout is container-responsive, not the fixed 1440 by 1000 artboard (3.832ms)
+✔ Client sidebar keeps My shipments and Tracking; bookings/history remain internal tabs (3.1912ms)
+✔ dashboard AI input still dispatches the shared assistant event, trims/bounds text and never saves a request (34.9753ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1683.7085

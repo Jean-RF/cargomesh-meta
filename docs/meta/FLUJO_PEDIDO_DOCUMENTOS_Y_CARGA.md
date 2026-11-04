@@ -4,6 +4,8 @@
 
 **Estado:** entrega documental para revisión del equipo. Contrasta el código de nuestra rama con fuentes oficiales; no implementa pantallas, almacenamiento, validación documental, emisión fiscal o nuevos comandos. No acredita aprobación de Axel/Juan/Luis/Ramón ni pruebas del producto. Los nombres de entidades, estados y comandos nuevos de este archivo son propuestas, no APIs disponibles.
 
+**Actualización de lectura, 28-oct:** el [formulario/manual CR-01](VALIDACION_CR01_2026-10-28.md) sí tiene ahora endpoints, migración y pruebas locales; las observaciones «sin persistencia» de este documento describen la inspección inicial. El expediente documental continúa sin implementación. Consultar [entrega actual](ENTREGA_ACTUAL.md), [guía de usuario](pruebas/GUIA_USUARIO_CR01.md) y [criterios del punto 4](contracts/EXPEDIENTE_DOCUMENTAL_MVP.md). El momento exacto de revisión documental carrier y sus roles siguen por acordar antes de añadir guardas al flujo comercial.
+
 ## 1. Decisión de producto y vocabulario
 
 El objetivo del cliente es **crear un pedido de transporte y tramitarlo con un carrier**, aprovechando los documentos que su organización ya tiene. No necesita volver a subir el mismo archivo en cada operación, pero cada uso requiere comprobar alcance, vigencia y permiso de acceso.

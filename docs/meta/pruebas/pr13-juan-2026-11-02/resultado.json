@@ -1,0 +1,28 @@
+{
+  "head": "dbcd5f99b59f65df699c7075e1f8d9e56560de6f",
+  "base": "1f07e8a54b9f0e2170d8017827d629b1a8c59f69",
+  "logistics": {
+    "firstPass": 211,
+    "firstFail": 1,
+    "harnessFailure": "missing scenario in partial archive",
+    "targetedRetryPass": 4,
+    "distinctCasesVerified": 212
+  },
+  "metaLoading": 45,
+  "auth": 14,
+  "navigation": 7,
+  "explanations": 48,
+  "distinctCasesVerified": 326,
+  "architecture": {
+    "modules": 897,
+    "clientEntries": 255
+  },
+  "typecheckExit": 0,
+  "browserChecked": false,
+  "paidInference": false,
+  "merged": true,
+  "mergeCommit": "40f8865397dddf0c7dd6b87598c74b7d87ee9dad",
+  "mergedAt": "2026-11-02T23:43:35Z",
+  "mergeTree": "2bd227080741639405a656635c15f0dffac51814",
+  "localCheckoutPulled": false
+}

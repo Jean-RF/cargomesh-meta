@@ -1,0 +1,38 @@
+{
+  "base": "46beca6cd35208907f58f88451c5514972958e03",
+  "chatWorkflow": 111,
+  "metaAi": 54,
+  "clientOperations": 81,
+  "dashboard": 8,
+  "localArchitecture": {
+    "modules": 899,
+    "clientEntries": 255
+  },
+  "paidInference": false,
+  "remoteMigrations": false,
+  "visualReview": "pending user",
+  "productionBuild": {
+    "exit": 0,
+    "isolated": true,
+    "privateEnvCopied": false,
+    "cpuLimit": 2
+  },
+  "applicationTree": "a31f14b49dbf5384751aadc41cf472d3a2d556d8",
+  "candidateVerification": {
+    "chatWorkflow": 111,
+    "metaAi": 54,
+    "clientOperations": 81,
+    "documents": 8,
+    "loadingSessions": 48,
+    "dashboard": 8,
+    "total": 310,
+    "architectureModules": 899,
+    "clientEntries": 255
+  },
+  "typecheckExit": 0,
+  "dashboardAsset": {
+    "file": "cargomesh/public/landing-planet/dashboard-planet.png",
+    "sha256": "a0a0b7a62b130c0965817f75769581e498e3de3d59244a878ca3ec635d6eaf73"
+  },
+  "credentialPatternFindings": 0
+}

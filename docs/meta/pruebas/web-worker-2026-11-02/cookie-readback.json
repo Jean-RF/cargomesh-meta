@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-02T13:22:06.938Z",
+  "clientSession": "HTTP200_COOKIE",
+  "carrierSession": "HTTP200_COOKIE",
+  "passportCurrent": true,
+  "jobCount": 2,
+  "carrierDocuments": [
+    {
+      "revisionId": "54928626-1882-481e-b93c-a11abe7898ea",
+      "review": "ACCEPTED"
+    },
+    {
+      "revisionId": "ac08c938-6e48-4ffe-abb3-b0ccbc07f75c",
+      "review": "ACCEPTED"
+    }
+  ],
+  "bookingId": "654a02b7-c366-4298-8e1a-003481cbfb0a",
+  "bookingStatus": "AUTHORIZED",
+  "tetrisHTTP": 200,
+  "visualAcceptance": false
+}

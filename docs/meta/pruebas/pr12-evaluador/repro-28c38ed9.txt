@@ -1,0 +1,21 @@
+NULL_COVERAGE_ACTUAL: [('879dc96b-3c00-43e1-b772-619996b2b713', 'COMPLETE', None, True), ('d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c', None, 'COBERTURA_DESCONOCIDA', False)]
+FAILED_B_ACTUAL:
+| Clip | Grupo esperado | Grupo del job | Cobertura esperada | Cobertura del job | Resultado | Fuente | Segmentador | Esperado | Observado | Diferencia | Estado | Marcas | Problema | Error | Segundos SAM | Costo USD |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| a.mp4 | 879dc96b-3c00-43e1-b772-619996b2b713 | 879dc96b-3c00-43e1-b772-619996b2b713 | COMPLETE | COMPLETE | EVALUADO | OWN_CAPTURE | META_SAM_API | 8 | 8 | 0 | OK | 0 | — | — | 12.5 | 0.06 |
+| b.mp4 | d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c | d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c | COMPLETE | COMPLETE | FAILED | OWN_CAPTURE | — | 4 | — | — | FAILED | 0 | — | SIN_OBSERVACION | 0 | 0 |
+
+Clips: esperados 2, evaluados 1 (exactos 1), fallidos 1, pendientes 0, sin resultado 0.
+No todos los clips esperados tienen un conteo exacto y válido: la evaluación no está completa. Resultado válido solo para estos clips; no generaliza.
+- Grupo 879dc96b-3c00-43e1-b772-619996b2b713: esperados 1, evaluados 1 (exactos 1), fallidos 0, pendientes 0, sin resultado 0.
+- Grupo d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c: esperados 1, evaluados 0 (exactos 0), fallidos 1, pendientes 0, sin resultado 0.
+MISSING_B_ACTUAL:
+| Clip | Grupo esperado | Grupo del job | Cobertura esperada | Cobertura del job | Resultado | Fuente | Segmentador | Esperado | Observado | Diferencia | Estado | Marcas | Problema | Error | Segundos SAM | Costo USD |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| a.mp4 | 879dc96b-3c00-43e1-b772-619996b2b713 | 879dc96b-3c00-43e1-b772-619996b2b713 | COMPLETE | COMPLETE | EVALUADO | OWN_CAPTURE | META_SAM_API | 8 | 8 | 0 | OK | 0 | — | — | 12.5 | 0.06 |
+| b.mp4 | d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c | — | COMPLETE | — | SIN_RESULTADO | — | — | 4 | — | — | — | 0 | — | — | 0 | 0 |
+
+Clips: esperados 2, evaluados 1 (exactos 1), fallidos 0, pendientes 0, sin resultado 1.
+No todos los clips esperados tienen un conteo exacto y válido: la evaluación no está completa. Resultado válido solo para estos clips; no generaliza.
+- Grupo 879dc96b-3c00-43e1-b772-619996b2b713: esperados 1, evaluados 1 (exactos 1), fallidos 0, pendientes 0, sin resultado 0.
+- Grupo d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c: esperados 1, evaluados 0 (exactos 0), fallidos 0, pendientes 0, sin resultado 1.

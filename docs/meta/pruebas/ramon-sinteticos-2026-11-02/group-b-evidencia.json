@@ -1,0 +1,127 @@
+{
+  "schema": "dockmind.evidence.v1",
+  "generatedAt": "2026-11-02T20:43:47.091Z",
+  "label": "SYNTHETIC_OR_FIXTURE",
+  "identity": {
+    "jobId": "64b8e40d-f339-4f2b-acfd-7a504efc7ff4",
+    "attempt": 1,
+    "organizationId": "c2300000-0000-4000-8000-000000000001",
+    "sessionId": "36dd509e-6612-4ce2-8663-46531abce043",
+    "evidenceId": "83fb775a-3898-4412-9729-14b5e8d085ee",
+    "groupId": "d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c",
+    "manifestRevision": 1,
+    "coverage": "COMPLETE"
+  },
+  "status": "SUCCEEDED",
+  "error": null,
+  "clip": {
+    "source": "SYNTHETIC_RENDER",
+    "sha256Uploaded": "780dcbd2c6f2985728ee96998b9dcd6dec019dd1d67274af804ffb2b2747b3dd",
+    "sha256Analyzed": "780dcbd2c6f2985728ee96998b9dcd6dec019dd1d67274af804ffb2b2747b3dd",
+    "sameBytes": true,
+    "original": {
+      "width": 1280,
+      "height": 720,
+      "fps": 10,
+      "frames": 162,
+      "duration": 16.2,
+      "codec": "h264"
+    },
+    "analyzed": {
+      "width": 1280,
+      "height": 720,
+      "fps": 10,
+      "frames": 162,
+      "duration": 16.2,
+      "codec": "h264"
+    },
+    "roi": null,
+    "timeMapping": "segundo = cuadro / 10"
+  },
+  "config": {
+    "line": {
+      "from": [
+        0.5,
+        0
+      ],
+      "to": [
+        0.5,
+        1
+      ]
+    },
+    "inside": [
+      0.8,
+      0.5
+    ],
+    "direction": "IN cruza hacia el punto de adentro; OUT, al revés. Coordenadas en fracciones del cuadro original.",
+    "unit": "BOX",
+    "concept": "cardboard box",
+    "margin": 0.01,
+    "minTrackFrames": 3
+  },
+  "provenance": {
+    "segmenter": "FIXTURE",
+    "realInference": false,
+    "model": "FIXTURE",
+    "requestId": null,
+    "analysisVersion": "dockmind-0.1.0",
+    "analyzedAt": "2026-11-02T20:43:01+00:00"
+  },
+  "count": {
+    "status": "OK",
+    "entries": 4,
+    "exits": 0,
+    "net": 4,
+    "unit": "BOX",
+    "events": [
+      {
+        "seconds": 3.2,
+        "frame": 32,
+        "direction": "IN",
+        "objectId": 1
+      },
+      {
+        "seconds": 6.2,
+        "frame": 62,
+        "direction": "IN",
+        "objectId": 2
+      },
+      {
+        "seconds": 9.2,
+        "frame": 92,
+        "direction": "IN",
+        "objectId": 3
+      },
+      {
+        "seconds": 12.2,
+        "frame": 122,
+        "direction": "IN",
+        "objectId": 4
+      }
+    ],
+    "reviewFlags": [],
+    "tracksSeen": 4,
+    "tracksCounted": 4,
+    "maxObjectsInFrame": 2
+  },
+  "providerUsage": {
+    "billable": false,
+    "seconds": 0,
+    "boxes": 176,
+    "estimatedCostUsd": 0
+  },
+  "overlay": {
+    "object": "83fb775a-3898-4412-9729-14b5e8d085ee-64b8e40d-f339-4f2b-acfd-7a504efc7ff4-a1-overlay.mp4",
+    "status": "VERIFIED",
+    "sha256Stored": "3c24b4f4d739891e86035890880980a494fc26cba61e5bd1813724a3bd6e8905",
+    "sha256Now": "3c24b4f4d739891e86035890880980a494fc26cba61e5bd1813724a3bd6e8905",
+    "sizeBytesNow": 88829,
+    "verified": true
+  },
+  "delivery": {
+    "status": "DELIVERED",
+    "tries": 1,
+    "observationId": "72ae522c-3359-45b6-9711-5b6d90a37bf2",
+    "deliveredAt": "2026-11-02T20:43:01.641541+00:00"
+  }
+}

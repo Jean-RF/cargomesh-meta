@@ -1,0 +1,97 @@
+{
+  "ranAt": "2026-11-02T03:00:34.719Z",
+  "requestId": "8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+  "manifestId": "163cd0cc-a0d2-4f8e-bcde-310c689fcafd",
+  "sessionId": "9c332d9c-506a-45ed-a7d1-1df48c848269",
+  "passportId": "ceee5506-476c-48ba-a78d-81ff742ea5b2",
+  "dispatches": 2,
+  "injectedCalls": 2,
+  "mode": "DEMO",
+  "segmenter": "FIXTURE",
+  "realInference": false,
+  "explanationTransport": "INJECTED",
+  "rows": [
+    {
+      "id": "879dc96b-3c00-43e1-b772-619996b2b713",
+      "label": "BOX",
+      "unit": "BOX",
+      "declared": 8,
+      "planned": null,
+      "observed": 8,
+      "status": "MATCH",
+      "delta": 0,
+      "progressPercent": 100,
+      "evidence": [
+        {
+          "id": "610923d7-7393-41bf-ad44-f3c5c5c2ce9f",
+          "timeSeconds": 3.2
+        },
+        {
+          "id": "3f5b76e7-6fed-4993-9107-7f59723a74aa",
+          "timeSeconds": 4.6
+        },
+        {
+          "id": "6f92885f-6774-4c0a-b310-6350308a6ed5",
+          "timeSeconds": 6
+        },
+        {
+          "id": "cb55439b-624a-4900-9007-272efe793832",
+          "timeSeconds": 7.4
+        },
+        {
+          "id": "251cbcc4-507e-455b-adb4-6958600d6286",
+          "timeSeconds": 8.8
+        },
+        {
+          "id": "cf012309-7d51-4821-8299-bde9eadd03ee",
+          "timeSeconds": 10.2
+        },
+        {
+          "id": "5b078606-6191-49b1-819f-a54d00972f17",
+          "timeSeconds": 11.6
+        },
+        {
+          "id": "3cff478b-0969-4a32-9375-4144a7ac20de",
+          "timeSeconds": 13
+        }
+      ],
+      "coverage": "COMPLETE",
+      "planIssue": "Sin plan",
+      "assignments": []
+    },
+    {
+      "id": "d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c",
+      "label": "BOX",
+      "unit": "BOX",
+      "declared": 4,
+      "planned": null,
+      "observed": 3,
+      "status": "DIFFERENCE_PROPOSED",
+      "delta": 1,
+      "progressPercent": 75,
+      "evidence": [
+        {
+          "id": "61b5e45b-ba47-48f6-af44-15fff51078e1",
+          "timeSeconds": 3.2
+        },
+        {
+          "id": "b10fe345-0f1a-4676-8df4-0881263a9fd2",
+          "timeSeconds": 4.6
+        },
+        {
+          "id": "f2039d74-646c-4b5f-b01a-c20d5df8fd20",
+          "timeSeconds": 6
+        }
+      ],
+      "coverage": "COMPLETE",
+      "planIssue": "Sin plan",
+      "assignments": []
+    }
+  ],
+  "effects": {
+    "bookingCreated": false,
+    "incidentCreated": false,
+    "deliveryConfirmed": false
+  },
+  "url": "http://127.0.0.1:8080/tetris?session=9c332d9c-506a-45ed-a7d1-1df48c848269&passport=ceee5506-476c-48ba-a78d-81ff742ea5b2"
+}

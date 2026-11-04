@@ -1,0 +1,17 @@
+[
+  {
+    "path": "cargomesh/package.json",
+    "normalizedMergeExit": 1,
+    "conflicts": 1
+  },
+  {
+    "path": "cargomesh/src/features/meta-loading-dashboard/operation.tsx",
+    "normalizedMergeExit": 0,
+    "conflicts": 0
+  },
+  {
+    "path": "BUILT_DURING_HACKATHON.md",
+    "normalizedMergeExit": 0,
+    "conflicts": 0
+  }
+]

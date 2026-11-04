@@ -1,0 +1,56 @@
+{
+  "author": "Ramon/Jean",
+  "source": "https://drive.google.com/drive/folders/1dCVyHHa9xqoF-LwFVBIlfU3L5Q9_Y8z-",
+  "provenance": "SYNTHETIC_RENDER; geometric reference; no real inference",
+  "generatorExecuted": false,
+  "files": [
+    {
+      "name": "entrega.json",
+      "bytes": 1150,
+      "sha256": "b4e63eff90fef47cbfad3ddf0e8c79b107d5a2bd3891a4c4700f726d77e70817",
+      "driveId": "1IgN0QIyA0cqzud8P_TfhqrQN9IykRt6e"
+    },
+    {
+      "name": "generar_sinteticos.py",
+      "bytes": 3127,
+      "sha256": "9f66bff4eaf7011fcece58b9bf617004d1b9d60d4c1ac6527786ff4b2ef40c9c",
+      "driveId": "1DuiQ_Adpshmh6yjLtN2kafflqn4L8Fiq"
+    },
+    {
+      "name": "grupo_a_sintetico.fixture.txt",
+      "bytes": 20658,
+      "sha256": "7d6e8a559c42008dc17ac9b4c5d4693f62b9fea84e282f9ebe16de9d4de75e98",
+      "driveId": "1zBWv4Il4Rqn7Sl-ePiaBXJbIu_OU1VfX"
+    },
+    {
+      "name": "grupo_a_sintetico.mp4",
+      "bytes": 30528,
+      "sha256": "6bd1ab08da4422fd50eacf7f8f32ed9eb967d3ccabce1ceebd8145208d646fc4",
+      "driveId": "1FmBSmZlwnFcoPaEbokZzLWAK8YEmlkcw"
+    },
+    {
+      "name": "grupo_b_sintetico.fixture.txt",
+      "bytes": 10722,
+      "sha256": "97d47f154b1aa6bbdb4f18c2f268bb0e2af00812739dba5a4e2a9a981701ca83",
+      "driveId": "1uJ5i9hgzoqmLmXbnoaV-M61KqfG1AhqR"
+    },
+    {
+      "name": "grupo_b_sintetico.mp4",
+      "bytes": 21335,
+      "sha256": "780dcbd2c6f2985728ee96998b9dcd6dec019dd1d67274af804ffb2b2747b3dd",
+      "driveId": "1wgoks4k-fbuTASpav5RkzAJZf2j9dGlx"
+    },
+    {
+      "name": "LEEME.md",
+      "bytes": 2527,
+      "sha256": "594706cfe009de144c03ebd6f58dbf706a363de98f87b5d33edd1eef83199414",
+      "driveId": "1Pchabnx8qZS0t2y3m8fIFSC5dYsJVdjJ"
+    },
+    {
+      "name": "referencia_sintetica_ab.csv",
+      "bytes": 1780,
+      "sha256": "3fff644449b96c36c5694d550003d181a93a08f55e08b0bf8d84750f1aa82166",
+      "driveId": "1YrG0OSGm1juyJHZsz-2KBRs5FQX6nFA3"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "at": "2026-11-02T20:43:04.809Z",
+  "requestId": "8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+  "manifestId": "163cd0cc-a0d2-4f8e-bcde-310c689fcafd",
+  "sessionId": "36dd509e-6612-4ce2-8663-46531abce043",
+  "passportId": "331e9301-b37f-46a3-ad06-2b5eab9ca4d6",
+  "transport": "NEXT_HTTP_LOCAL_LOOPBACK",
+  "segmenter": "FIXTURE",
+  "realInference": false,
+  "explanationCalls": 0,
+  "deliverySha256": "b4e63eff90fef47cbfad3ddf0e8c79b107d5a2bd3891a4c4700f726d77e70817",
+  "rows": [
+    {
+      "groupId": "879dc96b-3c00-43e1-b772-619996b2b713",
+      "declared": 8,
+      "observed": 8,
+      "unit": "BOX",
+      "status": "MATCH",
+      "delta": 0
+    },
+    {
+      "groupId": "d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c",
+      "declared": 4,
+      "observed": 4,
+      "unit": "BOX",
+      "status": "MATCH",
+      "delta": 0
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "879dc96b-3c00-43e1-b772-619996b2b713",
+      "clipId": "c04db746-0540-4463-86a3-86d8c4009610",
+      "clipSha256": "6bd1ab08da4422fd50eacf7f8f32ed9eb967d3ccabce1ceebd8145208d646fc4",
+      "jobId": "9eaf27c1-a5e3-481a-aec0-773c6d83f22e",
+      "attempt": 1,
+      "observationId": "478db29c-3dcd-4045-a122-cf7b30170615",
+      "net": 8,
+      "source": "SYNTHETIC_RENDER",
+      "realInference": false,
+      "status": "SUCCEEDED",
+      "delivery": "DELIVERED",
+      "overlayStatus": "VERIFIED",
+      "overlaySha256": "8c4c85492d1f52fd7561e85f63f613f71219ed4299196721d5df515301b5c43b"
+    },
+    {
+      "groupId": "d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c",
+      "clipId": "83fb775a-3898-4412-9729-14b5e8d085ee",
+      "clipSha256": "780dcbd2c6f2985728ee96998b9dcd6dec019dd1d67274af804ffb2b2747b3dd",
+      "jobId": "64b8e40d-f339-4f2b-acfd-7a504efc7ff4",
+      "attempt": 1,
+      "observationId": "72ae522c-3359-45b6-9711-5b6d90a37bf2",
+      "net": 4,
+      "source": "SYNTHETIC_RENDER",
+      "realInference": false,
+      "status": "SUCCEEDED",
+      "delivery": "DELIVERED",
+      "overlayStatus": "VERIFIED",
+      "overlaySha256": "3c24b4f4d739891e86035890880980a494fc26cba61e5bd1813724a3bd6e8905"
+    }
+  ],
+  "effects": {
+    "bookingCreated": false,
+    "incidentCreated": false,
+    "deliveryConfirmed": false
+  },
+  "url": "http://127.0.0.1:8080/tetris?session=36dd509e-6612-4ce2-8663-46531abce043&passport=331e9301-b37f-46a3-ad06-2b5eab9ca4d6"
+}

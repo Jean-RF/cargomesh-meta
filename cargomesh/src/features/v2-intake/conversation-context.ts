@@ -2,6 +2,19 @@ import { ConversationContextFieldSchema, type InterpretationRequest } from "@/fe
 import { CONVERSATION_FIELDS, type GuidedConversationField } from "./conversation-fields";
 import type { V2IntakePrototypeDraft } from "./prototype-model";
 
+/** Bounded, in-session memory. Preserve early cargo statements as well as recent dialogue. */
+export function conversationMemory(turns: ReadonlyArray<{speaker: 'user'|'assistant';text:string;provisional?:boolean}>) {
+  const reset=turns.findLastIndex(turn=>turn.speaker==='user'
+    && /^(?:start over|start again|empezar de nuevo|empecemos|reiniciar)[.!\s]*$/i.test(turn.text.trim()));
+  const complete=turns.slice(reset+1).filter(turn=>!turn.provisional&&turn.text.trim());
+  const recent=complete.slice(-12);
+  const anchors=complete.filter(turn=>turn.speaker==='user'&&!recent.includes(turn)
+    && /\b(?:cargo|ship|transport|pallets?|boxes|bottles?|medicine|mercanc[ií]a|carga|env[ií]o|frascos?|medicamentos?|kg|actually|correction|corrige)\b/i.test(turn.text)).slice(-4);
+  return [...anchors,...recent].map(turn=>({role:turn.speaker,
+    text:turn.text.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,'[contact]')
+      .replace(/\+?\d[\d\s().-]{7,}\d/g,'[phone]').trim().slice(0,350)})).filter(turn=>turn.text);
+}
+
 /** Only validated, non-contact provisional fields are sent as interpretation hints. */
 export function conversationContext(
   draft: V2IntakePrototypeDraft,

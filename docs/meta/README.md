@@ -1,14 +1,23 @@
 # CargoMesh Meta: entrada del equipo
 
+Entorno de trabajo: [solo Meta local activo; bancos de pruebas apagados al terminar](ENTORNO_LOCAL_ACTIVO.md).
+
 La documentación activa de Meta está en esta carpeta. El trabajo nuevo se realiza en `Chujutak2024/meta-hackathon`, ramas `codex/meta-*` y PR a `main` del mismo repositorio. Linear está aplazado por indicación expresa del usuario.
+
+**Para revisar esta entrega, empieza por [Entrega actual](ENTREGA_ACTUAL.md) y sigue la [guía de prueba como usuario](pruebas/GUIA_USUARIO_CR01.md).** El formulario/manifiesto funciona en Meta local; el punto 4 documental tiene plantillas y criterios, todavía sin subida/reutilización implementadas. Los cortes históricos de los planes no sustituyen este estado.
 
 | Necesidad | Documento |
 | --- | --- |
+| Repartir el siguiente incremento y revisar avances del equipo | [Mapeado de tareas y próxima revisión](MAPEADO_TAREAS_PROXIMA_REVISION.md) |
+| Ver el estado de los seis puntos y qué se puede aceptar | [Entrega actual](ENTREGA_ACTUAL.md) |
+| Probar manualmente el formulario, la revisión y la reapertura | [Guía de usuario CR-01](pruebas/GUIA_USUARIO_CR01.md) |
+| Definir qué falta para cerrar el punto 4 de documentos | [Criterios de expediente documental](contracts/EXPEDIENTE_DOCUMENTAL_MVP.md) |
 | Entender el producto y el mapa del código | [Estructura](../../ESQUEMA_PROYECTO.md) |
 | Arrancar una historia con un agente | [Prompts](prompts/README.md) |
 | Saber qué rama y PR usa cada integrante | [Cinco frentes de trabajo](PR_INTEGRANTES.md) |
 | Conectar los cinco módulos de un único producto | [Objetivo y conexiones](OBJETIVO_Y_CONEXIONES.md) |
 | Revisar el recorrido solicitud → orden y los documentos reutilizables | [Flujo de pedido, documentos y carga](FLUJO_PEDIDO_DOCUMENTOS_Y_CARGA.md) |
+| Generar archivos PDF de ejemplo para Organización y envío | [Plantillas y prompt para ChatGPT](templates/documentos-demo/README.md) |
 | Ejecutar nuestro frente y entender CR-00 campo por campo | [Plan de declaración e integración](PLAN_CR_DECLARACION_E_INTEGRACION.md) |
 | Comprobar qué funciona en Meta local y reproducir manifiestos | [Validación CR-01 del 28-oct](VALIDACION_CR01_2026-10-28.md) |
 | Consultar tareas, dueño y dependencia | [Backlog](backlog/README.md) |

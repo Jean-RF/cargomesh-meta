@@ -1,0 +1,84 @@
+{
+  "scope": "META_LOCAL_ONLY",
+  "requestId": "8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+  "manifestId": "163cd0cc-a0d2-4f8e-bcde-310c689fcafd",
+  "manifestRevision": 1,
+  "groups": [
+    {
+      "groupId": "879dc96b-3c00-43e1-b772-619996b2b713",
+      "sourceUnitIndex": 0
+    },
+    {
+      "groupId": "d1b2aab3-29d2-4b90-8a70-d369c0dd1f6c",
+      "sourceUnitIndex": 1
+    }
+  ],
+  "bookingId": "654a02b7-c366-4298-8e1a-003481cbfb0a",
+  "bookingStatus": "AUTHORIZED",
+  "documentRevisions": [
+    {
+      "id": "54928626-1882-481e-b93c-a11abe7898ea",
+      "documentId": "b5bcac53-9d00-46a2-ae57-cd0b8ed22dcf",
+      "organizationId": "c2300000-0000-4000-8000-000000000001",
+      "title": "DEMO - Pacific Home Goods company information",
+      "kind": "COMPANY_PROFILE",
+      "requestId": null,
+      "version": 1,
+      "documentVersion": 1,
+      "filename": "demo-company-information-formal-plain.pdf",
+      "mime": "application/pdf",
+      "bytes": 45486,
+      "sha256": "d0aa06f9fcd973efbf66c6046d9e79c290b4c95aecbf862460c27cfab36e6c57",
+      "state": "READY",
+      "issuedOn": "2026-11-01",
+      "expiresOn": null,
+      "createdAt": "2026-11-01T22:42:54.573379+00:00"
+    },
+    {
+      "id": "ac08c938-6e48-4ffe-abb3-b0ccbc07f75c",
+      "documentId": "d327eb0f-b7fb-4d76-ae18-b50145211a8a",
+      "organizationId": "c2300000-0000-4000-8000-000000000001",
+      "title": "DEMO - PL-DEMO-001 - 8 + 4 BOX",
+      "kind": "PACKING_LIST",
+      "requestId": "8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+      "version": 1,
+      "documentVersion": 1,
+      "filename": "demo-packing-list-formal-plain.pdf",
+      "mime": "application/pdf",
+      "bytes": 46786,
+      "sha256": "20c288d4f8d949ae184373c38a536fc9fb948bb342512452a32ac58a9f3cc99e",
+      "state": "READY",
+      "issuedOn": "2026-11-01",
+      "expiresOn": null,
+      "createdAt": "2026-11-01T22:42:55.412716+00:00"
+    }
+  ],
+  "reviews": [
+    {
+      "shareId": "71d2723e-9bb2-4e62-8bdc-4aa75b3fa3bb",
+      "revisionId": "54928626-1882-481e-b93c-a11abe7898ea",
+      "review": "ACCEPTED"
+    },
+    {
+      "shareId": "39c09f91-549a-4f03-8299-05f777c5d3ac",
+      "revisionId": "ac08c938-6e48-4ffe-abb3-b0ccbc07f75c",
+      "review": "ACCEPTED"
+    }
+  ],
+  "checks": [
+    "same saved request, confirmed manifest and both stable group UUIDs",
+    "organization document library requires authentication",
+    "COMPANY_PROFILE: supplied private PDF uploaded and replayed without duplication",
+    "PACKING_LIST: supplied private PDF uploaded and replayed without duplication",
+    "corporate document reused and packing list bound to the exact confirmed manifest",
+    "booking explicitly authorized through native authenticated HTTP",
+    "carrier sees only the two revisions explicitly shared for this booking",
+    "private downloads preserve hashes; public and foreign access denied; reviews replay safely",
+    "carrier acceptance persists after reload and does not confirm or dispatch the booking"
+  ],
+  "inferenceCalls": 0,
+  "payment": false,
+  "dispatchConfirmed": false,
+  "clientUrl": "http://127.0.0.1:8080/clients/requests/8b0fed7d-4cc3-4cc3-b819-8f68fdeefebe",
+  "carrierUrl": "http://127.0.0.1:8080/carriers/orders/654a02b7-c366-4298-8e1a-003481cbfb0a"
+}

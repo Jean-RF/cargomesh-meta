@@ -1,5 +1,9 @@
 # Meta friction log
 
+## 2026-11-01 — local worker integration is not a deployed Modal service
+
+After PR #6 was integrated, the active Meta local database lacked the DockMind job/attempt migrations, the machine had no FFmpeg, and there was no worker URL/proxy/callback configuration or own loading footage. A remote Modal worker cannot reach loopback Storage/callback URLs. We backed up and migrated only the authorized Meta local database, prepared checksum-verified portable FFmpeg, and exercised the real Python/Hono/Storage pipeline through the owner's explicit local test dispatcher. SYNTHETIC_RENDER/FIXTURE and INJECTED explanation provenance remain recorded. Sandbox temporary-directory/child-process failures were resolved by using workspace temporaries in authorized local execution; no production HTTPS/auth guard was weakened. Real deployment, network reachability and physical/SAM acceptance remain Ramón's pending deliverable. [Evidence](pruebas/RECORRIDO_DOCKMIND_CONECTADO_2026-11-01.md).
+
 ## 2026-10-28 — local UI preview versus a connected workflow
 
 The source checkout initially had no Meta database configuration. Its explicit visual preview opened the form, but the Organization preview attempted authenticated settings reads and the UI could revoke itself; the preview login also interrupted the requested direct entry. The loopback frontend preview now opens directly and its Organization page uses labelled sample data without API reads. This does not grant a backend identity.
@@ -31,3 +35,12 @@ The production build initially hit EPERM creating generated .next directories un
 ## 2026-10-27 — rama remota existente al publicar
 
 La publicación encontró codex/meta-axel ya creada sobre la estructura del equipo, cuyo target aceptado es main de este repositorio. Se conservó esa historia y se reaplicaron solo los commits locales inéditos de IA. Los conflictos fueron documentales: prevalecen AGENTS, prompts, backlog y estructura remotos; las referencias antiguas a meta-main describen preparación local, no el flujo activo. No hubo force-push ni cambios en main/Amazon.
+
+
+## 2026-11-01 — supplied demo PDFs contain embedded attachments
+
+Both supplied formal PDFs contained catalog attachment references (`/AF`, `/Names`, `/EmbeddedFile`). The existing private-document validator intentionally rejects embedded attachments. The originals were preserved. Plain copies were produced by copying only page/resource trees, without the attachment catalog. Full-page rendered pixel comparisons were identical. Both copies then passed real private upload/replay, binding, Carrier download/hash and review in isolated Meta local. The file format conversion does not add legal validity, OCR or automatic extraction.
+
+## 2026-11-01 — integrating declaration media with the document dossier
+
+The local dossier commit and Luis PR10 both registered Hono routes, tests and migration inventory. Integration preserved both modules, all additive migrations and author records. The chat stash conflict was due to mixed line endings plus independent memory/media changes; normalizing a temporary merge preserved both. TypeScript,27media,7document,11manifest and111chat tests passed. The document SQL test assumed an empty organization; it now asserts that its own finalized revision is present without deleting earlier demo documents. All39document pgTAP checks and35Luis transition checks passed with rollback on the existing local data. PR11 passed its three remote gates and was merged as2071886. No cloud migration or Amazon deployment changed.

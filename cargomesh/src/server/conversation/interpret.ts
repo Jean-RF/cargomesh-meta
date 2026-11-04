@@ -150,6 +150,12 @@ export async function interpretConversationTurn(
   input = InterpretationRequestSchema.parse(input);
   const env = options.env ?? process.env;
   const config = options.config ?? conversationBedrockConfig(env);
+  if (input.context?.screen === "TRANSPORT_SELECTION") {
+    if (env.CARGOMESH_AI_PROVIDER === "META")
+      return interpretMetaConversationTurn(input, { env, fetch: options.metaFetch });
+    return { schemaVersion: "2.0", mode: "DETERMINISTIC", telemetry: null,
+      interpretation: { intent: "HELP", fields: [] } };
+  }
   const fallback = { schemaVersion: "2.0" as const, interpretation: interpretDeterministically(input), mode: "DETERMINISTIC" as const, telemetry: null };
   if (isNoisyTranscript(input.text)) return fallback;
   if (fallback.interpretation.intent === "HELP" && helpTopic(input.text) === "SERVICES") return fallback;

@@ -1,0 +1,59 @@
+✔ JU-00: unknown and zero denominators never produce a percentage (2.8266ms)
+✔ JU-00: no observation is unknown, never confirmed zero (8.0136ms)
+✔ JU-00: a session without an authorized operation is visibly a demo (3.2295ms)
+✔ JU-01: pallets and boxes stay in separate totals (2.5914ms)
+✔ JU-01: partial pages and unknown group counts never become global totals (1.1254ms)
+✔ JU-01: complete plan with no allocation means explicit zero, incomplete plan means pending (1.6465ms)
+✔ JU-01: stale or incompatible plans cannot supply planned quantities (1.6314ms)
+✔ JU-01: empty and older refreshes preserve the previous snapshot (1.8947ms)
+✔ an open session shows progress without declaring a shortage (0.8458ms)
+✔ closed sufficient evidence gives a proposed difference and a match deterministically (1.5611ms)
+✔ incomplete coverage or uncertainty cannot prove a difference (1.5627ms)
+✔ a changed manifest revision makes the comparison outdated (0.7432ms)
+✔ units and sessions must match before comparing (1.0759ms)
+✔ an explicit complete count of zero remains a confirmed zero (0.5548ms)
+✔ duplicate observations, negative counts and foreign allocations fail contract validation (3.7989ms)
+✔ integer overflow in a total is unknown rather than a rounded count (1.249ms)
+✔ keeps caller idempotency on transport retries and reads the authorized source only (43.5005ms)
+✔ checks explanation response scope and sends stable command keys with an abort signal (4.3232ms)
+✔ validates Passport source before deriving comparison and rejects forged evidence scope (21.1271ms)
+✔ the directory preserves all sixty truck/driver identities and isolates its illustrative tariffs (2.3783ms)
+✔ category, weight, accented names and sorting compose without mutating the fleet (11.6227ms)
+✔ 3D groups partition the actual placed units, retain weight and contain their geometry envelopes (8.9708ms)
+✔ selected leader uses reserved gutters and approaches the selected boundary from its chosen side (3.0991ms)
+✔ offscreen and invalid targets never get a misleading clamped leader (0.2993ms)
+▶ Loading HTTP routes
+  ✔ blocks cross-origin cookies, malformed JSON, oversized bodies and missing versions (59.0469ms)
+  ✔ uses the native authentication boundary when no injected test actor is supplied (2.7348ms)
+  ✔ protects explanation commands, forwards identity/scope/key and makes status a read-only call (3.8053ms)
+✔ Loading HTTP routes (67.0705ms)
+✔ reader passes trusted organization and session to the repository (10.2564ms)
+✔ other organizations, facilities and sessions cannot leak a snapshot (3.5297ms)
+✔ no granted facility means no repository call (0.4061ms)
+✔ production reader rejects fixture data and malformed sources (2.3098ms)
+✔ missing session is not found (0.2781ms)
+▶ Loading operation trust boundary
+  ✔ requires identity, explicit unit mapping, versions and UUID idempotency before writes (4.0525ms)
+  ✔ does not return a foreign session or list and propagates a persistence failure (2.185ms)
+  ✔ rejects an opening receipt that changes the operator chosen unit mapping (1.3943ms)
+  ✔ keeps historical Passport readable but refuses explanation from a stale source (12.8563ms)
+  ✔ rechecks the bound actor and currency for producer read ports (10.1864ms)
+  ✔ uses scoped RPC args and exposes missing capability without a fallback (0.692ms)
+  ✔ does not forward invalid worker counts to privileged persistence (0.9928ms)
+✔ Loading operation trust boundary (33.9423ms)
+▶ Operational loading facts
+  ✔ compares a closed evidenced group and preserves the immutable Passport source (18.8951ms)
+  ✔ does not conclude a difference from open, incomplete, uncertain, stale or negative-net evidence (11.3457ms)
+  ✔ keeps a workflow-only draft-version change current but rejects synthetic verification evidence (1.3306ms)
+  ✔ rejects forged quantities, foreign observations and changed identities at the boundary (3.1646ms)
+  ✔ projects exact event aliases for Luis, validates response scope and refuses lossy projections (7.6333ms)
+  ✔ checks the worker supplied net and event counts instead of inventing conversions (1.0741ms)
+✔ Operational loading facts (45.2085ms)
+ℹ tests 45
+ℹ suites 3
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1871.3544

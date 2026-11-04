@@ -54,9 +54,41 @@ test("connected and isolated demo dashboards share presentation but keep separat
   assert.match(demo, /listWorkspaceRequests\(\)/);
   const activity = readFileSync(new URL("./dashboard-activity.tsx", import.meta.url), "utf8");
   assert.match(activity, /OperationRequestLink/);
-  assert.match(activity, /aria-pressed/);
   assert.match(activity, /unavailable \?/);
   assert.ok(!activity.includes("fetch("));
+});
+
+test("activity summary keeps exact request destinations and timestamps and distinguishes denied from empty data", () => {
+  const source = readFileSync(new URL("./dashboard-activity.tsx", import.meta.url), "utf8");
+  const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX } }).outputText;
+  type Node = { type: string; props: Record<string, unknown> };
+  const jsx = (type: string, props: Record<string, unknown>) => ({ type, props });
+  const exports: { DashboardActivity?: (props: object) => Node } = {};
+  vm.runInNewContext(code, { exports, require: (name: string) => {
+    if (name === "react/jsx-runtime") return { jsx, jsxs: jsx };
+    if (name === "lucide-react") return new Proxy({}, { get: () => "icon" });
+    if (name.endsWith("locale-provider")) return { useLocale: () => ({ t: (_es: string, en: string) => en }) };
+    if (name.endsWith("workspace-link")) return { WorkspaceLink: "Link" };
+    if (name.endsWith("operations-navigation")) return { OperationRequestLink: "RequestLink" };
+    if (name.endsWith(".css")) return { __esModule: true, default: {} };
+    throw Error(name);
+  } });
+  const all = (node: unknown): Node[] => Array.isArray(node) ? node.flatMap(all) : node && typeof node === "object" && "props" in node ? [node as Node, ...all((node as Node).props.children)] : [];
+  const items = dashboardRequests([request("exact-request", "DRAFT")], "en").recent;
+  const view = exports.DashboardActivity!({ items, unavailable: false }), nodes = all(view);
+  assert.equal(view.props.role, "region");
+  assert.equal(view.props.tabIndex, 0);
+  assert.equal(nodes.find(node => node.type === "RequestLink")?.props.requestId, "exact-request");
+  assert.equal(nodes.find(node => node.type === "time")?.props.dateTime, "2026-10-22T12:00:00.000Z");
+  assert.equal(nodes.filter(node => node.type === "th").length, 5);
+  assert(nodes.some(node => node.type === "td" && node.props.children === "Arequipa"));
+  assert(!nodes.some(node => node.type === "RequestLink" && node.props.requestId !== "exact-request"));
+  for (const unavailable of [false, true]) {
+    const empty = all(exports.DashboardActivity!({ items: [], unavailable }));
+    assert.equal(empty.some(node => node.type === "table"), false);
+    assert.equal(empty.some(node => node.type === "Link" && node.props.href === "/freight-request/new"), !unavailable);
+    assert.equal(empty.find(node => node.type === "strong")?.props.children, unavailable ? "Activity could not be loaded" : "Your first shipment starts here");
+  }
 });
 test("mockup layout is container-responsive, not the fixed 1440 by 1000 artboard", () => {
   const css = readFileSync(new URL("./client-dashboard.module.css", import.meta.url), "utf8");

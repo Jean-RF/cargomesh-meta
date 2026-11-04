@@ -2,6 +2,8 @@
 
 Fecha: 27 de octubre de 2026. Responsable: Cristhian, asistido por Codex. Rama: `codex/meta-cristhian`. PR de trabajo: [#3](https://github.com/Chujutak2024/meta-hackathon/pull/3), destino `main` de `Chujutak2024/meta-hackathon`.
 
+**Lectura del estado vigente, 28-oct:** [Entrega actual](ENTREGA_ACTUAL.md) distingue planificación e implementación. El flujo manual tiene evidencia local en `e0c55f8`; las secciones de inicio siguientes conservan su corte histórico. Para aceptar la UI usa la [guía de usuario](pruebas/GUIA_USUARIO_CR01.md); el expediente aún pendiente tiene [criterios propios](contracts/EXPEDIENTE_DOCUMENTAL_MVP.md).
+
 **Estado:** plan y mapa basados en lectura del código, con incrementos parciales CR-00 y backend CR-01 descritos debajo. El resto sigue planificado; no acredita pruebas del producto, un flujo completo ni acuerdos de Axel/Juan/Luis todavía no recibidos. No crear otra rama ni otro PR para ejecutar estas historias.
 
 **Inicio de ejecución CR-00:** se ha añadido [el contrato candidato 0.1 y mapper puro](contracts/DECLARED_MANIFEST_CR00.md), con ejemplos sintéticos. Persistencia, aplicación de propuestas, confirmación, revisión de consumidores y validación ejecutable continúan pendientes. El resto de este archivo mantiene el plan de trabajo; no es evidencia de funcionalidades terminadas.

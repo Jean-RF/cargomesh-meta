@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-02T03:03:08.781Z",
+  "scope": "HTTP through running Next8080, real local Auth, no visual acceptance",
+  "passportId": "ceee5506-476c-48ba-a78d-81ff742ea5b2",
+  "current": true,
+  "explanations": 2,
+  "jobs": [
+    {
+      "jobId": "213404a9-10d6-4c13-8fee-753c370d1887",
+      "status": "SUCCEEDED",
+      "delivery": "DELIVERED",
+      "overlay": "VERIFIED"
+    },
+    {
+      "jobId": "5689cdc1-2787-4502-93cd-cfaa2f1214ef",
+      "status": "SUCCEEDED",
+      "delivery": "DELIVERED",
+      "overlay": "VERIFIED"
+    }
+  ],
+  "pageStatus": 200
+}
