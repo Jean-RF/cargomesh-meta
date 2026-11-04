@@ -15,7 +15,12 @@ const names: Record<string, [string, string]> = {
   unitHeightCm: ["Alto (cm)", "Height (cm)"],
   handlingRequirements: ["Requisitos de manejo", "Handling requirements"],
 };
-export function DeclarationMediaPanel() {
+export function DeclarationMediaPanel({ compact = false, panelId, expanded, onExpandedChange }: {
+  compact?: boolean;
+  panelId?: string;
+  expanded?: boolean;
+  onExpandedChange?: (expanded: boolean) => void;
+} = {}) {
   const session = useOptionalIntakeSession(),
     id = useId(),
     details = useRef<HTMLDetailsElement>(null),
@@ -28,6 +33,7 @@ export function DeclarationMediaPanel() {
     const open = () => {
       if (details.current) {
         details.current.open = true;
+        onExpandedChange?.(true);
         details.current.scrollIntoView({
           block: "nearest",
           behavior: "smooth",
@@ -36,7 +42,7 @@ export function DeclarationMediaPanel() {
     };
     window.addEventListener("cargomesh:open-media", open);
     return () => window.removeEventListener("cargomesh:open-media", open);
-  }, []);
+  }, [onExpandedChange]);
   if (!session) return null;
   const { media: m, t, locale } = session,
     disabled =
@@ -48,25 +54,31 @@ export function DeclarationMediaPanel() {
       );
   const label = (name: string) =>
     (names[name] ?? [name, name])[locale === "es" ? 0 : 1];
+  if (compact && !m.items.length && !m.recording && !m.requestingMic && !m.error && !m.notice && !m.analysis) return null;
   return (
     <details
+      id={panelId}
       name="cargomesh-draft-context"
       className={styles.panel}
+      data-compact={compact}
+      open={expanded}
       ref={details}
       onToggle={(e) => {
+        onExpandedChange?.(e.currentTarget.open);
         if (!e.currentTarget.open) m.cancelRecording();
       }}
     >
       <summary>
         <span>
           <Paperclip size={17} />
-          {t("Fotos y notas de voz", "Photos & voice notes")}
+          {compact ? t("Revisar adjuntos", "Review attachments") : t("Fotos y notas de voz", "Photos & voice notes")}
         </span>
         <small>
-          {m.items.length ? `${m.items.length}/4` : t("Añadir", "Add")}
+          {compact ? t("Cerrar", "Close") : m.items.length ? `${m.items.length}/4` : t("Añadir", "Add")}
         </small>
       </summary>
       <div className={styles.body}>
+        {!compact && <>
         <p>
           {t(
             "Adjunta una foto, etiqueta o nota de voz. Revisa la propuesta antes de aplicarla a esta carga.",
@@ -152,7 +164,9 @@ export function DeclarationMediaPanel() {
             "Up to 4 attachments and one voice note. PNG/JPG: 5 MB each, 12 MB combined. Mono WAV: 30 MB. Recording: up to 60 s.",
           )}
         </small>
-        {m.items.length > 0 && (
+        </>}
+        {compact && (m.recording || m.requestingMic) && <div className={styles.recording} role="status"><Mic size={16} aria-hidden="true"/><span>{m.requestingMic ? t("Abriendo micrófono…", "Opening microphone…") : t(`Grabando · ${m.seconds}s`, `Recording · ${m.seconds}s`)}</span>{m.recording && <Button type="button" size="compact" variant="secondary" onClick={m.stopRecording}><Square size={13} aria-hidden="true"/>{t("Detener", "Stop")}</Button>}</div>}
+        {!compact && m.items.length > 0 && (
           <ul className={styles.files}>
             {m.items.map((f) => (
               <li key={f.id}>
@@ -190,14 +204,15 @@ export function DeclarationMediaPanel() {
             ))}
           </ul>
         )}
-        <label className={styles.context} htmlFor={id + "-context"}>
-          {t(
+        {compact && m.items.filter(file => file.kind === "audio" && file.state === "READY").map(file => <VoicePreview key={file.id} id={file.id} t={t}/>)}
+        {(!compact || m.items.length > 0) && <><label className={styles.context} htmlFor={id + "-context"}>
+          {compact ? t("Añadir contexto (opcional)", "Add context (optional)") : t(
             "Aclaración o corrección (opcional)",
             "Clarification or correction (optional)",
           )}
           <textarea
             id={id + "-context"}
-            rows={2}
+            rows={compact ? 1 : 2}
             maxLength={6000}
             value={text}
             disabled={disabled}
@@ -222,6 +237,7 @@ export function DeclarationMediaPanel() {
           <Sparkles size={15} />
           {t("Analizar adjuntos", "Analyze attachments")}
         </Button>
+        </>}
         {m.error && (
           <p className={styles.error} role="alert">
             {m.error}

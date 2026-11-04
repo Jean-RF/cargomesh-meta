@@ -31,12 +31,7 @@
 .contentColumn {
   min-width: 0;
   container-type: inline-size;
-  /* Match the assistant surface: the page makes room instead of jumping under it. */
-  transition: margin-right .56s cubic-bezier(.22,1,.36,1);
 }
-
-@media (min-width: 1200px) { .shell[data-assistant-docked="true"] .contentColumn { margin-right: 27rem; } }
-@media (prefers-reduced-motion: reduce) { .contentColumn { transition: none; } }
 
 .topbar {
   position: sticky;

@@ -8,6 +8,29 @@
   font-size: 14px;
   line-height: 1.5;
 }
+.panel[data-compact="true"] { margin: 18px 0 0; background: #fafbff; font-size: 13px; }
+.panel[data-compact="true"]:not([open]) { display: none; }
+.panel[data-compact="true"] .body { overflow: visible; max-height: none; }
+.attachButton { position: relative; background: #f3f1fb; color: #7560ba; }
+.menuHost { position: relative; flex: none; display: flex; align-items: center; }
+.attachMenu { position: absolute; z-index: 6; bottom: calc(100% + 16px); left: 0; width: min(280px,calc(100vw - 64px)); padding: 6px; border: 1px solid #e6e0ee; border-radius: 14px; background: #fff; box-shadow: 0 12px 40px #39305224,0 2px 8px #3930520d; }
+.menuHost .menuOption { display: flex; justify-content: flex-start; align-items: center; gap: 11px; width: 100%; min-height: 47px; height: auto; padding: 8px 10px; border: 0; border-radius: 9px; background: transparent; color: #514665; text-align: left; font-size: 13px; }
+.menuHost .menuOption:hover:not(:disabled),.menuHost .menuOption:focus-visible { background: #f4f0fc; }
+.menuOption > svg { flex: none; color: #8066b7; }
+.menuOption > span { display: grid; gap: 2px; }
+.menuOption small { font-size: 10px; color: #978da6; }
+.menuLimits { margin: 5px 4px 0; padding: 9px 6px 4px; border-top: 1px solid #efebf5; color: #9b91aa; font-size: 9px; line-height: 1.5; }
+.recording { display: flex; align-items: center; gap: 8px; color: #986296; font-size: 12px; }
+.recording > span { flex: 1; }
+.attachButton[aria-expanded="true"] { background: #eae4ff; color: #6045c6; }
+.attachCount { position: absolute; top: -3px; right: -3px; min-width: 15px; padding: 1px 3px; border-radius: 999px; background: #6f52d4; color: #fff; font-size: 9px; line-height: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0 0 10px; list-style: none; }
+.chips li { display: flex; align-items: center; min-width: 0; max-width: 100%; }
+.chips .removeChip { flex: none; padding: 4px; min-height: 24px; margin-left: 2px; background: transparent; }
+.chips button { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 30px; padding: 5px 9px; border: 1px solid #e5dff4; border-radius: 8px; background: #fff; color: #625780; font-size: 11px; }
+.chips button > svg { flex: none; }
+.chips button > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 180px; }
+.chips small { color: #836725; }
 .panel summary {
   padding: 13px 15px;
   cursor: pointer;

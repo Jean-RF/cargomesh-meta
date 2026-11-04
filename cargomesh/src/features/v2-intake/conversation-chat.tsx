@@ -11,8 +11,9 @@ import {transportChatDecision} from './transport-chat';
 import type { ProposalErrorCode } from "@/shared/schemas/meta/model-proposal";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { MicOff, ArrowUp, ChevronDown, GripVertical, MessageSquareText, Mic, PanelRightClose, PanelRightOpen, SquarePen, X } from "lucide-react";
+import { MicOff, ArrowUp, ChevronDown, GripVertical, MessageSquareText, Mic, MoreHorizontal, PanelRightClose, PanelRightOpen, SquarePen, X } from "lucide-react";
 import {DeclarationMediaPanel} from './declaration-media-panel';
+import { DeclarationMediaButton, DeclarationMediaChips } from "./declaration-media-composer";
 import { useReducedMotionPreference } from "@/features/product-motion/use-motion-preference";
 import { ASSISTANT_TRANSITION, AssistantLiveContent, AssistantMascot, AssistantSurface, useAssistantEntrance } from "./assistant-motion";
 import { assistantWelcomeMotion } from "./chat-surface-model";
@@ -118,11 +119,13 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   const launcherLabel = t("Preguntar a CargoMesh", "Ask CargoMesh");
   const [open, setOpen] = useState(presentation === "inline");
   const [mediaOpenRequest,setMediaOpenRequest]=useState(0);
+  const [mediaExpanded, setMediaExpanded] = useState(false);
   useEffect(()=>{const openMedia=()=>{setOpen(true);setMediaOpenRequest(value=>value+1);};window.addEventListener('cargomesh:request-media',openMedia);return()=>window.removeEventListener('cargomesh:request-media',openMedia);},[]);
   useEffect(()=>{if(open&&mediaOpenRequest)window.dispatchEvent(new Event('cargomesh:open-media'));},[open,mediaOpenRequest]);
   const [surfaceMode, setSurfaceMode] = useState<"sidebar" | "detached">("sidebar");
   const [launcherExpanded, setLauncherExpanded] = useState(false);
   const motionId = useId();
+  const mediaPanelId = `${motionId}-attachments`;
   const reducedMotion = useReducedMotionPreference();
   const intro = useAssistantEntrance(catalogStatus !== "loading", open, presentation === "workspace");
   const [mobile, setMobile] = useState(false);
@@ -202,6 +205,11 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   const processedVoiceCommandsRef = useRef<Set<string>>(new Set());
   const voiceSaveInFlightRef = useRef(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (!mediaExpanded || !open) return;
+    const frame = requestAnimationFrame(() => document.getElementById(mediaPanelId)?.scrollIntoView({ block: "nearest", behavior: reducedMotion ? "auto" : "smooth" }));
+    return () => cancelAnimationFrame(frame);
+  }, [mediaExpanded, open, mediaPanelId, reducedMotion]);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const announcedDraftRef = useRef<string | null>(null);
   const lastSpokenMessage = useRef(0);
@@ -246,7 +254,10 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
   }, [open, surfaceMode, presentation, onDockedChange]);
   useEffect(() => { if (launcherExpanded && !open) launcherInputRef.current?.focus(); }, [launcherExpanded, open]);
   const nextField = missingField(draft);
-  const transportHelp=language==='es'?'Esta pantalla elige el transporte. Terrestre está disponible; aéreo y marítimo aún no. ¿Continuamos con terrestre?':'This screen selects transport. Road is available; Air and Sea are not available yet. Shall we continue with Road?';
+  const selectingTransportScreen = pathname?.endsWith("/freight-request/new");
+  const transportHelp = selectingTransportScreen
+    ? (language === 'es' ? 'Terrestre está disponible; aéreo y marítimo aún no. ¿Continuamos con terrestre?' : 'Road transport is available. Air and Sea are not available yet. Shall we continue with Road?')
+    : (language === 'es' ? 'Cuéntame qué necesitas enviar y entre qué ciudades. Te ayudaré a preparar y revisar tu envío terrestre, paso a paso.' : 'Tell me what you need to ship and between which cities. I’ll help you prepare and review your road shipment, step by step.');
   const screenVoiceContext=transportSelectionRequired?'ASSISTANT: Current screen: choose transport. Only ROAD is available; AIR and SEA unavailable. Ask to select Road before pickup/cargo questions. Do not save or book.':'ASSISTANT: Current screen: ROAD shipment form. Follow the shared draft and its next missing field. AIR and SEA unavailable. Review and confirm before saving.';
   const voiceTurns=recentVoiceContext(history);
   const contextualVoiceTurns=[...voiceTurns.slice(0,4),...voiceTurns.slice(Math.max(4,voiceTurns.length-11)),screenVoiceContext];
@@ -889,18 +900,22 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
     </div>
     <AnimatePresence>
     {open && <AssistantSurface key="assistant-panel" mode={surfaceMode} mobile={mobile} hostRef={detachedPosition.ref} style={surfaceMode === "detached" && !mobile ? detachedPosition.style : undefined}>
-    <section ref={panelRef} id="v2-chat-panel" className={styles.panel} role={mobile ? "dialog" : undefined} aria-modal={mobile ? true : undefined} aria-labelledby="v2-chat-title">
+    <section ref={panelRef} id="v2-chat-panel" className={styles.panel} role="dialog" aria-modal={mobile ? true : undefined} aria-labelledby="v2-chat-title">
       <header className={styles.header}>
         {surfaceMode === "detached" && !mobile ? <button type="button" className={styles.panelGrip} {...detachedPosition.handle} aria-label={t("Mover ventana del chat", "Move chat window")} title={t("Arrastra para mover", "Drag to move")}><GripVertical size={16}/></button> : null}
         <AssistantMascot thinking={interpretationBusy || workflowBusy || busy} />
         <div className={styles.headerCopy}><strong id="v2-chat-title">CargoMesh <span>Copilot</span></strong></div>
         <div className={styles.headerActions}>
           <button type="button" className={styles.iconButton} onClick={startNewChat} disabled={busy || interpretationBusy || workflowBusy || voiceInterpretPending} aria-label={t("Nueva conversación", "Start new chat")} title={t("Nueva conversación · conserva tu solicitud", "Start new chat · keeps your request")}><SquarePen size={18}/></button>
-          <button type="button" className={styles.iconButton} onClick={() => setSurfaceMode((mode) => mode === "sidebar" ? "detached" : "sidebar")} aria-label={surfaceMode === "sidebar" ? t("Desacoplar del panel lateral", "Detach from sidebar") : t("Acoplar al panel lateral", "Dock to sidebar")} title={surfaceMode === "sidebar" ? t("Desacoplar del panel lateral", "Detach from sidebar") : t("Acoplar al panel lateral", "Dock to sidebar")}>{surfaceMode === "sidebar" ? <PanelRightClose size={18}/> : <PanelRightOpen size={18}/>}</button>
+          <details className={styles.headerMenu}><summary aria-label={t("Más opciones", "More options")} title={t("Más opciones", "More options")}><MoreHorizontal size={19} aria-hidden="true"/></summary><div>
+            <button type="button" onClick={event => { setSurfaceMode(mode => mode === "sidebar" ? "detached" : "sidebar"); const menu = event.currentTarget.closest("details"); if (menu) menu.open = false; }}>
+              {surfaceMode === "sidebar" ? <PanelRightClose size={17} aria-hidden="true"/> : <PanelRightOpen size={17} aria-hidden="true"/>}
+              {surfaceMode === "sidebar" ? t("Ventana movible", "Movable window") : t("Panel superpuesto", "Overlay panel")}
+            </button>
+          </div></details>
           <button type="button" className={styles.iconButton} aria-label={t("Cerrar asistente", "Close assistant")} title={t("Cerrar asistente", "Close assistant")} onClick={closePanel}><X size={19}/></button>
         </div>
       </header>
-      {transportSelectionRequired?<div className={styles.notice} role="status"><p>{transportHelp}</p><button type="button" className={styles.suggestion} onClick={onSelectRoad}>{t('Continuar con terrestre','Continue with Road')}</button></div>:<ChatStructuredSummary draft={draft} options={options} request={request} dirty={draftDirty} onEdit={onEdit ? goToFormStep : undefined} t={t} />}
       {busy && <p className={styles.catalogNotice} role="status">{busyLabel ?? t("Actualizando el borrador…", "Updating the draft…")}</p>}
       {catalogStatus !== "ready" && <div className={styles.catalogNotice} role="status"><strong>{catalogStatus === "loading" ? t("Preparando los datos de tu organización…", "Loading your organization's catalog…") : t("No se pudo preparar el asistente", "The assistant needs your catalog")}</strong>{catalogError && <span>{catalogError}</span>}{catalogStatus === "empty" && <span>{t("Faltan sedes u opciones compatibles. Revisa el catálogo de tu organización.", "Facilities or supported options are missing. Review your organization's catalog.")}</span>}{catalogStatus !== "loading" && onRetryCatalog && <button type="button" onClick={onRetryCatalog}>{t("Reintentar", "Retry")}</button>}</div>}
       <div className={styles.conversationContent}>
@@ -913,18 +928,20 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
         if (following || !metrics || (metrics.height === area.clientHeight && metrics.contentHeight === area.scrollHeight)) followLatestRef.current = following;
         if (following) setNewMessages(false);
       }}>
+        {!transportSelectionRequired && <ChatStructuredSummary draft={draft} options={options} request={request} dirty={draftDirty} onEdit={onEdit ? goToFormStep : undefined} t={t} />}
         {!novaVoiceEnabled && providerStatus(providerMode,providerFailure,language) && <p role="status">{providerStatus(providerMode,providerFailure,language)}</p>}
         {history.length === 1 && history[0]?.speaker === "assistant" && <div key={`welcome:${conversationEpoch}`} className={styles.welcome}>
           <motion.div className={styles.welcomeMascot} {...assistantWelcomeMotion("mascot", reducedMotion)}><AssistantMascot large /></motion.div>
           <motion.h2 {...assistantWelcomeMotion("title", reducedMotion)}>{t("Planifiquemos tu envío", "Let's plan your shipment")}</motion.h2>
         </div>}
-        <div className={styles.history} role="log" aria-live="off" aria-label="Conversation messages">
+        <div className={styles.history} role="log" aria-live="off" aria-label={t("Mensajes de la conversación", "Conversation messages")}>
           {history.map((message, index) => <motion.div key={`${conversationEpoch}:${index}`} className={message.speaker === "user" ? styles.userRow : styles.assistantRow}
             {...(history.length === 1 && message.speaker === "assistant" ? assistantWelcomeMotion("greeting", reducedMotion) : {
               initial: reducedMotion ? false as const : { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 },
               transition: { duration: reducedMotion ? 0 : .36, ease: ASSISTANT_TRANSITION.ease },
-            })}><p className={message.speaker === "user" ? styles.user : styles.assistant}><span className={styles.speaker}>{message.speaker === "user" ? "You" : "CargoMesh"}</span>{displayDemoText(message.text)}</p></motion.div>)}
+            })}>{message.speaker === "assistant" && history.length > 1 && <span className={styles.messageAvatar}><AssistantMascot active={open}/></span>}<p className={message.speaker === "user" ? styles.user : styles.assistant}><span className={styles.speaker}>{message.speaker === "user" ? t("Tú", "You") : "CargoMesh"}</span>{displayDemoText(message.text)}</p></motion.div>)}
         </div>
+        {transportSelectionRequired && <button type="button" className={styles.suggestion} onClick={onSelectRoad}>{selectingTransportScreen ? t("Continuar con terrestre", "Continue with Road") : t("Preparar envío terrestre", "Prepare road shipment")}</button>}
         <div className={styles.srOnly} role="status" aria-live="polite" aria-atomic="true">{announcement}</div>
         {choices.length > 0 && <div className={styles.choiceList} aria-label="Confirm a location">{choices.filter(choice => { const facility = options.facilities.find(f=>f.facilityId===choice.value); return !facility || !isHiddenClientFacility(facility.code,facility.facilityId); }).map((choice) => <button key={choice.value} type="button" onClick={() => { const field = { field: choice.field, value: choice.value }; onFields([field]); setChoices([]); add(null, `Confirmed ${choice.label}. ${ask(missingField(applyChatFieldsToDraft(draft, [field])) ?? "categoryCode")}`); }}>{choice.label}</button>)}</div>}
         {voiceReviewOpen && <section ref={reviewRef} className={styles.spokenReview} aria-label={language==='es'?'Confirmar solicitud por voz':'Review spoken freight request'}>
@@ -967,23 +984,25 @@ export function ConversationChat({ draft, options, optionsSource = "api", reques
         {workflowBusy && <p className={styles.loading} role="status">{t("Consultando datos actuales…", "Reading current records…")}</p>}
         {busy && <p className={styles.loading} role="status">{t("Guardando y consultando la solicitud…", "Saving and reading your request…")}</p>}
         {failedMessage && <button type="button" className={styles.retry} onClick={() => { setText(failedMessage); setFailedMessage(""); inputRef.current?.focus(); }}>{t("Reintentar mensaje", "Retry message")}</button>}
+        <DeclarationMediaPanel compact panelId={mediaPanelId} expanded={mediaExpanded} onExpandedChange={setMediaExpanded}/>
       </div>
       {newMessages && <button type="button" className={styles.latest} onClick={scrollToLatest}>{t("Ver mensajes recientes", "View latest messages")}</button>}
       </div>
       </div>
       <div className={styles.composerDock}>
-        <DeclarationMediaPanel/>
-        {!novaVoiceEnabled && (voice.message || voice.state === "unsupported") && <p className={styles.voiceStatus} role="status">{voice.message || "Speech recognition is unavailable here. You can type every step."}</p>}
+        <DeclarationMediaChips onOpen={() => setMediaExpanded(true)}/>
         {sendNotice && <p className={styles.voiceStatus} role="status">{sendNotice}</p>}
         <form onSubmit={(event) => { event.preventDefault(); void send(); }} className={styles.composer}>
-          <label className={styles.srOnly} htmlFor="v2-chat-text">Your message or editable voice transcript</label>
-          <textarea rows={2} maxLength={4096} className={styles.messageInput} onKeyDown={event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.nativeEvent.isComposing){event.preventDefault();event.currentTarget.form?.requestSubmit();}}} ref={inputRef} id="v2-chat-text" value={text} onChange={(event) => setText(event.target.value)} placeholder={t("Describe tu carga o corrige un dato…", "Describe cargo or correct a detail…")} autoComplete="off" disabled={busy || interpretationBusy || workflowBusy || novaTextPending} />
+          <DeclarationMediaButton disabled={busy || interpretationBusy || workflowBusy} onReview={() => setMediaExpanded(true)}/>
+          <label className={styles.srOnly} htmlFor="v2-chat-text">{t("Tu mensaje o transcripción editable", "Your message or editable voice transcript")}</label>
+          <textarea rows={1} maxLength={4096} className={styles.messageInput} onKeyDown={event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.nativeEvent.isComposing){event.preventDefault();event.currentTarget.form?.requestSubmit();}}} ref={inputRef} id="v2-chat-text" value={text} onChange={(event) => { setText(event.target.value); event.currentTarget.style.height = "auto"; event.currentTarget.style.height = `${Math.min(128,event.currentTarget.scrollHeight)}px`; }} placeholder={t("Describe tu carga o corrige un dato…", "Describe cargo or correct a detail…")} autoComplete="off" disabled={busy || interpretationBusy || workflowBusy || novaTextPending} />
           {novaVoiceEnabled && <button type="button" className={styles.novaMic} data-listening={Boolean(novaMicrophone?.active&&novaMicrophone.listening)} aria-pressed={Boolean(novaMicrophone?.active&&novaMicrophone.listening)} aria-label={novaMicrophone?.active&&novaMicrophone.listening?t("Apagar micrófono de Nova","Turn off Nova microphone"):t("Hablar con Nova","Talk to Nova")} title={novaMicrophone?.active&&novaMicrophone.listening?t("Apagar micrófono de Nova","Turn off Nova microphone"):t("Hablar con Nova","Talk to Nova")} disabled={catalogStatus!=="ready"||!novaMicrophone||novaMicrophone.disabled||busy||interpretationBusy||workflowBusy} onClick={()=>novaMicrophoneRef.current?.toggle()}>{novaMicrophone?.active&&novaMicrophone.listening?<MicOff size={18} aria-hidden="true"/>:<Mic size={18} aria-hidden="true"/>}</button>}
           {!novaVoiceEnabled && (voice.state === "listening" || voice.state === "requesting_permission")
-            ? <button type="button" className={styles.micActive} aria-label="Stop listening" title="Stop listening" onClick={voice.stop}>■</button>
-            : !novaVoiceEnabled && <button type="button" className={styles.mic} aria-label={voice.state === "unsupported" ? "Speech recognition unavailable" : "Dictate message"} title={voice.state === "unsupported" ? "Speech recognition unavailable" : "Dictate message"} disabled={catalogStatus !== "ready" || voice.state === "unsupported" || voice.state === "checking" || voice.state === "processing" || voice.speaking || busy || interpretationBusy || workflowBusy} onClick={voice.start}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="12" rx="3" stroke="currentColor" strokeWidth="1.8"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4m-4 0h8" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/></svg></button>}
-          <button type="submit" className={styles.send} aria-label="Send message" title="Send message" disabled={!text.trim() || busy || interpretationBusy || workflowBusy || novaTextPending || novaSpeaking || voice.speaking}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m4 12 15-8-3 16-4-6-8-2Zm8 2 7-10" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/></svg></button>
+            ? <button type="button" className={styles.micActive} aria-label={t("Detener dictado", "Stop listening")} title={t("Detener dictado", "Stop listening")} onClick={voice.stop}>■</button>
+            : !novaVoiceEnabled && <button type="button" className={styles.mic} aria-label={voice.state === "unsupported" ? t("Dictado no disponible", "Dictation unavailable") : t("Dictar mensaje", "Dictate message")} title={voice.state === "unsupported" ? t("Dictado no disponible", "Dictation unavailable") : t("Dictar mensaje", "Dictate message")} disabled={catalogStatus !== "ready" || voice.state === "unsupported" || voice.state === "checking" || voice.state === "processing" || voice.speaking || busy || interpretationBusy || workflowBusy} onClick={voice.start}><Mic size={18} aria-hidden="true"/></button>}
+          <button type="submit" className={styles.send} aria-label={t("Enviar mensaje", "Send message")} title={t("Enviar mensaje", "Send message")} disabled={!text.trim() || busy || interpretationBusy || workflowBusy || novaTextPending || novaSpeaking || voice.speaking}><ArrowUp size={18} aria-hidden="true"/></button>
         </form>
+        {!novaVoiceEnabled && (voice.message || voice.state === "unsupported") && <details className={styles.voiceInfo}><summary><MicOff size={12} aria-hidden="true"/>{voice.state === "unsupported" ? t("Dictado no disponible aquí", "Dictation unavailable here") : t("Estado del dictado", "Dictation status")}</summary><p>{voice.message || t("Puedes escribir tu mensaje o adjuntar una nota de voz.", "You can type your message or attach a voice note.")}</p></details>}
         {novaVoiceEnabled && catalogStatus === "ready" && <>
           <AssistantLiveContent><NovaVoicePreview compact microphoneControlRef={novaMicrophoneRef} onMicrophoneStateChange={setNovaMicrophone} externalSpeaking={voice.speaking} audioReplies={audioReplies} textInputRef={novaTextSenderRef} key={String(conversationEpoch)+':'+(transportSelectionRequired?'transport':'road')} preview={optionsSource === "fixture"} language={language} draftContext={transportSelectionRequired?undefined:voiceDraftContext(draft, request?.draftVersion ?? null, [...(measurementPending ? ["MEASUREMENT_SCOPE_PENDING" as const] : []),...(capturePending.date ? ["DATE_WINDOW_PENDING" as const] : []),...(capturePending.classification ? ["CLASSIFICATION_PENDING" as const] : [])], measurementPending, {timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone,pendingDates:capturePending.date?.alternatives??[],pendingWindow:capturePending.date??undefined})} voiceContext={contextualVoiceTurns} onPlaybackStateChange={speaking=>{setNovaSpeaking(speaking);if(speaking)setVoiceMode(true);}} onResponseFinished={()=>{awaitVoiceReplyRef.current=false;setResponseFinishedEpoch(n=>n+1);}} onTurn={(update) => {
             const nextHistory = applyVoiceTranscript(voiceHistoryRef.current, update);

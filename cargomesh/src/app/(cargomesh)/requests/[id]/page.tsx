@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { RequestWorkspace } from "@/features/shipper-portal/request-workspace";
-import {RequestDocuments} from '@/features/documents/document-panel';
 import type { WorkflowRecordV2 } from "@/features/shipper-portal/shipper-model";
 import { V2DraftError } from "@/server/modules/freight-requests/application/draft-service";
 import { readOperationsRequestFlow } from "@/server/services/v2-workspace/operations-server";
-import { OperationsNavigation, OperationsReadNotice } from "@/features/shipper-portal/operations-navigation";
+import { OperationsReadNotice } from "@/features/shipper-portal/operations-navigation";
 import styles from "@/features/shipper-portal/shipper-portal.module.css";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +15,7 @@ export default async function RequestPage({ params }: { params: Promise<{ id: st
     if (error instanceof V2DraftError && error.httpStatus === 404) notFound();
     throw error;
   });
-  return <div className={styles.page}><OperationsNavigation detail/><OperationsReadNotice issues={flow.issues}/>
+  return <div className={styles.page}><OperationsReadNotice issues={flow.issues}/>
     <RequestWorkspace key={`${flow.request.id}-${Date.now()}`} initialRequest={flow.request}
-      initialWorkflow={flow.workflow as Record<string, WorkflowRecordV2[]>} initialCatalog={flow.catalog} memberId={flow.memberId} readIncomplete={flow.issues.length > 0}/><RequestDocuments requestId={flow.request.id}/></div>;
+      initialWorkflow={flow.workflow as Record<string, WorkflowRecordV2[]>} initialCatalog={flow.catalog} memberId={flow.memberId} readIncomplete={flow.issues.length > 0}/></div>;
 }
