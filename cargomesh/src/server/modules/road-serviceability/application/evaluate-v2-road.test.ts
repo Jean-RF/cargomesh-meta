@@ -81,6 +81,32 @@ function service(): RoadService {
 }
 
 describe("HAC-12 ROAD application response", () => {
+  it("previews only a current authorized request with both saved coordinates", async () => {
+    const repo = draft();
+    const saved = (await repo.findById(actor, requestId))!;
+    const catalog = { listRoadServices: async () => [service()] };
+    let calls = 0;
+    const preview = async (origin: { lat: number; lng: number }, destination: { lat: number; lng: number }) => {
+      calls++;
+      assert.equal(origin.lat, -12.04);
+      assert.equal(destination.lat, -16.41);
+      return { corridorCode: null, geometrySource: "GOOGLE_ROUTES_API", provenanceStatus: "ESTIMATED" as const,
+        distanceKm: 1015, estimatedTransitHours: 18, legs: [] };
+    };
+    const missing = await evaluateV2RoadByRequestId(requestId, 1, actor, repo, catalog, preview);
+    assert.equal(missing.data.requestRoutePreview, null);
+    assert.equal(calls, 0);
+    Object.assign(saved.data.origin, { lat: -12.04, lng: -77.1 });
+    Object.assign(saved.data.destination, { lat: -16.41, lng: -71.53 });
+    await assert.rejects(evaluateV2RoadByRequestId(requestId, 2, actor, repo, catalog, preview), { code: "STALE_DRAFT" });
+    await assert.rejects(evaluateV2RoadByRequestId(requestId, 1, { ...actor, organizationId: serviceId }, repo, catalog, preview));
+    assert.equal(calls, 0);
+    const result = await evaluateV2RoadByRequestId(requestId, 1, actor, repo, catalog, preview);
+    assert.equal(result.data.requestRoutePreview?.geometrySource, "GOOGLE_ROUTES_API");
+    assert.equal(result.data.candidates[0].routePreview, null);
+    assert.equal(calls, 1);
+  });
+
   it("never evaluates SEA or a multimodal request as ROAD", async () => {
     const repo = draft();
     const saved = (await repo.findById(actor, requestId))!;

@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { findRoadLocation } from "@/features/v2-workspace/road-locations";
 import { calculateRoadRoutes, evaluateRoadAlternatives, selectRoadAlternative } from "./road-routing";
-import { createRoadRoutingHandler } from "./road-routing-http";
+import { createRoadRouteCalculator, createRoadRoutingHandler } from "./road-routing-http";
+import { createCarrierRoadRouter } from "@/server/hono/routes/carrier-road-routing";
 import type { Point } from "@/features/road-route-lab/contract";
 
 // Synthetic transport-contract fixtures only; these two-point shapes are not real roads
@@ -156,4 +157,45 @@ test("ten calls per process per minute budget and reset", async () => {
   for (let i = 0; i < 10; i++) assert.equal((await handler(request())).status, 200);
   assert.equal((await handler(request())).status, 429);
   now = 60_000; assert.equal((await handler(request())).status, 200);
+});
+
+test("hosted carrier lab validates scope and returns the provider road geometry", async () => {
+  const carrierId = "c0000000-0000-4000-8000-000000000001";
+  const otherCarrierId = "c0000000-0000-4000-8000-000000000002";
+  const appOrigin = "https://cargomesh-meta.vercel.app";
+  const bend = { lat: -13.5, lng: -76.5 };
+  let calls = 0;
+  const router = createCarrierRoadRouter({
+    authenticate: async id => ({ kind: "carrier", carrierId, operatorId: id, userId: id, organizationId: null }),
+    routeLab: createRoadRouteCalculator({ apiKey: "test-only-secret", fetcher: async () => {
+      calls++;
+      return calls === 1 ? Response.json(response([candidate(1000, 100, [origin, bend, destination])]))
+        : Response.json({ error: "test-only-secret" }, { status: 403 });
+    } }),
+  });
+  const send = (id = carrierId, headers: Record<string, string> = {}, body: unknown = {
+    originId: "lima", destinationId: "arequipa", objective: "FASTEST", traffic: input.traffic,
+  }) => router.request(`${appOrigin}/carrier-portal/carriers/${id}/route-lab`, {
+    method: "POST", headers: { Origin: appOrigin, "Content-Type": "application/json", ...headers }, body: JSON.stringify(body),
+  });
+  const cookie = { Cookie: "session=test" };
+  assert.equal((await send()).status, 401);
+  assert.equal((await send(carrierId, { ...cookie, Origin: "https://foreign.example" })).status, 403);
+  assert.equal((await send(otherCarrierId, cookie)).status, 403);
+  assert.equal((await send(carrierId, cookie, {})).status, 400);
+  assert.equal((await send(carrierId, cookie, { extra: "x".repeat(4100) })).status, 413);
+  assert.equal(calls, 0);
+
+  const success = await send(carrierId, cookie);
+  assert.equal(success.status, 200);
+  assert.match(success.headers.get("Cache-Control") ?? "", /no-store/);
+  const result = (await success.json()).data;
+  assert.equal(result.source, "GOOGLE_ROUTES_API");
+  assert.deepEqual(result.alternatives[0].points, [origin, bend, destination].map(({ lat, lng }) => ({ lat, lng })));
+
+  const denied = await send(carrierId, cookie);
+  assert.equal(denied.status, 502);
+  const error = await denied.text();
+  assert.match(error, /PROVIDER_DENIED/);
+  assert.doesNotMatch(error, /test-only-secret|polyline/);
 });

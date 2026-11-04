@@ -26,8 +26,9 @@ export function validCoordinate(lat: number | null, lng: number | null): lat is 
     && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
 }
 
-export function getMapPresentation(props: RoadCandidateMapViewProps): MapPresentation {
-  const selectedCandidate = props.candidates.find((candidate) => candidate.candidateId === props.selectedCandidateId) ?? null;
+export function getMapPresentation(props: Pick<RoadCandidateMapViewProps, "origin" | "destination"> &
+  Partial<Omit<RoadCandidateMapViewProps, "origin" | "destination">>): MapPresentation {
+  const selectedCandidate = props.candidates?.find((candidate) => candidate.candidateId === props.selectedCandidateId) ?? null;
   const markers: MapPresentation["markers"] = [];
   if (validCoordinate(props.origin.lat, props.origin.lng)) {
     markers.push({ kind: "origin", point: { lat: props.origin.lat, lng: props.origin.lng! }, label: props.origin.label });
@@ -36,7 +37,7 @@ export function getMapPresentation(props: RoadCandidateMapViewProps): MapPresent
     markers.push({ kind: "destination", point: { lat: props.destination.lat, lng: props.destination.lng! }, label: props.destination.label });
   }
 
-  const preview = selectedCandidate?.routePreview ?? null;
+  const preview = selectedCandidate?.routePreview ?? props.requestRoutePreview ?? null;
   const declaredSource = preview?.geometrySource.trim() || null;
   const hasEndpointCoordinates = markers.length === 2;
   const hasDeclaredGeometry = preview !== null && preview.provenanceStatus !== "UNKNOWN"

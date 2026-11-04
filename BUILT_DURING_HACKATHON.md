@@ -1,5 +1,11 @@
 # Base existente e incremento Meta
 
+## Juan — mapas de Clientes y rutas de Carrier — 4 noviembre 2026
+
+En el producto general, Clientes muestra el mapa base de la última solicitud y el detalle distingue la falta de coordenadas de un fallo de Google Maps. Los pines propuestos se guardan tras confirmación explícita y la evaluación puede solicitar una estimación vial con ambos extremos guardados. El laboratorio de Carrier usa el cálculo V2 con acceso al carrier seleccionado. La estimación es de conducción y conserva su procedencia, separada de elegibilidad y cobertura.
+
+103 pruebas focalizadas y control de arquitectura aprobados. La prueba del proveedor usa respuestas controladas. El trazado real requiere una clave Routes del servidor autorizada para el entorno desplegado.
+
 ## Axel + Codex — manifiesto a ensayo físico Tetris — 4 noviembre 2026
 
 Se recupera el planificador local de Axel/Codex del 1-nov para `Jean-RF/cargomesh-meta`: lectura de manifiesto vigente, revisión de unidades/dimensiones/carga útil, acomodo determinístico en una capa y vista 2D/3D. Conserva el catálogo, fábrica y sesiones de Juan. [Alcance, pruebas y pendientes](docs/meta/TETRIS_PLANNING_2026-11-04.md). No persiste planes operativos, reserva capacidad ni sustituye conteos SAM por geometría. Sin cambios en el repositorio o despliegue Amazon.

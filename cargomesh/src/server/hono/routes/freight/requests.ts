@@ -69,7 +69,11 @@ freightRequestsRouter.get("/:id/cargo-readiness", async (c) => {
   } catch (error) { return v2Error(c, error); }
 });
 
+let previewTimes: number[] = [];
 freightRequestsRouter.get("/:id/serviceability", async (c) => {
+  c.header("Cache-Control", "private, no-store");
+  const includeRoute = c.req.header("X-CargoMesh-Route-Preview") === "1"
+    && c.req.header("Sec-Fetch-Site") !== "cross-site";
   try {
     const [{ v2DraftRepository }, { createV2ServerSupabaseClient },
       { loadRoadServices }, { evaluateV2RoadByRequestId, ExpectedDraftVersionSchema }] = await Promise.all([
@@ -85,6 +89,16 @@ freightRequestsRouter.get("/:id/serviceability", async (c) => {
       c.req.param("id"), expected,
       { memberId: member.memberId, organizationId: member.organizationId },
       await v2DraftRepository(), { listRoadServices: () => loadRoadServices(db) },
+      includeRoute ? async (origin, destination) => {
+        const apiKey = process.env.GOOGLE_ROUTES_API_KEY?.trim();
+        if (!apiKey) return null;
+        const { computeRoadPreview } = await import("@/server/maps/local-road-preview");
+        const now = Date.now();
+        previewTimes = previewTimes.filter(time => now - time < 60_000);
+        if (previewTimes.length >= 10) return null;
+        previewTimes.push(now);
+        return (await computeRoadPreview({ origin, destination, apiKey })).routePreview;
+      } : undefined,
     ));
   } catch (error) { return v2Error(c, error); }
 });

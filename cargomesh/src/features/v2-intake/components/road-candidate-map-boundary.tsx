@@ -11,9 +11,10 @@ type Translate = (spanish: string, english: string) => string;
  * Keeping this boundary free of local state guarantees that cards and map use
  * the same selectedCandidateId and callback.
  */
-export function RoadCandidateMapBoundary({ props }: {
+export function RoadCandidateMapBoundary({ props, showBasemap }: {
   props: RoadCandidateMapViewProps;
   t: Translate;
+  showBasemap?: boolean;
 }) {
-  return <RoadCandidateMapView {...props} hideEmptyGuidance />;
+  return <RoadCandidateMapView {...props} hideEmptyGuidance showBasemap={showBasemap} />;
 }
