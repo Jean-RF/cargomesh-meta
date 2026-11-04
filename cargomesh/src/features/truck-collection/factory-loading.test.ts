@@ -64,6 +64,12 @@ test('articulated wrist keeps fixed links and the gripper on the exact cargo att
       assert(elbow.distanceTo(cell.arms[1].getWorldPosition(new Vector3()))<1e-8);assert(tip.distanceTo(expected)<1e-8);
       assert(cell.arms.every(arm=>arm.scale.equals(new Vector3(1,1,1))));angles.add(cell.arms[0].rotation.y.toFixed(4));
     }
+    const transfer=unit.moves.find(move=>move.label==='Trasladar y alinear con el acceso')!;
+    const start=factoryLoadingPose(plan,transfer.start),mid=factoryLoadingPose(plan,(transfer.start+transfer.end)/2);
+    assert(mid.carrier[0]<start.carrier[0]);
+    assert.equal(mid.carrier[1],plan.highY);
+    assert(Math.abs(mid.carrier[2]-(transfer.from[2]+transfer.to[2])/2)<1e-8);
+    assert(cell.beams.every(beam=>beam.scale.x===1),'telescopic sections retain their physical length');
     assert(angles.size>5,'wrist articulates through the transfer instead of remaining rigid');
     const pose=factoryLoadingPose(plan,(unit.graspAt+unit.settleAt)/2);animateFactoryScene(cell,pose);const first=cell.arms.map(a=>[...a.position.toArray(),a.rotation.y]);animateFactoryScene(cell,factoryLoadingPose(plan,plan.duration));animateFactoryScene(cell,pose);assert.deepEqual(cell.arms.map(a=>[...a.position.toArray(),a.rotation.y]),first);
     disposeCollectionTruck(model);cell.dispose();

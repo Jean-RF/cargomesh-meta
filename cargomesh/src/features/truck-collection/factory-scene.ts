@@ -8,11 +8,11 @@ import {factorySurfaces} from './factory-surfaces';
 
 type Ink='steel'|'dark'|'wall'|'floor'|'yellow'|'teal'|'body'|'red'|'wood'|'glass'|'light'|'sign'|'door';
 const inks={steel:'#9babad',dark:'#24353d',wall:'#d6dfdc',floor:'#b9c1bf',yellow:'#dfb347',teal:'#087f86',body:'#e7e9e4',red:'#ba443d',wood:'#a48760',glass:'#9bbfc9',light:'#fff2ce',sign:'#ffffff',door:'#e7e9e4'};
-export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,model:T.Group){
+export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,model:T.Group,invalidate?:()=>void){
   const root=new T.Group();root.name='Factory loading cell';
   const vehicleFixtures=new T.Group(),connection=new T.Group();root.add(vehicleFixtures,connection);
   const doors=[new T.Group(),new T.Group()];vehicleFixtures.add(...doors);
-  const surfaces=factorySurfaces();
+  const surfaces=factorySurfaces(invalidate);
   const materials=new Map<Ink,T.MeshStandardMaterial>(),buckets=new Map<T.Group,Map<Ink,T.BufferGeometry[]>>();
   const add=(parent:T.Group,ink:Ink,geometry:T.BufferGeometry,at:FactoryPoint,rotation:FactoryPoint=[0,0,0])=>{
     const g=geometry.index?geometry.toNonIndexed():geometry.clone();geometry.dispose();
@@ -43,7 +43,11 @@ export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,
   const minX=Math.min(l.front-1.2,cargoBounds.min.x-1),backZ=-W/2-1.5;
   const farZ=Math.max(W/2+2,cargoBounds.max.z+1),wallY=Math.max(F+4.0,plan.method==='crane'?plan.highY+c/2+1.5:F+4);
   const apron=plan.scenario==='incomplete'?plan.exitDistance:0;
-  box(root,'floor',[farX-minX+apron,.08,farZ-backZ+2],[(minX-apron+farX)/2,-.045,(farZ+backZ)/2]);
+  const hallStart=minX-Math.max(apron,plan.method==='rear'?15:0);
+  const hallEnd=farX+(plan.method==='rear'?16:0);
+  const garageDepth=Math.max(9,truck.lengthM+2);
+  const hallFront=farZ+(plan.method==='rear'?10+garageDepth:1);
+  box(root,'floor',[hallEnd-hallStart,.08,hallFront-backZ+1],[(hallStart+hallEnd)/2,-.045,(hallFront+backZ-1)/2]);
   if(plan.method==='rear'){
     box(root,'floor',[farX-R-1.35,F,farZ-backZ],[(R+.35+farX-1)/2,F/2,(farZ+backZ)/2]);
     box(root,'floor',[1,F,farZ-backZ-1.5],[farX-.5,F/2,(backZ+farZ-1.5)/2]);
@@ -87,6 +91,122 @@ export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,
     box(root,'steel',[.045,.22,.34],[x,wallY-.73,backZ+.12]);
   }
   for(let z=backZ+1;z<farZ;z+=3)box(root,'dark',[farX-minX,.003,.012],[(minX+farX)/2,.001,z]);
+  if(plan.method==='rear'){
+    // Leave the front of the cell open so the vehicle and transfer remain visible.
+    const serviceDepth=1.7, rackZ=backZ+.48;
+    const beamY=wallY+.32;
+    // Adjacent bays surround the active cell without changing its camera framing.
+    for(const [start,end] of [[hallStart,minX],[wallEnd,hallEnd]]){
+      const length=end-start,center=(start+end)/2;
+      box(root,'wall',[length,wallY,.14],[center,wallY/2,backZ-.13]);
+      box(root,'dark',[length,.14,.12],[center,beamY,backZ]);
+      for(const x of [center-3.5,center+3.5]){
+        box(root,'dark',[3.3,3.1,.14],[x,1.55,backZ-.02]);
+        box(root,'steel',[3.08,2.86,.085],[x,1.52,backZ+.045]);
+        for(let y=.26;y<2.9;y+=.16)box(root,'dark',[3.06,.013,.018],[x,y,backZ+.097]);
+        for(const side of [-1,1]){
+          box(root,'dark',[.18,wallY,.24],[x+side*1.9,wallY/2,backZ+.02]);
+          cylinder(root,'yellow',.083,.93,[x+side*1.68,.465,backZ+.75]);
+          box(root,'yellow',[.085,.008,3.7],[x+side*1.68,.006,backZ+2.6]);
+        }
+      }
+    }
+    for(const x of [hallStart+.35,minX+.38,wallEnd-.38,hallEnd-.35]){
+      const depth=farZ-backZ+3.25;
+      box(root,'dark',[.18,.18,depth],[x,beamY,backZ+depth/2]);
+      bar(root,'steel',[x,wallY-.69,backZ],[x,beamY,backZ+1.65],.038);
+    }
+    for(const z of [backZ+.95,backZ+3.4,farZ+1.9]){
+      box(root,'steel',[hallEnd-hallStart,.105,.12],[(hallStart+hallEnd)/2,beamY,z]);
+      for(let x=hallStart+1;x<hallEnd-.8;x+=3.2){
+        box(root,'dark',[1.6,.065,.18],[x,beamY-.19,z]);
+        box(root,'light',[1.51,.014,.13],[x,beamY-.228,z]);
+      }
+    }
+    for(const x of [hallStart+.35,hallEnd-.35]){
+      const z=farZ+2.95;
+      box(root,'dark',[.18,beamY,.20],[x,beamY/2,z]);
+      box(root,'steel',[.32,.045,.34],[x,.022,z]);
+      box(root,'yellow',[.23,.52,.26],[x,.26,z]);
+      bar(root,'steel',[x,beamY-.68,z],[x,beamY,z-.8],.034);
+    }
+    const walkway=farZ+2.2;
+    for(const z of [walkway,walkway+1.35])box(root,'yellow',[hallEnd-hallStart-1,.008,.065],[(hallStart+hallEnd)/2,.009,z]);
+    for(let x=hallStart+1;x<hallEnd-1;x+=4.6)for(let i=0;i<5;i++){
+      box(root,'body',[.29,.008,1.16],[x+i*.43,.010,walkway+.675]);
+    }
+
+    // Marshalling lane and vehicle bays sit beyond the pedestrian corridor.
+    const garageStart=hallFront-garageDepth,laneZ=farZ+7;
+    for(let x=hallStart+1.4;x<hallEnd-1.4;x+=2.7){
+      box(root,'body',[1.14,.007,.085],[x,.007,laneZ]);
+    }
+    const garageWidth=Math.max(4.45,W+1.65),garageHeight=Math.max(4.5,F+truck.bodyHeightM+.75);
+    const garageCount=3,garageLeft=hallStart+.75;
+    const garageSpan=garageCount*garageWidth,garageCenter=garageLeft+garageSpan/2,garageZ=garageStart+garageDepth/2;
+    box(root,'wall',[garageSpan,garageHeight,.18],[garageCenter,garageHeight/2,hallFront-.11]);
+    box(root,'dark',[garageSpan,.72,.11],[garageCenter,.36,hallFront-.015]);
+    box(root,'teal',[garageSpan,.12,.075],[garageCenter,garageHeight-.32,hallFront-.012]);
+    box(root,'steel',[garageSpan+.24,.20,garageDepth],[garageCenter,garageHeight,garageZ]);
+    for(let i=0;i<=garageCount;i++){
+      const x=garageLeft+i*garageWidth;
+      box(root,'wall',[.15,garageHeight,garageDepth-.16],[x,garageHeight/2,garageZ]);
+      box(root,'dark',[.16,garageHeight,.09],[x,garageHeight/2,hallFront-.015]);
+      if(i===garageCount)break;
+      const center=x+garageWidth/2,doorHeight=garageHeight-.48;
+      box(root,'dark',[garageWidth-.15,garageHeight,.19],[center,garageHeight/2,garageStart+.06]);
+      box(root,'steel',[garageWidth-.43,doorHeight,.09],[center,doorHeight/2,garageStart-.055]);
+      for(let y=.22;y<doorHeight-.11;y+=.23)box(root,'dark',[garageWidth-.45,.017,.016],[center,y,garageStart-.106]);
+      box(root,'light',[.76,.09,.14],[center,garageHeight-.23,garageStart-.065]);
+      box(root,'yellow',[garageWidth-.45,.007,.11],[center,.009,garageStart-.46]);
+      for(const side of [-1,1])cylinder(root,'yellow',.078,.84,[center+side*(garageWidth/2-.18),.42,garageStart-.48]);
+      box(root,'teal',[1.35,.88,.52],[center+garageWidth*.23,.44,hallFront-.46]);
+      box(root,'steel',[1.4,.065,.56],[center+garageWidth*.23,.912,hallFront-.46]);
+      box(root,'light',[1.5,.055,.16],[center,garageHeight-.16,garageZ]);
+    }
+    // Stock buffer on the warehouse side, outside the active transfer cell.
+    for(let x=farX+2.2;x<hallEnd-1.4;x+=3.2){
+      const z=backZ+5.5;
+      for(const dx of [-1.34,1.34])for(const dz of [-.51,.51]){
+        box(root,'dark',[.095,3.30,.095],[x+dx,1.65,z+dz]);
+      }
+      for(const y of [.22,1.43,2.64]){
+        box(root,'steel',[2.64,.06,1.08],[x,y,z]);
+        box(root,'teal',[2.72,.12,.07],[x,y-.035,z+.54]);
+        for(const dx of [-.64,.64]){
+          box(root,'wood',[1.10,.11,.84],[x+dx,y+.09,z]);
+          box(root,'body',[.94,.60,.75],[x+dx,y+.44,z]);
+          box(root,'dark',[.19,.09,.006],[x+dx+.24,y+.48,z+.377]);
+        }
+      }
+    }
+
+    for(let x=minX+.42;x<wallEnd-.8;x+=2.25){
+      box(root,'dark',[.16,.16,serviceDepth],[x,wallY-.03,backZ+serviceDepth/2]);
+      bar(root,'steel',[x,wallY-.90,backZ],[x,wallY-.10,backZ+serviceDepth],.028);
+    }
+    box(root,'steel',[wallEnd-minX,.075,.11],[(minX+wallEnd)/2,wallY-.04,backZ+serviceDepth]);
+    for(let x=minX+.35;x<R-.25;x+=.52)box(root,'yellow',[.28,.008,.06],[x,.008,W/2+.55]);
+    for(const x of [R+.43,R+.78]){
+      for(let z=-W/2+.04;z<W/2;z+=.22)add(root,'yellow',new T.BoxGeometry(.14,.006,.042),[x,F+.005,z],[0,-Math.PI/4,0]);
+    }
+    for(let x=minX+.9;x<R-.9;x+=1.55){
+      for(const dx of [-.64,.64])for(const dz of [-.27,.27]){
+        box(root,'dark',[.065,2.35,.055],[x+dx,1.175,rackZ+dz]);
+        box(root,'steel',[.13,.025,.14],[x+dx,.015,rackZ+dz]);
+      }
+      for(const y of [.40,1.15,1.9]){
+        box(root,'steel',[1.28,.055,.59],[x,y,rackZ]);
+        for(const dz of [-.29,.29])box(root,'teal',[1.30,.105,.042],[x,y-.04,rackZ+dz]);
+        for(const dx of [-.39,0,.39]){
+          const height=dx===0?.31:.24;
+          box(root,'wood',[.34,height,.42],[x+dx,y+.03+height/2,rackZ]);
+          box(root,'body',[.115,.07,.004],[x+dx,y+.13,rackZ+.212]);
+          box(root,'dark',[.060,.024,.004],[x+dx,y+.13,rackZ+.215]);
+        }
+      }
+    }
+  }
   const benchX=minX+1.15,benchZ=farZ-.55,benchFloor=plan.method==='crane'?F:0;
   box(root,'wood',[1.60,.08,.64],[benchX,benchFloor+.93,benchZ]);
   for(const dx of [-.67,.67])for(const dz of [-.23,.23])box(root,'dark',[.055,.89,.055],[benchX+dx,benchFloor+.445,benchZ+dz]);
@@ -170,10 +290,34 @@ export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,
       box(cross,'teal',[.12,.19,.39],[plan.baseX+.20,0,z]);
       for(const dz of [-.13,.13])cylinder(cross,'dark',.045,.035,[plan.baseX-.205,0,z+dz],[0,0,Math.PI/2]);
     }
+    for(const side of [-1,1]){
+      const z=side*(plan.stockWidth/2+.40);
+      // Vertical cable guide and guarded servo housing sit behind the transfer envelope.
+      for(let y=.22;y<columnHeight-.12;y+=.095)box(root,'dark',[.056,.064,.115],[plan.baseX+.19,F+y,z]);
+      box(root,'dark',[.24,.37,.23],[plan.baseX+.19,F+columnHeight-.29,z]);
+      cylinder(root,'steel',.093,.08,[plan.baseX+.36,F+columnHeight-.29,z],[0,0,Math.PI/2]);
+      for(let i=0;i<6;i++){
+        const angle=i*Math.PI/3;
+        cylinder(root,'dark',.009,.018,[plan.baseX+.405,F+columnHeight-.29+.067*Math.sin(angle),z+.067*Math.cos(angle)],[0,0,Math.PI/2]);
+      }
+      const loom=new T.CatmullRomCurve3([
+        new T.Vector3(plan.baseX+.40,F+columnHeight-.36,z),
+        new T.Vector3(plan.baseX+.46,F+columnHeight-.57,z),
+        new T.Vector3(plan.baseX+.31,F+columnHeight-.68,z),
+        new T.Vector3(plan.baseX+.215,F+columnHeight-.63,z),
+      ]);
+      add(root,'dark',new T.TubeGeometry(loom,12,.017,6,false),[0,0,0]);
+      for(const dy of [.13,.33,.53])box(cross,'steel',[.072,.04,.13],[plan.baseX+.22,dy-.23,z]);
+      for(let i=0;i<6;i++)box(root,'steel',[.023,.013,.15],[plan.baseX+.315,F+columnHeight-.43+i*.045,z]);
+    }
     box(cross,'teal',[.24,.19,plan.stockWidth+1.0],[plan.baseX,0,0]);
     box(cross,'steel',[.27,.045,plan.stockWidth+.95],[plan.baseX,-.04,0]);
     box(housing,'teal',[housingLength,.24,.25],[housingLength/2,0,0]);
     box(housing,'body',[housingLength*.75,.09,.27],[housingLength*.52,.155,0]);
+    box(housing,'dark',[housingLength*.82,.028,.036],[housingLength*.50,.205,.073]);
+    for(let i=0;i<8;i++){
+      box(housing,'steel',[.025,.037,.05],[housingLength*(.17+i*.092),.205,.073]);
+    }
     sign(housing,3,Math.min(housingLength*.6,.85),[housingLength*.55,.025,.127]);
     for(let i=0;i<7;i++)box(housing,'dark',[.025,.07,.008],[housingLength*.70+i*.045,0,.129]);
     box(head,'steel',[Math.min(a*.8,.65),.075,b+.15],[0,c/2+.05,0]);
@@ -181,6 +325,9 @@ export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,
     cylinder(head,'body',.075,.06,[0,c/2+.115,0]);
     cylinder(head,'teal',.064,.015,[0,c/2+.152,0]);
     cylinder(head,'steel',.014,b+.16,[0,c/2+.025,0],[Math.PI/2,0,0]);
+    for(const dx of [-.12,.12])for(const dz of [-1,1]){
+      cylinder(head,'dark',.013,.011,[dx,c/2+.092,dz*(b/2-.025)]);
+    }
     box(head,'dark',[.08,.035,.065],[Math.min(a*.32,.22),c/2+.12,.025]);
     cylinder(head,'glass',.015,.012,[Math.min(a*.32,.22)+.045,c/2+.12,.025],[0,0,Math.PI/2]);
     for(const arm of arms){
@@ -189,6 +336,16 @@ export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,
       cylinder(arm,'dark',.071,.083,[0,0,0]);cylinder(arm,'teal',.060,.012,[0,.048,0]);
       for(let i=0;i<6;i++){const angle=i*Math.PI/3;cylinder(arm,'steel',.008,.008,[Math.cos(angle)*.048,.058,Math.sin(angle)*.048]);}
       box(arm,'teal',[linkLength*.56,.015,.060],[linkLength*.49,.040,0]);
+      cylinder(arm,'steel',.034,.019,[linkLength-.019,.035,0]);
+      cylinder(arm,'dark',.015,.022,[linkLength-.019,.045,0]);
+      const harness=new T.CatmullRomCurve3([
+        new T.Vector3(.035,.061,.048),
+        new T.Vector3(linkLength*.38,.066,.060),
+        new T.Vector3(linkLength*.76,.058,.048),
+        new T.Vector3(linkLength-.020,.055,.023),
+      ]);
+      add(arm,'dark',new T.TubeGeometry(harness,10,.008,6,false),[0,0,0]);
+      for(const x of [linkLength*.35,linkLength*.65])box(arm,'steel',[.016,.014,.028],[x,.061,.051]);
       bar(arm,'dark',[.04,.044,.055],[linkLength-.045,.044,.043],.007);
       add(arm,'dark',new T.TorusGeometry(.043,.007,6,16,Math.PI),[.02,.048,.015],[Math.PI/2,0,0]);
     }
@@ -267,19 +424,20 @@ export function buildFactoryScene(truck:CollectionTruck,plan:FactoryLoadingPlan,
     const geometry=mergeGeometries(parts);parts.forEach(p=>p.dispose());if(!geometry)throw Error('No se pudo construir la fábrica.');
     let material=materials.get(ink);
     if(!material){material=new T.MeshStandardMaterial({color:ink==='door'?truck.bodyColor:inks[ink],roughness:ink==='steel'?.32:ink==='body'?.45:.84,metalness:ink==='steel'?.70:.04});
-      if(ink==='floor')material.map=surfaces.concrete;
+      if(ink==='floor'){material.map=surfaces.concrete;material.normalMap=surfaces.normal;material.normalScale.setScalar(.55);material.roughnessMap=surfaces.roughness;material.roughness=1;}
       if(ink==='sign'){material.map=surfaces.signs;material.side=T.DoubleSide;material.roughness=.70;}
       if(ink==='glass'){material.transparent=true;material.opacity=.48;material.depthWrite=false;material.roughness=.18;material.metalness=.15;material.side=T.DoubleSide;}
       if(ink==='light'){material.emissive.set('#fff2cf');material.emissiveIntensity=1.5;}
       materials.set(ink,material);}
     const mesh=new T.Mesh(geometry,material);mesh.name=`Factory ${ink}`;mesh.castShadow=ink!=='glass'&&ink!=='light'&&ink!=='sign';mesh.receiveShadow=true;parent.add(mesh);
   }
-  const beams=plan.method==='rear'?Array.from({length:5},(_,i)=>{const mesh=new T.Mesh(new T.BoxGeometry(1,.105-i*.009,.14-i*.015),materials.get(i%2?'steel':'dark'));root.add(mesh);mesh.castShadow=true;return mesh;}):[];
+  const stageLength=(plan.baseX-plan.front)/5+.12;
+  const beams=plan.method==='rear'?Array.from({length:5},(_,i)=>{const mesh=new T.Mesh(new T.BoxGeometry(stageLength,.105-i*.009,.14-i*.015),materials.get(i%2?'steel':'dark'));root.add(mesh);mesh.castShadow=true;return mesh;}):[];
   const collars=beams.map((_,i)=>{const mesh=new T.Mesh(new T.BoxGeometry(.045,.125-i*.009,.17-i*.015),materials.get('teal'));root.add(mesh);mesh.castShadow=true;return mesh;});
   const cable=plan.method==='crane'?new T.Mesh(new T.CylinderGeometry(.012,.012,1,8),materials.get('dark')):null;if(cable)root.add(cable);
   const frameBounds=new T.Box3(new T.Vector3(minX,0,backZ-.2),new T.Vector3(farX,plan.method==='crane'?craneTop+.6:plan.flow?Math.max(wallY,stream.userData.inletY+1.7):wallY+.25,farZ+.2));
   root.userData.factoryDetail={robot:plan.method==='rear'?'telescopic-gantry-articulated-wrist':plan.method,surfaces:'shared-concrete-signage',version:2};
-  return {root,model,vehicleFixtures,doors,connection,goods,head,jaws,beams,collars,arms,linkLength,cross,housing,ramp,stepRamp,shuttle,cable,craneTop,plan,frameBounds,fillPlane,fillCap,fluid,pileAnchor,pileBounds,stream,particles,truck,dispose(){disposeCollectionTruck(root);}};
+  return {root,model,vehicleFixtures,doors,connection,goods,head,jaws,beams,collars,arms,linkLength,stageLength,cross,housing,ramp,stepRamp,shuttle,cable,craneTop,plan,frameBounds,fillPlane,fillCap,fluid,pileAnchor,pileBounds,stream,particles,truck,dispose(){disposeCollectionTruck(root);for(const texture of Object.values(surfaces))texture?.dispose();}};
 }
 export type FactoryScene=ReturnType<typeof buildFactoryScene>;
 export function animateFactoryScene(scene:FactoryScene,pose:FactoryLoadingPose){
@@ -332,10 +490,10 @@ export function animateFactoryScene(scene:FactoryScene,pose:FactoryLoadingPose){
     return;
   }
   scene.jaws.forEach((jaw,i)=>{jaw.position.z=(i===0?-1:1)*(b/2+.0175+pose.gripOpen*.08);});
-  const ratio=T.MathUtils.clamp((pose.carrier[0]-plan.front)/(plan.baseX-plan.front),0,1),reach=scene.linkLength*(1.56+.22*ratio+.05*pose.gripOpen);
+  const ratio=T.MathUtils.clamp((pose.carrier[0]-plan.front)/(plan.baseX-plan.front),0,1),reach=scene.linkLength*(1.56+.22*ratio+.05*pose.gripOpen-.24*T.MathUtils.smoothstep(pose.carrier[0],plan.rear+plan.size[0]/2+.25,plan.baseX-1.05));
   const y=pose.carrier[1]+c/2+.115,shoulderX=pose.carrier[0]+reach,elbowX=pose.carrier[0]+reach/2,elbowZ=pose.carrier[2]+Math.sqrt(scene.linkLength**2-(reach/2)**2),part=(plan.baseX-shoulderX)/5;
   scene.cross.position.y=y;scene.housing.position.set(plan.baseX,y,pose.carrier[2]);
-  scene.beams.forEach((beam,i)=>{beam.scale.x=part+.025;beam.position.set(plan.baseX-(i+.5)*part,y,pose.carrier[2]);});
+  scene.beams.forEach((beam,i)=>{beam.position.set(plan.baseX-(i+1)*part+scene.stageLength/2,y,pose.carrier[2]);});
   scene.collars.forEach((collar,i)=>collar.position.set(plan.baseX-(i+1)*part,y,pose.carrier[2]));
   scene.arms[0].position.set(shoulderX,y,pose.carrier[2]);scene.arms[0].rotation.y=Math.atan2(pose.carrier[2]-elbowZ,elbowX-shoulderX);
   scene.arms[1].position.set(elbowX,y,elbowZ);scene.arms[1].rotation.y=Math.atan2(elbowZ-pose.carrier[2],pose.carrier[0]-elbowX);

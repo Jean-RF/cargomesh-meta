@@ -511,6 +511,19 @@ export function buildCollectionTruck(t: CollectionTruck, reveal=false, hideCargo
             sphere([w*.18,h*.25,d*.18],[bx,base+h*.36,bz],'load');
             for(let cut=0;cut<3;cut++)bar([bx-w*.07+cut*w*.07,base+h*.59,bz-d*.08],[bx-w*.04+cut*w*.07,base+h*.60,bz+d*.08],.002,'wood');
           }
+        }else if(k==='medicine'&&!hasPallet){
+          const [cx,cy,cz]=pos,capY=cy+h*.36;
+          box([w-.008,h*.84,d-.008],[cx,cy-h*.08,cz],'load',.018);
+          box([w,.012,d],[cx,capY-.017,cz],'frame',.006);
+          box([w,h*.15,d],[cx,cy+h*.425,cz],'load',.011);
+          for(const side of [-1,1]){
+            for(const dx of [-w*.33,w*.33]){
+              box([.024,.043,.011],[cx+dx,capY-.022,cz+side*(d/2-.002)],'frame',.003);
+              box([.015,.022,.009],[cx+dx,capY-.027,cz+side*(d/2+.003)],'metal',.002);
+            }
+            box([.009,.068,d*.38],[cx+side*(w/2-.006),cy+.058,cz],'frame',.004);
+            box([.014,.016,d*.28],[cx+side*(w/2-.002),cy+.063,cz],'metal',.003);
+          }
         }else if(k==='bricks'&&iy===layers-1){
           const brick=new T.Shape();brick.moveTo(-w/2,-d/2);brick.lineTo(w/2,-d/2);brick.lineTo(w/2,d/2);brick.lineTo(-w/2,d/2);brick.closePath();
           for(const offset of [-w*.23,w*.23]){const hole=new T.Path();hole.moveTo(offset-w*.12,-d*.24);hole.lineTo(offset-w*.12,d*.24);hole.lineTo(offset+w*.12,d*.24);hole.lineTo(offset+w*.12,-d*.24);hole.closePath();brick.holes.push(hole);}
@@ -520,8 +533,8 @@ export function buildCollectionTruck(t: CollectionTruck, reveal=false, hideCargo
           for(const side of [-1,1])box([w-.025,.006,.002],[pos[0],pos[1],pos[2]+side*(d/2+.001)],'white',0);
         }
         if(k==='cartons'||k==='medicine'){
-          box([w*.08,.003,d-.004],[pos[0],pos[1]+h/2+.002,pos[2]],'strap');
-          for(const end of [-1,1])box([w*.08,h*.24,.003],[pos[0],pos[1]+h*.38,pos[2]+end*(d/2+.002)],'strap');
+          if(k!=='medicine'||hasPallet)box([w*.08,.003,d-.004],[pos[0],pos[1]+h/2+.002,pos[2]],'strap');
+          if(k!=='medicine'||hasPallet)for(const end of [-1,1])box([w*.08,h*.24,.003],[pos[0],pos[1]+h*.38,pos[2]+end*(d/2+.002)],'strap');
           labelPlate([pos[0]+w*.11,pos[1],pos[2]+d/2+.004],[w*.45,h*.43,.002],hasPallet?1+iy*columns*rows+ix*rows+iz:0);
           for(const end of [-1,1])box([.002,.001,d*.92],[pos[0]+end*w*.43,pos[1]+h/2+.001,pos[2]],'wood');
         }

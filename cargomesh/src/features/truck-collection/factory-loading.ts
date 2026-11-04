@@ -37,7 +37,7 @@ export function factoryLoadingPlan(truck:CollectionTruck):FactoryLoadingPlan|nul
   const stockColumns=method==='crane'?(a>3?count:Math.min(6,Math.ceil(Math.sqrt(count)))):method==='ramp'?count:Math.min(4,count);
   const stockRows=Math.ceil(count/stockColumns),stockWidth=stockColumns*(b+.40);
   const rampLength=method==='ramp'?Math.max(4,...targets.map(p=>(p.position[1]-c/2+.036)/.22)):0;
-  const baseX=l.rear+2+stockRows*(a+.40)+.70,portalX=l.rear+.65;
+  const baseX=l.rear+2+stockRows*(a+.40)+.70,portalX=l.rear+Math.max(.65,a/2+.12);
   const highY=method==='crane'?Math.max(floor+truck.bodyHeightM+c/2+.70,...targets.map(p=>p.position[1]+c+.60)):Math.max(floor+c*1.5+.15,...targets.map(p=>p.position[1]+.036+.12));
   const unitLabel=flow?'lote':a===1.2&&b===.8?'pallet':({medicine:'contenedor',cartons:'caja',fish:'cajón',bakery:'bandeja',bottles:'cesta',coils:'bobina',cable:'bobina',cars:'vehículo',excavator:'excavadora',tractor:'tractor',drums:'bidón',ibc:'IBC',cylinders:'cilindro',plants:'macetón',flowers:'carro',glass:'paquete',panels:'panel'} as Record<string,string>)[kind]??'unidad';
   const supports=method==='ramp'?rollingSupports(kind,unitM):[];
@@ -80,8 +80,8 @@ export function factoryLoadingPlan(truck:CollectionTruck):FactoryLoadingPlan|nul
       move('Elevar sobre el muelle',[source[0],highY,source[2]],0);
       if(method==='crane')move('Trasladar sobre la plataforma',[target[0],highY,target[2]],0);
       else{
-        move('Alinear con el hueco',[source[0],highY,target[2]],0);
-        move('Llevar al acceso',[portalX,highY,target[2]],0);
+        // Move both horizontal axes together once the unit clears the staged stock.
+        move('Trasladar y alinear con el acceso',[portalX,highY,target[2]],0);
         move('Ajustar altura de entrada',[portalX,target[1]+.08,target[2]],0);
         move('Entrar en el camión',[target[0],target[1]+.08,target[2]],0);
       }

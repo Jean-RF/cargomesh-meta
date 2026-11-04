@@ -17,11 +17,19 @@ test('driver eyes remain visible in front of the skin sockets',()=>{
     });
     try{
       for(const side of [-1,1]){
-        const ray=new Raycaster(new Vector3(-.25,1.7+.019*height,side*.032*width),new Vector3(1,0,0),0,.30);
+        const ray=new Raycaster(new Vector3(-.25,1.7+(truck.driver.body==='female'?.0095:.019)*height,side*.032*width),new Vector3(1,0,0),0,.30);
         const whites=ray.intersectObjects(meshes.filter(m=>m.name==='white')),skin=ray.intersectObjects(meshes.filter(m=>m.name==='skin'));
         assert(whites.length&&(!skin.length||whites[0].distance<skin[0].distance),`${truck.driver.id}: eye buried behind skin`);
       }
     }finally{for(const m of meshes){m.geometry.dispose();(m.material as MeshStandardMaterial).dispose();}}
+  }
+});
+
+test('Valeria and Mateo select distinct Blender Studio anatomical bases',()=>{
+  for(const [truck,expected] of [[collectionTrucks[0],'male'],[collectionTrucks[1],'female']] as const){
+    const anatomy=buildSeatedDriver(truck,[0,1.7,0],geometry=>geometry.dispose());
+    assert.equal(anatomy.body,expected);
+    assert.equal(anatomy.source.endsWith('/ realistic female'),expected==='female');
   }
 });
 
@@ -45,6 +53,23 @@ test('hair and folded clothing retain valid surface normals',()=>{
       }
     }finally{geometry.dispose();}
   });
+});
+
+test('medical driver has contoured reflective uniform bands facing the windshield',()=>{
+  const truck=collectionTrucks.find(t=>t.id==='cm-medical-van')!;
+  const bands:number[]=[];
+  buildSeatedDriver(truck,[0,1.7,0],(geometry,part)=>{
+    try{
+      if(part!=='white'||geometry.attributes.position.count!==18)return;
+      const positions=geometry.attributes.position,normals=geometry.attributes.normal;
+      const height=positions.getY(1)-positions.getY(0);
+      if(Math.abs(height-.027)>1e-6)return;
+      assert(normals.getX(8)<0);
+      assert(Math.abs(positions.getX(2)-positions.getX(16))>.001);
+      bands.push(height);
+    }finally{geometry.dispose();}
+  });
+  assert.equal(bands.length,4);
 });
 
 test('long trailers keep a compact clearance behind their licensed cab',()=>{

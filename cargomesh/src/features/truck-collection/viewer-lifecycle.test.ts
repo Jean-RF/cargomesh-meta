@@ -42,7 +42,7 @@ function sceneHarness(source=readFileSync(new URL('./viewer.tsx',import.meta.url
     'three/addons/controls/OrbitControls.js':{OrbitControls:Controls},'three/addons/environments/RoomEnvironment.js':{RoomEnvironment:Environment},
     'three/addons/loaders/RGBELoader.js':{RGBELoader:class{async loadAsync(){counts.hdr++;return new T.Texture();}}},
     './catalog':{collectionTrucks},'./model':{cargoPlacements,
-      buildCollectionTruck(truck:CollectionTruck){counts.build++;const model=new T.Group(),mesh=new T.Mesh(new T.BoxGeometry(truck.lengthM,truck.bodyHeightM,truck.widthM),new T.MeshStandardMaterial());model.add(mesh);model.userData={printedBarcodes:[],cabGeometry:{bounds:{min:[-2,0,-1],max:[0,3,1]}}};return model;},
+      buildCollectionTruck(truck:CollectionTruck){counts.build++;const model=new T.Group(),mesh=new T.Mesh(new T.BoxGeometry(truck.lengthM,truck.bodyHeightM,truck.widthM),new T.MeshStandardMaterial());model.add(mesh);model.userData={printedBarcodes:[],cabGeometry:{head:[-1,1.7,.38],bounds:{min:[-2,0,-1],max:[0,3,1]}}};return model;},
       disposeCollectionTruck(model:T.Group){counts.dispose++;model.traverse(n=>{if(n instanceof T.Mesh){n.geometry.dispose();for(const m of Array.isArray(n.material)?n.material:[n.material])m.dispose();}});}},
     './licensed-cabs':{loadLicensedCab:(truck:CollectionTruck)=>{counts.cab++;return deferCab?new Promise(resolve=>pendingCabs.push({truck,resolve})):Promise.resolve({model:new T.Group()});}},
     './materials':{loadCollectionTextures:async()=>{counts.textures++;return {};},applyCollectionTextures(){}},
@@ -66,12 +66,12 @@ function sceneHarness(source=readFileSync(new URL('./viewer.tsx',import.meta.url
 test('camera angles and resize reuse one assembly, loader and ready exporter',async t=>{
   const h=sceneHarness();await h.update();const firstReady=h.events.ready.at(-1),model=h.state.scene.children.find(c=>c instanceof T.Group);
   const cameraPositions=new Set<string>();
-  for(const view of ['side','front','rear','top','cargo','cab','iso']){
+  for(const view of ['side','front','rear','top','cargo','cab','driver','iso']){
     await h.update({view});cameraPositions.add(h.state.camera.position.toArray().join(','));
     assert(h.state.camera.position.toArray().every(Number.isFinite));assert.equal(h.state.gl.domElement.dataset.view,view);
   }
   for(const width of [390,1200,600])await h.update({}, {width,height:500});
-  t.diagnostic(JSON.stringify({scenario:'initial mount, seven angle changes, three resizes',counts:h.counts}));
+  t.diagnostic(JSON.stringify({scenario:'initial mount, eight angle changes, three resizes',counts:h.counts}));
   assert(cameraPositions.size>4);assert.equal(h.counts.build,1);assert.equal(h.counts.cab,1);assert.equal(h.counts.textures,1);assert.equal(h.counts.dispose,0);
   assert.equal(h.events.ready.length,2);assert.equal(h.events.ready.at(-1),firstReady);assert.deepEqual(h.events.loading,[true,false]);assert(h.state.scene.children.includes(model!));
   assert.equal(h.counts.directDraw,0,'only the existing compositor should draw the scene');

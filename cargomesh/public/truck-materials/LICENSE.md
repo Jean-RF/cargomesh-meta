@@ -16,7 +16,7 @@ Original downloads were checked against MD5 hashes from the public file API. JPE
 
 ## Human anatomy
 
-`src/features/truck-collection/driver-base.json` derives from **Human Base Meshes 1.4.1**, the realistic male body by **Dan Ulrich**, published by Blender Studio and community contributors under **CC0-1.0**. The offline extraction script is `scripts/prepare-driver-mesh.py`; the derived file records the source blend's SHA-256. Clothing, seated pose and per-driver facial variations are project modifications.
+`src/features/truck-collection/driver-base.json` derives from **Human Base Meshes 1.4.1**, the realistic male body by **Dan Ulrich**, published by Blender Studio and community contributors under **CC0-1.0**. The offline extraction script is `scripts/prepare-driver-mesh.py`; the derived file records the source blend's SHA-256. Clothing, seated pose and per-driver facial variations are project modifications. `driver-base-female.json` derives from the corresponding realistic female model in the same CC0 bundle. The extraction script accepts `--female` after the blend path and aligns the mesh with the seated pose.
 
 - Official listing and CC0 grant: https://www.blender.org/download/demo-files/#assets
 - Source archive: https://download.blender.org/demo/asset-bundles/human-base-meshes/human-base-meshes-bundle-v1.4.1.zip
@@ -42,3 +42,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 Factory-detail revision, 2 November 2026: the concrete and industrial-signage atlases in `src/features/truck-collection/factory-surfaces.ts` are original deterministic project artwork under this repository's MIT license. They are generated once per factory scene, not downloaded photographs or manufacturer textures. Mechanical castings, fixtures and lettering are project geometry/artwork; manufacturer pages are construction references only, not distributed assets.
+
+## Equipamiento e iluminación del garaje
+
+- [Concrete Floor 02](https://polyhaven.com/a/concrete_floor_02), Rob Tuytel, Poly Haven, CC0. Color, normal y rugosidad de 1K en fábrica y garaje.
+
+- [Metal Tool Chest](https://polyhaven.com/a/metal_tool_chest), John Yann, Poly Haven, CC0. Convertido a GLB con mapas de 512 px.
+- [Old Tyre](https://polyhaven.com/a/old_tyre), MP, Poly Haven, CC0. Convertido a GLB con mapas de 512 px.
+- [Garage](https://polyhaven.com/a/garage), Greg Zaal, Poly Haven, CC0. HDR de 1K para iluminación ambiental.

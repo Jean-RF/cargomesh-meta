@@ -346,3 +346,9 @@ El chat de texto enviaba solo el último mensaje y campos estructurados; perdía
 El modelo usa el historial como contexto no confiable, sin convertir citas antiguas en propuestas nuevas. Una referencia ambigua o negada no acepta Road. Confirmar Road desde el dashboard abre el formulario existente en su primer paso; no crea una solicitud incompleta ni reserva transporte. Los frascos de medicamentos se conservan como declaración conversada, sin asumir cajas/pallets, requisitos térmicos o equipo.
 
 Verificación: 30 pruebas focalizadas (incluyen las del área), suite chat/workflow 111/111 y TypeScript exit 0; 133 casos distintos entre workflow y adaptador. HTTP real con memoria del ejemplo: META pide aclarar «hello shipment»; en ROAD_INTAKE recuerda «at least 1,000 bottles of Medicine» y pregunta el origen. No hubo escrituras comerciales, inferencia de imágenes/audio, migración, merge ni despliegue. La comprobación de navegación es de lógica/cableado y tipos; la revisión visual permanece pendiente del usuario.
+
+## Juan — garajes, conductores y transferencia de carga — 3 noviembre 2026
+
+El incremento `70623ad` equipa el garaje de inspección y amplía las zonas de fábrica. Mejora el traslado del manipulador, detalla los contenedores isotérmicos y añade la vista Conductor con una malla femenina de Blender Studio para las conductoras del catálogo. La integración con `origin/main@294d1de` conserva la reutilización de escenas del PR #14 y los cambios posteriores del equipo.
+
+Verificación local sobre la integración. Cuatro pruebas de ciclo de vida del visor cubren reutilización de la escena, ocho cambios de ángulo, tres tamaños, continuidad de reproducción y composición. Chromium verifica la apertura de la vista Conductor y los dos finales de carga en el furgón sanitario. La revisión visual no cubre cada cabina ni mide FPS en hardware físico.

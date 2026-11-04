@@ -1,5 +1,6 @@
 import * as T from 'three';
-import base from './driver-base.json';
+import maleBase from './driver-base.json';
+import femaleBase from './driver-base-female.json';
 import type { CollectionTruck } from './catalog';
 import type { AddVehiclePart, VehiclePart } from './cab-models';
 
@@ -27,10 +28,17 @@ function clipSurface(polygon:SurfacePoint[]){
 
 /** CC0 anatomical topology, posed into the seat; no spherical head or cylinder limbs. */
 export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart){
+  const feminine=t.driver.body==='female';
+  const base=feminine?femaleBase:maleBase;
   const serial=Number(t.driver.id.slice(-3)),positions=base.positions;
   const width=.94+(serial%7)*.018,height=.96+(serial%5)*.017;
-  const tiedHair=serial%2===0,build=.94+(serial%5)*.035;
+  const tiedHair=feminine,build=.94+(serial%5)*.035;
+  const faceShape=(serial%5-2)/2,cheekShape=(serial%7-3)/3;
   const hairColor=new T.Color(t.driver.hair),skinColor=new T.Color(t.driver.skin);
+  const irisColor=new T.Color(['#403329','#573e2d','#57523a','#34454a'][serial%4]);
+  const greyHair=serial%4===0?Math.min(.45,t.driver.years*.017):0;
+  const grey=new T.Color('#9c9490');
+  const hairTint=hairColor.toArray(),skinTint=skinColor.toArray();
   const put:AddVehiclePart=(geometry,part,at,rotation)=>{
     if(part==='hair'&&!geometry.attributes.color){
       const color:number[]=[];for(let i=0;i<geometry.attributes.position.count;i++)color.push(hairColor.r,hairColor.g,hairColor.b);
@@ -71,10 +79,16 @@ export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart)
       // Different jaw, nose and cheek proportions retain the source's facial topology.
       p.x-=(.003+(serial%4)*.0015)*Math.exp(-Math.pow((z-1.565)/.022,2))*Math.exp(-Math.pow(x/.025,2));
       p.z*=1+(serial%3-.8)*.055*Math.exp(-Math.pow((z-1.515)/.045,2));
-      if(tiedHair)p.z*=1-.10*Math.exp(-Math.pow((z-1.515)/.035,2));
+      const face=smooth(-y,.044,.11);
+      const chin=face*Math.exp(-((z-1.496)**2)/.00062)*Math.exp(-(x*x)/.0024);
+      const cheek=face*Math.exp(-((z-1.552)**2)/.00055)*Math.exp(-((Math.abs(x)-.057)**2)/.00047);
+      p.x-=faceShape*.006*chin+cheekShape*.0045*cheek;
+      p.z*=1+faceShape*.044*chin+cheekShape*.025*cheek;
     }else if(part==='uniform'&&z>.92){
-      const fold=.009+.003*Math.sin(z*93+x*27);
-      p.x+=y<-.025?-fold:fold;p.z+=Math.sign(x)*.007;
+      const sleeve=smooth(z,.92,1.04)*(1-smooth(z,1.33,1.43));
+      const fold=(.004+.002*Math.sin(z*68+x*22))*sleeve;
+      p.x+=fold*Math.tanh((y+.025)*32);
+      p.z+=Math.sign(x)*.004*sleeve;
       const torso=smooth(z,.94,1.06)*(1-smooth(z,1.33,1.43))*(1-smooth(Math.abs(x),.16,.24));
       p.z*=1+(build-1)*torso;p.x-=.012*torso*(y<-.025?1:-1);
     }
@@ -82,11 +96,16 @@ export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart)
     const front=smooth(-y,.07,.12),lip=front*Math.exp(-Math.pow((z-1.523)/.009,2))*Math.exp(-Math.pow(x/.028,4));
     const cheek=front*Math.exp(-Math.pow((Math.abs(x)-.052)/.021,2))*Math.exp(-Math.pow((z-1.557)/.024,2));
     const socket=front*Math.exp(-Math.pow((Math.abs(x)-.032)/.019,2))*Math.exp(-Math.pow((z-1.592)/.014,2));
-    const shade=part==='skin'?[1-.18*lip-.07*socket,.96-.38*lip-.07*cheek-.08*socket,.92-.34*lip-.06*cheek-.08*socket]:z<.92?[.22,.25,.30]:[1,1,1];
+    const ear=smooth(Math.abs(x),.067,.093)*smooth(z,1.52,1.55)*(1-smooth(z,1.60,1.626));
+    const chin=front*Math.exp(-Math.pow((z-1.499)/.021,2))*Math.exp(-Math.pow(x/.058,4));
+    const grain=.018*Math.sin(x*421+y*273+z*549)*Math.sin(y*179-z*311);
+    const crease=front*Math.exp(-((z-1.523)**2)/.0000065)*Math.exp(-(x*x)/.00053);
+    const lipVolume=lip*(.73+.07*(serial%4));
+    const shade=part==='skin'?[1-.12*lipVolume-.10*crease-.07*socket-.025*chin,.96-.35*lipVolume-.16*crease-.13*cheek-.11*socket-.11*ear,.92-.30*lipVolume-.13*crease-.10*cheek-.09*socket-.08*ear].map(channel=>T.MathUtils.clamp(channel+grain,0,1)):z<.92?[.22,.25,.30]:[1+grain-.035,1+grain-.035,1+grain-.035];
     if(part==='skin'&&!tiedHair&&serial%3===0){
       const edge=Math.min(z-1.477,1.545+.040*smooth(Math.abs(x),.025,.075)-z,-.043-y,.082-Math.abs(x),(Math.hypot(x/.031,(z-1.522)/.017)-1)*.015);
       const coverage=(.50+.12*Math.sin(x*900+z*700))*smooth(edge,0,.014);
-      for(let k=0;k<3;k++)shade[k]=T.MathUtils.lerp(shade[k],hairColor.toArray()[k]/skinColor.toArray()[k],coverage);
+      for(let k=0;k<3;k++)shade[k]=T.MathUtils.lerp(shade[k],hairTint[k]/skinTint[k],coverage);
     }
     colors.push(...shade);
   }
@@ -115,25 +134,49 @@ export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart)
       for(let j=1;j+1<clipped.length;j++)for(const v of [clipped[0],clipped[j],clipped[j+1]]){
         const {x,z}=v.source,crown=smooth(z,1.60,1.68),parting=Math.exp(-Math.pow((x-.018)/.006,2));
         const coverage=smooth(v.d,0,.012),p=v.p.clone().addScaledVector(v.n,.0015*coverage);
-        p.y+=crown*((tiedHair?.003:.004)-parting*.002+.0015*Math.sin(x*300+z*40))*coverage;
-        const grain=.88+.09*Math.sin(x*1300+z*170),color=skinColor.clone().lerp(hairColor.clone().multiplyScalar(grain),coverage);
+        const sweep=Math.sin(x*143+z*170);
+        p.addScaledVector(v.n,((tiedHair?.0035:.0045)+crown*(.006+.003*sweep)-parting*.0015)*coverage);
+        const strand=Math.sin(x*1300+z*170),grain=.84+.14*strand;
+        const temple=smooth(Math.abs(x),.039,.079)*(1-smooth(z,1.627,1.666));
+        const hair=hairColor.clone().lerp(grey,greyHair*temple*smooth(strand,.30,1)).multiplyScalar(grain);
+        const color=skinColor.clone().lerp(hair,coverage);
         values.push(p.x,p.y,p.z);normals.push(v.n.x,v.n.y,v.n.z);shades.push(color.r,color.g,color.b);tex.push(x*12,z*12);
       }
     }
     const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(values,3));g.setAttribute('normal',new T.Float32BufferAttribute(normals,3));g.setAttribute('color',new T.Float32BufferAttribute(shades,3));g.setAttribute('uv',new T.Float32BufferAttribute(tex,2));put(g,'hair');
   };
-  if(tiedHair||serial%9!==0)hairSurface((x,y,z)=>z-T.MathUtils.lerp(1.566,1.632-(serial%3)*.005,smooth(-y,.035,.105))+.008*smooth(Math.abs(x),.04,.08)+.0012*Math.sin(x*340)*smooth(-y,.04,.10));
-  const dot=(scale:Vec,at:Vec,part:VehiclePart)=>{const g=new T.SphereGeometry(1,12,8);g.scale(...scale);put(g,part,[head[0]+at[0],head[1]+at[1],head[2]+at[2]]);};
+  if(tiedHair||serial%9!==0)hairSurface((x,y,z)=>{
+    const temple=smooth(Math.abs(x),.042,.078)*smooth(-y,.022,.078);
+    const hairline=T.MathUtils.lerp(1.559,1.631-(serial%3)*.005,smooth(-y,.035,.105));
+    const sweptPart=tiedHair?.006*Math.tanh((x-.018)*32)*smooth(-y,.025,.095):0;
+    return z-hairline+.016*temple+sweptPart+.0017*Math.sin(x*340)*smooth(-y,.04,.10);
+  });
+  const dot=(scale:Vec,at:Vec,part:VehiclePart,tint?:T.Color)=>{
+    const g=new T.SphereGeometry(1,12,8);g.scale(...scale);
+    if(tint)g.setAttribute('color',new T.Float32BufferAttribute(Array.from({length:g.attributes.position.count},()=>tint.toArray()).flat(),3));
+    put(g,part,[head[0]+at[0],head[1]+at[1],head[2]+at[2]]);
+  };
   const stitch=(path:Vec[],part:VehiclePart,r=.002)=>put(new T.TubeGeometry(new T.CatmullRomCurve3(path.map(p=>point(p[0]+head[0],p[1]+head[1],p[2]+head[2]))),20,r,4,false),part);
+  const torso=new T.Mesh(full,new T.MeshBasicMaterial()),beltRay=new T.Raycaster();torso.updateMatrixWorld();
   for(const s of [-1,1]){
-    const y=.019*height,z=s*.032*width;
-    dot([.007,.0052,.0105],[-.097,y,z],'white');
-    dot([.0024,.0042,.0046],[-.105,y,z],'hair');
-    dot([.0012,.0025,.0027],[-.1075,y,z],'frame');
-    dot([.0008,.0011,.0011],[-.109,y+.0015,z+.0012],'white');
-    stitch([[-.099,y,z-.0105],[-.104,y+.0058,z],[-.099,y,z+.0105]],'skin',.0014);
-    stitch([[-.099,y,z-.0105],[-.103,y-.0048,z],[-.099,y,z+.0105]],'skin',.0010);
-    stitch([[-.098,.041*height,s*.017*width],[-.102,.046*height,s*.032*width],[-.094,.040*height,s*.054*width]],'hair',tiedHair?.0018:.0025);
+    const y=(feminine?.0095:.019)*height,z=s*.032*width;
+    const depth=feminine?.006:0;
+    dot([.007,.0049,.0100],[-.097+depth,y,z],'white');
+    dot([.0024,.0042,.0046],[-.105+depth,y,z],'hair',irisColor);
+    dot([.0012,.0025,.0027],[-.1075+depth,y,z],'frame');
+    dot([.0008,.0011,.0011],[-.109+depth,y+.0015,z+.0012],'white');
+    if(feminine){
+      const brow:Vec[]=[[0,.029*height,s*.016*width],[0,.034*height,s*.032*width],[0,.030*height,s*.050*width]];
+      stitch(brow.map(([,py,pz])=>{
+        beltRay.set(point(head[0]-.25,head[1]+py,head[2]+pz),point(1,0,0));
+        const hit=beltRay.intersectObject(torso)[0];
+        return [hit?hit.point.x-head[0]-.001:-.096,py,pz];
+      }),'hair',.0011);
+    }else{
+      stitch([[-.099,y,z-.0105],[-.104,y+.0058,z],[-.099,y,z+.0105]],'skin',.0014);
+      stitch([[-.099,y,z-.0105],[-.103,y-.0048,z],[-.099,y,z+.0105]],'skin',.0010);
+      stitch([[-.098,.041*height,s*.017*width],[-.102,.046*height,s*.032*width],[-.094,.040*height,s*.054*width]],'hair',.0025);
+    }
   }
   const cloth=(points:Vec[])=>{
     const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(points.flatMap(p=>[head[0]+p[0],head[1]+p[1],head[2]+p[2]]),3));
@@ -148,17 +191,17 @@ export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart)
   cloth([[-.146,-.29,.055],[-.144,-.30,.125],[-.148,-.39,.12],[-.150,-.40,.06]]);
   stitch([[-.147,-.30,.056],[-.151,-.40,.06],[-.149,-.39,.12],[-.145,-.31,.124]],'uniform',.0008);
   for(let i=0;i<3;i++)dot([.002,.003,.003],[-.154,-.27-i*.034,0],'white');
-  if(serial%7===2){
+  if(feminine?serial%10===4:serial%7===2){
     for(const side of [-1,1]){
-      const z=side*.033*width,y=.020*height;
+      const z=side*.033*width,y=(feminine?.0105:.020)*height;
       stitch([[-.119,y+.009,z-.018],[-.121,y+.012,z],[-.119,y+.009,z+.018],[-.119,y-.009,z+.017],[-.121,y-.010,z],[-.119,y-.009,z-.017],[-.119,y+.009,z-.018]],'frame',.0015);
       stitch([[-.119,y+.004,side*.052*width],[-.09,y+.007,side*.076],[-.015,y+.004,side*.083]],'frame',.0015);
     }
-    stitch([[-.121,.022,-.014],[-.124,.027,0],[-.121,.022,.014]],'frame',.0015);
+    const bridge=feminine?.013:.022;
+    stitch([[-.121,bridge,-.014],[-.124,bridge+.005,0],[-.121,bridge,.014]],'frame',.0015);
   }
   const beltPath=[[-.025,-.17,.165],[-.115,-.32,.075],[-.156,-.46,-.01],[-.148,-.65,-.135]] as const;
   const curve=new T.CatmullRomCurve3(beltPath.map(p=>point(p[0]+head[0],p[1]+head[1],p[2]+head[2]))),belt:number[]=[],beltIndices:number[]=[];
-  const torso=new T.Mesh(full,new T.MeshBasicMaterial()),beltRay=new T.Raycaster();torso.updateMatrixWorld();
   for(let i=0;i<=16;i++){
     const p=curve.getPoint(i/16),tangent=curve.getTangent(i/16),edge=point(0,-tangent.z,tangent.y).normalize().multiplyScalar(.022);
     beltRay.set(point(head[0]-.8,p.y,p.z),point(1,0,0));const surface=beltRay.intersectObject(torso)[0];if(surface)p.x=Math.min(p.x,surface.point.x-.012);
@@ -168,6 +211,28 @@ export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart)
     }
   }
   const webbing=new T.BufferGeometry();webbing.setAttribute('position',new T.Float32BufferAttribute(belt,3));webbing.setIndex(beltIndices);webbing.computeVertexNormals();add(webbing,'rubber');
+  // Fit cloth trim to the posed torso so it follows different body builds.
+  const trim=(y:number,z:number,width:number,height:number,part:VehiclePart,offset=.007)=>{
+    const vertices:number[]=[],indices:number[]=[];
+    for(let i=0;i<=8;i++)for(const edge of [-1,1]){
+      const py=head[1]+y+edge*height/2,pz=head[2]+z+width*(i/8-.5);
+      beltRay.set(point(head[0]-.8,py,pz),point(1,0,0));
+      const surface=beltRay.intersectObject(torso)[0];
+      if(!surface)return;
+      vertices.push(surface.point.x-offset,py,pz);
+      if(i&&edge===1){const k=i*2;indices.push(k-2,k,k-1,k,k+1,k-1);}
+    }
+    const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();
+    put(geometry,part);
+  };
+  if(serial%3!==0){
+    for(const side of [-1,1]){
+      trim(-.435,side*.081,.112,.027,'white');
+      trim(-.472,side*.081,.112,.027,'white');
+    }
+  }
+  trim(-.321,-.088,.059,.031,'frame');
+  trim(-.322,-.088,.043,.011,'white',.008);
   torso.material.dispose();full.dispose();
   add(new T.BoxGeometry(.025,.045,.040),'metal',[head[0]-.153,head[1]-.64,head[2]-.13]);
   add(new T.BoxGeometry(.028,.024,.025),'red',[head[0]-.166,head[1]-.64,head[2]-.13]);
@@ -186,5 +251,5 @@ export function buildSeatedDriver(t:CollectionTruck,head:Vec,add:AddVehiclePart)
     const hair=new T.BufferGeometry();hair.setAttribute('position',new T.Float32BufferAttribute(vertices,3));hair.setAttribute('uv',new T.Float32BufferAttribute(tailUv,2));hair.setIndex(indices);hair.computeVertexNormals();put(hair,'hair');
     stitch([[.095,.035,-.024],[.112,.034,0],[.095,.035,.024]],'rubber',.003);
   }
-  return {source:base.source,vertices:positions.length/3,pose:'seated-steering',identity:serial};
+  return {source:base.source,vertices:positions.length/3,pose:'seated-steering',identity:serial,body:t.driver.body};
 }

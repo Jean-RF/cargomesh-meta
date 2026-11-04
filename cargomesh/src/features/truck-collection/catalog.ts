@@ -8,7 +8,7 @@ export type CollectionTruck = {
   id: string; model: string; type: string; size: TruckSize; form: BodyForm;
   color: string; colorName: string; bodyColor: string; lengthM: number; widthM: number; bodyLengthM: number; bodyHeightM: number;
   axles: number; driveAxles:1|2; cab: 'compact' | 'bonnet' | 'day' | 'sleeper'; payloadKg: number; cargo: Cargo;
-  driver: { id: string; name: string; years: number; uniform: string; skin: string; hair: string };
+  driver: { id: string; name: string; body: 'female' | 'male'; years: number; uniform: string; skin: string; hair: string };
   plate: string; depot: string; year: number; powerKw: number; source: 'SYNTHETIC_DESIGN';
   design:VehicleDesign;
   cabBase:CabBase;
@@ -118,7 +118,7 @@ export const collectionTrucks: readonly CollectionTruck[] = ([small,medium,large
     axles,driveAxles,
     cab:design.hood?'bonnet':design.sleeper?'sleeper':groupIndex===0?'compact':'day',
     payloadKg:Math.ceil(Math.max(mass*1.15,[1000,6500,24000][groupIndex]+index*[25,90,120][groupIndex])/50)*50,cargo,
-    driver:{id:`DEMO-DR-${String(n+1).padStart(3,'0')}`,name:drivers[n],years:2+(n*7)%24,uniform:colors[(n+13)%60][0],skin:['#ba815e','#d19b76','#966548','#e0b090','#805a45'][n%5],hair:['#352a25','#171a1d','#574439','#6a5141','#473c37'][n%5]},
+    driver:{id:`DEMO-DR-${String(n+1).padStart(3,'0')}`,name:drivers[n],body:n%2===0?'male' as const:'female' as const,years:2+(n*7)%24,uniform:colors[(n+13)%60][0],skin:['#ba815e','#d19b76','#966548','#e0b090','#805a45'][n%5],hair:['#352a25','#171a1d','#574439','#6a5141','#473c37'][n%5]},
     plate:`DEMO-${String(n+1).padStart(3,'0')}`,depot:depots[n%depots.length],year:2022+n%5,powerKw:[95,175,360][groupIndex]+index*3,source:'SYNTHETIC_DESIGN' as const};
 }));
 export const cargoMassKg = (truck: CollectionTruck) => Math.round(truck.cargo.count*truck.cargo.unitKg*10)/10;
