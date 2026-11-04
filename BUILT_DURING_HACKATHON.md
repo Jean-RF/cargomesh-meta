@@ -1,5 +1,19 @@
 # Base existente e incremento Meta
 
+## Axel + Codex — SAM real local autorizado — 4 noviembre 2026
+
+El usuario autorizó dos llamadas pagadas con clips sintéticos. Análisis directo y job completo con SAM 3.1 aprobados: seis cruces, callback, observación, comparación y Passport reabierto; video anotado verificado. Sin tercera llamada, material privado, cambios alojados o acciones comerciales. SDK sin reintentos automáticos; aceptación en modo SAM explícito del runner. [Evidencia y límites](docs/meta/SAM_REAL_ACCEPTANCE_2026-11-04.md). El launcher persistente continúa FIXTURE sin coste; no se confunde inferencia real con captura propia.
+
+## Axel + Codex — conexión local DockMind a Passport — 4 noviembre 2026
+
+Herramientas multimedia fuera del repo, launcher LOCAL_LOOPBACK activo y protegido por credenciales locales. E2E real de transporte/Auth/Storage/Python/HMAC, observación, comparación y Passport reabierto: ocho etapas aprobadas sobre SYNTHETIC_RENDER/FIXTURE, no SAM real. 55 pruebas DockMind y seis de diagnóstico pasan. [Recibo y límites](docs/meta/TETRIS_LOCAL_CONNECTED_2026-11-04.md). Sin despliegue ni claves publicadas; arranque SAM pagado rechazado por revisión automática, autorización específica solicitada.
+
+## Axel + Codex — inicio del cierre Tetris/IA — 4 noviembre 2026
+
+Continuación autorizada: Supabase Meta local nueva `meta-cr01-validation`, API 64321, 57 migraciones verificadas/aplicadas; escenario ROAD sintético y verificación SQL pasan. Auth e intake HTTP local: 200. Seis pruebas del diagnóstico y TypeScript aprobados. No hay Modal; NOT_CONFIGURED alojado es esperado. Worker aún sin iniciar, falta multimedia/segmentador; aceptación HTTP integral no aprobada por restricción de origen de sesión automática. Detalles y puertos en el plan enlazado.
+
+Por solicitud de rama aparte, inicio local en `codex/meta-tetris-ai-integration` desde `main@c97c59b`. [Plan y estado](docs/meta/PLAN_TETRIS_AI_INTEGRATION.md): diagnóstico de configuración sin valores privados ni llamadas de red, con cuatro pruebas. Distingue clave Meta de transporte worker/callback y configuración servidor Supabase. No acredita SAM ni despliegue; no publica ni modifica infraestructura.
+
 ## Juan — mapas de Clientes y rutas de Carrier — 4 noviembre 2026
 
 En el producto general, Clientes muestra el mapa base de la última solicitud y el detalle distingue la falta de coordenadas de un fallo de Google Maps. Los pines propuestos se guardan tras confirmación explícita y la evaluación puede solicitar una estimación vial con ambos extremos guardados. El laboratorio de Carrier usa el cálculo V2 con acceso al carrier seleccionado. La estimación es de conducción y conserva su procedencia, separada de elegibilidad y cobertura.

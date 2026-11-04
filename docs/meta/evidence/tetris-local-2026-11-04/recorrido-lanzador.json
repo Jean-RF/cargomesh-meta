@@ -1,0 +1,188 @@
+{
+  "ranAt": "2026-11-04T23:06:22.412Z",
+  "scope": "Supabase local (http://127.0.0.1:64321), app createHonoApp en 127.0.0.1 con DOCKMIND_WORKER_MODE=LOCAL_LOOPBACK y lanzador `dockmind serve-local`; sin Modal, SAM ni base alojada",
+  "segmenter": "FIXTURE del clip SYNTHETIC_RENDER sintetico_todas (6 cruces); no es inferencia real ni captura propia",
+  "checks": [
+    "Sesión DEMO de Juan sobre un manifiesto CR-01 confirmado, por HTTP con Bearer",
+    "Clip privado registrado, subido con URL firmada y verificado READY",
+    "El lanzador responde 401 sin Modal-Key/Modal-Secret",
+    "Job -> despacho HTTP al lanzador -> Storage -> callback firmado -> SUCCEEDED persistido -> una observación de Juan (neto 6, FIXTURE)",
+    "El video que se reproduce es el del intento 1 y su SHA-256 coincide con el que declaró el worker",
+    "Callback repetido (202 ALREADY_RECORDED), recuperación (409 DELIVERY_NOT_PENDING) y despacho repetido (duplicate): una sola observación y un solo análisis",
+    "Paquete de evidencia: identidad, configuración, procedencia, marcas de tiempo y video verificado; rotulado SYNTHETIC_OR_FIXTURE",
+    "Cobertura QA sintética explícita, cierre versionado, diferencia cero y Passport persistido/reabierto; sin explicación pagada"
+  ],
+  "receipt": {
+    "call_id": "local-2c718dc5dee5",
+    "job_id": "66cdd18c-dff9-48dd-bbf5-6bd01752504a",
+    "attempt": 1,
+    "group_id": "72abd64b-cd0c-4b75-b870-4cd2e4b885a1",
+    "status": "SUCCEEDED",
+    "error": null,
+    "net": 6,
+    "count_status": "OK",
+    "provider": {
+      "segmenter": "FIXTURE",
+      "real_inference": false,
+      "model": "FIXTURE",
+      "request_id": null,
+      "seconds": 0,
+      "estimated_cost_usd": 0
+    },
+    "overlay_sha256": "fde81981ca89d1aba0869a56de07ef111ea95e79c0bd5164b5c8de2590abb843",
+    "reused": false,
+    "delivery": {
+      "delivered": true,
+      "tries": 1,
+      "http_status": 200,
+      "problem": null
+    }
+  },
+  "passport": {
+    "id": "3b84077a-9b56-43b1-9ba6-818f0b9cc4d4",
+    "sessionVersion": 4
+  },
+  "replay": {
+    "status": 202,
+    "reason": "ALREADY_RECORDED"
+  },
+  "evidencePack": {
+    "schema": "dockmind.evidence.v1",
+    "generatedAt": "2026-11-04T23:06:22.229Z",
+    "label": "SYNTHETIC_OR_FIXTURE",
+    "identity": {
+      "jobId": "66cdd18c-dff9-48dd-bbf5-6bd01752504a",
+      "attempt": 1,
+      "organizationId": "c2300000-0000-4000-8000-000000000001",
+      "sessionId": "d8d28275-fdd0-483a-a6fd-18045846dfe8",
+      "evidenceId": "53a28cf9-1ff1-47d4-8905-0234b36835d4",
+      "groupId": "72abd64b-cd0c-4b75-b870-4cd2e4b885a1",
+      "manifestRevision": 1,
+      "coverage": "COMPLETE"
+    },
+    "status": "SUCCEEDED",
+    "error": null,
+    "clip": {
+      "source": "SYNTHETIC_RENDER",
+      "sha256Uploaded": "8e2610e167d60a465ebefa6d98aef19e63dc8f3e561b3fd51e891581c70d0a92",
+      "sha256Analyzed": "8e2610e167d60a465ebefa6d98aef19e63dc8f3e561b3fd51e891581c70d0a92",
+      "sameBytes": true,
+      "original": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 330,
+        "duration": 11,
+        "codec": "h264"
+      },
+      "analyzed": {
+        "width": 1280,
+        "height": 720,
+        "fps": 10,
+        "frames": 110,
+        "duration": 11,
+        "codec": "h264"
+      },
+      "roi": null,
+      "timeMapping": "segundo = cuadro / 10"
+    },
+    "config": {
+      "line": {
+        "from": [
+          0.5,
+          0
+        ],
+        "to": [
+          0.5,
+          1
+        ]
+      },
+      "inside": [
+        0.8,
+        0.5
+      ],
+      "direction": "IN cruza hacia el punto de adentro; OUT, al revés. Coordenadas en fracciones del cuadro original.",
+      "unit": "BOX",
+      "concept": "cardboard box",
+      "margin": 0.01,
+      "minTrackFrames": 3
+    },
+    "provenance": {
+      "segmenter": "FIXTURE",
+      "realInference": false,
+      "model": "FIXTURE",
+      "requestId": null,
+      "analysisVersion": "dockmind-0.1.0",
+      "analyzedAt": "2026-11-04T23:06:20+00:00"
+    },
+    "count": {
+      "status": "OK",
+      "entries": 6,
+      "exits": 0,
+      "net": 6,
+      "unit": "BOX",
+      "events": [
+        {
+          "seconds": 3.2,
+          "frame": 32,
+          "direction": "IN",
+          "objectId": 1
+        },
+        {
+          "seconds": 4.6,
+          "frame": 46,
+          "direction": "IN",
+          "objectId": 2
+        },
+        {
+          "seconds": 6,
+          "frame": 60,
+          "direction": "IN",
+          "objectId": 3
+        },
+        {
+          "seconds": 7.4,
+          "frame": 74,
+          "direction": "IN",
+          "objectId": 4
+        },
+        {
+          "seconds": 8.8,
+          "frame": 88,
+          "direction": "IN",
+          "objectId": 5
+        },
+        {
+          "seconds": 10.2,
+          "frame": 102,
+          "direction": "IN",
+          "objectId": 6
+        }
+      ],
+      "reviewFlags": [],
+      "tracksSeen": 6,
+      "tracksCounted": 6,
+      "maxObjectsInFrame": 4
+    },
+    "providerUsage": {
+      "billable": false,
+      "seconds": 0,
+      "boxes": 253,
+      "estimatedCostUsd": 0
+    },
+    "overlay": {
+      "object": "53a28cf9-1ff1-47d4-8905-0234b36835d4-66cdd18c-dff9-48dd-bbf5-6bd01752504a-a1-overlay.mp4",
+      "status": "VERIFIED",
+      "sha256Stored": "fde81981ca89d1aba0869a56de07ef111ea95e79c0bd5164b5c8de2590abb843",
+      "sha256Now": "fde81981ca89d1aba0869a56de07ef111ea95e79c0bd5164b5c8de2590abb843",
+      "sizeBytesNow": 83520,
+      "verified": true
+    },
+    "delivery": {
+      "status": "DELIVERED",
+      "tries": 1,
+      "observationId": "c8736cb0-1958-4b88-a163-116810b44946",
+      "deliveredAt": "2026-11-04T23:06:02.099186+00:00"
+    }
+  }
+}
