@@ -1,0 +1,42 @@
+"use client";
+import { useEffect,useRef,useState } from "react";
+import { Download,FileText,FileUp } from "lucide-react";
+import { Button,Dialog,SearchField } from "@/components/ui";
+import { useLocale } from "@/features/i18n/locale-provider";
+import type { DocumentRevision } from "@/shared/schemas/meta/documents";
+import { formatDateTime } from "@/shared/lib/date-time";
+import { DocumentUploadDialog } from "./document-upload-dialog";
+import { DocumentActionsMenu } from "./document-actions-menu";
+import { documents } from "./document-client";
+import s from "./request-documents.module.css";
+
+export function OrganizationDocumentLibrary() {
+  const {t,localeTag}=useLocale();
+  const [rows,setRows]=useState<DocumentRevision[]>([]),[next,setNext]=useState<number|null>(null),[loaded,setLoaded]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
+  const [search,setSearch]=useState(''),[type,setType]=useState('ALL'),[upload,setUpload]=useState<{replacement:DocumentRevision|null}|null>(null);
+  const [history,setHistory]=useState<{id:string;title:string;rows:DocumentRevision[];next:number|null}|null>(null),inFlight=useRef(false);
+  async function load(offset=0){const result=await documents.library(undefined,offset);setRows(old=>offset?[...old,...result.data]:result.data);setNext(result.nextOffset);setLoaded(true);}
+  useEffect(()=>{let active=true;void documents.library().then(result=>{if(active){setRows(result.data);setNext(result.nextOffset);setLoaded(true);}}).catch(error=>{if(active){setError(error instanceof Error?error.message:t('No se pudieron consultar los documentos.','Documents could not be loaded.'));setLoaded(true);}});return()=>{active=false;};},[]);
+  async function run(work:()=>Promise<void>){if(inFlight.current)return;inFlight.current=true;setBusy(true);setError('');try{await work();}catch(error){setError(error instanceof Error?error.message:t('No se pudo completar la acción.','Action failed.'));}finally{inFlight.current=false;setBusy(false);}}
+  async function download(row:DocumentRevision){const result=await documents.download(row.id);const anchor=document.createElement('a');anchor.href=result.url;anchor.rel='noopener noreferrer';anchor.download='';anchor.click();}
+  async function versions(row:DocumentRevision){const result=await documents.library(undefined,0,row.documentId);setHistory({id:row.documentId,title:row.title,rows:result.data,next:result.nextOffset});}
+  const kindLabel=(kind:string)=>({COMPANY_PROFILE:t('Perfil de empresa','Company profile'),PACKING_LIST:t('Lista de empaque','Packing list'),OTHER:t('Otro documento','Other document')})[kind]??kind;
+  const current=rows.filter((row,index)=>rows.findIndex(item=>item.id===row.id)===index&&!rows.some(item=>item.documentId===row.documentId&&item.version>row.version));
+  const visible=current.filter(row=>(type==='ALL'||row.kind===type)&&(!search.trim()||[row.title,row.filename,kindLabel(row.kind)].join(' ').toLocaleLowerCase(localeTag).includes(search.trim().toLocaleLowerCase(localeTag))));
+  return <section className={`${s.panel} ${s.organizationLibrary}`}>
+    <header className={s.toolbar}><div><h2>{t('Biblioteca de documentos','Document library')}</h2><p>{t('Privada de tu organización. Las listas de empaque se agregan desde cada solicitud.','Private to your organization. Add packing lists from each request.')}</p></div><Button size="compact" disabled={busy} onClick={()=>setUpload({replacement:null})}><FileUp size={15}/>{t('Subir documento','Upload document')}</Button></header>
+    <div className={s.libraryFilters}><SearchField fieldClassName={s.librarySearch} label={t('Buscar documentos','Search documents')} hideLabel placeholder={t('Buscar documentos…','Search documents…')} value={search} onValueChange={setSearch} clearLabel={t('Limpiar búsqueda','Clear search')}/>
+      <select className={s.typeFilter} aria-label={t('Tipo de documento','Document type')} value={type} onChange={event=>setType(event.target.value)}><option value="ALL">{t('Todos los tipos','All types')}</option><option value="COMPANY_PROFILE">{kindLabel('COMPANY_PROFILE')}</option><option value="OTHER">{kindLabel('OTHER')}</option>{current.some(row=>row.kind==='PACKING_LIST')&&<option value="PACKING_LIST">{kindLabel('PACKING_LIST')}</option>}</select></div>
+    {error&&<p role="alert" className={s.error}>{error} <Button size="compact" variant="ghost" disabled={busy} onClick={()=>void run(()=>load())}>{t('Reintentar','Retry')}</Button></p>}{notice&&<p role="status" className={s.notice}>{notice}</p>}
+    {!loaded?<p role="status" className={s.empty}>{t('Cargando documentos…','Loading documents…')}</p>:visible.length?<div className={s.tableViewport}><table className={`${s.table} ${s.libraryTable}`}><thead><tr><th scope="col">{t('Documento','Document')}</th><th scope="col">{t('Tipo','Type')}</th><th scope="col">{t('Versión','Version')}</th><th scope="col">{t('Estado','Status')}</th><th scope="col">{t('Vencimiento','Expiry')}</th><th scope="col"><span className={s.hiddenInput}>{t('Acciones','Actions')}</span></th></tr></thead><tbody>{visible.map(row=>{
+      const expired=Boolean(row.expiresOn&&row.expiresOn<new Date().toISOString().slice(0,10));return <tr key={row.id}><td><div className={s.libraryFile}><span><FileText size={18}/></span><div><strong>{row.title}</strong><small>{row.filename} · {Math.ceil(row.bytes/1024)} KiB</small></div></div></td><td>{kindLabel(row.kind)}</td><td>v{row.version}</td><td><span className={s.chip} data-tone={expired||row.state!=='READY'?'warning':'blue'}>{row.state!=='READY'?t('Carga incompleta','Upload incomplete'):expired?t('Vencido','Expired'):t('Listo para revisión','Ready for review')}</span></td><td>{row.expiresOn??t('Sin vencimiento','No expiry')}</td><td><div className={s.actions}><button className={s.more} type="button" aria-label={`${t('Descargar','Download')}: ${row.title}`} disabled={busy||row.state!=='READY'} onClick={()=>void run(()=>download(row))}><Download size={15}/></button><DocumentActionsMenu label={row.title} actions={[{label:t('Subir nueva versión','Upload new revision'),disabled:busy,action:()=>setUpload({replacement:row})},{label:t('Historial de versiones','Revision history'),disabled:busy,action:()=>void run(()=>versions(row))}]}/></div></td></tr>;
+    })}</tbody></table></div>:<p className={s.empty}>{current.length?t('No hay documentos que coincidan.','No matching documents.'):t('Todavía no hay documentos en tu biblioteca.','No documents in your library yet.')}</p>}
+    <footer className={s.footer}><span>{visible.length} {t('documentos cargados','loaded documents')}</span><details><summary>{t('Sobre esta biblioteca','About this library')}</summary><p>{t('Subir un archivo no verifica su validez legal.','Uploading a file does not verify legal validity.')}</p></details>{next!==null&&<Button variant="ghost" size="compact" disabled={busy} onClick={()=>void run(()=>load(next))}>{t('Cargar más','Load more')}</Button>}</footer>
+    {upload&&<DocumentUploadDialog replacement={upload.replacement} onClose={()=>setUpload(null)} onSaved={async()=>{await load();setNotice(t('Versión guardada en privado.','Revision saved privately.'));}}/>}
+    <Dialog open={Boolean(history)} className={s.drawer} title={t('Historial de versiones','Revision history')} description={history?.title??''} closeLabel={t('Cerrar','Close')} onClose={()=>setHistory(null)} closeDisabled={busy}>
+      <div className={s.revisions}>{history?.rows.map(row=><article className={s.revision} key={row.id}><h3>v{row.version}</h3><p>{row.filename}</p><p>{formatDateTime(row.createdAt,localeTag)}</p>{row.expiresOn&&<p>{t('Vencimiento','Expiry')}: {row.expiresOn}</p>}<span className={s.chip}>{row.state==='READY'?t('Guardado','Saved'):t('Carga incompleta','Upload incomplete')}</span><div className={s.actions}><Button variant="secondary" size="compact" disabled={busy||row.state!=='READY'} onClick={()=>void run(()=>download(row))}>{t('Descargar','Download')}</Button></div></article>)}
+        {history&&history.next!==null&&<Button variant="ghost" size="compact" disabled={busy} onClick={()=>void run(async()=>{const result=await documents.library(undefined,history.next!,history.id);setHistory(old=>old?{...old,rows:[...old.rows,...result.data],next:result.nextOffset}:old);})}>{t('Más versiones','More revisions')}</Button>}{error&&<p role="alert" className={s.error}>{error}</p>}
+      </div>
+    </Dialog>
+  </section>;
+}

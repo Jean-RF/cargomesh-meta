@@ -1,5 +1,5 @@
 "use client";
-import {Button} from '@/components/ui';
+import {Button,Input} from '@/components/ui';
 import {Plus,Trash2} from 'lucide-react';
 import {cargoGroups,appendCargoGroup,type DraftCargoGroup} from '../cargo-groups';
 import {FeedbackInput,FeedbackSelect,FeedbackCheckbox,AssistantFieldFeedback} from '../assistant-field-feedback';
@@ -14,6 +14,7 @@ export function CargoGroupsEditor(){
  {groups.map((g,index)=><fieldset key={g.id} className={styles.cargoGroup}><legend>{t('Grupo','Group')} {index+1}</legend><div className={styles.cargoGroupHeading}><Button type="button" variant="ghost" disabled={groups.length===1} aria-label={t('Eliminar grupo ','Remove group ')+(index+1)} onClick={()=>updateCargoGroups(groups.filter(row=>row.id!==g.id))}><Trash2 size={15}/>{t('Eliminar','Remove')}</Button></div><div className={styles.formGrid}>
  <FeedbackSelect field="unitPackageType" feedbackEnabled={index===0} label={t('Tipo de paquete','Package type')} value={g.unitPackageType} onChange={e=>change(g.id,'unitPackageType',e.target.value)}><option value="">{t('Seleccionar','Select')}</option>{activeOptions.packagingOptions.map(o=><option value={o.code} key={o.code}>{t(o.labelEs,o.labelEn)}</option>)}</FeedbackSelect>
  {numbers.map(([key,es,en,step])=><FeedbackInput field={key} key={key} feedbackEnabled={index===0} label={t(es,en)} type="number" min={step} step={step} value={g[key]} error={index===0?errorFor(key):undefined} onChange={e=>change(g.id,key,e.target.value)}/>)}
+ {g.unitUnitsPerPackage!==undefined&&<Input label={t('Unidades por bulto','Units per package')} type="number" min={1} max={1000000} step={1} required value={g.unitUnitsPerPackage} onChange={e=>change(g.id,'unitUnitsPerPackage',e.target.value)}/>}
  <FeedbackCheckbox field="unitIndivisible" feedbackEnabled={index===0} label={t('Pieza indivisible','Indivisible piece')} checked={g.unitIndivisible} onChange={e=>change(g.id,'unitIndivisible',e.target.checked)}/><FeedbackCheckbox field="unitStackable" feedbackEnabled={index===0} label={t('Apilable','Stackable')} checked={g.unitStackable} onChange={e=>change(g.id,'unitStackable',e.target.checked)}/>
  </div></fieldset>)}
  {errorFor('additionalUnits')?<p role="alert">{t('Completa cantidad, peso, volumen y dimensiones de todos los grupos.','Complete quantity, weight, volume and dimensions for every group.')}</p>:null}

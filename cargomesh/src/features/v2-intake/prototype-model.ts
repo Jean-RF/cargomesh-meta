@@ -42,6 +42,7 @@ export type V2IntakePrototypeDraft = {
   unitHeightCm: string;
   unitIndivisible: boolean;
   unitStackable: boolean;
+  unitUnitsPerPackage?: string;
   pickupWindowStartsAt: string;
   pickupWindowEndsAt: string;
   deliveryWindowStartsAt: string;
@@ -127,7 +128,8 @@ export function requestToPrototypeDraft(request: FreightRequestV2Data): V2Intake
     temperatureMinCelsius: request.cargoSpecification.temperatureRange?.minCelsius == null ? "" : String(request.cargoSpecification.temperatureRange.minCelsius),
     temperatureMaxCelsius: request.cargoSpecification.temperatureRange?.maxCelsius == null ? "" : String(request.cargoSpecification.temperatureRange.maxCelsius),
     primaryGroupId:'group-0',primaryOriginalIndex:0,
-    additionalUnits:request.cargoSpecification.units.slice(1).map((u,i)=>({id:'group-'+(i+1),originalIndex:i+1,unitPackageType:u.packageType,unitQuantity:String(u.quantity),unitWeightPerUnitKg:String(u.weightPerUnitKg),unitVolumePerUnitM3:String(u.volumePerUnitM3),unitLengthCm:String(u.dimensionsCm.length),unitWidthCm:String(u.dimensionsCm.width),unitHeightCm:String(u.dimensionsCm.height),unitIndivisible:u.indivisible,unitStackable:u.stackable})),
+    additionalUnits:request.cargoSpecification.units.slice(1).map((u,i)=>({id:'group-'+(i+1),originalIndex:i+1,unitPackageType:u.packageType,unitQuantity:String(u.quantity),unitWeightPerUnitKg:String(u.weightPerUnitKg),unitVolumePerUnitM3:String(u.volumePerUnitM3),unitLengthCm:String(u.dimensionsCm.length),unitWidthCm:String(u.dimensionsCm.width),unitHeightCm:String(u.dimensionsCm.height),unitIndivisible:u.indivisible,unitStackable:u.stackable,...(u.unitsPerPackage===undefined?{}:{unitUnitsPerPackage:String(u.unitsPerPackage)})})),
+    ...(unit.unitsPerPackage===undefined?{}:{unitUnitsPerPackage:String(unit.unitsPerPackage)}),
     unitPackageType: unit.packageType,
     unitQuantity: String(unit.quantity),
     unitWeightPerUnitKg: String(unit.weightPerUnitKg),

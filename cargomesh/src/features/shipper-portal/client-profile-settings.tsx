@@ -1,9 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { z } from 'zod';
-import { X } from 'lucide-react';
-import { Button, Checkbox, Input, Select } from '@/components/ui';
+import { Plus, Trash2 } from 'lucide-react';
+import { Button, Dialog, Input, Select } from '@/components/ui';
+import { useLocale } from '@/features/i18n/locale-provider';
+import { CargoProfileCards } from './cargo-profile-cards';
+import { profileOptionLabel } from './cargo-profile-presentation';
 import { CatalogInputsV2, CatalogRecordV2Schema, parseCatalogRecordV2, type CatalogRecordV2 } from '@/shared/schemas/v2/catalog';
 import { IntakeOptionsV2ResponseSchema, RequirementCodeV2Schema } from '@/shared/schemas/v2/intake-options';
 import { EquipmentCodeV2Schema, TransportModeV2Schema, RankingObjectiveV2Schema } from '@/shared/schemas/v2/freight-request';
@@ -53,7 +56,8 @@ const blankUnit = {
 
 const endpoint = (kind: Kind) => (kind === 'cargo-profiles' ? '/cargo-profiles' : '/organizations/current/preferences');
 
-export function ClientCatalogSettings({ kind, editable }: { kind: Kind; editable: boolean }) {
+export function ClientCatalogSettings({ kind, editable, organization = false, createSignal = 0 }: { kind: Kind; editable: boolean; organization?: boolean; createSignal?: number }) {
+  const {t}=useLocale();
   const [records, setRecords] = useState<CatalogRecordV2[]>([]);
   const [selected, setSelected] = useState<CatalogRecordV2 | null>(null);
   const [creating, setCreating] = useState(false);
@@ -108,6 +112,16 @@ export function ClientCatalogSettings({ kind, editable }: { kind: Kind; editable
       read.current++;
     };
   }, []);
+
+  useEffect(()=>{if(organization&&editable&&createSignal>0){setCreating(true);setSelected(null);setMessage('');}},[createSignal,organization,editable]);
+
+  if(organization&&kind==='cargo-profiles')return <div>
+    {error&&<p className={styles.error} role="alert">{error} <Button variant="ghost" size="compact" onClick={()=>void load()}>{t('Reintentar','Retry')}</Button></p>}
+    {message&&<p className={styles.success} role="status">{message}</p>}
+    {loading&&!records.length?<div className={modalStyles.skeletonBone} style={{height:180}} aria-label={t('Cargando perfiles','Loading profiles')} aria-busy="true"/>:<CargoProfileCards records={records} categories={categories} editable={editable} busy={loading} onOpen={id=>void open(id)}/>}
+    <div className={styles.actions}>{offset>0&&<Button variant="secondary" size="compact" disabled={loading} onClick={()=>void load(Math.max(0,offset-25))}>{t('Anterior','Previous')}</Button>}{next!==null&&<Button variant="secondary" size="compact" disabled={loading} onClick={()=>void load(next)}>{t('Siguiente','Next')}</Button>}</div>
+    {(selected||creating)&&<CargoProfileModal key={selected?selected.id+':'+selected.version:'new'} kind={kind} record={selected} editable={editable} categories={categories} onClose={()=>{setSelected(null);setCreating(false);}} onReload={()=>selected&&void open(selected.id)} onSaved={async()=>{setSelected(null);setCreating(false);setMessage(t('Perfil guardado.','Profile saved.'));await load(offset);}}/>}
+  </div>;
 
   return (
     <section className={styles.panel}>
@@ -231,11 +245,12 @@ function CargoProfileModal({
   onSaved: (value: CatalogRecordV2) => Promise<void>;
   onReload: () => void;
 }) {
+  const {t}=useLocale(),formId=useId();
   const [value, setValue] = useState<Profile | Preference>(
     record
       ? (record.value as Profile | Preference)
       : kind === 'cargo-profiles'
-      ? { ...blankProfile, categoryId: categories[0]?.id ?? '' }
+      ? { ...blankProfile, categoryId: categories[0]?.id ?? '', typicalUnits:[{...blankUnit,dimensionsCm:{...blankUnit.dimensionsCm}}] }
       : blankPreference
   );
   const [busy, setBusy] = useState(false);
@@ -243,22 +258,9 @@ function CargoProfileModal({
   const [conflict, setConflict] = useState(false);
   const pending = useRef<SettingsCommand | null>(null);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKeyDown);
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = originalOverflow;
-    };
-  }, [onClose]);
-
   async function save(e: FormEvent) {
     e.preventDefault();
-    if (busy || conflict) return;
+    if (!editable || busy || conflict) return;
     try {
       const parsed = CatalogInputsV2[kind].parse(value);
       const route = endpoint(kind) + (record ? '/' + record.id + '/revisions' : '');
@@ -283,86 +285,21 @@ function CargoProfileModal({
 
   const titleText = record
     ? kind === 'cargo-profiles'
-      ? `Edit cargo profile: ${cleanDemoText((record.value as Profile).name) || 'Saved profile'}`
-      : 'Saved preferences'
+      ? t('Editar perfil de carga','Edit cargo profile')
+      : t('Preferencias guardadas','Saved preferences')
     : kind === 'cargo-profiles'
-    ? 'Create cargo profile'
-    : 'New preferences';
+    ? t('Crear perfil de carga','Create cargo profile')
+    : t('Nuevas preferencias','New preferences');
 
-  return (
-    <div className={modalStyles.overlay} onClick={onClose} role="presentation">
-      <div
-        className={modalStyles.modal}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="cargo-profile-modal-title"
-        onClick={e => e.stopPropagation()}
-      >
-        {/* Decorative window header with 3 dots */}
-        <div className={modalStyles.windowBar}>
-          <div className={modalStyles.windowDots} aria-hidden="true">
-            <span className={modalStyles.dotBlue} />
-            <span className={modalStyles.dotPurple} />
-            <span className={modalStyles.dotPink} />
-          </div>
-          <h3 id="cargo-profile-modal-title" className={modalStyles.windowTitle}>
-            {titleText}
-          </h3>
-          <button
-            type="button"
-            className={modalStyles.closeButton}
-            onClick={onClose}
-            aria-label="Close dialog"
-          >
-            <X size={18} aria-hidden="true" />
-          </button>
-        </div>
-
-        {/* card__content container */}
-        <div className={modalStyles.cardContent}>
-          <form className={modalStyles.modalForm} onSubmit={save}>
-            {!editable && (
-              <p className={styles.notice}>
-                Your role can view these settings. A manager with the required permissions can edit them.
-              </p>
-            )}
-
-            <fieldset disabled={!editable || busy || conflict}>
-              {kind === 'cargo-profiles' ? (
-                <ProfileFields
-                  value={value as Profile}
-                  onChange={setValue}
-                  categories={categories}
-                />
-              ) : (
-                <PreferenceFields value={value as Preference} onChange={setValue} />
-              )}
-            </fieldset>
-
-            {error && <p className={styles.error} role="alert">{error}</p>}
-
-            <div className={modalStyles.modalFooter}>
-              <Button type="button" variant="secondary" disabled={busy} onClick={onClose}>
-                Cancel
-              </Button>
-              {editable && (
-                <Button type="submit" disabled={conflict} isLoading={busy} loadingLabel="Saving…">
-                  {error && !conflict ? 'Retry save' : record ? 'Save changes' : 'Save cargo profile'}
-                </Button>
-              )}
-              {record && (
-                <Button type="button" variant="secondary" disabled={busy} onClick={onReload}>
-                  Reload latest
-                </Button>
-              )}
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+  return <Dialog open title={titleText} description={kind==='cargo-profiles'?t('Guarda tu carga habitual para reutilizarla en nuevas solicitudes.','Save recurring cargo so you can reuse it in new requests.'):t('Preferencias de planificación.','Planning preferences.')} className={modalStyles.dialog} closeLabel={t('Cerrar','Close')} closeDisabled={busy} onClose={onClose}
+    footer={<><Button type="button" variant="secondary" disabled={busy} onClick={onClose}>{t('Cancelar','Cancel')}</Button>{record&&conflict&&<Button type="button" variant="secondary" disabled={busy} onClick={onReload}>{t('Recargar versión actual','Reload latest')}</Button>}{editable&&<Button type="submit" form={formId} className={modalStyles.saveButton} disabled={busy||conflict} isLoading={busy}>{error&&!conflict?t('Reintentar','Retry save'):record?t('Guardar cambios','Save changes'):t('Guardar perfil','Save profile')}</Button>}</>}>
+    <form id={formId} className={modalStyles.modalForm} onSubmit={save}>
+      {!editable&&<p className={styles.muted}>{t('Tu rol permite consultar este perfil.','Your role can view this profile.')}</p>}
+      <fieldset disabled={!editable||busy||conflict}>{kind==='cargo-profiles'?<ProfileFields value={value as Profile} onChange={setValue} categories={categories}/>:<PreferenceFields value={value as Preference} onChange={setValue}/>}</fieldset>
+      {error&&<p className={styles.error} role="alert">{error}</p>}
+    </form>
+  </Dialog>;
 }
-
 function Equipment({
   value,
   onChange,
@@ -370,206 +307,56 @@ function Equipment({
   value: string | null;
   onChange: (value: Profile['preferredEquipment']) => void;
 }) {
+  const {t}=useLocale();
   return (
     <Select
-      label="Preferred equipment"
+      label={t('Equipo preferido','Preferred equipment')}
       value={value ?? ''}
       onChange={e => onChange((e.target.value as Profile['preferredEquipment']) || null)}
     >
-      <option value="">No preference</option>
+      <option value="">{t('Sin preferencia','No preference')}</option>
       {EquipmentCodeV2Schema.options.map(v => (
-        <option key={v}>{v}</option>
+        <option key={v} value={v}>{profileOptionLabel(v,t)}</option>
       ))}
     </Select>
   );
 }
 
-function ProfileFields({
-  value,
-  onChange,
-  categories,
-}: {
-  value: Profile;
-  onChange: (value: Profile) => void;
-  categories: { id: string; name: string }[];
-}) {
-  const updateUnit = (index: number, patch: Partial<Profile['typicalUnits'][number]>) =>
-    onChange({
-      ...value,
-      typicalUnits: value.typicalUnits.map((v, i) => (i === index ? { ...v, ...patch } : v)),
-    });
-
-  return (
-    <>
-      <div className={modalStyles.fieldsGrid}>
-        <Input
-          label="Profile name"
-          value={cleanDemoText(value.name) || value.name}
-          onChange={e => onChange({ ...value, name: e.target.value })}
-          required
-          maxLength={200}
-        />
-        <Select
-          label="Cargo category"
-          value={value.categoryId}
-          onChange={e => onChange({ ...value, categoryId: e.target.value })}
-          required
-        >
-          <option value="">Select a saved category</option>
-          {!categories.some(v => v.id === value.categoryId) && value.categoryId && (
-            <option value={value.categoryId}>Saved category (currently inactive)</option>
-          )}
-          {categories.map(v => (
-            <option value={v.id} key={v.id}>
-              {cleanDemoText(v.name) || v.name}
-            </option>
-          ))}
-        </Select>
-        <Equipment value={value.preferredEquipment} onChange={v => onChange({ ...value, preferredEquipment: v })} />
-        <Checkbox
-          label="Active profile"
-          checked={value.active}
-          onChange={e => onChange({ ...value, active: e.target.checked })}
-        />
-      </div>
-
-      <div className={modalStyles.sectionBlock}>
-        <h4 className={modalStyles.sectionTitle}>Handling Requirements</h4>
-        <div className={modalStyles.reqGrid}>
-          {RequirementCodeV2Schema.options.map(v => (
-            <Checkbox
-              key={v}
-              label={v.replaceAll('_', ' ')}
-              checked={value.requirements.includes(v)}
-              onChange={e =>
-                onChange({
-                  ...value,
-                  requirements: e.target.checked
-                    ? [...value.requirements, v]
-                    : value.requirements.filter(item => item !== v),
-                })
-              }
-            />
-          ))}
+function ProfileFields({value,onChange,categories}:{value:Profile;onChange:(value:Profile)=>void;categories:{id:string;name:string}[]}) {
+  const {t}=useLocale();
+  const updateUnit=(index:number,patch:Partial<Profile['typicalUnits'][number]>)=>onChange({...value,typicalUnits:value.typicalUnits.map((unit,i)=>i===index?{...unit,...patch}:unit)});
+  const requirements=[...new Set([...RequirementCodeV2Schema.options,...value.requirements])];
+  return <>
+    <div className={modalStyles.fieldsGrid}>
+      <Input label={t('Nombre del perfil','Profile name')} placeholder={t('Ej. Pallets de productos empacados','e.g. Pallets of packaged goods')} value={value.name} onChange={event=>onChange({...value,name:event.target.value})} required maxLength={200}/>
+      <Select label={t('Categoría de carga','Cargo category')} value={value.categoryId} required onChange={event=>onChange({...value,categoryId:event.target.value})}>
+        <option value="">{t('Seleccionar categoría','Select category')}</option>{value.categoryId&&!categories.some(row=>row.id===value.categoryId)&&<option value={value.categoryId}>{t('Categoría guardada (inactiva)','Saved category (inactive)')}</option>}
+        {categories.map(row=><option key={row.id} value={row.id}>{cleanDemoText(row.name)||row.name}</option>)}
+      </Select>
+      <Equipment value={value.preferredEquipment} onChange={preferredEquipment=>onChange({...value,preferredEquipment})}/>
+      <label className={modalStyles.active}><input type="checkbox" role="switch" checked={value.active} onChange={event=>onChange({...value,active:event.target.checked})}/><span>{t('Perfil activo','Active profile')}</span></label>
+    </div>
+    <section className={modalStyles.sectionBlock}><h3 className={modalStyles.sectionTitle}>{t('Requisitos de manipulación','Handling requirements')} <span>· {t('opcional','optional')}</span></h3>
+      <div className={modalStyles.reqGrid}>{requirements.map(requirement=><button key={requirement} type="button" aria-pressed={value.requirements.includes(requirement)} onClick={()=>onChange({...value,requirements:value.requirements.includes(requirement)?value.requirements.filter(item=>item!==requirement):[...value.requirements,requirement]})}>{profileOptionLabel(requirement,t)}</button>)}</div>
+    </section>
+    <section className={modalStyles.sectionBlock}><header className={modalStyles.unitsHeading}><h3 className={modalStyles.sectionTitle}>{t('Plantillas de unidades de carga','Cargo unit templates')}</h3><Button type="button" variant="secondary" size="compact" disabled={value.typicalUnits.length>=100} onClick={()=>onChange({...value,typicalUnits:[...value.typicalUnits,{...blankUnit,dimensionsCm:{...blankUnit.dimensionsCm}}]})}><Plus size={14}/>{t('Agregar unidad','Add unit')}</Button></header>
+      {!value.typicalUnits.length&&<p className={styles.muted}>{t('Agrega una unidad para guardar medidas y cantidades.','Add a unit to save dimensions and quantities.')}</p>}
+      {value.typicalUnits.map((unit,index)=><div key={index} className={modalStyles.unitCard}>
+        <div className={modalStyles.unitPrimary}>
+          <Select label={t('Embalaje','Packaging')} value={unit.packageType} onChange={event=>updateUnit(index,{packageType:event.target.value})}>{Array.from(new Set(['PALLET','BOX','CRATE','DRUM','BULK',unit.packageType])).map(type=><option value={type} key={type}>{profileOptionLabel(type,t)}</option>)}</Select>
+          <Input label={t('Cantidad','Quantity')} type="number" min={1} step={1} required value={unit.quantity} onChange={event=>updateUnit(index,{quantity:Number(event.target.value)})}/>
+          <Input label={t('Peso por unidad (kg)','Weight per unit (kg)')} type="number" min={0.000001} step="any" required value={unit.weightPerUnitKg} onChange={event=>updateUnit(index,{weightPerUnitKg:Number(event.target.value)})}/>
+          <Input label={t('Volumen por unidad (m³)','Volume per unit (m³)')} type="number" min={0.000001} step="any" required value={unit.volumePerUnitM3} onChange={event=>updateUnit(index,{volumePerUnitM3:Number(event.target.value)})}/>
         </div>
-        {value.requirements
-          .filter(v => !RequirementCodeV2Schema.options.includes(v as typeof RequirementCodeV2Schema.options[number]))
-          .map(v => (
-            <p key={v} className={styles.muted}>
-              Saved requirement: {v}
-            </p>
-          ))}
-      </div>
-
-      <div className={modalStyles.sectionBlock}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h4 className={modalStyles.sectionTitle}>Cargo unit templates</h4>
-          <Button
-            type="button"
-            variant="secondary"
-            disabled={value.typicalUnits.length >= 100}
-            onClick={() => onChange({ ...value, typicalUnits: [...value.typicalUnits, { ...blankUnit }] })}
-          >
-            + Add unit template
-          </Button>
+        <div className={modalStyles.unitSecondary}><fieldset className={modalStyles.dimensionFields}><legend>{t('Dimensiones (cm)','Dimensions (cm)')} <span>{t('L × A × H','L × W × H')}</span></legend><div>{(['length','width','height'] as const).map(dimension=><Input key={dimension} label={dimension==='length'?t('Largo','Length'):dimension==='width'?t('Ancho','Width'):t('Alto','Height')} type="number" min={0.000001} step="any" required value={unit.dimensionsCm[dimension]} onChange={event=>updateUnit(index,{dimensionsCm:{...unit.dimensionsCm,[dimension]:Number(event.target.value)}})}/>)}</div></fieldset>
+          <Input label={t('Unidades por bulto','Units per package')} type="number" min={1} step={1} max={1000000} required value={unit.unitsPerPackage} onChange={event=>updateUnit(index,{unitsPerPackage:Number(event.target.value)})}/>
         </div>
-
-        {!value.typicalUnits.length && (
-          <p className={styles.notice}>No unit templates yet. Add a template to reuse dimensions and quantities.</p>
-        )}
-
-        {value.typicalUnits.map((unit, index) => (
-          <div className={modalStyles.unitCard} key={index}>
-            <div className={modalStyles.fieldsGrid}>
-              <Select
-                label="Packaging"
-                value={unit.packageType}
-                onChange={e => updateUnit(index, { packageType: e.target.value })}
-              >
-                {Array.from(new Set(['PALLET', 'BOX', 'CRATE', 'DRUM', 'BULK', unit.packageType])).map(v => (
-                  <option key={v}>{v}</option>
-                ))}
-              </Select>
-              <Input
-                label="Quantity"
-                type="number"
-                min={1}
-                step={1}
-                required
-                value={unit.quantity}
-                onChange={e => updateUnit(index, { quantity: Number(e.target.value) })}
-              />
-              <Input
-                label="Weight per unit (kg)"
-                type="number"
-                min={0.000001}
-                step="any"
-                required
-                value={unit.weightPerUnitKg}
-                onChange={e => updateUnit(index, { weightPerUnitKg: Number(e.target.value) })}
-              />
-              <Input
-                label="Volume per unit (m³)"
-                type="number"
-                min={0.000001}
-                step="any"
-                required
-                value={unit.volumePerUnitM3}
-                onChange={e => updateUnit(index, { volumePerUnitM3: Number(e.target.value) })}
-              />
-              {(['length', 'width', 'height'] as const).map(d => (
-                <Input
-                  key={d}
-                  label={d[0].toUpperCase() + d.slice(1) + ' (cm)'}
-                  type="number"
-                  min={0.000001}
-                  step="any"
-                  required
-                  value={unit.dimensionsCm[d]}
-                  onChange={e =>
-                    updateUnit(index, {
-                      dimensionsCm: { ...unit.dimensionsCm, [d]: Number(e.target.value) },
-                    })
-                  }
-                />
-              ))}
-              <Input
-                label="Units per package"
-                type="number"
-                min={1}
-                step={1}
-                max={1000000}
-                required
-                value={unit.unitsPerPackage}
-                onChange={e => updateUnit(index, { unitsPerPackage: Number(e.target.value) })}
-              />
-              <Checkbox
-                label="Indivisible"
-                checked={unit.indivisible}
-                onChange={e => updateUnit(index, { indivisible: e.target.checked })}
-              />
-              <Checkbox
-                label="Stackable"
-                checked={unit.stackable}
-                onChange={e => updateUnit(index, { stackable: e.target.checked })}
-              />
-            </div>
-            <div className={modalStyles.unitActions}>
-              <Button
-                variant="ghost"
-                type="button"
-                onClick={() => onChange({ ...value, typicalUnits: value.typicalUnits.filter((_, i) => i !== index) })}
-              >
-                Remove unit template
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+        <div className={modalStyles.unitFooter}><div className={modalStyles.reqGrid}><button type="button" aria-pressed={unit.indivisible} onClick={()=>updateUnit(index,{indivisible:!unit.indivisible})}>{t('Indivisible','Indivisible')}</button><button type="button" aria-pressed={unit.stackable} onClick={()=>updateUnit(index,{stackable:!unit.stackable})}>{t('Apilable','Stackable')}</button></div>
+          <Button type="button" variant="ghost" size="compact" className={modalStyles.removeUnit} onClick={()=>onChange({...value,typicalUnits:value.typicalUnits.filter((_,i)=>i!==index)})}><Trash2 size={13}/>{t('Quitar unidad','Remove unit')}</Button></div>
+      </div>)}
+    </section>
+  </>;
 }
-
 function PreferenceFields({
   value,
   onChange,

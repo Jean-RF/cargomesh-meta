@@ -62,6 +62,7 @@ import {cargoGroups} from './cargo-groups';
 
 import { intakeStepLabels } from "./assistant-form-guide";
 import {ShipmentTransportGate} from './shipment-transport-gate';
+import {CargoProfileReuse} from './cargo-profile-reuse';
 
 const STEP_ICONS = [MapPinned, Package, CalendarDays, ClipboardCheck] as const;
 
@@ -106,6 +107,7 @@ function IntakeForm({ embedded = false, onPersisted, onEvaluation }: IntakeProps
 
   return (
     <div className={`${styles.page} ${embedded ? styles.embedded : styles.standalone}`} data-intake-layout={embedded ? "embedded" : "standalone"}>
+      {!embedded&&<CargoProfileReuse/>}
       <div className={styles.frame}>
         {embedded || optionsSource !== "api" ? <header className={styles.hero}>
           {embedded ? <div className={styles.heroMain}>
