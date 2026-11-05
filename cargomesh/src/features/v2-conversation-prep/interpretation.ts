@@ -20,6 +20,10 @@ export const ConversationContextFieldSchema = ConversationFieldNameSchema.exclud
 ]);
 
 export const ConversationContextSchema = z.object({
+  planningTimeZone:z.string().max(100).refine(zone=>{try{new Intl.DateTimeFormat('en',{timeZone:zone});return true;}catch{return false;}}).optional(),
+  referenceTime:z.string().datetime().optional(),
+  // Server replaces this hint; it contains no document contents or download URLs.
+  documents:z.object({companyProfile:z.enum(['AVAILABLE','MISSING','EXPIRED','INCOMPLETE','UNKNOWN']),regulatoryReview:z.literal('NOT_ASSESSED')}).strict().optional(),
   // Provisional browser hint; authenticated HTTP replaces it from authorized facilities.
   roadRouteStatus: z.enum(['INCOMPLETE','COORDINATES_REQUIRED','DISCONNECTED_NETWORKS','UNVERIFIED']).optional(),
   screen: z.enum(["TRANSPORT_SELECTION", "ROAD_INTAKE"]).optional(),

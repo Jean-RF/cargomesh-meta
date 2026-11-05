@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "base": "c97c59b",
+  "frontend": "5144a4d",
+  "integration": "6cfbf46",
+  "pendingFix": "exclude manual group unitsPerPackage from conversational field type",
+  "testsWithOverlap": 470,
+  "typecheck": true,
+  "architecture": {
+    "modules": 935,
+    "clientEntries": 273
+  },
+  "productionBuild": {
+    "exitCode": 0,
+    "isolated": true,
+    "envFilesCopied": 0,
+    "cpus": 2,
+    "srcAndPublicFilesCompared": 1527,
+    "sourceDifferences": 0
+  },
+  "newPaidCalls": 0,
+  "newDataWrites": 0,
+  "visualReview": "PENDING_USER",
+  "deploy": "NOT_PERFORMED"
+}

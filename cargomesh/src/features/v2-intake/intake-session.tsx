@@ -5,6 +5,7 @@ import { useIntakeController } from "./intake-controller";
 import {EMPTY_PROTOTYPE_DRAFT} from './prototype-model';
 import {useDeclarationMedia} from './use-declaration-media';
 import {workspaceSwitchGuard,type WorkspaceSwitchDetail} from '@/features/workspace-demo/switch-guard';
+import {PackingListImportDialog} from '@/features/documents/packing-list-import';
 
 type IntakeSession=ReturnType<typeof useIntakeController>&{roadTransportSelected:boolean;selectRoadTransport:()=>void;media:ReturnType<typeof useDeclarationMedia>};
 const IntakeSessionContext = createContext<IntakeSession | null>(null);
@@ -26,7 +27,7 @@ export function IntakeSessionProvider({ children }: { children: ReactNode }) {
    window.addEventListener('cargomesh:before-workspace-switch',beforeSwitch);
    return()=>window.removeEventListener('cargomesh:before-workspace-switch',beforeSwitch);
   },[session.submitPhase,session.request,session.dirtyAfterCreate,session.draft,session.t,media.busy,media.recording,media.requestingMic]);
-  return <IntakeSessionContext.Provider value={{...session,media,roadTransportSelected,selectRoadTransport,createDraftAndEvaluate:()=>media.ensureIdle()?session.createDraftAndEvaluate():Promise.resolve(),retryAfterCreate:()=>media.ensureIdle()?session.retryAfterCreate():Promise.resolve(),reset:()=>{media.reset();session.reset();setRoadTransportSelected(false);}}}>{children}</IntakeSessionContext.Provider>;
+  return <IntakeSessionContext.Provider value={{...session,media,roadTransportSelected,selectRoadTransport,createDraftAndEvaluate:()=>media.ensureIdle()?session.createDraftAndEvaluate():Promise.resolve(),retryAfterCreate:()=>media.ensureIdle()?session.retryAfterCreate():Promise.resolve(),reset:()=>{media.reset();session.reset();setRoadTransportSelected(false);}}}>{children}<PackingListImportDialog/></IntakeSessionContext.Provider>;
 }
 
 export function useOptionalIntakeSession() { return useContext(IntakeSessionContext); }

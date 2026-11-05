@@ -34,7 +34,7 @@ test("multi-slot chat updates derive totals from the latest provisional values",
 
 test("chat correction and form edit share one draft without clearing unrelated fields", () => {
   const options = getIntakeOptionsFixture().data;
-  const initial = buildPrototypeExample(options);
+  const initial = buildPrototypeExample(options,Date.parse("2026-10-04T12:00:00Z"));
   const corrected = applyChatFieldsToDraft(initial, [
     { field: "unitQuantity", value: "12" },
     { field: "originFacilityId", value: options.facilities[2].facilityId },
@@ -151,7 +151,8 @@ test("windows preserve pickup and delivery order", () => {
   const issues = validatePrototypeStep(3, {
     ...PROVISIONAL_PROTOTYPE_DRAFT,
     pickupWindowEndsAt: "2026-10-05T07:00",
-    deliveryWindowStartsAt: "2026-10-05T06:00",
+    deliveryWindowStartsAt: "2026-10-04T06:00",
+    deliveryWindowEndsAt: "2026-10-04T20:00",
   });
   assert.equal(issues.some((issue) => issue.field === "pickupWindowEndsAt" && issue.code === "invalid-range"), true);
   assert.equal(issues.some((issue) => issue.field === "deliveryWindowStartsAt" && issue.code === "invalid-range"), true);
@@ -220,7 +221,7 @@ test("the one-click example uses facility ids and selector codes from the curren
     requirementOptions: [{ ...fixture.requirementOptions[2], code: "BACKEND_REQUIREMENT" }],
   };
 
-  const example = buildPrototypeExample(options);
+  const example = buildPrototypeExample(options,Date.parse("2026-10-04T12:00:00Z"));
   assert.equal(example.originFacilityId, "backend-facility-1");
   assert.equal(example.destinationFacilityId, "backend-facility-2");
   assert.equal(example.categoryCode, "BACKEND_CATEGORY");
@@ -240,13 +241,13 @@ test("the one-click example keeps the HAC-12 positive lane when facilities arriv
     facilities: [fixture.facilities[1], fixture.facilities[0], fixture.facilities[2]],
   };
 
-  const example = buildPrototypeExample(options);
+  const example = buildPrototypeExample(options,Date.parse("2026-10-04T12:00:00Z"));
   assert.equal(example.originFacilityId, fixture.facilities[0].facilityId);
   assert.equal(example.destinationFacilityId, fixture.facilities[1].facilityId);
-  assert.equal(new Date(example.pickupWindowStartsAt).toISOString(), "2026-10-05T08:00:00.000Z");
-  assert.equal(new Date(example.pickupWindowEndsAt).toISOString(), "2026-10-05T18:00:00.000Z");
-  assert.equal(new Date(example.deliveryWindowStartsAt).toISOString(), "2026-10-07T08:00:00.000Z");
-  assert.equal(new Date(example.deliveryWindowEndsAt).toISOString(), "2026-10-07T20:00:00.000Z");
+  assert.equal(example.pickupWindowStartsAt, "2026-10-05T08:00");
+  assert.equal(example.pickupWindowEndsAt, "2026-10-05T18:00");
+  assert.equal(example.deliveryWindowStartsAt, "2026-10-07T08:00");
+  assert.equal(example.deliveryWindowEndsAt, "2026-10-07T20:00");
 });
 
 test("requirement toggling is deterministic and duplicate-free", () => {
@@ -284,7 +285,7 @@ test("intake and facility layouts respond to their available container, includin
 });
 
 test('flexible accepted days survive create, reload and revision without filling the gaps',()=>{
- const options=getIntakeOptionsFixture().data;const draft={...buildPrototypeExample(options),urgency:'URGENT',loadSize:'MEDIUM',planningTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone,pickupAlternatives:[{startsAt:'2026-10-06T08:00',endsAt:'2026-10-06T18:00'}],deliveryAlternatives:[{startsAt:'2026-10-08T08:00',endsAt:'2026-10-08T20:00'}]};
+ const options=getIntakeOptionsFixture().data;const draft={...buildPrototypeExample(options,Date.parse("2026-10-04T12:00:00Z")),urgency:'URGENT',loadSize:'MEDIUM',planningTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone,pickupAlternatives:[{startsAt:'2026-10-06T08:00',endsAt:'2026-10-06T18:00'}],deliveryAlternatives:[{startsAt:'2026-10-08T08:00',endsAt:'2026-10-08T20:00'}]};
  const input=mapDraftToCreateFreightRequestV2Input(draft,options);assert.equal(input.selectionObjective,'FASTEST');assert.equal(input.planningPreferences?.pickupWindows.length,2);assert.equal(input.pickupWindow.endsAt,input.planningPreferences!.pickupWindows[1].endsAt);
  const saved={...input,id:'219dfc89-e745-4817-9a58-de64847484c4',referenceCode:'REQ-TEST',organizationId:'e5000001-0000-4000-8000-000000000001',status:'DRAFT',draftVersion:1,origin:options.facilities.find(f=>f.facilityId===draft.originFacilityId),destination:options.facilities.find(f=>f.facilityId===draft.destinationFacilityId),requiredEquipment:input.requiredEquipment??null,budget:null,createdAt:'2026-10-01T00:00:00Z',updatedAt:'2026-10-01T00:00:00Z'} as unknown as FreightRequestV2Data;
  saved.origin={...input.origin,facilityId:draft.originFacilityId,label:'Origin',countryCode:'PE',city:'Lima',region:null,lat:null,lng:null};saved.destination={...saved.origin,facilityId:draft.destinationFacilityId,city:'Arequipa'};

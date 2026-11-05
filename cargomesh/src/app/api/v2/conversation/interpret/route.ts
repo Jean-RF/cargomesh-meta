@@ -37,9 +37,13 @@ export async function POST(request: Request) {
   try {
     const ids=input.context?.knownFields.filter(f=>f.field==='originFacilityId'||f.field==='destinationFacilityId')??[];
     const {v2IntakeOptionsRepository}=await import('@/server/modules/intake/infrastructure/supabase-intake-options-repository');
-    const facilities=ids.length?(await (await v2IntakeOptionsRepository()).listActiveFacilities(member.organizationId))??[]:[];
+    const [facilities,documents]=await Promise.all([
+      ids.length?(await v2IntakeOptionsRepository()).listActiveFacilities(member.organizationId):Promise.resolve([]),
+      (async()=>{try{const {documentService}=await import('@/server/modules/media-evidence/document-repository');const {readDocumentReadiness}=await import('@/server/modules/media-evidence/document-readiness');return await readDocumentReadiness(await documentService(),{organizationId:member.organizationId,actorId:member.memberId,carrierId:null});}catch{return {companyProfile:'UNKNOWN' as const,regulatoryReview:'NOT_ASSESSED' as const};}})(),
+    ]);
     const authorized=facilities.filter(f=>f.organization_id===member.organizationId);
-    const scoped=withAuthorizedRoadContext(input,authorized);
+    const roadScoped=withAuthorizedRoadContext(input,authorized);
+    const scoped={...roadScoped,context:{...roadScoped.context!,referenceTime:new Date().toISOString(),planningTimeZone:roadScoped.context?.planningTimeZone??'America/Lima',knownFields:roadScoped.context?.knownFields??[],lastAskedField:roadScoped.context?.lastAskedField??null,failedAttempts:roadScoped.context?.failedAttempts??0,documents:{companyProfile:documents.companyProfile,regulatoryReview:documents.regulatoryReview}}};
     const result=await interpretConversationTurn(scoped,{signal:request.signal});
     return NextResponse.json(applyRoadResponseAdvice(scoped,result,authorized),{headers:{'Cache-Control':'no-store'}});
   } catch {

@@ -1,0 +1,25 @@
+{
+  "status": "LOCAL_TECHNICAL_PASS",
+  "typecheck": true,
+  "architecture": {
+    "modules": 926,
+    "clientEntries": 267
+  },
+  "tests": {
+    "documentsCalendar": 24,
+    "intake": 91,
+    "meta": 64,
+    "chat": 119,
+    "conversation": 107,
+    "voiceHarness": 32,
+    "dispatchAndDraft": 21
+  },
+  "testExecutionsWithOverlap": 458,
+  "realSyntheticMetaCalls": 7,
+  "syntheticDraft": "5d10eb5a-599d-45d4-b376-5d24a434c0d0",
+  "commercialWrites": 0,
+  "visualReview": "PENDING_USER",
+  "productionBuild": "NOT_RUN_DEPENDENCY_JUNCTION_DENIED",
+  "published": false,
+  "regulatoryReview": "NOT_ASSESSED"
+}

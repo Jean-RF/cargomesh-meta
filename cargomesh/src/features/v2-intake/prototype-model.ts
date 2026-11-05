@@ -8,6 +8,7 @@ import type {
 
 import {cargoGroups,groupTotals,cargoGroupInput,type DraftCargoGroup} from './cargo-groups';
 import {needsExplicitCargoGroup} from './assistant-group-scope';
+import {planningInstant,planningClock} from '@/shared/lib/planning-clock';
 
 export type PrototypeStep = 1 | 2 | 3 | 4;
 
@@ -42,6 +43,7 @@ export type V2IntakePrototypeDraft = {
   unitHeightCm: string;
   unitIndivisible: boolean;
   unitStackable: boolean;
+  unitUnitsPerPackage?: string;
   pickupWindowStartsAt: string;
   pickupWindowEndsAt: string;
   deliveryWindowStartsAt: string;
@@ -127,7 +129,8 @@ export function requestToPrototypeDraft(request: FreightRequestV2Data): V2Intake
     temperatureMinCelsius: request.cargoSpecification.temperatureRange?.minCelsius == null ? "" : String(request.cargoSpecification.temperatureRange.minCelsius),
     temperatureMaxCelsius: request.cargoSpecification.temperatureRange?.maxCelsius == null ? "" : String(request.cargoSpecification.temperatureRange.maxCelsius),
     primaryGroupId:'group-0',primaryOriginalIndex:0,
-    additionalUnits:request.cargoSpecification.units.slice(1).map((u,i)=>({id:'group-'+(i+1),originalIndex:i+1,unitPackageType:u.packageType,unitQuantity:String(u.quantity),unitWeightPerUnitKg:String(u.weightPerUnitKg),unitVolumePerUnitM3:String(u.volumePerUnitM3),unitLengthCm:String(u.dimensionsCm.length),unitWidthCm:String(u.dimensionsCm.width),unitHeightCm:String(u.dimensionsCm.height),unitIndivisible:u.indivisible,unitStackable:u.stackable})),
+    additionalUnits:request.cargoSpecification.units.slice(1).map((u,i)=>({id:'group-'+(i+1),originalIndex:i+1,unitPackageType:u.packageType,unitQuantity:String(u.quantity),unitWeightPerUnitKg:String(u.weightPerUnitKg),unitVolumePerUnitM3:String(u.volumePerUnitM3),unitLengthCm:String(u.dimensionsCm.length),unitWidthCm:String(u.dimensionsCm.width),unitHeightCm:String(u.dimensionsCm.height),unitIndivisible:u.indivisible,unitStackable:u.stackable,...(u.unitsPerPackage===undefined?{}:{unitUnitsPerPackage:String(u.unitsPerPackage)})})),
+    ...(unit.unitsPerPackage===undefined?{}:{unitUnitsPerPackage:String(unit.unitsPerPackage)}),
     unitPackageType: unit.packageType,
     unitQuantity: String(unit.quantity),
     unitWeightPerUnitKg: String(unit.weightPerUnitKg),
@@ -158,6 +161,7 @@ export type PrototypeValidationCode =
   | "positive-integer"
   | "invalid-date"
   | "invalid-range"
+  | "past-window"
   | "invalid-email"
   | "invalid-phone"
   | "total-mismatch"
@@ -269,13 +273,15 @@ function utcInstantToLocalDateTimeInput(utcInstant: string) {
  * Static values remain presentation-only; every submitted selector value is
  * sourced from the current GET /api/v2/intake/options response.
  */
-export function buildPrototypeExample(options: IntakeOptionsData): V2IntakePrototypeDraft {
+export function buildPrototypeExample(options: IntakeOptionsData, now=Date.now()): V2IntakePrototypeDraft {
   const requirements = ["TEMP_CONTROLLED", "SECURITY_SEAL"]
     .filter((code) => options.requirementOptions.some((option) => option.code === code));
   const temperatureControlled = requirements.includes("TEMP_CONTROLLED");
   const packaging = preferredOptionCode(options.packagingOptions, ["PALLET"]);
   const originFacilityId = preferredFacilityId(options.facilities, "QA-A-LIMA");
   const destinationFacilityId = preferredFacilityId(options.facilities, "QA-A-AREQUIPA", originFacilityId);
+  const timeZone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const day=(offset:number,hour:string)=>`${planningClock(now+offset*86400000,timeZone).slice(0,10)}T${hour}`;
 
   return {
     ...PROVISIONAL_PROTOTYPE_DRAFT,
@@ -285,10 +291,11 @@ export function buildPrototypeExample(options: IntakeOptionsData): V2IntakeProto
     packaging,
     unitPackageType: packaging,
     requiredEquipment: preferredOptionCode(options.equipmentOptions, ["REEFER_TRUCK"]),
-    pickupWindowStartsAt: utcInstantToLocalDateTimeInput("2026-10-05T08:00:00Z"),
-    pickupWindowEndsAt: utcInstantToLocalDateTimeInput("2026-10-05T18:00:00Z"),
-    deliveryWindowStartsAt: utcInstantToLocalDateTimeInput("2026-10-07T08:00:00Z"),
-    deliveryWindowEndsAt: utcInstantToLocalDateTimeInput("2026-10-07T20:00:00Z"),
+    planningTimeZone:timeZone,
+    pickupWindowStartsAt: day(1,'08:00'),
+    pickupWindowEndsAt: day(1,'18:00'),
+    deliveryWindowStartsAt: day(3,'08:00'),
+    deliveryWindowEndsAt: day(3,'20:00'),
     requirements,
     temperatureMinCelsius: temperatureControlled ? PROVISIONAL_PROTOTYPE_DRAFT.temperatureMinCelsius : "",
     temperatureMaxCelsius: temperatureControlled ? PROVISIONAL_PROTOTYPE_DRAFT.temperatureMaxCelsius : "",
@@ -446,14 +453,12 @@ export function validatePrototypeStep(
     ) {
       issues.push({ field: "deliveryWindowEndsAt", code: "invalid-range" });
     }
-    if (
-      !draft.urgency && !draft.loadSize && !draft.pickupAlternatives?.length && !draft.deliveryAlternatives?.length
-      && validLocalDateTime(draft.pickupWindowEndsAt)
-      && validLocalDateTime(draft.deliveryWindowStartsAt)
-      && Date.parse(draft.deliveryWindowStartsAt) < Date.parse(draft.pickupWindowEndsAt)
-    ) {
-      issues.push({ field: "deliveryWindowStartsAt", code: "invalid-range" });
-    }
+    const zone=draft.planningTimeZone??Intl.DateTimeFormat().resolvedOptions().timeZone;
+    for(const field of dateFields){const value=draft[field];if(typeof value==='string'&&value&&planningInstant(value,zone)===null&&!issues.some(i=>i.field===field))issues.push({field,code:'invalid-date'});}
+    // Windows are availability ranges: overlap is valid, but arrival must be possible after pickup.
+    const pickups=[{startsAt:draft.pickupWindowStartsAt,endsAt:draft.pickupWindowEndsAt},...(draft.pickupAlternatives??[])];
+    const deliveries=[{startsAt:draft.deliveryWindowStartsAt,endsAt:draft.deliveryWindowEndsAt},...(draft.deliveryAlternatives??[])];
+    if(pickups.every(w=>planningInstant(w.startsAt,zone)!==null)&&deliveries.every(w=>planningInstant(w.endsAt,zone)!==null)&&!pickups.some(p=>deliveries.some(d=>planningInstant(d.endsAt,zone)!>planningInstant(p.startsAt,zone)!)))issues.push({field:'deliveryWindowStartsAt',code:'invalid-range'});
     if (draft.pickupContactEmail && !validEmail(draft.pickupContactEmail)) {
       issues.push({ field: "pickupContactEmail", code: "invalid-email" });
     }
@@ -502,8 +507,8 @@ export function filterIntakeFacilities(
   });
 }
 
-function toIso(localDateTime: string) {
-  return new Date(localDateTime).toISOString();
+function toIso(localDateTime: string,zone=Intl.DateTimeFormat().resolvedOptions().timeZone) {
+  const instant=planningInstant(localDateTime,zone);if(instant===null)throw Error('INVALID_LOCAL_CLOCK');return new Date(instant).toISOString();
 }
 
 function locationFromFacility(facility: IntakeFacilityOption) {
@@ -521,8 +526,8 @@ function locationFromFacility(facility: IntakeFacilityOption) {
 export function draftDispatchPreferences(draft:V2IntakePrototypeDraft):DispatchPreferences|undefined {
  if(!draft.urgency&&!draft.loadSize&&!draft.pickupAlternatives?.length&&!draft.deliveryAlternatives?.length)return undefined;
  return DispatchPreferencesSchema.parse({urgency:draft.urgency||'SCHEDULED',loadSize:draft.loadSize||null,timeZone:draft.planningTimeZone??Intl.DateTimeFormat().resolvedOptions().timeZone,
- pickupWindows:[{startsAt:toIso(draft.pickupWindowStartsAt),endsAt:toIso(draft.pickupWindowEndsAt)},...(draft.pickupAlternatives??[]).map(w=>({startsAt:toIso(w.startsAt),endsAt:toIso(w.endsAt)}))],
- deliveryWindows:[{startsAt:toIso(draft.deliveryWindowStartsAt),endsAt:toIso(draft.deliveryWindowEndsAt)},...(draft.deliveryAlternatives??[]).map(w=>({startsAt:toIso(w.startsAt),endsAt:toIso(w.endsAt)}))]});
+ pickupWindows:[{startsAt:toIso(draft.pickupWindowStartsAt,draft.planningTimeZone),endsAt:toIso(draft.pickupWindowEndsAt,draft.planningTimeZone)},...(draft.pickupAlternatives??[]).map(w=>({startsAt:toIso(w.startsAt,draft.planningTimeZone),endsAt:toIso(w.endsAt,draft.planningTimeZone)}))],
+ deliveryWindows:[{startsAt:toIso(draft.deliveryWindowStartsAt,draft.planningTimeZone),endsAt:toIso(draft.deliveryWindowEndsAt,draft.planningTimeZone)},...(draft.deliveryAlternatives??[]).map(w=>({startsAt:toIso(w.startsAt,draft.planningTimeZone),endsAt:toIso(w.endsAt,draft.planningTimeZone)}))]});
 }
 
 export function mapDraftToCreateFreightRequestV2Input(
@@ -551,8 +556,8 @@ export function mapDraftToCreateFreightRequestV2Input(
     ...(planningPreferences?{planningPreferences,selectionObjective:planningPreferences.urgency==='URGENT'?'FASTEST' as const:'LOWEST_COST' as const}:{}),
     origin: locationFromFacility(origin),
     destination: locationFromFacility(destination),
-    pickupWindow: planningPreferences?windowEnvelope(planningPreferences.pickupWindows):{startsAt:toIso(draft.pickupWindowStartsAt),endsAt:toIso(draft.pickupWindowEndsAt)},
-    deliveryWindow: planningPreferences?windowEnvelope(planningPreferences.deliveryWindows):{startsAt:toIso(draft.deliveryWindowStartsAt),endsAt:toIso(draft.deliveryWindowEndsAt)},
+    pickupWindow: planningPreferences?windowEnvelope(planningPreferences.pickupWindows):{startsAt:toIso(draft.pickupWindowStartsAt,draft.planningTimeZone),endsAt:toIso(draft.pickupWindowEndsAt,draft.planningTimeZone)},
+    deliveryWindow: planningPreferences?windowEnvelope(planningPreferences.deliveryWindows):{startsAt:toIso(draft.deliveryWindowStartsAt,draft.planningTimeZone),endsAt:toIso(draft.deliveryWindowEndsAt,draft.planningTimeZone)},
     acceptedModes: ["ROAD"],
     requiredEquipment: draft.requiredEquipment,
     cargoSpecification: {

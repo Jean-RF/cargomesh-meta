@@ -2,7 +2,8 @@ import { displayDemoText } from "@/shared/lib/demo-presentation";
 import type { IntakeOptionsData } from "./contracts";
 import type { V2IntakePrototypeDraft } from "./prototype-model";
 
-export type ConversationField = Exclude<keyof V2IntakePrototypeDraft,'primaryGroupId'|'primaryOriginalIndex'|'additionalUnits'|'pickupAlternatives'|'deliveryAlternatives'|'planningTimeZone'|'reviewedConversationFields'>;
+// Units within a package are edited/reused through groups, not inferred by the current chat contract.
+export type ConversationField = Exclude<keyof V2IntakePrototypeDraft,'primaryGroupId'|'primaryOriginalIndex'|'additionalUnits'|'pickupAlternatives'|'deliveryAlternatives'|'planningTimeZone'|'reviewedConversationFields'|'unitUnitsPerPackage'>;
 const ENGLISH_EQUIPMENT_LABELS: Record<string, string> = {
   BOX_TRUCK: "Box truck", REFRIGERATED_TRUCK: "Refrigerated truck", SECURE_BOX_TRUCK: "Secure box truck",
   HAZMAT_TRUCK: "Hazmat truck", FLATBED: "Flatbed truck", DUMP_TRUCK: "Dump truck",

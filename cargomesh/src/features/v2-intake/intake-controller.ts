@@ -1,5 +1,6 @@
 "use client";
 import {replaceCargoGroups,type DraftCargoGroup} from "./cargo-groups";
+import {upcomingWindowIssues} from './upcoming-windows';
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAssistantChangeFeedback } from "./use-assistant-change-feedback";
@@ -180,6 +181,7 @@ export function useIntakeController() {
       "positive-number": t("Ingresa un número mayor que cero.", "Enter a number greater than zero."),
       "positive-integer": t("Ingresa un entero mayor que cero.", "Enter an integer greater than zero."),
       "invalid-date": t("Ingresa una fecha y hora válidas.", "Enter a valid date and time."),
+      "past-window": t('Esta disponibilidad ya venció. Elige un rango vigente en el calendario.','This availability has elapsed. Choose current dates in the calendar.'),
       "invalid-range": t("La ventana debe terminar después de iniciar y respetar el orden retiro→entrega.", "The window must end after it starts and preserve pickup→delivery order."),
       "invalid-email": t("Ingresa un correo válido.", "Enter a valid email."),
       "invalid-phone": t("Usa formato E.164, por ejemplo +51987654321.", "Use E.164 format, for example +51987654321."),
@@ -190,6 +192,7 @@ export function useIntakeController() {
   };
   const focusValidationSummary = () => requestAnimationFrame(() => errorRef.current?.focus());
   const enterReview = () => {
+    const elapsed=upcomingWindowIssues(draft);if(elapsed.length){setStep(3);setIssues(elapsed);focusValidationSummary();return false;}
     const validation = validatePrototypeReview(draft);
     if (!validation.valid) {
       setStep(validation.invalidStep);
@@ -203,7 +206,7 @@ export function useIntakeController() {
     return true;
   };
   const goNext = () => {
-    const nextIssues = validatePrototypeStep(step, draft);
+    const nextIssues = [...validatePrototypeStep(step, draft),...(step===3?upcomingWindowIssues(draft):[])];
     setIssues(nextIssues);
     if (nextIssues.length) {
       focusValidationSummary();

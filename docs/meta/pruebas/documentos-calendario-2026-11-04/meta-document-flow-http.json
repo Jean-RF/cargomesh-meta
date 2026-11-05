@@ -1,0 +1,330 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "check": "authorized-library",
+      "organizationId": "c2300000-0000-4000-8000-000000000001",
+      "requiredToCreate": false,
+      "requirementsPolicy": "REQUIREMENTS_TO_CONFIRM",
+      "regulatoryReview": "NOT_ASSESSED",
+      "companyProfile": "AVAILABLE"
+    },
+    {
+      "check": "real-http-model",
+      "text": "12 pallets of machine parts, 100 kg per pallet.",
+      "mode": "META",
+      "error": null,
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "36c5d3b9-ddf0-4dab-ad9c-25ce00f48d76",
+        "latencyMs": 5037,
+        "attempts": 1,
+        "inputTokens": 2904,
+        "outputTokens": 577,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "interpretation": {
+        "intent": "PROVIDE",
+        "fields": [
+          {
+            "field": "cargoDescription",
+            "value": "machine parts"
+          },
+          {
+            "field": "packaging",
+            "value": "PALLET"
+          },
+          {
+            "field": "unitQuantity",
+            "value": "12"
+          },
+          {
+            "field": "unitWeightPerUnitKg",
+            "value": "100"
+          }
+        ],
+        "acknowledgment": "Got it — 12 pallets of machine parts at 100 kg per pallet."
+      }
+    },
+    {
+      "check": "real-http-model",
+      "text": "What did I want to ship?",
+      "mode": "META",
+      "error": null,
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "c738bc08-ab62-49bc-8252-7a3847c87a53",
+        "latencyMs": 3901,
+        "attempts": 1,
+        "inputTokens": 820,
+        "outputTokens": 398,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "You mentioned 12 pallets of machine parts, 100 kg per pallet. Let me know with a separate clear statement if you want to update the form with that."
+      }
+    },
+    {
+      "check": "real-http-model",
+      "text": "Do I need to upload my company profile again for every shipment? Is it legally certified?",
+      "mode": "META",
+      "error": null,
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "7f1f7833-8e8d-4134-b5ea-b9ddb1d935fd",
+        "latencyMs": 2871,
+        "attempts": 1,
+        "inputTokens": 791,
+        "outputTokens": 201,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "No — your company profile is already stored, so you don't need to upload it again for each shipment. It is not legally certified and has no compliance review; carrier review is separate."
+      }
+    },
+    {
+      "check": "real-missing-document-guidance",
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Your company profile is missing. You can upload it under Organization > Documents in the app, where you'll find a reminder link to complete it."
+      },
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "8bebff9f-e0f1-498c-aa0d-243e9f1877a2",
+        "latencyMs": 1811,
+        "attempts": 1,
+        "inputTokens": 755,
+        "outputTokens": 106,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      }
+    },
+    {
+      "check": "real-http-model",
+      "text": "Can pickup and delivery availability overlap on the same day?",
+      "mode": "META",
+      "error": null,
+      "metadata": {
+        "provider": "META",
+        "transport": "META_MODEL_API",
+        "model": "muse-spark-1.3",
+        "requestId": "0f0eb7e8-d3e5-4c70-bbc7-87052e0ad7ca",
+        "latencyMs": 5654,
+        "attempts": 1,
+        "inputTokens": 784,
+        "outputTokens": 637,
+        "estimatedCostUsd": null,
+        "outcome": "PROPOSED"
+      },
+      "interpretation": {
+        "intent": "HELP",
+        "fields": [],
+        "acknowledgment": "Yes — pickup and delivery are availability windows, not departure/arrival promises, so they can overlap on the same day as long as delivery still allows a time after pickup."
+      }
+    },
+    {
+      "check": "real-pdf-groups",
+      "groups": [
+        {
+          "label": "Group A",
+          "proposal": {
+            "schemaVersion": "1.0",
+            "inputRevision": 1,
+            "status": "PROPOSED",
+            "refusalReason": null,
+            "fields": [
+              {
+                "field": "unitQuantity",
+                "value": 8,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "Group A: 8 BOX"
+                }
+              },
+              {
+                "field": "unitType",
+                "value": "BOX",
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "Group A: 8 BOX"
+                }
+              },
+              {
+                "field": "unitWeightKg",
+                "value": 100,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "Weight per BOX: 100 kg"
+                }
+              },
+              {
+                "field": "unitHeightCm",
+                "value": 100,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "height 100 cm"
+                }
+              },
+              {
+                "field": "unitLengthCm",
+                "value": 120,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "length 120 cm"
+                }
+              },
+              {
+                "field": "unitWidthCm",
+                "value": 80,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "width 80 cm"
+                }
+              }
+            ],
+            "missingFields": [
+              "cargoDescription",
+              "handlingRequirements"
+            ],
+            "warnings": [
+              "INCOMPLETE_DECLARATION"
+            ],
+            "requiresHumanConfirmation": true
+          }
+        },
+        {
+          "label": "Group B",
+          "proposal": {
+            "schemaVersion": "1.0",
+            "inputRevision": 1,
+            "status": "PROPOSED",
+            "refusalReason": null,
+            "fields": [
+              {
+                "field": "unitQuantity",
+                "value": 4,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "Group B: 4 BOX"
+                }
+              },
+              {
+                "field": "unitType",
+                "value": "BOX",
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "Group B: 4 BOX"
+                }
+              },
+              {
+                "field": "unitWeightKg",
+                "value": 50,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "Weight per BOX: 50 kg"
+                }
+              },
+              {
+                "field": "unitHeightCm",
+                "value": 50,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "height 50 cm"
+                }
+              },
+              {
+                "field": "unitLengthCm",
+                "value": 60,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "length 60 cm"
+                }
+              },
+              {
+                "field": "unitWidthCm",
+                "value": 40,
+                "provenance": {
+                  "source": "text",
+                  "evidenceId": null,
+                  "inputRevision": 1,
+                  "basis": "EXPLICIT",
+                  "quote": "width 40 cm"
+                }
+              }
+            ],
+            "missingFields": [
+              "cargoDescription",
+              "handlingRequirements"
+            ],
+            "warnings": [
+              "INCOMPLETE_DECLARATION"
+            ],
+            "requiresHumanConfirmation": true
+          }
+        }
+      ],
+      "missing": [],
+      "regulatoryReview": "NOT_ASSESSED"
+    },
+    {
+      "check": "synthetic-draft-save-replay-reopen",
+      "requestId": "5d10eb5a-599d-45d4-b376-5d24a434c0d0",
+      "status": "DRAFT",
+      "groups": 2,
+      "bookingsCreated": 0
+    },
+    {
+      "check": "unauthenticated-readiness",
+      "status": 401
+    }
+  ]
+}

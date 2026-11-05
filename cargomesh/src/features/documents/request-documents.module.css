@@ -38,6 +38,20 @@
 .notice { color: #3262bd; }
 .dialog { width: min(560px,calc(100vw - 32px)); max-width: 560px; border-radius: 16px; }
 .form { display: grid; gap: 16px; }
+.libraryUpload[open] { width: min(600px,calc(100vw - 32px)); max-width: 600px; border-radius: 16px; }
+.libraryUpload .dropzone { order: -1; padding: 28px 18px; }
+.libraryFilters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 0 20px 16px; }
+.librarySearch { width: min(300px,100%); margin: 0; }
+.librarySearch [data-cm-search-control] { min-height: 39px; border-radius: 9px; }
+.librarySearch input { font-size: 12px; }
+.typeFilter { min-height: 39px; padding: 8px 12px; border: 1px solid #dce4ee; border-radius: 9px; background: #fff; color: #7c90ab; font: inherit; font-size: 12px; }
+.libraryFile { display: flex; align-items: center; gap: 11px; }
+.libraryFile > span { display: grid; flex: none; place-items: center; width: 34px; height: 37px; border-radius: 8px; background: #eef4ff; color: #5b83e7; }
+.libraryFile > div { min-width: 0; }
+.libraryFile :is(strong,small) { overflow-wrap: anywhere; }
+.organizationLibrary,.libraryUpload { --cm-color-primary: #2b59ff; --cm-color-primary-hover: #234bdc; }
+.libraryTable td:last-child { width: 96px; }
+.libraryTable .actions { flex-wrap: nowrap; width: auto; }
 .dates { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 .dropzone { display: grid; justify-items: center; gap: 10px; padding: 25px 16px; border: 1px dashed #b4c7f5; border-radius: 12px; background: #f7faff; color: #4569b4; text-align: center; }
 .dropzone strong { font-size: 13px; overflow-wrap: anywhere; }

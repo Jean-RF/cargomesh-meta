@@ -1,0 +1,31 @@
+✔ selects one feasible operation within accepted dates, not their envelope (21.5909ms)
+✔ confirmed work is not displaced by urgency; proposes the next accepted day (2.8695ms)
+✔ a gap between accepted dates is never an available pickup day (1.2498ms)
+✔ manual scheduling authority and urgent eligibility are distinct (1.5939ms)
+✔ overlapping windows and an unknown timezone are rejected (127.3547ms)
+✔ two whole packages require two calendars in the same slot (11.1838ms)
+✔ cost search considers each feasible truck instead of accepting the first asset ID (6.6669ms)
+✔ scheduled orders compare price first and urgent orders compare arrival first (0.6616ms)
+✔ an exceeded asset universe returns review instead of a partial cheapest claim (4.4509ms)
+✔ tariff requires sourced distance and rounds each money component to cents (2.8236ms)
+✔ trip policy rejects an ambiguous rate, fractions of cents, and unapproved authority (4.0232ms)
+✔ presentation truncates ranked alternatives without changing their source order (1.0092ms)
+✔ no historical requests or prices never produce a fabricated price (1.7346ms)
+✔ past prices are labelled as historical and cannot authorize a booking (0.6039ms)
+✔ search requires an explicit version, deadline and consent (0.3956ms)
+✔ multi-resource pricing needs explicit scope and applies it without hidden multiplication (0.6007ms)
+▶ HAC-12 V2 draft application service
+  ✔ uses server-side facility coordinates and preserves POST→GET fields (64.8668ms)
+  ✔ replays the same key and rejects a changed payload (5.237ms)
+  ✔ rejects a forged tenant before writing and propagates the transactional foreign-facility error (5.149ms)
+  ✔ round-trips manual pins as user assertions without creating a facility (1.7329ms)
+  ✔ hashes parsed DTOs independently of JSON object key order (1.2008ms)
+✔ HAC-12 V2 draft application service (84.8707ms)
+ℹ tests 21
+ℹ suites 1
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1331.2228

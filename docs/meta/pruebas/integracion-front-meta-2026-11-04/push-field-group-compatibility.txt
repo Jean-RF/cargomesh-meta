@@ -1,0 +1,21 @@
+✔ boxes and pallets preserve distinct measurements and derive one total through creation (137.7209ms)
+✔ untargeted chat corrections preserve all groups instead of selecting the first (2.938ms)
+✔ removing/reordering groups preserves the original package metadata on revision (7.8834ms)
+✔ a newly appended incomplete group prevents request creation and retains other fields (3.2342ms)
+✔ known weight remains visible before volume is provided, and vice versa (3.8026ms)
+✔ an incomplete second group never exposes a partial shipment total or invents zero (2.4008ms)
+✔ an invalid first suggestion does not prevent later valid details from resolving (5.3078ms)
+✔ facility and category choices resolve only published V2 options (2.9585ms)
+✔ quantity, dimensions and dates reject invalid provisional turns (0.9162ms)
+✔ equipment prompts use English labels even when persisted selector copy is Spanish (0.5467ms)
+✔ natural English category and packaging values resolve only configured V2 codes (0.6902ms)
+✔ Spanish category and packaging names still resolve only configured V2 codes (0.454ms)
+✔ two tenant facilities in one city stay ambiguous until one is selected (0.4613ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1876.6959

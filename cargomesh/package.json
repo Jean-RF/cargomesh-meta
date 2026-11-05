@@ -69,7 +69,8 @@
     "smoke:meta-explanation": "node --env-file-if-exists=.env.local --conditions=react-server --import tsx scripts/meta-explanation-smoke.ts",
     "test:meta-draft-media": "node --conditions=react-server --import tsx --test src/features/v2-intake/declaration-media.test.ts src/server/modules/media-evidence/declaration-media.test.ts src/server/db/supabase/local-profile.test.ts",
     "smoke:meta-draft-media": "node --conditions=react-server --env-file-if-exists=.env.local --import tsx scripts/meta-draft-media-http-smoke.ts",
-    "test:viewer-performance": "node --conditions=react-server --import tsx --test src/features/truck-collection/viewer-lifecycle.test.ts"
+    "test:viewer-performance": "node --conditions=react-server --import tsx --test src/features/truck-collection/viewer-lifecycle.test.ts",
+    "test:meta-intake-documents": "node --conditions=react-server --import tsx --test src/server/modules/media-evidence/packing-list.test.ts src/server/modules/media-evidence/document-readiness.test.ts src/features/v2-intake/planning-clock.test.ts src/features/documents/packing-list-model.test.ts src/server/hono/routes/meta/documents.test.ts"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.1137.0",
@@ -92,6 +93,7 @@
     "sharp": "0.35.4",
     "tailwind-merge": "^3.0.1",
     "three": "0.186.1",
+    "unpdf": "1.4.0",
     "zod": "3.25.76"
   },
   "devDependencies": {

@@ -4,12 +4,13 @@ import {Button,Input,Select} from '@/components/ui';
 import {DocumentMetadata,DOCUMENT_LIMIT,type DocumentRevision,DocumentDossier} from '@/shared/schemas/meta/documents';
 import {documents} from './document-client';
 import s from './documents.module.css';
+import {OrganizationDocumentLibrary} from './organization-document-library';
 const kindName=(kind:string)=>({COMPANY_PROFILE:'Company profile',PACKING_LIST:'Packing list',OTHER:'Other document'}[kind]??kind);
 const stateName=(state:string)=>({PENDING:'Pending carrier review',ACCEPTED:'Accepted for this booking',CORRECTION_REQUESTED:'Correction requested',REVOKED:'Access revoked'}[state]??state);
 const validity=(r:DocumentRevision)=>r.expiresOn?new Date(r.expiresOn+'T23:59:59Z')<new Date()?'Expired':`Expiry supplied: ${r.expiresOn}`:'No expiry supplied';
 function useIntent(){const intent=useRef<{signature:string;key:string}|null>(null);return {key(value:unknown){const signature=JSON.stringify(value);if(intent.current?.signature!==signature)intent.current={signature,key:crypto.randomUUID()};return intent.current.key;},clear(){intent.current=null;}};}
 async function download(id:string,carrierId?:string){const result=await documents.download(id,carrierId);const a=document.createElement('a');a.href=result.url;a.rel='noopener noreferrer';a.download='';a.click();}
-export function OrganizationDocuments(){return <section className={s.panel}><h3>Documents</h3><p className={s.muted}>Private organization library. Uploading a file does not verify its legal validity. Shipment-specific packing lists are uploaded from their request.</p><DocumentLibrary/></section>;}
+export function OrganizationDocuments(){return <OrganizationDocumentLibrary/>;}
 function DocumentLibrary({requestId,blocked=false,onChanged}:{requestId?:string;blocked?:boolean;onChanged?:()=>Promise<void>}){
  const [rows,setRows]=useState<DocumentRevision[]>([]),[next,setNext]=useState<number|null>(null),[loaded,setLoaded]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const [file,setFile]=useState<File|null>(null),[title,setTitle]=useState(''),[kind,setKind]=useState<'COMPANY_PROFILE'|'PACKING_LIST'|'OTHER'>(requestId?'PACKING_LIST':'COMPANY_PROFILE'),[issued,setIssued]=useState(''),[expiry,setExpiry]=useState(''),[replacement,setReplacement]=useState<DocumentRevision|null>(null);
