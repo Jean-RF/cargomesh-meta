@@ -31,4 +31,6 @@ Evidencia: [integracion-front-meta-2026-11-04](integracion-front-meta-2026-11-04
 
 ## Revisión solicitada
 
+Al reconfirmar la base, el equipo acababa de integrar el PR #7, `main@845bf60`. Se incorpora también ese delta: diagnóstico Tetris, arnés local, evidencia y desactivación de reintentos pagados del SDK SAM. No cambia las rutas o componentes del paquete Cliente validado. La build completa citada arriba corresponde a la integración sobre `c97c59b`; para este delta posterior se revisan los archivos y se repiten los seis casos del diagnóstico, tipos y arquitectura. No se repite SAM ni otra inferencia pagada.
+
 Ramón/Jean revisa el PR sobre `main` de `Jean-RF/cargomesh-meta`. El push es a la rama existente `codex/meta-copilot-overlay-ui`, sin force-push ni merge a main. La revisión visual/funcional del usuario sigue pendiente. El análisis de PDF no certifica normativa ni autenticidad, los escaneos sin texto no tienen OCR en este incremento, y la importación no comparte documentos ni crea bookings automáticamente. No se modifica Amazon, Supabase alojado o Vercel. La compilación local no certifica un despliegue alojado.
