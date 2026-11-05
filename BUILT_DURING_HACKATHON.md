@@ -1,5 +1,9 @@
 # Base existente e incremento Meta
 
+## Cristhian — gate y entrega a revisión de Ramón — 4 noviembre 2026
+
+Conservados Front `5144a4d` y nuestro incremento `d02d888`; sincronización de main `c97c59b` mediante `6cfbf46`. Se ajusta la compatibilidad del tipo de campos de conversación con `unitUnitsPerPackage`, que continúa en el flujo de grupos/perfiles sin habilitar inferencia no implementada. Gate integrado: 470 ejecuciones de casos con solapamientos, TypeScript y arquitectura 935/273 correctos; build de producción aislada sin `.env` exit 0 y 1.527 archivos de fuente/assets comparados idénticos. Esta verificación supera el bloqueo temporal de build descrito en las notas anteriores. Publicación en rama y PR a main solicitada, con revisión de Ramón/Jean; sin merge, migración ni despliegue. [Informe del conjunto y límites](docs/meta/pruebas/INTEGRACION_FRONT_Y_META_2026-11-04.md).
+
 ## Cristhian — sincronización de Front y correcciones pendientes — 4 noviembre 2026
 
 Por solicitud expresa del usuario se conserva el commit de Front `5144a4d` (Organización, biblioteca y reutilización de perfiles) y se guarda en un incremento separado el trabajo pendiente: compatibilidad de lectura de moneda, contexto documental de Meta, packing list, calendario/horarios, contactos y evidencia. El arnés de Organización se adapta a la composición entregada por Front, conservando sus pruebas de Documentos ante fallos del perfil. Se sincroniza la rama con `origin/main` y se publica mediante PR, sin push directo a main, migraciones remotas ni cambios de despliegue. Las notas previas «sin commit/publicación pendiente» describen el momento de su ejecución, anterior a esta integración.

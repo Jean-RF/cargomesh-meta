@@ -1,0 +1,28 @@
+✔ deep-linked documents mount independently while the profile endpoint is pending or fails (36.9157ms)
+✔ documents can open after an overview read error without reloading the component (7.5837ms)
+✔ successful PEN profile shows the real organization without invented verification or relative activity (5.757ms)
+✔ an ambiguous network failure retries the identical mutation key and payload (90.4126ms)
+✔ successful persisted response is the control for stable 409/403 and invalid output (7.4555ms)
+✔ civil hours accept midnight closure and reject invalid/overlapping time with a valid control (77.232ms)
+✔ document routes reject cookie CSRF, missing versions and malformed body before persistence (101.6697ms)
+✔ native document boundary rejects an invalid bearer before service access (4.8952ms)
+✔ each document request authenticates once, including root and nested paths (13.0113ms)
+✔ readiness is read-only and missing documents do not assert a legal requirement (45.7312ms)
+✔ packing list endpoint rejects CSRF, invalid files and missing membership before inference (35.0591ms)
+✔ authorized context is the positive control for tenant mismatch and invalid page (15.4274ms)
+✔ prepare cannot mutate; explicit confirmation and server actor are required (4.2357ms)
+✔ a valid proposal controls rejection of forged proposal membership (1.7002ms)
+▶ Organization aggregate boundary
+  ✔ reads a stored PEN profile without conversion while USD write and tenant guards remain active (11.4918ms)
+  ✔ rejects malformed stored currencies without changing accepted commercial money (8.014ms)
+  ✔ rejects incomplete identifiers, forged auth state, phone and currency (5.572ms)
+  ✔ validates before persistence and refuses another tenant in output (3.7944ms)
+✔ Organization aggregate boundary (35.9576ms)
+ℹ tests 18
+ℹ suites 1
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2687.4331
